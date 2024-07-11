@@ -25,13 +25,13 @@ module usb_c()
 {
 	translate([0,hole_dist_y/2,bottom_thickness+leg_height+pcb_height])
 	{
-	translate([-10, -9/2.+1.25, 0])
-	cube([20, 9-2.5, 3]);
+	translate([-10, -9.2/2.+1.25, 0])
+	cube([20, 9.2-2.5, 3.2]);
 		
-	for (y=[-9/2.+1.25, 9/2.-1.25])
-	translate([-10, y, 1.5])
+	for (y=[-9.2/2.+1.25, 9.2/2.-1.25])
+	translate([-10, y, 1.6])
 	rotate([0,90,0])
-	scale([1.5,1.25,1])
+	scale([1.6,1.25,1])
 	cylinder(h=20, r=1);
 	}
 }
