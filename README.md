@@ -1,5 +1,5 @@
 
 # USB-C fed Protoboard
 
-<img src="protoboard.jpg" >
+<img src="img/protoboard.jpg" >
 
