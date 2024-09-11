@@ -1,39 +1,78 @@
-e=.001;
+e=.0001;
 $fn=48;
 padding=5;
 
+use <usb.scad>
+use <grid.scad>
+
 hole_dist_x = 50;
 hole_dist_y = 40;
-pcb_height = 1.2;
-inner_radius = 4.5;
+
+inner_radius = 4;
+pcb_radius = 3.5;
+pcb_thickness = 1.2;
 wall_thickness = 1;
-wall_height = 15;
-thread = 2.5;
 bottom_thickness = .8;
-border_width = 1.;
 top_thickness = .8;
+total_height = 16;
+
 top_edge_height = 2.5;
-top_edge_width = 1.;
+top_edge_thickness = 1.;
 top_edge_margin = 0.;
-leg_height = 4;
-leg_radius = 2.7;
+
+leg_height = 3;
+leg_thickness = 1;
+
+usb_c_board_offset=2.5 ;
+
+/* (countersunk) screw specs */
+thread = 2.5;
+head_diameter = 5;
+head_thickness = 1.7;
+screw_clearance = .25;
 
 outer_radius = inner_radius+wall_thickness;
-screw_fit_radius = (thread*0.9)/2;
+screw_grab_radius = (thread*0.9)/2;
+screw_loose_radius = (thread/0.9)/2;
+component_z = bottom_thickness+leg_height+pcb_thickness;
 
-module usb_c()
+
+grid_rows = 4;
+grid_cols = 5;
+grid_pitch = 10;
+grid_width = 1;
+grid_height_bottom = 1;
+grid_height_top = 2;
+
+module preview()
 {
-	translate([0,hole_dist_y/2,bottom_thickness+leg_height+pcb_height])
-	{
-	translate([-10, -9.2/2.+1.25, 0])
-	cube([20, 9.2-2.5, 3.2]);
-		
-	for (y=[-9.2/2.+1.25, 9.2/2.-1.25])
-	translate([-10, y, 1.6])
-	rotate([0,90,0])
-	scale([1.6,1.25,1])
-	cylinder(h=20, r=1);
-	}
+	if ($preview) children();
+}
+
+module on_pcb()
+{
+	translate([0,0,component_z]) children();
+}
+
+module usb_c(margin=0)
+{
+	translate([0,-usb_c_board_offset,0]) 
+	usb_c_type_c31_m12(margin) usb_c_plug(margin);
+}
+
+module usb_c_keepout()
+{
+	usb_c(margin=.5);
+}
+
+module at_front()
+{
+	translate([hole_dist_x+pcb_radius,hole_dist_y/2,0]) rotate([0,0,-90])  children();
+}
+
+module at_top()
+{
+	translate([hole_dist_x/2,hole_dist_y+pcb_radius,0]) children();
 }
 
 module at_holes(x, y)
@@ -44,65 +83,145 @@ module at_holes(x, y)
 				children();
 }
 
+module case_shape(height, radius)
+{
+	hull()
+		at_holes()
+			cylinder(height, r=radius);
+}
+
+module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
+{
+	x = head_diameter/2 - screw_loose_radius;
+	y = head_thickness;
+	dz = (sqrt(x*x+y*y)/x - y/x)*padding;
+
+	path = [
+		[0, -e],
+		[padding+head_diameter/2, -e],
+		[padding+head_diameter/2, screw_clearance+dz],
+		[padding+screw_loose_radius, screw_clearance+head_thickness+dz],
+		[padding+screw_loose_radius, bottom_thickness+leg_height+e],
+		[padding+screw_grab_radius, bottom_thickness+leg_height+e],
+		[padding+screw_grab_radius, total_height-top_thickness+e],
+		[0, total_height-top_thickness+e],
+
+ ];
+
+	rotate_extrude() polygon(path);
+}
+
 module leg()
 {
-	difference()
+	intersection()
 	{
-	translate([0,0,-e])
-		cylinder(h=leg_height+e, r=leg_radius);
-	translate([0,0,-e*2])
-		cylinder(h=leg_height+e*3, r=screw_fit_radius);
+		screw_shape(leg_thickness);
+		translate([0,0,e]) cylinder(leg_height-e, r=leg_thickness+head_diameter/2+1); 
 	}
 }
 
-module notched_block(height, radius, notch_size)
+module leg_keepout()
 {
-	translate([notch_size-radius,-radius, 0])
-		cube([hole_dist_x-2*(notch_size-radius), hole_dist_y+2*notch_size, height]);
-	translate([-notch_size, notch_size-radius, 0])
-		cube([hole_dist_x+2*notch_size, hole_dist_y-2*(notch_size-radius), height]);
+	screw_shape(0, bottom_epsilon=-e);
 }
 
-module rounded_block(height, radius)
+module pcb()
 {
-	notched_block(height, radius, radius);
-	at_holes() cylinder(h=height, r=radius);
+	translate([0,0,bottom_thickness+leg_height])
+		color("green")
+			case_shape(pcb_thickness, pcb_radius);
+}
+
+module keepout_zones()
+{
+	at_holes() leg_keepout();
+	on_pcb() at_front() usb_c_keepout();
 }
 
 module case()
 {
-	at_holes() translate([0, 0, bottom_thickness])leg();
-
 	difference()
 	{
-		difference()
+		union()
 		{
-			rounded_block(bottom_thickness+wall_height, outer_radius);
-			translate([0,0,bottom_thickness]) rounded_block(wall_height+e, inner_radius);
+			at_holes() translate([0, 0, bottom_thickness]) leg();
+			difference()
+			{
+				case_shape(total_height-top_thickness, outer_radius);
+				translate([0,0,bottom_thickness])
+				case_shape(total_height-top_thickness, inner_radius);
+			}
+			width = 2*outer_radius + hole_dist_x;
+			depth = 2*outer_radius + hole_dist_y;
+
+			translate([-outer_radius+e,-outer_radius+e,bottom_thickness-e])
+			grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch);
 		}
-		usb_c();
+		keepout_zones();
 	}
 }
 
 module top()
 {
-	rounded_block(top_thickness, outer_radius);
 	difference()
 	{
-		translate([0,0,top_thickness-e])
-			rounded_block(top_edge_height+e, inner_radius-top_edge_margin);
-		translate([0,0,top_thickness-e*2])
+		union()
 		{
-			rounded_block(top_edge_height+e*3, inner_radius-top_edge_margin-top_edge_width);
-			notched_block(top_edge_height+e*3, outer_radius+e, 2*outer_radius);
+			difference()
+			{
+				translate([0,0,total_height-top_thickness])
+				{
+					case_shape(top_thickness, outer_radius);
+					translate([0,0,-top_edge_height])
+						case_shape(top_edge_height+e, inner_radius);
+				}
+				translate([0,0,total_height-top_thickness-top_edge_height-e])
+					case_shape(top_edge_height+e, inner_radius-top_edge_thickness);
+			}
+
+			at_holes() intersection()
+			{
+				screw_shape(leg_thickness);
+				translate([0,0,component_z])
+				cylinder(total_height-component_z-e, r=screw_loose_radius+leg_thickness+1);
+			}
+
+			width = 2*inner_radius + hole_dist_x;
+			depth = 2*inner_radius + hole_dist_y;
+
+			translate([-inner_radius+e,-inner_radius+e,total_height-top_thickness-grid_height_top])
+			grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch);
+
+
 		}
+		keepout_zones();
 	}
+
+}
+
+module flip()
+{
+	translate([ 0, hole_dist_y, total_height]) rotate([180,0,0]) children();
 }
 
 module next()
 {
-	translate([0,hole_dist_y+2*outer_radius+padding, 0]) children();
+	translate([ 0, hole_dist_y+2*outer_radius+padding, 0 ]) children();
 }
 
-case();
-next() top();
+preview()
+{
+	pcb();
+	on_pcb()
+	{
+		at_front() usb_c();
+	}
+}
+
+render()
+{
+	case();
+	next() 
+	flip()
+	top();
+}
