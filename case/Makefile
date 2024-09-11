@@ -1,6 +1,6 @@
 
 DEPS=case.scad usb.scad grid.scad
-TARGETS=case_bottom.stl case_top.stl case_orig.stl
+TARGETS=case.stl case_bottom.stl case_top.stl case_orig.stl
 
 all: $(TARGETS)
 
