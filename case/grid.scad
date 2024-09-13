@@ -2,7 +2,7 @@
 module bars(width, height, n, pitch, bar_width)
 {
 	for (i=[0:n-1])
-		translate([0, (i-(n-1)/2)*pitch, 0])
+		translate([0, (i-(n-1)/2)*pitch-bar_width/2, 0])
 			cube([width, bar_width, height]);
 }
 

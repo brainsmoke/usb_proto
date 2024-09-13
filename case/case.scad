@@ -23,6 +23,9 @@ top_edge_margin = 0.;
 leg_height = 3;
 leg_thickness = 1;
 
+funnel_top_radius = 3;
+funnel_top_height = 3;
+
 usb_c_board_offset=2.5 ;
 
 /* (countersunk) screw specs */
@@ -34,6 +37,7 @@ screw_clearance = .25;
 outer_radius = inner_radius+wall_thickness;
 screw_grab_radius = (thread*0.9)/2;
 screw_loose_radius = (thread/0.9)/2;
+funnel_top_inner_radius = funnel_top_radius-leg_thickness;
 component_z = bottom_thickness+leg_height+pcb_thickness;
 
 
@@ -96,6 +100,10 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 	y = head_thickness;
 	dz = (sqrt(x*x+y*y)/x - y/x)*padding;
 
+	x2 = funnel_top_inner_radius - screw_grab_radius;
+	y2 = funnel_top_height;
+	dz2 = (sqrt(x*x+y*y)/x - y/x)*padding;
+
 	path = [
 		[0, -e],
 		[padding+head_diameter/2, -e],
@@ -103,7 +111,8 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 		[padding+screw_loose_radius, screw_clearance+head_thickness+dz],
 		[padding+screw_loose_radius, bottom_thickness+leg_height+e],
 		[padding+screw_grab_radius, bottom_thickness+leg_height+e],
-		[padding+screw_grab_radius, total_height-top_thickness+e],
+		[padding+screw_grab_radius, total_height-top_thickness-funnel_top_height-dz2],
+		[padding+funnel_top_inner_radius, total_height-top_thickness+e],
 		[0, total_height-top_thickness+e],
 
  ];
@@ -183,7 +192,7 @@ module top()
 			{
 				screw_shape(leg_thickness);
 				translate([0,0,component_z])
-				cylinder(total_height-component_z-e, r=screw_loose_radius+leg_thickness+1);
+				cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
 			}
 
 			width = 2*inner_radius + hole_dist_x;
