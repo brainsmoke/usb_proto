@@ -15650,6 +15650,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C165948"
+			(at 30.48 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "B8"
 			(uuid "aed19241-081a-4a11-80c1-d7b6cda62292")
 		)
@@ -15754,6 +15763,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 54.61 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25905"
 			(at 54.61 30.48 0)
 			(effects
 				(font
@@ -16024,6 +16042,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C25905"
+			(at 54.61 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "50f7b102-1cc6-4df1-8492-8fa183fa26e6")
 		)
@@ -16057,7 +16084,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "1uF"
 			(at 204.851 40.513 0)
 			(effects
 				(font
@@ -16085,6 +16112,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 201.93 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C52923"
 			(at 201.93 39.37 0)
 			(effects
 				(font
@@ -16191,7 +16227,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "1uF"
 			(at 162.56 44.958 0)
 			(effects
 				(font
@@ -16219,6 +16255,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 158.75 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C52923"
 			(at 158.75 38.1 0)
 			(effects
 				(font
@@ -16389,7 +16434,7 @@
 				)
 			)
 		)
-		(property "Value" "AP2204K-3.3"
+		(property "Value" "AP2112K-3.3"
 			(at 180.34 34.2646 0)
 			(effects
 				(font
@@ -16416,6 +16461,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 180.34 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C51118"
 			(at 180.34 40.64 0)
 			(effects
 				(font
@@ -16585,7 +16639,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "0103f308-1159-4ba4-be98-c8b7c88971a2")
 		(property "Reference" "J5"
@@ -16623,6 +16677,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x21, script generated"
+			(at 270.51 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 270.51 36.83 0)
 			(effects
 				(font
@@ -16822,6 +16885,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C52923"
+			(at 77.47 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "63122b34-61ae-4361-91c9-85d4958cfdcd")
 		)
@@ -16844,7 +16916,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "0aef6cc1-7dbe-4ad1-9465-c54818920844")
 		(property "Reference" "J41"
@@ -16882,6 +16954,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 242.57 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 242.57 149.86 0)
 			(effects
 				(font
@@ -16955,6 +17036,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C318893"
+			(at 257.81 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "4066237c-40e4-45c4-bfa0-732c9c403214")
 		)
@@ -16977,7 +17067,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "0dc6b30f-d101-4e08-9169-d277496d2a0d")
 		(property "Reference" "J36"
@@ -17015,6 +17105,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 254 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 254 118.11 0)
 			(effects
 				(font
@@ -17125,7 +17224,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1772e788-7067-4b36-b6a3-b2577cf73582")
 		(property "Reference" "J27"
@@ -17171,6 +17270,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 105.41 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "4311d8a9-4fc0-405f-ad58-829a4baad5be")
 		)
@@ -17208,7 +17316,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1ad12462-c21d-4031-b397-f663fdd93e6a")
 		(property "Reference" "J34"
@@ -17254,6 +17362,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 220.98 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "ea46015d-7dde-49a2-828a-62c7eef4b40a")
 		)
@@ -17291,7 +17408,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1e97447d-4f91-4f8e-b779-bf1afab22d5d")
 		(property "Reference" "J47"
@@ -17337,6 +17454,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 21.59 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "5f532b9d-33d2-483d-9be8-dd84d699ee9d")
 		)
@@ -17374,7 +17500,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "2c30d568-fb75-4004-a28a-9407fa6442dc")
 		(property "Reference" "J29"
@@ -17420,6 +17546,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 138.43 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "1466a944-f37c-440c-8367-f490a0e53d8c")
 		)
@@ -17457,7 +17592,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "2f041414-24b7-43b0-85c8-c079a7e8e154")
 		(property "Reference" "J23"
@@ -17503,6 +17638,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 39.37 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "bc1aba00-8e05-48e1-8445-f0cc278b1716")
 		)
@@ -17540,7 +17684,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "3482b1da-94cb-4909-a6fb-f08062177b77")
 		(property "Reference" "J12"
@@ -17586,6 +17730,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 121.92 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "5c43bb07-4efd-4a06-8145-53d9fb601b4d")
 		)
@@ -17623,7 +17776,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "3889d6d0-c57c-4dae-92da-4219b9a503c5")
 		(property "Reference" "J32"
@@ -17669,6 +17822,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 187.96 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "5ef82b1b-ac8d-4726-8a7e-a4ede88d6d5a")
 		)
@@ -17706,7 +17868,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "3943a315-e070-4545-92e0-8def63b7d90f")
 		(property "Reference" "J3"
@@ -17744,6 +17906,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x21, script generated"
+			(at 231.14 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 231.14 36.83 0)
 			(effects
 				(font
@@ -17831,7 +18002,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "39e5bf86-3d4d-49f0-ac89-88ddbe220b0f")
 		(property "Reference" "J31"
@@ -17877,6 +18048,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 171.45 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "957de8d7-ed5b-4be7-8bb7-c9f34f2c9293")
 		)
@@ -17914,7 +18094,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "41a33b08-18f6-49e4-a37b-622b24d532f7")
 		(property "Reference" "J48"
@@ -17960,6 +18140,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 21.59 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "ade9b895-e2cd-49d7-9346-95e94ffcae3e")
 		)
@@ -17997,7 +18186,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "41bbe8b3-b490-42a8-b872-9e0b2fdfe8b6")
 		(property "Reference" "J7"
@@ -18035,6 +18224,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 39.37 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 39.37 91.44 0)
 			(effects
 				(font
@@ -18193,6 +18391,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C2290"
+			(at 123.19 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c0a26e44-ddf0-4020-9922-ad91aaeba74a")
 		)
@@ -18215,7 +18422,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "46042f2d-6924-4ab2-a522-8e8413e9e744")
 		(property "Reference" "J25"
@@ -18261,6 +18468,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 72.39 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "7ff1175e-1395-4f53-8546-ee620b5d7e41")
 		)
@@ -18298,7 +18514,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "498b6710-3324-46ce-896f-fbced5510f19")
 		(property "Reference" "J43"
@@ -18344,6 +18560,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 273.05 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "185a20e9-b766-4d34-987c-b1617e89e2ef")
 		)
@@ -18363,7 +18588,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "49cf6b27-1b67-4422-a014-72e37d512190")
 		(property "Reference" "J13"
@@ -18401,6 +18626,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 138.43 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 138.43 91.44 0)
 			(effects
 				(font
@@ -18511,7 +18745,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "56814e90-36ba-4a93-a65f-df2707e25261")
 		(property "Reference" "J39"
@@ -18559,6 +18793,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 170.18 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "SWDCLK"
 			(uuid "74c167b6-4801-4395-ae2c-29504f7d0014")
 		)
@@ -18584,7 +18827,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "5933cfda-ea22-442c-a7e7-344357df1b0a")
 		(property "Reference" "J11"
@@ -18622,6 +18865,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 105.41 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 105.41 91.44 0)
 			(effects
 				(font
@@ -18714,6 +18966,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C52923"
+			(at 87.63 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "34f34ddc-700b-4877-bce8-9f04f7ca31b9")
 		)
@@ -18736,7 +18997,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "5f863c88-0df2-48c1-960b-9c0bd5781934")
 		(property "Reference" "J4"
@@ -18774,6 +19035,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x21, script generated"
+			(at 251.46 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 251.46 36.83 0)
 			(effects
 				(font
@@ -18907,6 +19177,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C318893"
+			(at 257.81 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ad1f1f38-f2cb-467e-9e98-10816780242e")
 		)
@@ -18929,7 +19208,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "6db559cd-498b-46a6-bffe-d45b296c2d93")
 		(property "Reference" "J17"
@@ -18975,6 +19254,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 204.47 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "dba44eb7-78a8-4f53-8c3c-7f0bec3241c0")
 		)
@@ -19012,7 +19300,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "6ff853bb-82d0-43d6-a6db-284075689809")
 		(property "Reference" "J55"
@@ -19058,6 +19346,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 87.63 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "3605e773-455c-4c55-876c-f2c5fffcfde3")
 		)
@@ -19095,7 +19392,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "702426ad-3f72-4fa7-9880-1ee120145099")
 		(property "Reference" "J30"
@@ -19133,6 +19430,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 154.94 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 154.94 118.11 0)
 			(effects
 				(font
@@ -19243,7 +19549,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "73d381d3-3560-40e0-8ff8-2c1c323fb277")
 		(property "Reference" "J54"
@@ -19289,6 +19595,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 71.12 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "e5961bca-10fa-44ce-acb4-93787703afca")
 		)
@@ -19326,7 +19641,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "7c3c9cb5-5657-4ac2-a10c-400767f5cf6b")
 		(property "Reference" "J28"
@@ -19372,6 +19687,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 121.92 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "6427d10e-b041-47ac-8047-104e18ffaab8")
 		)
@@ -19409,7 +19733,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "7c3fcf65-8f43-41ac-8ced-67582c49d6e7")
 		(property "Reference" "J52"
@@ -19447,6 +19771,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 54.61 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 54.61 171.45 0)
 			(effects
 				(font
@@ -19537,6 +19870,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C25744"
+			(at 96.52 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "50dd9ba8-39e7-4750-9727-ce0ad368ea78")
 		)
@@ -19559,7 +19901,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "8527faf1-2bcd-4dec-bf9e-b6219297cb73")
 		(property "Reference" "J26"
@@ -19597,6 +19939,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 88.9 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 88.9 118.11 0)
 			(effects
 				(font
@@ -19687,6 +20038,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C25744"
+			(at 123.19 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "442c381d-20a8-49c7-aebc-26e57daeb87d")
 		)
@@ -19755,6 +20115,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C318893"
+			(at 85.09 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ed1cd490-a9f2-46e3-9a8a-a555c37e2cbc")
 		)
@@ -19777,7 +20146,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "89db8a82-6888-4239-b329-435e2f0a10a6")
 		(property "Reference" "J20"
@@ -19815,6 +20184,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 254 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 254 91.44 0)
 			(effects
 				(font
@@ -20035,6 +20413,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C25744"
+			(at 132.08 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b9eaf942-e9c4-4101-9b0c-8d11c281c076")
 		)
@@ -20102,6 +20489,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C25744"
+			(at 140.97 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "14ac5bbc-cb0e-4bdd-b2c2-775dcf35e8b3")
 		)
@@ -20124,7 +20520,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "949cd2fd-8287-4822-8a6b-862e85a1b73f")
 		(property "Reference" "J6"
@@ -20170,6 +20566,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 22.86 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "bc6f6d9c-e541-4497-904b-c5941cc82e75")
 		)
@@ -20207,7 +20612,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "967069a1-2903-4cf8-9a38-5a933ef95691")
 		(property "Reference" "J37"
@@ -20253,6 +20658,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 270.51 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "a09d3d3a-36d2-4be1-ad7d-9fdd7a7d46ed")
 		)
@@ -20290,7 +20704,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "986cf5ea-9829-479f-82a1-1d3d1389db49")
 		(property "Reference" "J9"
@@ -20336,6 +20750,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 72.39 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "e82cc263-529b-4956-aab3-6814881c06c7")
 		)
@@ -20373,7 +20796,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "a67cade5-ba49-43dc-ad0a-04876e963ea7")
 		(property "Reference" "J56"
@@ -20419,6 +20842,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 87.63 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "b4025b9c-1ee0-4c39-9ec7-c13d954a2c47")
 		)
@@ -20456,7 +20888,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "a7e2a0a1-217e-441e-ac36-f952f59b8737")
 		(property "Reference" "J33"
@@ -20494,6 +20926,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 204.47 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 204.47 118.11 0)
 			(effects
 				(font
@@ -20585,6 +21026,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C318893"
+			(at 257.81 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1131b6ee-9bf2-4373-a5af-8ba9573ca562")
 		)
@@ -20607,7 +21057,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "a8885e8f-ecd4-4e92-9443-db61cd6c6168")
 		(property "Reference" "J19"
@@ -20653,6 +21103,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 237.49 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "e1c66fe2-a6aa-464b-abee-3a8cc423ba0f")
 		)
@@ -20690,7 +21149,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b0cfdac9-4a2d-485f-9b8a-a73cde7d60ff")
 		(property "Reference" "J40"
@@ -20736,6 +21195,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 242.57 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3849b21b-7cc8-4fec-abb2-fb8929898afe")
 		)
@@ -20755,7 +21223,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b34f6fe9-c867-45b2-b0c7-b858a861fae1")
 		(property "Reference" "J53"
@@ -20801,6 +21269,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 71.12 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "463b48a2-f682-43fd-af6d-09688e27ad08")
 		)
@@ -20838,7 +21315,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b4700016-a3b2-40fd-a155-cd964b854f02")
 		(property "Reference" "J15"
@@ -20884,6 +21361,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 171.45 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "70c7848c-2dba-4433-bd29-3eb7c9dab521")
 		)
@@ -20921,7 +21407,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b65580c0-ec49-4f4d-a1ef-ebadfb2fd2eb")
 		(property "Reference" "J57"
@@ -20959,6 +21445,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
+			(at 114.3 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 114.3 176.53 0)
 			(effects
 				(font
@@ -21043,6 +21538,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C2290"
+			(at 132.08 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8b8b2b71-730d-414f-9ad3-a51a8978583b")
 		)
@@ -21065,7 +21569,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b97d4935-fe2f-402b-823c-8a8d453af9e8")
 		(property "Reference" "J51"
@@ -21111,6 +21615,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 54.61 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "c2940139-71b2-4022-aeea-d101703e6f21")
 		)
@@ -21148,7 +21661,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "ba7deceb-6bc0-46e7-98f4-915f573857a2")
 		(property "Reference" "J46"
@@ -21196,6 +21709,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "93406baf-3f36-4ba0-a7c3-8830ff252aba")
 		)
@@ -21218,7 +21740,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bb2c7925-037f-4a32-b8b2-7ecf97ce6086")
 		(property "Reference" "J14"
@@ -21264,6 +21786,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 154.94 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "aaa11642-2821-42ce-b14c-95b63a667066")
 		)
@@ -21301,7 +21832,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bc2f2974-5065-4881-9d3a-4438b43ad59b")
 		(property "Reference" "J24"
@@ -21347,6 +21878,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 55.88 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "ce001a68-6b82-4329-8544-f86df362618e")
 		)
@@ -21384,7 +21924,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bca29c9d-ba45-4095-a630-6cfc19499b19")
 		(property "Reference" "J21"
@@ -21430,6 +21970,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 270.51 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "66580b86-74d7-4378-981f-589efbfd4ea5")
 		)
@@ -21467,7 +22016,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bf60e3fc-1199-452b-98b8-33d7b6f30497")
 		(property "Reference" "J18"
@@ -21513,6 +22062,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 220.98 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "224acb08-de90-4eaf-a0d7-b1827e0d0420")
 		)
@@ -21550,7 +22108,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bfef362a-ca58-44e4-940f-247f9a8abcf7")
 		(property "Reference" "J10"
@@ -21596,6 +22154,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 88.9 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "95dd0ddd-338a-4a2e-9bdc-1243661fbbd7")
 		)
@@ -21633,7 +22200,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "c258d562-b88b-4499-ba23-01775c66c73e")
 		(property "Reference" "J38"
@@ -21671,6 +22238,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x10, script generated"
+			(at 107.95 -17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 107.95 -17.78 0)
 			(effects
 				(font
@@ -21725,7 +22301,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "c347c95a-1246-47b5-9978-1dc39d8464a9")
 		(property "Reference" "J50"
@@ -21763,6 +22339,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 38.1 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 38.1 171.45 0)
 			(effects
 				(font
@@ -21853,6 +22438,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C25744"
+			(at 149.86 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d37b0771-d1bf-4cb3-90e7-962a193a0100")
 		)
@@ -21875,7 +22469,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "c458ac8c-d9ff-4117-8be1-342dba04c40d")
 		(property "Reference" "J42"
@@ -21921,6 +22515,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 242.57 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "62e1b002-8011-4766-98a6-35342bcc77d1")
 		)
@@ -21940,7 +22543,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "d0b3c802-8c5b-49de-9489-0261eb43fb7a")
 		(property "Reference" "J35"
@@ -21986,6 +22589,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 237.49 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "e751fc98-3f41-47ec-ab85-724b6bde131f")
 		)
@@ -22023,7 +22635,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "d980c3cb-3ba6-4af3-9099-f2f8e85794bf")
 		(property "Reference" "J2"
@@ -22061,6 +22673,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x21, script generated"
+			(at 212.09 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 212.09 36.83 0)
 			(effects
 				(font
@@ -22148,7 +22769,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "db681b32-df1e-4065-ae45-e7c3f089a52a")
 		(property "Reference" "J22"
@@ -22186,6 +22807,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 22.86 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 22.86 118.11 0)
 			(effects
 				(font
@@ -22344,6 +22974,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C2290"
+			(at 140.97 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a5ab973b-5cc1-4a29-ae97-ce8f64499487")
 		)
@@ -22406,6 +23045,15 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
+			(at 149.86 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2290"
 			(at 149.86 166.37 0)
 			(effects
 				(font
@@ -22477,6 +23125,15 @@
 			)
 		)
 		(property "Description" "STMicroelectronics Arm Cortex-M0 MCU, 32KB flash, 6KB RAM, 48 MHz, 2.0-3.6V, 23 GPIO, UFQFPN28"
+			(at 114.3 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C961597"
 			(at 114.3 41.91 0)
 			(effects
 				(font
@@ -22585,7 +23242,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "fafcb4f2-b12e-4c17-9ec8-5891486779a0")
 		(property "Reference" "J49"
@@ -22631,6 +23288,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 38.1 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "91bced00-033d-40e3-862d-262cbe84a1cc")
 		)
@@ -22668,7 +23334,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "fbb562b0-1d89-414b-ab20-2139da5171a0")
 		(property "Reference" "J44"
@@ -22714,6 +23380,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 273.05 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f374a8e7-de5d-44f3-bfff-7a2ca28a74c7")
 		)
@@ -22733,7 +23408,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "fd6f1049-2d2e-4471-b855-067b050b67e4")
 		(property "Reference" "J8"
@@ -22779,6 +23454,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 55.88 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "ad071a03-977e-4baf-9502-3dcf9fe1dc8e")
 		)
@@ -22816,7 +23500,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "febc967b-6f05-443d-a8c2-2f180aed2abc")
 		(property "Reference" "J16"
@@ -22862,6 +23546,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 187.96 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "23d18f17-7d6c-4c88-9fd3-36a229901f40")
 		)
@@ -22899,7 +23592,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "ff5ebddf-9851-4de9-8045-f7a6c91bf4bc")
 		(property "Reference" "J45"
@@ -22937,6 +23630,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 273.05 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 273.05 161.29 0)
 			(effects
 				(font
