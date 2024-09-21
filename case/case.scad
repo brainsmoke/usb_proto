@@ -5,7 +5,7 @@ padding=5;
 use <usb.scad>
 use <grid.scad>
 
-hole_dist_x = 50;
+hole_dist_x = 70;
 hole_dist_y = 40;
 
 inner_radius = 4;
@@ -29,9 +29,9 @@ funnel_top_height = 3;
 usb_c_board_offset=2.5 ;
 
 /* (countersunk) screw specs */
-thread = 2.5;
-head_diameter = 5;
-head_thickness = 1.7;
+thread = 3.;
+head_diameter = 6;
+head_thickness = 2.5;
 screw_clearance = .25;
 
 outer_radius = inner_radius+wall_thickness;
