@@ -16935,7 +16935,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinSocket_1x01"
 			(at 242.57 149.86 0)
 			(effects
 				(font
@@ -18533,7 +18533,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinSocket_1x01"
 			(at 273.05 138.43 0)
 			(effects
 				(font
@@ -21168,7 +21168,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinSocket_1x01"
 			(at 242.57 138.43 0)
 			(effects
 				(font
@@ -21682,7 +21682,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Library:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinHeader_1x02"
 			(at 54.61 44.45 0)
 			(effects
 				(font
@@ -22488,7 +22488,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinSocket_1x01"
 			(at 242.57 161.29 0)
 			(effects
 				(font
@@ -23353,7 +23353,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinSocket_1x01"
 			(at 273.05 149.86 0)
 			(effects
 				(font
@@ -23611,7 +23611,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinSocket_1x01"
 			(at 273.05 161.29 0)
 			(effects
 				(font

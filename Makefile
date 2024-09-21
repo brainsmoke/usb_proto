@@ -17,7 +17,7 @@ PCB=pcb/$(PROJECT).kicad_pcb
 SCHEMATIC=pcb/$(PROJECT).kicad_sch
 
 POSFILE_JLC=$(BUILDDIR)/posfile_top_jlc.csv
-POSFILE_KICAD=$(TMPDIR)/posfile_top_jlc.csv
+POSFILE_KICAD=$(TMPDIR)/posfile_top_kicad.csv
 BOMFILE_JLC=$(BUILDDIR)/bomfile_jlc.csv
 ZIP=$(BUILDDIR)/$(PROJECT).zip
 DRILL_FILES=$(GERBERDIR)/$(PROJECT)-NPTH.drl $(GERBERDIR)/$(PROJECT)-PTH.drl
@@ -25,6 +25,7 @@ DRILL_FILES=$(GERBERDIR)/$(PROJECT)-NPTH.drl $(GERBERDIR)/$(PROJECT)-PTH.drl
 GERBER_OPTS=--no-protel-ext --board-plot-params
 DRILL_OPTS=--format=excellon --excellon-oval-format=route --excellon-separate-th
 BOM_JLC_OPTS=--fields='Value,Reference,Footprint,LCSC' --labels='Comment,Designator,Footprint,JLCPCB Part \#' --group-by=LCSC --ref-range-delimiter='' --exclude-dnp
+POS_OPTS=--exclude-dnp --side front --units=mm --format=csv
 
 SCAD_DEPS=case/case.scad case/usb.scad
 CASE=$(BUILDDIR)/case_bottom.stl \
@@ -57,7 +58,7 @@ $(GERBERS): $(PCB) $(GERBERDIR)
 	kicad-cli pcb export gerbers $(GERBER_OPTS) -o $(GERBERDIR) --layers=$(LAYERS) $(PCB)
 
 $(POSFILE_KICAD): $(PCB) $(TMPDIR)
-	kicad-cli pcb export pos $(PCB) --side front --units=mm --format=csv -o $(POSFILE_KICAD)
+	kicad-cli pcb export pos $(PCB) $(POS_OPTS) -o $(POSFILE_KICAD)
 
 $(BOMFILE_JLC): $(SCHEMATIC) $(BUILDDIR)
 	kicad-cli sch export bom -o $(BOMFILE_JLC) $(BOM_JLC_OPTS) $(SCHEMATIC)
