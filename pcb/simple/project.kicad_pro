@@ -546,7 +546,7 @@
       "exclude_dnp": true,
       "fields_ordered": [
         {
-          "group_by": true,
+          "group_by": false,
           "label": "Comment",
           "name": "Value",
           "show": true
@@ -576,12 +576,6 @@
           "show": false
         },
         {
-          "group_by": false,
-          "label": "Footprint",
-          "name": "JLC_FOOTPRINT",
-          "show": false
-        },
-        {
           "group_by": true,
           "label": "DNP",
           "name": "${DNP}",
@@ -601,16 +595,16 @@
         },
         {
           "group_by": true,
-          "label": "JLCPCB part #",
-          "name": "JLCPCB part #",
+          "label": "LCSC",
+          "name": "LCSC",
           "show": true
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "name": "",
-      "sort_asc": true,
-      "sort_field": "Value"
+      "sort_asc": false,
+      "sort_field": ""
     },
     "connection_grid_size": 50.0,
     "drawing": {

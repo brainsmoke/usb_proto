@@ -1,2 +1,7 @@
 "Comment","Designator","Footprint","JLCPCB Part #"
-"-- mixed values --","C1,C2,J1,R1,R2,R3,R4,SW1,SW2,SW3,U2","-- mixed values --",""
+"1uF","C1,C2","Capacitor_SMD:C_0603_1608Metric","C15849"
+"USB_C_Receptacle_USB2.0","J1","Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12","C165948"
+"56k","R4","Resistor_SMD:R_0603_1608Metric","C23206"
+"5k1","R1,R2,R3","Resistor_SMD:R_0603_1608Metric","C23186"
+"SW_SPST","SW1,SW2,SW3","Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2","C318893"
+"AP2112K-3.3","U2","Package_TO_SOT_SMD:SOT-23-5","C51118"

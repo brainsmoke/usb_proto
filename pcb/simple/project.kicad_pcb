@@ -444,25 +444,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "042c728a-debf-4bc6-9fed-7c5dfa343ac0")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d0c6761d-dea1-405a-8f6e-e4fc825a6aa9")
+			(uuid "73308652-2cb3-4dd4-af14-363e4d4168f5")
 			(effects
 				(font
 					(size 1 1)
@@ -473,7 +460,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/986cf5ea-9829-479f-82a1-1d3d1389db49")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -1443,25 +1430,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C165948"
+		(property "LCSC" "C165948"
 			(at 0 0 -90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "48070894-603d-4396-a723-2be6015e0f04")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 -90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "77496a4c-9442-4fb9-ba83-d22ff1395ace")
+			(uuid "684fa68d-ca34-4c8e-8550-2418bef4152a")
 			(effects
 				(font
 					(size 1 1)
@@ -1472,7 +1446,7 @@
 		(property ki_fp_filters "USB*C*Receptacle*")
 		(path "/00000000-0000-0000-0000-00005ff24a9e")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -4.7 -1.9)
@@ -1870,25 +1844,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e08ddc08-8c8d-433a-91f5-a9f547bf2474")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "99d860e3-722a-4279-a492-6e819edf4167")
+			(uuid "c4fd241d-94e9-4d3e-9323-6b2d3425df91")
 			(effects
 				(font
 					(size 1 1)
@@ -1899,7 +1860,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/a8885e8f-ecd4-4e92-9443-db61cd6c6168")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -2763,25 +2724,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2e1912d6-57b6-4be3-b9a8-cc76dadaeabb")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "a10b2ea0-8088-457d-9260-c3e3a4be230a")
+			(uuid "942d88b4-bfa3-43d1-a094-83fc96263386")
 			(effects
 				(font
 					(size 1 1)
@@ -2792,7 +2740,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/46042f2d-6924-4ab2-a522-8e8413e9e744")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -3656,25 +3604,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "fb61de09-aaa8-4165-ab90-87432444eda5")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "df257703-1d95-44fd-a939-063f23661930")
+			(uuid "89417e53-6814-4ac1-a8c6-077d820a36e5")
 			(effects
 				(font
 					(size 1 1)
@@ -3685,7 +3620,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/b4700016-a3b2-40fd-a155-cd964b854f02")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -4548,25 +4483,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d5aedd08-e611-48b5-a97e-5b9ec7f02f15")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0016cb9a-f8e2-420a-a608-df08a6182820")
+			(uuid "eee86019-5ae4-46cb-9b9a-9456531eba80")
 			(effects
 				(font
 					(size 1 1)
@@ -4577,7 +4499,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/ceabc227-ff0e-48db-bf87-01c47d6d2bfa")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -5911,25 +5833,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "7950bd6f-3da8-4f14-b594-fa937a476964")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5bf474ea-97da-4ab8-b480-abd2e99d7674")
+			(uuid "24cc09d7-9457-4bdf-9ddf-b1f80c1500d9")
 			(effects
 				(font
 					(size 1 1)
@@ -5940,7 +5849,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/5933cfda-ea22-442c-a7e7-344357df1b0a")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -6803,25 +6712,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "907113c7-11d8-45f3-8e51-367da836c412")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b5fde965-4915-4b3a-b4b1-100060b1b4c5")
+			(uuid "12165151-b917-4e06-9a1c-3ef7dc5a500f")
 			(effects
 				(font
 					(size 1 1)
@@ -6832,7 +6728,7 @@
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/f377b9f2-3b66-42fd-9135-4b33cfc3d2f8")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd dnp)
 		(fp_line
 			(start 1.65 0.73)
@@ -7036,25 +6932,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "141adb07-df86-4201-81f0-075bb96b2144")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5ec474c4-b37b-43d1-b5b6-4f2cf3778434")
+			(uuid "6746d064-08f6-4120-ba3b-3707c18c9101")
 			(effects
 				(font
 					(size 1 1)
@@ -7065,7 +6948,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/0dc6b30f-d101-4e08-9169-d277496d2a0d")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -7928,25 +7811,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C15849"
+		(property "LCSC" "C15849"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "08a45367-cea2-404e-9e51-2fe2b4499e27")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3229bb0b-31bd-47d2-834e-b713f40ee917")
+			(uuid "0450edc6-e18e-4106-850f-e861106e5cae")
 			(effects
 				(font
 					(size 1 1)
@@ -7957,7 +7827,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/00000000-0000-0000-0000-00005ff2987e")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.14058 0.51)
@@ -8169,25 +8039,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "345d501e-aec6-47af-90b5-165172b0a794")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "96fcab7b-90ed-4709-ba5d-820a99dbdc91")
+			(uuid "499dc24e-9fc6-4286-9636-bbfca9bc8a5a")
 			(effects
 				(font
 					(size 1 1)
@@ -8198,7 +8055,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/1772e788-7067-4b36-b6a3-b2577cf73582")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -9061,25 +8918,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "71f2e367-e3da-497e-a7cb-00309f01d3a9")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cf324690-8f63-49f3-b772-c8e3e56766ca")
+			(uuid "17cc5c3c-af3b-477b-904f-4d3930855136")
 			(effects
 				(font
 					(size 1 1)
@@ -9090,7 +8934,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/73bd6474-5d29-40ec-8fc1-d1d51505b42e")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -10423,25 +10267,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "fa6ff180-9ef4-4cf8-9658-7f0e6abfa56d")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "99bd18cc-ec6e-4308-a5c3-cceabb9054b3")
+			(uuid "0df98e39-3878-4466-b2e6-fd6bd04b6f67")
 			(effects
 				(font
 					(size 1 1)
@@ -10452,7 +10283,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/d102f839-018e-4326-b053-40cd8c1f49cf")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
@@ -10557,25 +10388,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C15849"
+		(property "LCSC" "C15849"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6e5bd5ff-15bc-4f68-9ae4-76e2f87535e6")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "30ada394-635e-4540-acf1-f77f014fb345")
+			(uuid "346a77e5-7fce-484e-9a37-7b7b25840d96")
 			(effects
 				(font
 					(size 1 1)
@@ -10586,7 +10404,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/00000000-0000-0000-0000-00005ff2a9b9")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.14058 -0.51)
@@ -10798,25 +10616,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6e74a355-ed73-49f8-b2ca-dc917239ecf3")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "19dd9ade-548c-415e-adcf-d1cb1fc705c6")
+			(uuid "04ca3711-ba3f-400a-b4af-878394043875")
 			(effects
 				(font
 					(size 1 1)
@@ -10827,7 +10632,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/2f041414-24b7-43b0-85c8-c079a7e8e154")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -11691,25 +11496,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "fe35085d-cc47-472b-9f8b-8a2d18196581")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e8642e30-53aa-4ac2-9e4f-ae2a65802f2f")
+			(uuid "00a15858-b80e-4116-a371-301319130638")
 			(effects
 				(font
 					(size 1 1)
@@ -11720,7 +11512,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/89db8a82-6888-4239-b329-435e2f0a10a6")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -12584,25 +12376,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "dde4abba-5a22-4932-b84f-35473009b843")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "65612c5b-2acc-4e0d-836e-e03accea290d")
+			(uuid "906f8187-b126-41c8-9b59-88c86e45bec6")
 			(effects
 				(font
 					(size 1 1)
@@ -12613,7 +12392,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/967069a1-2903-4cf8-9a38-5a933ef95691")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -13477,25 +13256,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "b1e285ab-d2dd-479a-aaca-ecfa3fa4ba00")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "87f7619a-e532-453c-8b9e-67a6713c9809")
+			(uuid "6bd037c2-5896-4e51-8503-e74f91bc185c")
 			(effects
 				(font
 					(size 1 1)
@@ -13506,7 +13272,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/db681b32-df1e-4065-ae45-e7c3f089a52a")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -14369,25 +14135,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "836f471a-2ac5-4ae7-ae5d-3eb16ea48cd9")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "539b12b8-fc21-47aa-b729-7826984428c3")
+			(uuid "ae2656a9-3d18-4d25-a91d-853710df6692")
 			(effects
 				(font
 					(size 1 1)
@@ -14398,7 +14151,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/e5b93cd5-efbb-47b3-a607-fc0f8f8cc2ec")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
@@ -14504,25 +14257,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1618ef9f-8d10-48d1-acf0-abfd295daa79")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "418270d7-fe5f-478e-9700-b50d46b188ff")
+			(uuid "6ac9839b-3f3a-4a45-a3f4-13caaf84d362")
 			(effects
 				(font
 					(size 1 1)
@@ -14533,7 +14273,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/bc2f2974-5065-4881-9d3a-4438b43ad59b")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -15396,25 +15136,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C318893"
+		(property "LCSC" "C318893"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "54038f48-b4b0-4af1-a769-aca2af7d4d95")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "ceb3885f-8bef-479f-b72e-665102ff7319")
+			(uuid "1e6ec067-da9e-4423-b3e3-e9214567b577")
 			(effects
 				(font
 					(size 1 1)
@@ -15424,7 +15151,7 @@
 		)
 		(path "/2bd76753-80a2-4f0e-b5ea-76a6eccc4b56")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start 2.199999 -1.55)
@@ -15684,25 +15411,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "060e6a79-ee61-4dfd-9814-b2bf3a3daad3")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2ccbf1af-26a2-4ffa-a1a1-548bb70842ca")
+			(uuid "802af470-28f9-461d-be87-db79a5375c76")
 			(effects
 				(font
 					(size 1 1)
@@ -15713,7 +15427,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/e832fc28-84d9-4d00-a3b4-868fd791a18f")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -17047,25 +16761,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "3aa7d97c-9949-4136-875c-f25a0379ecf4")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "50c729f4-4a0c-463f-bbde-24e2c239c8a7")
+			(uuid "b60e2ab6-ec92-48ae-9ef4-189dcad37ac7")
 			(effects
 				(font
 					(size 1 1)
@@ -17076,7 +16777,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/bb2c7925-037f-4a32-b8b2-7ecf97ce6086")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -17940,25 +17641,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "123cc4a2-cfb1-4da7-bf39-6e57e368fb1f")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "841a1121-102e-4704-882a-e7beecd7c69b")
+			(uuid "774522df-5f6a-46d1-a59f-f589ceb82057")
 			(effects
 				(font
 					(size 1 1)
@@ -17969,7 +17657,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/8527faf1-2bcd-4dec-bf9e-b6219297cb73")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -18833,25 +18521,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "20b1db24-a537-47e8-be6b-38caee38d72f")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d99f8745-0b6f-473d-aa32-b9e780fbd72c")
+			(uuid "9d4a34e9-a637-4833-9235-2823d54d3186")
 			(effects
 				(font
 					(size 1 1)
@@ -18862,7 +18537,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/febc967b-6f05-443d-a8c2-2f180aed2abc")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -19725,25 +19400,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C51118"
+		(property "LCSC" "C51118"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6ba97efa-50e7-4f33-91ee-df6939643c8c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2ce05b99-1340-4390-94c2-a546af4f51fd")
+			(uuid "10516072-528e-49a7-8e81-9bc95bfccc74")
 			(effects
 				(font
 					(size 1 1)
@@ -19754,7 +19416,7 @@
 		(property ki_fp_filters "SOT?23?5*")
 		(path "/00000000-0000-0000-0000-00005ff2b29d")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start 0 -1.56)
@@ -20044,25 +19706,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2b3ba1f7-b38f-43ad-a818-8a1dd1a658eb")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "321f4cfe-f854-4472-b6f2-55586898be09")
+			(uuid "2e93d9b5-c8ac-4fc0-bc0b-8310e189753f")
 			(effects
 				(font
 					(size 1 1)
@@ -20073,7 +19722,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/1ad12462-c21d-4031-b397-f663fdd93e6a")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -20936,25 +20585,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "75135375-ce9e-46b3-ac2e-507f0bdefc38")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b7e1c9d3-aa46-43b4-a566-fdadf2eb5ec3")
+			(uuid "87330a3b-2252-42e8-84a9-817f018bdb89")
 			(effects
 				(font
 					(size 1 1)
@@ -20965,7 +20601,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/c963cc08-7fd8-4841-b8a3-8a1832d6faff")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
@@ -21071,25 +20707,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "46aa5270-09ab-496c-9ca6-0d1c1128e0c0")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e00d96df-e70b-4d46-98c1-43b8753db0a9")
+			(uuid "14d83910-0de8-4bad-9a63-f7a0b05d7ba5")
 			(effects
 				(font
 					(size 1 1)
@@ -21100,7 +20723,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/2c30d568-fb75-4004-a28a-9407fa6442dc")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -21964,25 +21587,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e7903c55-c9d2-406d-b2ee-b3913170b332")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "ab2c8f16-95c4-4b0b-984b-febd55e0d1e7")
+			(uuid "449b6166-d740-4edf-bdcd-0cec9afc3f55")
 			(effects
 				(font
 					(size 1 1)
@@ -21993,7 +21603,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/bfef362a-ca58-44e4-940f-247f9a8abcf7")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -22856,25 +22466,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e1a64914-c022-44e9-beb5-9ad75618c410")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0291e9df-23c1-4f4e-b501-6bc88b37ad93")
+			(uuid "eb4f409b-936a-4c85-a687-9ef7d2796cf9")
 			(effects
 				(font
 					(size 1 1)
@@ -22885,7 +22482,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/2b718f77-e8a4-4d3a-8ddf-2c0ac668408c")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
@@ -22991,25 +22588,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6fa5f090-0222-4dc1-92ae-690fec7d3814")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e694ac01-e701-4c97-b25e-f9ef50b9bf80")
+			(uuid "d0ce57e6-b3c1-4376-8f35-a0a18d8bdc55")
 			(effects
 				(font
 					(size 1 1)
@@ -23020,7 +22604,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/3482b1da-94cb-4909-a6fb-f08062177b77")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -23883,25 +23467,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e2c1b01b-8ee2-4c85-8877-a1177a066144")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c20a1b62-4624-4f85-862c-8ae21529c7d0")
+			(uuid "cfd84d72-e57e-4366-8f4a-075543256627")
 			(effects
 				(font
 					(size 1 1)
@@ -23912,7 +23483,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/881be5e3-b531-4735-a6eb-228897ba851f")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
@@ -24018,25 +23589,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "cf5b05d1-f98d-4417-b129-6bf645ff736f")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "18d0ac08-6609-43c0-a5eb-4f6e0ca563af")
+			(uuid "031f0d17-ca1b-44c9-a9d5-009dbf0493ae")
 			(effects
 				(font
 					(size 1 1)
@@ -24047,7 +23605,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/bca29c9d-ba45-4095-a630-6cfc19499b19")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -24911,25 +24469,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "c1d99369-cfdc-48a0-a635-106bf25ab9da")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d44e8790-9ab7-4710-aab4-0b939ff46eba")
+			(uuid "4955c47c-b6de-4d7e-a997-3db36cce5163")
 			(effects
 				(font
 					(size 1 1)
@@ -24940,7 +24485,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/6052b206-61c6-410a-9f8a-2bd7509a0ad3")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 1.27 90)
@@ -25056,25 +24601,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "49b01b5e-216f-4830-9eb5-b07660cd0db5")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "bcc1ce64-25a3-4f9c-a03f-0541a5998d85")
+			(uuid "cdde7f6a-7478-474d-bc60-f12825b9f92a")
 			(effects
 				(font
 					(size 1 1)
@@ -25085,7 +24617,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/a7e2a0a1-217e-441e-ac36-f952f59b8737")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -25949,25 +25481,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "929267ad-6b55-419f-9661-d626e1971385")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "65704ec6-4927-4e13-a759-bba9ea7f01c8")
+			(uuid "598ede28-0254-4738-823a-17636a707a31")
 			(effects
 				(font
 					(size 1 1)
@@ -25978,7 +25497,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/7c3c9cb5-5657-4ac2-a10c-400767f5cf6b")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -26842,25 +26361,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "ec2f36a1-fec7-47e1-99ee-d2f4c630f2c3")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "7553e950-2274-41ef-b2a8-7aa00695f0bc")
+			(uuid "e9276367-3027-4a3e-8406-2952e21e5f65")
 			(effects
 				(font
 					(size 1 1)
@@ -26871,7 +26377,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/fd6f1049-2d2e-4471-b855-067b050b67e4")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -27735,25 +27241,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "032c36ac-b681-4c60-8489-ea8367da75c8")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "a1fded4f-9aaa-44eb-93fd-658a6bd9eb8e")
+			(uuid "6517925c-e4d0-492a-b235-6eccbdd4c065")
 			(effects
 				(font
 					(size 1 1)
@@ -27764,7 +27257,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/949cd2fd-8287-4822-8a6b-862e85a1b73f")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -28628,25 +28121,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "3d73ea15-8f9f-478c-ac13-2da894dc0608")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "dc3174e8-c62c-46d7-8e06-c0e5205d1b7d")
+			(uuid "d132df95-56b4-4a0a-87ff-46c58ad5dce5")
 			(effects
 				(font
 					(size 1 1)
@@ -28657,7 +28137,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/702426ad-3f72-4fa7-9880-1ee120145099")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -29521,25 +29001,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d068f06b-73a9-4f68-9cf5-a85b7511ab08")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5be26d49-7543-437a-ae66-a2d7d84de9c6")
+			(uuid "1d59d8ab-2d3a-4d3f-825a-8664eee75960")
 			(effects
 				(font
 					(size 1 1)
@@ -29550,7 +29017,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/3889d6d0-c57c-4dae-92da-4219b9a503c5")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -30414,25 +29881,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "791ef7dd-b8b0-4a03-a931-8c9908d9e81c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "102d6773-e6e3-4b79-816e-90647f5bdf0a")
+			(uuid "1d4fec47-29d6-487b-9090-4ec71e753e14")
 			(effects
 				(font
 					(size 1 1)
@@ -30443,7 +29897,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/41bbe8b3-b490-42a8-b872-9e0b2fdfe8b6")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -31307,25 +30761,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "aeb05abd-a106-4629-9fd6-4107df196583")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "497e9fd1-5c0f-4ee2-b8df-0718242a2665")
+			(uuid "3bf63826-4fc7-4c48-a9cb-31c7895fc227")
 			(effects
 				(font
 					(size 1 1)
@@ -31336,7 +30777,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/bf60e3fc-1199-452b-98b8-33d7b6f30497")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -32200,25 +31641,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "db5c50a8-2b54-49cc-98ef-0e69853fea83")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6e9f524c-3b92-4125-a072-3b65950bb945")
+			(uuid "27a40133-44d8-409f-8f11-cec76638d5c9")
 			(effects
 				(font
 					(size 1 1)
@@ -32229,7 +31657,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/39e5bf86-3d4d-49f0-ac89-88ddbe220b0f")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -33093,25 +32521,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "ce339faf-a7b2-405f-aff9-b96fa73e1a6a")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1b93c1d2-249a-4921-9831-b3b583c3c779")
+			(uuid "5a7b2692-35ff-469c-8722-f677128964d7")
 			(effects
 				(font
 					(size 1 1)
@@ -33122,7 +32537,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/49cf6b27-1b67-4422-a014-72e37d512190")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -33986,25 +33401,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f7a816e6-4cad-456f-a4bb-96ba5c9ab611")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e67ec4c6-2259-44dd-8373-f855cbdb5bbd")
+			(uuid "80a910ac-5b88-4494-8227-28135973cfc8")
 			(effects
 				(font
 					(size 1 1)
@@ -34015,7 +33417,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/d0b3c802-8c5b-49de-9489-0261eb43fb7a")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -34985,25 +34387,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "77fa8bc8-823d-48a7-a3b4-6916da55f297")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "68da14c1-b783-40d8-8b6e-50fd49854311")
+			(uuid "b22719ab-9c3b-40ac-8ffb-c44ca8568254")
 			(effects
 				(font
 					(size 1 1)
@@ -35014,7 +34403,7 @@
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/8741b06c-a2e7-4017-8235-f5dd8daef219")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd dnp)
 		(fp_line
 			(start 1.65 0.73)
@@ -35217,25 +34606,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C23186"
+		(property "LCSC" "C23186"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "4b1bc5cc-41c2-4bb8-9c26-91db4d1121b8")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d3f65abd-741b-42ee-9a8f-bc51219a6f69")
+			(uuid "b6ef2a65-ea8e-49dd-8b23-3b609ebfdc65")
 			(effects
 				(font
 					(size 1 1)
@@ -35246,7 +34622,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/753e2e97-331e-4085-89bd-f04fed4e5c75")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.237258 0.5225)
@@ -35458,25 +34834,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C23206"
+		(property "LCSC" "C23206"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "0726fe95-d290-4137-98a6-2e693b4a1433")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cb6fbb6e-6e57-4884-bd13-1fd13ab8bdb8")
+			(uuid "81b2ce6a-0f55-48f3-b73f-e7eec0e32546")
 			(effects
 				(font
 					(size 1 1)
@@ -35487,7 +34850,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/6352638b-029e-44e9-9810-73f91dc93ea0")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.237258 0.5225)
@@ -35698,25 +35061,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C23186"
+		(property "LCSC" "C23186"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "4f278c9b-90c5-4e28-8f7c-581113f3de94")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "be6985d2-00d3-4a09-8b73-703c6441c9f3")
+			(uuid "b03f5022-5890-4e78-81a3-f2e4883dd124")
 			(effects
 				(font
 					(size 1 1)
@@ -35727,7 +35077,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/00000000-0000-0000-0000-00005ff28677")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.237258 -0.5225)
@@ -35938,25 +35288,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "c0669956-49cf-4d9d-999b-b8daae2437fc")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9034d2da-7abf-442a-929d-1979928477f4")
+			(uuid "ec66895d-a84f-41b6-aba6-18782d606655")
 			(effects
 				(font
 					(size 1 1)
@@ -35967,7 +35304,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/f05a29bc-369e-4a6f-a6fd-1242704bd885")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
@@ -36072,25 +35409,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C318893"
+		(property "LCSC" "C318893"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "72a4d487-fc2f-4d9d-a172-2497bd0928b2")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b27a4b4e-51cc-4e48-861a-8f464213f376")
+			(uuid "4ebc55c2-3fb8-4575-8075-cd715eb37e52")
 			(effects
 				(font
 					(size 1 1)
@@ -36100,7 +35424,7 @@
 		)
 		(path "/43903db3-b98f-4987-a3a2-fe65aba8373a")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start 2.199999 -1.55)
@@ -36360,25 +35684,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C318893"
+		(property "LCSC" "C318893"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6bd90105-320d-41cb-9fe4-6e76e6647cb7")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2db6740b-a91e-4f9b-9dba-55f0746e0f08")
+			(uuid "9f52da1e-e869-42cc-9d4c-8e8155851353")
 			(effects
 				(font
 					(size 1 1)
@@ -36388,7 +35699,7 @@
 		)
 		(path "/d1914eeb-b9ab-45c9-8844-af1f60a52abf")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start 2.199999 -1.55)
@@ -36648,25 +35959,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6eb9694a-eba1-4099-a028-d46861b83629")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0e6e6667-800d-49d5-b124-5ff2a2e75db0")
+			(uuid "21a0920b-5795-4d31-b4ae-70b18a49622f")
 			(effects
 				(font
 					(size 1 1)
@@ -36677,7 +35975,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/71b92d75-4f0c-47fb-b46d-9fcb7897bb4d")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
@@ -38010,25 +37308,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "bffcfddd-4fce-4943-9ee0-516afe0ddd74")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e38d89c4-83b9-41d3-b0bf-cbbfcb3e4ec2")
+			(uuid "3d8f7689-4b5f-408f-8b1b-cb42d5174636")
 			(effects
 				(font
 					(size 1 1)
@@ -38039,7 +37324,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/1b84f047-57ec-4c1f-9b82-8eba91f6ac82")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
@@ -38144,25 +37429,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" "C23186"
+		(property "LCSC" "C23186"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "c69036fe-b7bc-4804-9643-8995aadea9a5")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "de2242bf-cad0-43f2-a559-a1877bcfcb9e")
+			(uuid "884e8116-aca1-456d-93c1-6b120641e8a0")
 			(effects
 				(font
 					(size 1 1)
@@ -38173,7 +37445,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/00000000-0000-0000-0000-00005ff24b63")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.237258 -0.5225)
@@ -38385,25 +37657,12 @@
 				)
 			)
 		)
-		(property "JLCPCB part #" ""
+		(property "LCSC" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "99341e86-4142-45c6-a3f0-820fae96af32")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "JLC_FOOTPRINT" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "aee73a34-3fcb-4ab8-b25e-cbd1b21e0749")
+			(uuid "49ee7bd4-5787-469b-95c9-cda6180e7f8d")
 			(effects
 				(font
 					(size 1 1)
@@ -38414,7 +37673,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/6db559cd-498b-46a6-bffe-d45b296c2d93")
 		(sheetname "Root")
-		(sheetfile "tester.kicad_sch")
+		(sheetfile "project.kicad_sch")
 		(attr through_hole dnp)
 		(fp_line
 			(start -1 0)
