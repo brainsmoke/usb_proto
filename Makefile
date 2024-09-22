@@ -38,11 +38,7 @@ CASES=$(BUILDDIR)/case.stl \
       $(BUILDDIR)/case_bottom.stl \
       $(BUILDDIR)/case_top.stl
 
-CASE_EXTRA=
-
 TMPFILES=$(GERBERS) $(DRILLFILES) $(POSFILE_KICAD)
-EXTRA=$(CASE_EXTRA)
-
 
 PROJECT_TARGETS=$(PROJECTS:=.project)
 TARGETS=$(PROJECT_TARGETS)
@@ -55,16 +51,14 @@ INTERMEDIATE_FILES=$(foreach project, $(PROJECTS), \
 BUILD_FILES=$(foreach project, $(PROJECTS), \
             $(patsubst %, $(POSFILE), $(project)) \
             $(patsubst %, $(BOMFILE), $(project)) \
-			$(patsubst %, $(ZIPFILE), $(project)) \
+            $(patsubst %, $(ZIPFILE), $(project)) \
             $(foreach case, $(CASES), $(patsubst %, $(case), $(project))))
 
-.PHONY: all extra clean $(PROJECT_TARGETS)
+.PHONY: all clean $(PROJECT_TARGETS)
 
 all: $(TARGETS)
 
 $(PROJECT_TARGETS): %.project: $(ZIPFILE) $(POSFILE) $(BOMFILE) $(CASES)
-
-extra: $(TARGETS) $(EXTRA)
 
 $(GERBERS): $(PCB)
 	mkdir -p $(dir $@)
