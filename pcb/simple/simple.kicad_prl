@@ -74,7 +74,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "tester.kicad_prl",
+    "filename": "simple.kicad_prl",
     "version": 3
   },
   "project": {
