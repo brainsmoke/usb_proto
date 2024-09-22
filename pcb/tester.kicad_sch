@@ -5,6 +5,125 @@
 	(uuid "dcd3e9a3-3064-4a63-a185-81cd67bb2bda")
 	(paper "A4")
 	(lib_symbols
+		(symbol "Connector:Conn_01x01_Pin"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x01_Pin"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x01, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x01_Pin_1_1"
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Connector:Conn_01x02_Pin"
 			(pin_names
 				(offset 1.016) hide)
@@ -2083,6 +2202,175 @@
 				)
 			)
 		)
+		(symbol "Device:LED"
+			(pin_numbers hide)
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LED"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Light emitting diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "LED diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LED_0_1"
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy -1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "LED_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:R"
 			(pin_numbers hide)
 			(pin_names
@@ -2371,6 +2659,139 @@
 						)
 					)
 					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Switch:SW_SPST"
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SW_SPST"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Single Pole Single Throw (SPST) switch"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "switch lever"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SW_SPST_0_0"
+				(circle
+					(center -2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 0.254) (xy 1.524 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SW_SPST_1_1"
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2724,6 +3145,12 @@
 		(uuid "131a9e08-acc1-4cec-87c6-d4f9e3cc20b8")
 	)
 	(junction
+		(at 83.82 179.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "15051a48-a59d-4ed7-bdb5-07bf730e2a9a")
+	)
+	(junction
 		(at 30.48 93.98)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3018,6 +3445,12 @@
 		(uuid "49e1b2bf-98c9-48cc-b6e8-8bd2b9e7c541")
 	)
 	(junction
+		(at 83.82 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "49e744c5-2ff2-4ff5-8040-12c7ddfa251c")
+	)
+	(junction
 		(at 215.9 34.29)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3144,6 +3577,12 @@
 		(uuid "60f01a67-faed-42ee-9bab-427069771d33")
 	)
 	(junction
+		(at 96.52 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "61ad301a-2e62-484c-aff8-676ad9fb21bc")
+	)
+	(junction
 		(at 157.48 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3184,6 +3623,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "689ab854-2521-42a6-8a36-6aea997e8a3b")
+	)
+	(junction
+		(at 83.82 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6aec285f-d2f3-465c-9770-b488cf526d36")
 	)
 	(junction
 		(at 228.6 86.36)
@@ -3232,6 +3677,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7457687a-2e4b-4b4b-a6a6-1b4fbea13b42")
+	)
+	(junction
+		(at 96.52 179.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7649d40e-305f-4c39-9594-ea9303567c44")
 	)
 	(junction
 		(at 46.99 86.36)
@@ -3534,6 +3985,12 @@
 		(uuid "aa2c7f35-8ade-4f20-814d-22cf58ac6d7d")
 	)
 	(junction
+		(at 25.4 148.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ae2a48d3-2d54-4f87-a4a0-bcea0754e8c8")
+	)
+	(junction
 		(at 63.5 115.57)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3706,6 +4163,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d3d566a4-6435-4d2d-8ac7-8c7e9ca64dcd")
+	)
+	(junction
+		(at 96.52 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d49b376f-4a1c-4aa3-a03a-7af4447fd381")
 	)
 	(junction
 		(at 146.05 113.03)
@@ -4091,6 +4554,16 @@
 	)
 	(wire
 		(pts
+			(xy 50.8 157.48) (xy 50.8 165.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0743e846-61cf-449f-aa8b-15c72e43b52d")
+	)
+	(wire
+		(pts
 			(xy 154.94 57.15) (xy 157.48 57.15)
 		)
 		(stroke
@@ -4171,6 +4644,16 @@
 	)
 	(wire
 		(pts
+			(xy 78.74 161.29) (xy 83.82 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0cac2f0d-6969-40a1-a6e5-8c8328ccba87")
+	)
+	(wire
+		(pts
 			(xy 226.06 118.11) (xy 228.6 118.11)
 		)
 		(stroke
@@ -4221,6 +4704,16 @@
 	)
 	(wire
 		(pts
+			(xy 95.25 179.07) (xy 96.52 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0fc8899e-ade0-4381-b432-5a6ee914b0b9")
+	)
+	(wire
+		(pts
 			(xy 113.03 110.49) (xy 113.03 113.03)
 		)
 		(stroke
@@ -4268,6 +4761,16 @@
 			(type default)
 		)
 		(uuid "10de91fc-61ad-4aa1-b7ac-82b87712efcb")
+	)
+	(wire
+		(pts
+			(xy 25.4 142.24) (xy 25.4 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "110faf94-1e5c-4f2d-b114-2af414994ba0")
 	)
 	(wire
 		(pts
@@ -4348,6 +4851,16 @@
 			(type default)
 		)
 		(uuid "1324efe9-fe5d-4f5e-bfe6-15567191ebf4")
+	)
+	(wire
+		(pts
+			(xy 25.4 148.59) (xy 27.94 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "14b170b8-1b0b-4329-b61b-0eeb9e8888c6")
 	)
 	(wire
 		(pts
@@ -5501,6 +6014,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 152.4) (xy 96.52 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "461be8e0-aea4-47ff-8f33-b1e22ddb83cf")
+	)
+	(wire
+		(pts
 			(xy 245.11 88.9) (xy 245.11 91.44)
 		)
 		(stroke
@@ -5588,6 +6111,16 @@
 			(type default)
 		)
 		(uuid "48062f48-f616-496a-9ef7-31a869d8ff71")
+	)
+	(wire
+		(pts
+			(xy 97.79 152.4) (xy 96.52 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48219f74-2a15-4738-a395-060e98ea2429")
 	)
 	(wire
 		(pts
@@ -5688,6 +6221,16 @@
 			(type default)
 		)
 		(uuid "4dc1ded0-7626-4d12-ab21-908e990f4911")
+	)
+	(wire
+		(pts
+			(xy 96.52 161.29) (xy 101.6 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4df1f995-42e6-4750-a72c-9bf6ac07e048")
 	)
 	(wire
 		(pts
@@ -5831,6 +6374,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 179.07) (xy 101.6 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5302ae60-681f-41d6-8f1e-f32714559c7b")
+	)
+	(wire
+		(pts
 			(xy 93.98 96.52) (xy 96.52 96.52)
 		)
 		(stroke
@@ -5868,6 +6421,16 @@
 			(type default)
 		)
 		(uuid "53c63a8a-8dcd-4a66-b979-c4b33c0d78df")
+	)
+	(wire
+		(pts
+			(xy 95.25 144.78) (xy 96.52 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53ed4385-25cf-428a-a490-97b864ee03e1")
 	)
 	(wire
 		(pts
@@ -6291,6 +6854,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 161.29) (xy 85.09 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "678d1a50-7141-4aaa-a91b-2e25695535dc")
+	)
+	(wire
+		(pts
 			(xy 63.5 86.36) (xy 63.5 88.9)
 		)
 		(stroke
@@ -6338,6 +6911,16 @@
 			(type default)
 		)
 		(uuid "68e3641f-83db-4886-b565-c10bde6c4a2f")
+	)
+	(wire
+		(pts
+			(xy 83.82 179.07) (xy 85.09 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "692ebce0-8a58-41ac-b752-2733c1f900ae")
 	)
 	(wire
 		(pts
@@ -6761,6 +7344,16 @@
 	)
 	(wire
 		(pts
+			(xy 81.28 152.4) (xy 83.82 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d36fba2-1597-4a8a-8fbb-bc65ebee651e")
+	)
+	(wire
+		(pts
 			(xy 48.26 39.37) (xy 48.26 41.91)
 		)
 		(stroke
@@ -6901,6 +7494,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 152.4) (xy 83.82 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "83a640dd-e1de-40ce-a517-02e28bd26324")
+	)
+	(wire
+		(pts
 			(xy 60.96 83.82) (xy 63.5 83.82)
 		)
 		(stroke
@@ -6928,6 +7531,16 @@
 			(type default)
 		)
 		(uuid "8531d133-0620-4286-a444-1681a7a6a135")
+	)
+	(wire
+		(pts
+			(xy 35.56 157.48) (xy 38.1 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "857711cb-d059-4850-8865-9bd24443f177")
 	)
 	(wire
 		(pts
@@ -6971,6 +7584,16 @@
 	)
 	(wire
 		(pts
+			(xy 35.56 148.59) (xy 38.1 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87d2c454-6013-4f45-8d19-51a5799d4bd0")
+	)
+	(wire
+		(pts
 			(xy 143.51 115.57) (xy 146.05 115.57)
 		)
 		(stroke
@@ -6988,6 +7611,16 @@
 			(type default)
 		)
 		(uuid "88834d15-53fa-4113-b9a3-9fb0152fd9b8")
+	)
+	(wire
+		(pts
+			(xy 96.52 144.78) (xy 101.6 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88d7ef2d-04c2-4f99-b774-006d2bbd2f5d")
 	)
 	(wire
 		(pts
@@ -7078,6 +7711,16 @@
 			(type default)
 		)
 		(uuid "8ae48b10-9ec1-4090-8d48-a7f4cf858197")
+	)
+	(wire
+		(pts
+			(xy 97.79 170.18) (xy 96.52 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b0f60be-83f7-46e8-b9a4-5c333124c32d")
 	)
 	(wire
 		(pts
@@ -7358,6 +8001,16 @@
 			(type default)
 		)
 		(uuid "97d1d17b-36ba-4b76-9f81-08f54584f100")
+	)
+	(wire
+		(pts
+			(xy 96.52 135.89) (xy 96.52 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "982044a2-3b5d-416e-b94d-81977e6716d5")
 	)
 	(wire
 		(pts
@@ -7731,6 +8384,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 144.78) (xy 85.09 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a734df74-3137-4a4d-b5ab-3dc2abd4992a")
+	)
+	(wire
+		(pts
 			(xy 245.11 99.06) (xy 242.57 99.06)
 		)
 		(stroke
@@ -7951,6 +8614,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 170.18) (xy 96.52 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ae44f690-3a96-4b7d-b3a8-4605f2f28329")
+	)
+	(wire
+		(pts
 			(xy 173.99 46.99) (xy 176.53 46.99)
 		)
 		(stroke
@@ -7988,6 +8661,16 @@
 			(type default)
 		)
 		(uuid "af7ec7c8-c141-4c66-9452-eeaca79b9a5d")
+	)
+	(wire
+		(pts
+			(xy 78.74 179.07) (xy 83.82 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "afe11ae1-b7b2-440d-8326-87238316db2f")
 	)
 	(wire
 		(pts
@@ -8178,6 +8861,16 @@
 			(type default)
 		)
 		(uuid "b6bbe4ff-229a-4088-996c-d827734f8ab4")
+	)
+	(wire
+		(pts
+			(xy 78.74 144.78) (xy 83.82 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b77b4164-0317-4afa-be4f-36a5b3b79567")
 	)
 	(wire
 		(pts
@@ -8611,6 +9304,16 @@
 	)
 	(wire
 		(pts
+			(xy 25.4 157.48) (xy 25.4 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7c45c18-af93-4784-a59a-043135ca7339")
+	)
+	(wire
+		(pts
 			(xy 154.94 24.13) (xy 157.48 24.13)
 		)
 		(stroke
@@ -8738,6 +9441,16 @@
 			(type default)
 		)
 		(uuid "cbca79f6-4881-4369-b8f5-469c7e338aa5")
+	)
+	(wire
+		(pts
+			(xy 97.79 135.89) (xy 96.52 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cbdd474f-e7d6-4ba5-89da-21fcf72f9551")
 	)
 	(wire
 		(pts
@@ -8961,6 +9674,26 @@
 	)
 	(wire
 		(pts
+			(xy 95.25 161.29) (xy 96.52 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3ca48c5-f4e9-4ffd-9d11-28353569290c")
+	)
+	(wire
+		(pts
+			(xy 81.28 135.89) (xy 83.82 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4a49f75-3b71-4d26-b4be-6e5f84d402fc")
+	)
+	(wire
+		(pts
 			(xy 143.51 110.49) (xy 146.05 110.49)
 		)
 		(stroke
@@ -8968,6 +9701,16 @@
 			(type default)
 		)
 		(uuid "d5baccf5-e098-470f-b428-028e6d2f3d4f")
+	)
+	(wire
+		(pts
+			(xy 45.72 157.48) (xy 50.8 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d603d40a-d0da-4620-974d-948d78451ac1")
 	)
 	(wire
 		(pts
@@ -9201,6 +9944,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 170.18) (xy 83.82 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e24d2336-3366-4a59-b91a-e825efd889ab")
+	)
+	(wire
+		(pts
 			(xy 212.09 125.73) (xy 209.55 125.73)
 		)
 		(stroke
@@ -9241,6 +9994,16 @@
 	)
 	(wire
 		(pts
+			(xy 81.28 170.18) (xy 83.82 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e462143e-5772-4ff3-9cd6-975eb6d04572")
+	)
+	(wire
+		(pts
 			(xy 157.48 39.37) (xy 157.48 41.91)
 		)
 		(stroke
@@ -9248,6 +10011,16 @@
 			(type default)
 		)
 		(uuid "e4ad4093-f287-47a4-a3e1-2f1a6afe9012")
+	)
+	(wire
+		(pts
+			(xy 83.82 135.89) (xy 83.82 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e53fc390-3801-4019-910b-8ab532042744")
 	)
 	(wire
 		(pts
@@ -9451,6 +10224,16 @@
 	)
 	(wire
 		(pts
+			(xy 27.94 157.48) (xy 25.4 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef37ca8c-cbc3-4bfe-bc5f-fe33b3078c25")
+	)
+	(wire
+		(pts
 			(xy 176.53 93.98) (xy 179.07 93.98)
 		)
 		(stroke
@@ -9611,6 +10394,16 @@
 	)
 	(wire
 		(pts
+			(xy 45.72 148.59) (xy 50.8 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7dc09db-20ad-453e-9994-db854de938e3")
+	)
+	(wire
+		(pts
 			(xy 213.36 46.99) (xy 215.9 46.99)
 		)
 		(stroke
@@ -9749,6 +10542,72 @@
 		)
 		(uuid "ff8d5bd0-79d5-4155-b616-270b629951e1")
 	)
+	(global_label "sw1_a"
+		(shape input)
+		(at 81.28 135.89 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0454fc59-6d58-40f9-9429-78fc44d0b8df")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 73.2643 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "sw3_a"
+		(shape input)
+		(at 81.28 170.18 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "12001d2d-5e01-4848-a471-2a02356817ae")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 73.2643 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "sw2_b"
+		(shape input)
+		(at 97.79 152.4 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "18439575-891a-4bdc-8813-ad7a75c6e458")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.8057 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "3V3"
 		(shape input)
 		(at 109.22 36.83 0)
@@ -9809,6 +10668,50 @@
 			)
 		)
 	)
+	(global_label "sw1_b"
+		(shape input)
+		(at 97.79 135.89 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "53845f3f-a742-40d2-aab3-88a5b7d19948")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.8057 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "sw3_b"
+		(shape input)
+		(at 97.79 170.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "78014c77-4ffd-4956-9f8b-08b824b90b40")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.8057 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "D+"
 		(shape input)
 		(at 49.53 46.99 0)
@@ -9849,6 +10752,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "sw2_a"
+		(shape input)
+		(at 81.28 152.4 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f1fa4729-8fb3-4041-bbac-4b0b8ae40442")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 73.2643 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -9897,6 +10822,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 30.48 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C165948"
+			(at 30.48 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 30.48 41.91 0)
 			(effects
 				(font
@@ -9982,7 +10925,7 @@
 				)
 			)
 		)
-		(property "Value" "5.1k"
+		(property "Value" "5k1"
 			(at 54.61 27.5336 90)
 			(effects
 				(font
@@ -9990,7 +10933,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 54.61 28.702 90)
 			(effects
 				(font
@@ -10009,6 +10952,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 54.61 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C23186"
+			(at 54.61 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 54.61 30.48 0)
 			(effects
 				(font
@@ -10244,7 +11205,7 @@
 				)
 			)
 		)
-		(property "Value" "5.1k"
+		(property "Value" "5k1"
 			(at 54.61 32.6136 90)
 			(effects
 				(font
@@ -10252,7 +11213,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 54.61 33.782 90)
 			(effects
 				(font
@@ -10271,6 +11232,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 54.61 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C23186"
+			(at 54.61 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 54.61 35.56 0)
 			(effects
 				(font
@@ -10312,7 +11291,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "1uF"
 			(at 128.651 40.513 0)
 			(effects
 				(font
@@ -10321,7 +11300,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 126.6952 43.18 0)
 			(effects
 				(font
@@ -10340,6 +11319,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 125.73 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C15849"
+			(at 125.73 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 125.73 39.37 0)
 			(effects
 				(font
@@ -10446,7 +11443,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "1uF"
 			(at 73.66 46.228 0)
 			(effects
 				(font
@@ -10455,7 +11452,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 70.8152 43.18 0)
 			(effects
 				(font
@@ -10474,6 +11471,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 69.85 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C15849"
+			(at 69.85 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 69.85 39.37 0)
 			(effects
 				(font
@@ -10644,7 +11659,7 @@
 				)
 			)
 		)
-		(property "Value" "AP2204K-3.3"
+		(property "Value" "AP2112K-3.3"
 			(at 96.52 32.9946 0)
 			(effects
 				(font
@@ -10671,6 +11686,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 96.52 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C51118"
+			(at 96.52 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 96.52 39.37 0)
 			(effects
 				(font
@@ -10840,7 +11873,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "0dc6b30f-d101-4e08-9169-d277496d2a0d")
 		(property "Reference" "J36"
@@ -10878,6 +11911,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 254 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 254 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 254 118.11 0)
 			(effects
 				(font
@@ -10988,7 +12039,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1772e788-7067-4b36-b6a3-b2577cf73582")
 		(property "Reference" "J27"
@@ -11034,6 +12085,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 105.41 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 105.41 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "4311d8a9-4fc0-405f-ad58-829a4baad5be")
 		)
@@ -11071,7 +12140,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1ad12462-c21d-4031-b397-f663fdd93e6a")
 		(property "Reference" "J34"
@@ -11117,6 +12186,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 220.98 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 220.98 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "ea46015d-7dde-49a2-828a-62c7eef4b40a")
 		)
@@ -11148,13 +12235,265 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 73.66 179.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "1b84f047-57ec-4c1f-9b82-8eba91f6ac82")
+		(property "Reference" "J44"
+			(at 74.295 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 74.295 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 73.66 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 73.66 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 73.66 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 73.66 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 73.66 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dc18f815-3bc8-436f-828a-e6143c583050")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J44")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 106.68 161.29 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "2b718f77-e8a4-4d3a-8ddf-2c0ac668408c")
+		(property "Reference" "J43"
+			(at 106.045 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 106.045 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 106.68 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 106.68 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 106.68 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 106.68 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 106.68 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "92d07d17-b041-4a57-9e7b-4b58182000c6")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J43")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 90.17 161.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2bd76753-80a2-4f0e-b5ea-76a6eccc4b56")
+		(property "Reference" "SW2"
+			(at 90.17 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_SPST"
+			(at 90.17 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
+			(at 90.17 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 90.17 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single Pole Single Throw (SPST) switch"
+			(at 90.17 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C318893"
+			(at 90.17 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 90.17 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8561346b-4894-4e0e-916c-23eaa8347951")
+		)
+		(pin "2"
+			(uuid "5b863a49-3e02-41d9-8268-f720aca5e51d")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "SW2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x07_Pin")
 		(at 138.43 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "2c30d568-fb75-4004-a28a-9407fa6442dc")
 		(property "Reference" "J29"
@@ -11200,6 +12539,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 138.43 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 138.43 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "1466a944-f37c-440c-8367-f490a0e53d8c")
 		)
@@ -11237,7 +12594,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "2f041414-24b7-43b0-85c8-c079a7e8e154")
 		(property "Reference" "J23"
@@ -11283,6 +12640,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 39.37 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 39.37 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "bc1aba00-8e05-48e1-8445-f0cc278b1716")
 		)
@@ -11320,7 +12695,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "3482b1da-94cb-4909-a6fb-f08062177b77")
 		(property "Reference" "J12"
@@ -11366,6 +12741,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 121.92 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 121.92 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "5c43bb07-4efd-4a06-8145-53d9fb601b4d")
 		)
@@ -11403,7 +12796,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "3889d6d0-c57c-4dae-92da-4219b9a503c5")
 		(property "Reference" "J32"
@@ -11449,6 +12842,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 187.96 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 187.96 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "5ef82b1b-ac8d-4726-8a7e-a4ede88d6d5a")
 		)
@@ -11486,7 +12897,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "39e5bf86-3d4d-49f0-ac89-88ddbe220b0f")
 		(property "Reference" "J31"
@@ -11532,6 +12943,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 171.45 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 171.45 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "957de8d7-ed5b-4be7-8bb7-c9f34f2c9293")
 		)
@@ -11569,7 +12998,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "41bbe8b3-b490-42a8-b872-9e0b2fdfe8b6")
 		(property "Reference" "J7"
@@ -11615,6 +13044,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 39.37 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 39.37 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "0964ed08-14ce-43bd-ac49-81a32f503bbc")
 		)
@@ -11646,13 +13093,99 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 90.17 144.78 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "43903db3-b98f-4987-a3a2-fe65aba8373a")
+		(property "Reference" "SW1"
+			(at 90.17 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_SPST"
+			(at 90.17 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
+			(at 90.17 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 90.17 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single Pole Single Throw (SPST) switch"
+			(at 90.17 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C318893"
+			(at 90.17 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 90.17 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d7ed744d-2228-4441-a547-153ce408fbfc")
+		)
+		(pin "2"
+			(uuid "26949dcd-ffcd-4e56-a7df-47384e7b287a")
+		)
+		(instances
+			(project ""
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "SW1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x07_Pin")
 		(at 72.39 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "46042f2d-6924-4ab2-a522-8e8413e9e744")
 		(property "Reference" "J25"
@@ -11698,6 +13231,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 72.39 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 72.39 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "7ff1175e-1395-4f53-8546-ee620b5d7e41")
 		)
@@ -11735,7 +13286,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "49cf6b27-1b67-4422-a014-72e37d512190")
 		(property "Reference" "J13"
@@ -11781,6 +13332,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 138.43 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 138.43 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "46a093b0-4572-47f2-938f-16acaaf4208e")
 		)
@@ -11818,7 +13387,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "5933cfda-ea22-442c-a7e7-344357df1b0a")
 		(property "Reference" "J11"
@@ -11864,6 +13433,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 105.41 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 105.41 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "0d7632f5-87c3-49b8-a141-ce783df35b90")
 		)
@@ -11895,13 +13482,78 @@
 		)
 	)
 	(symbol
+		(lib_id "power:VCC")
+		(at 25.4 142.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5edfe90d-adb0-4ddf-997b-0cb9ab9b1183")
+		(property "Reference" "#PWR011"
+			(at 25.4 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 25.8318 137.8458 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 25.4 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 25.4 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 25.4 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "99a55c5c-7678-42c2-a5b3-4a76f9157805")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "#PWR011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
 		(at 54.61 44.45 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "6052b206-61c6-410a-9f8a-2bd7509a0ad3")
 		(property "Reference" "J38"
@@ -11922,7 +13574,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "Library:PinHeader_1x02_P2.54mm_Vertical"
 			(at 54.61 44.45 0)
 			(effects
 				(font
@@ -11949,6 +13601,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "36bad198-9052-4b16-8779-c2f92735103b")
 		)
@@ -11965,13 +13635,98 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 31.75 157.48 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6352638b-029e-44e9-9810-73f91dc93ea0")
+		(property "Reference" "R4"
+			(at 31.75 152.2222 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "56k"
+			(at 31.75 154.5336 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 31.75 155.702 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 31.75 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 31.75 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C23206"
+			(at 31.75 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 31.75 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7b349a32-cf1b-4d38-a14d-8cdf2a90b945")
+		)
+		(pin "1"
+			(uuid "98c37759-e778-43a7-b052-b790a5099e87")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x07_Pin")
 		(at 204.47 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "6db559cd-498b-46a6-bffe-d45b296c2d93")
 		(property "Reference" "J17"
@@ -12017,6 +13772,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 204.47 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 204.47 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "dba44eb7-78a8-4f53-8c3c-7f0bec3241c0")
 		)
@@ -12054,7 +13827,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "702426ad-3f72-4fa7-9880-1ee120145099")
 		(property "Reference" "J30"
@@ -12100,6 +13873,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 154.94 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 154.94 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "8439c3da-af79-48b6-b8cb-d27791352003")
 		)
@@ -12137,7 +13928,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "71b92d75-4f0c-47fb-b46d-9fcb7897bb4d")
 		(property "Reference" "J3"
@@ -12175,6 +13966,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x16, script generated"
+			(at 168.91 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 168.91 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 168.91 41.91 0)
 			(effects
 				(font
@@ -12247,7 +14056,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "73bd6474-5d29-40ec-8fc1-d1d51505b42e")
 		(property "Reference" "J5"
@@ -12285,6 +14094,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x16, script generated"
+			(at 208.28 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 208.28 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 208.28 41.91 0)
 			(effects
 				(font
@@ -12351,13 +14178,98 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 31.75 148.59 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "753e2e97-331e-4085-89bd-f04fed4e5c75")
+		(property "Reference" "R3"
+			(at 31.75 143.3322 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5k1"
+			(at 31.75 145.6436 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 31.75 146.812 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 31.75 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 31.75 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C23186"
+			(at 31.75 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 31.75 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f139616d-3f15-4d9c-ac42-30d640265cee")
+		)
+		(pin "1"
+			(uuid "3151c2fa-8229-4740-87d7-7abc49d305d6")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x07_Pin")
 		(at 121.92 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "7c3c9cb5-5657-4ac2-a10c-400767f5cf6b")
 		(property "Reference" "J28"
@@ -12403,6 +14315,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 121.92 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 121.92 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "6427d10e-b041-47ac-8047-104e18ffaab8")
 		)
@@ -12440,7 +14370,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "8527faf1-2bcd-4dec-bf9e-b6219297cb73")
 		(property "Reference" "J26"
@@ -12486,6 +14416,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 88.9 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 88.9 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "29b6ce16-664d-4fa0-8931-f62ad4c2f21d")
 		)
@@ -12517,13 +14465,182 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:LED")
+		(at 41.91 157.48 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "8741b06c-a2e7-4017-8235-f5dd8daef219")
+		(property "Reference" "D2"
+			(at 43.4975 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 43.4975 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 41.91 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 41.91 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 41.91 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 41.91 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 41.91 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4d8a1eff-5ee2-45b6-a650-961c7365afb9")
+		)
+		(pin "2"
+			(uuid "03501356-582a-436d-a6b2-7a01ac92d971")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 73.66 144.78 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "881be5e3-b531-4735-a6eb-228897ba851f")
+		(property "Reference" "J41"
+			(at 74.295 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 74.295 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 73.66 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 73.66 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 73.66 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 73.66 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 73.66 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ee9114c7-7c75-43c0-a5e8-ff8a24cb894b")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x07_Pin")
 		(at 254 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "89db8a82-6888-4239-b329-435e2f0a10a6")
 		(property "Reference" "J20"
@@ -12561,6 +14678,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 254 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 254 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 254 91.44 0)
 			(effects
 				(font
@@ -12736,7 +14871,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "949cd2fd-8287-4822-8a6b-862e85a1b73f")
 		(property "Reference" "J6"
@@ -12782,6 +14917,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 22.86 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 22.86 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "bc6f6d9c-e541-4497-904b-c5941cc82e75")
 		)
@@ -12819,7 +14972,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "967069a1-2903-4cf8-9a38-5a933ef95691")
 		(property "Reference" "J37"
@@ -12865,6 +15018,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 270.51 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 270.51 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "a09d3d3a-36d2-4be1-ad7d-9fdd7a7d46ed")
 		)
@@ -12902,7 +15073,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "986cf5ea-9829-479f-82a1-1d3d1389db49")
 		(property "Reference" "J9"
@@ -12948,6 +15119,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 72.39 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 72.39 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "e82cc263-529b-4956-aab3-6814881c06c7")
 		)
@@ -12985,7 +15174,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "a7e2a0a1-217e-441e-ac36-f952f59b8737")
 		(property "Reference" "J33"
@@ -13031,6 +15220,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 204.47 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 204.47 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "792a89d4-d488-42d9-bd08-40ea4e7093d9")
 		)
@@ -13068,7 +15275,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "a8885e8f-ecd4-4e92-9443-db61cd6c6168")
 		(property "Reference" "J19"
@@ -13114,6 +15321,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 237.49 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 237.49 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "e1c66fe2-a6aa-464b-abee-3a8cc423ba0f")
 		)
@@ -13151,7 +15376,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b4700016-a3b2-40fd-a155-cd964b854f02")
 		(property "Reference" "J15"
@@ -13197,6 +15422,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 171.45 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 171.45 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "70c7848c-2dba-4433-bd29-3eb7c9dab521")
 		)
@@ -13234,7 +15477,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bb2c7925-037f-4a32-b8b2-7ecf97ce6086")
 		(property "Reference" "J14"
@@ -13280,6 +15523,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 154.94 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 154.94 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "aaa11642-2821-42ce-b14c-95b63a667066")
 		)
@@ -13317,7 +15578,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bc2f2974-5065-4881-9d3a-4438b43ad59b")
 		(property "Reference" "J24"
@@ -13363,6 +15624,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 55.88 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 55.88 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "ce001a68-6b82-4329-8544-f86df362618e")
 		)
@@ -13400,7 +15679,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bca29c9d-ba45-4095-a630-6cfc19499b19")
 		(property "Reference" "J21"
@@ -13446,6 +15725,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 270.51 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 270.51 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "66580b86-74d7-4378-981f-589efbfd4ea5")
 		)
@@ -13483,7 +15780,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bf60e3fc-1199-452b-98b8-33d7b6f30497")
 		(property "Reference" "J18"
@@ -13529,6 +15826,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 220.98 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 220.98 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "224acb08-de90-4eaf-a0d7-b1827e0d0420")
 		)
@@ -13566,7 +15881,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bfef362a-ca58-44e4-940f-247f9a8abcf7")
 		(property "Reference" "J10"
@@ -13612,6 +15927,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 88.9 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 88.9 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "95dd0ddd-338a-4a2e-9bdc-1243661fbbd7")
 		)
@@ -13643,13 +15976,161 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 106.68 144.78 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "c963cc08-7fd8-4841-b8a3-8a1832d6faff")
+		(property "Reference" "J40"
+			(at 106.045 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 106.045 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 106.68 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 106.68 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 106.68 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 106.68 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 106.68 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1a42c04e-7d9c-442c-9182-0f0169f8c33d")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J40")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 50.8 165.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cb459d6c-631f-4887-bc3e-8299288e12a4")
+		(property "Reference" "#PWR012"
+			(at 50.8 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 50.927 169.4942 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 50.8 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 50.8 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6023c980-30e3-4f7f-90c4-1f3d09ac5800")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "#PWR012")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x16_Pin")
 		(at 189.23 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "ceabc227-ff0e-48db-bf87-01c47d6d2bfa")
 		(property "Reference" "J4"
@@ -13687,6 +16168,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x16, script generated"
+			(at 189.23 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 189.23 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 189.23 41.91 0)
 			(effects
 				(font
@@ -13759,7 +16258,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "d0b3c802-8c5b-49de-9489-0261eb43fb7a")
 		(property "Reference" "J35"
@@ -13805,6 +16304,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 237.49 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 237.49 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "e751fc98-3f41-47ec-ab85-724b6bde131f")
 		)
@@ -13836,13 +16353,182 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 106.68 179.07 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "d102f839-018e-4326-b053-40cd8c1f49cf")
+		(property "Reference" "J45"
+			(at 106.045 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 106.045 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 106.68 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 106.68 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 106.68 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 106.68 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 106.68 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0469f2e4-02a2-4eb7-a882-e7a2195819ca")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 90.17 179.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d1914eeb-b9ab-45c9-8844-af1f60a52abf")
+		(property "Reference" "SW3"
+			(at 90.17 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_SPST"
+			(at 90.17 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
+			(at 90.17 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 90.17 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single Pole Single Throw (SPST) switch"
+			(at 90.17 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" "C318893"
+			(at 90.17 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 90.17 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a5e37b13-f691-459b-990f-62bd02c9060a")
+		)
+		(pin "2"
+			(uuid "67278efa-bac0-4aaa-8593-5ee9ff1e379b")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "SW3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x07_Pin")
 		(at 22.86 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "db681b32-df1e-4065-ae45-e7c3f089a52a")
 		(property "Reference" "J22"
@@ -13888,6 +16574,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 22.86 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 22.86 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "90eacc36-5bb3-459c-a7e0-e3bfec0a95a6")
 		)
@@ -13919,13 +16623,96 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 73.66 161.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "e5b93cd5-efbb-47b3-a607-fc0f8f8cc2ec")
+		(property "Reference" "J42"
+			(at 74.295 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 74.295 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 73.66 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 73.66 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 73.66 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 73.66 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 73.66 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d56fb0df-205e-4213-b036-cb2a8b47170d")
+		)
+		(instances
+			(project "tester"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x16_Pin")
 		(at 149.86 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e832fc28-84d9-4d00-a3b4-868fd791a18f")
 		(property "Reference" "J2"
@@ -13963,6 +16750,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x16, script generated"
+			(at 149.86 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 149.86 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 149.86 41.91 0)
 			(effects
 				(font
@@ -14029,13 +16834,182 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 55.88 148.59 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "f05a29bc-369e-4a6f-a6fd-1242704bd885")
+		(property "Reference" "J39"
+			(at 55.245 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 55.245 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 55.88 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 55.88 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 55.88 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 55.88 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 55.88 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bd3019cd-cc38-4139-b212-07c59d2c6503")
+		)
+		(instances
+			(project ""
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 41.91 148.59 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "f377b9f2-3b66-42fd-9135-4b33cfc3d2f8")
+		(property "Reference" "D1"
+			(at 43.4975 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 43.4975 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 41.91 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 41.91 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 41.91 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 41.91 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 41.91 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dd7316d1-003b-447a-8109-c7ddd1b642ed")
+		)
+		(pin "2"
+			(uuid "041b900a-ffc5-4143-a4aa-24735d789a6b")
+		)
+		(instances
+			(project ""
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x07_Pin")
 		(at 55.88 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "fd6f1049-2d2e-4471-b855-067b050b67e4")
 		(property "Reference" "J8"
@@ -14081,6 +17055,24 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB part #" ""
+			(at 55.88 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
+			(at 55.88 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "7"
 			(uuid "ad071a03-977e-4baf-9502-3dcf9fe1dc8e")
 		)
@@ -14118,7 +17110,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "febc967b-6f05-443d-a8c2-2f180aed2abc")
 		(property "Reference" "J16"
@@ -14156,6 +17148,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x07, script generated"
+			(at 187.96 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB part #" ""
+			(at 187.96 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLC_FOOTPRINT" ""
 			(at 187.96 91.44 0)
 			(effects
 				(font
