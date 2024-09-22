@@ -39449,6 +39449,18 @@
 			(justify left mirror)
 		)
 	)
+	(gr_text "${PCB_ORDER_NUMBER}"
+		(at 41 0 90)
+		(layer "B.SilkS")
+		(uuid "75b87568-7f9f-4751-868f-9118adecc94f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.125)
+			)
+			(justify bottom mirror)
+		)
+	)
 	(gr_text "GND"
 		(at -1.27 -21.59 0)
 		(layer "B.SilkS")
