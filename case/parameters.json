@@ -1,0 +1,14 @@
+{
+	"parameterSets":
+	{
+		"simple": {
+		},
+		"usbserial": {
+			"hole_dist_x": "70",
+			"thread": "3",
+			"head_diameter": "6",
+			"head_thickness": "2.5"
+		}
+	},
+	"fileFormatVersion": "1"
+}

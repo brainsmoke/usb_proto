@@ -1,8 +1,20 @@
 
-PROJECTS=simple
+PROJECTS=simple usbserial
 
 BOARDHOUSE=jlc
 PARTNO_MARKING=JLCJLCJLCJLC
+BOM_JLC_OPTS=--fields='Value,Reference,Footprint,LCSC' --labels='Comment,Designator,Footprint,JLCPCB Part \#' --group-by=LCSC --ref-range-delimiter='' --exclude-dnp
+
+GERBER_OPTS=--no-protel-ext --board-plot-params -D PCB_ORDER_NUMBER="$(PARTNO_MARKING)"
+DRILL_OPTS=--format=excellon --excellon-oval-format=route --excellon-separate-th
+BOM_OPTS=$(BOM_JLC_OPTS)
+POS_OPTS=--exclude-dnp --side front --units=mm --format=csv
+
+CASE_PARAM_SET=$*
+
+LAYERS2=F.Cu B.Cu F.Mask B.Mask F.Paste B.Paste F.Silkscreen B.Silkscreen Edge.Cuts
+LAYERS4=$(LAYERS2) In1.Cu In2.Cu
+LAYERS :=$(LAYERS2)
 
 BUILDDIR=build/%
 TMPDIR=tmp/%
@@ -14,28 +26,17 @@ ZIPFILE=$(BUILDDIR)/gerbers_$(BOARDHOUSE).zip
 BOMFILE=$(BUILDDIR)/bomfile_$(BOARDHOUSE).csv
 DRILLFILES=$(TMPDIR)/project-NPTH.drl $(TMPDIR)/project-PTH.drl
 
-LAYERS2=F.Cu B.Cu F.Mask B.Mask F.Paste B.Paste F.Silkscreen B.Silkscreen Edge.Cuts
-LAYERS4=$(LAYERS2) In1.Cu In2.Cu
-
-LAYERS :=$(LAYERS2)
 COMMA :=,
 SPACE :=$() $()
+GERBER_EXPORT_LIST=$(subst $(SPACE),$(COMMA),$(value LAYERS))
 
 GERBERS := $(foreach layer, $(subst .,_, $(LAYERS)), $(TMPDIR)/project-$(layer).gbr)
 
-GERBER_EXPORT_LIST=$(subst $(SPACE),$(COMMA),$(value LAYERS))
-
-
-GERBER_OPTS=--no-protel-ext --board-plot-params -D PCB_ORDER_NUMBER="$(PARTNO_MARKING)"
-DRILL_OPTS=--format=excellon --excellon-oval-format=route --excellon-separate-th
-BOM_JLC_OPTS=--fields='Value,Reference,Footprint,LCSC' --labels='Comment,Designator,Footprint,JLCPCB Part \#' --group-by=LCSC --ref-range-delimiter='' --exclude-dnp
-
-BOM_OPTS=$(BOM_JLC_OPTS)
-POS_OPTS=--exclude-dnp --side front --units=mm --format=csv
-
-SCAD_DEPS=case/case.scad case/usb.scad
-CASE=$(BUILDDIR)/case_bottom.stl \
-     $(BUILDDIR)/case_top.stl
+SCAD_PARAMETERS=case/parameters.json
+SCAD_DEPS=case/case.scad case/usb.scad $(SCAD_PARAMETERS)
+CASES=$(BUILDDIR)/case.stl \
+      $(BUILDDIR)/case_bottom.stl \
+      $(BUILDDIR)/case_top.stl
 
 CASE_EXTRA=
 
@@ -46,17 +47,22 @@ EXTRA=$(CASE_EXTRA)
 PROJECT_TARGETS=$(PROJECTS:=.project)
 TARGETS=$(PROJECT_TARGETS)
 
-BUILD_FILES=$(foreach project, $(PROJECTS), \
+INTERMEDIATE_FILES=$(foreach project, $(PROJECTS), \
             $(patsubst %, $(POSFILE_KICAD), $(project)) \
-            $(patsubst %, $(POSFILE), $(project)) \
             $(foreach gerber, $(GERBERS), $(patsubst %, $(gerber), $(project))) \
             $(foreach drillfile, $(DRILLFILES), $(patsubst %, $(drillfile), $(project))))
+
+BUILD_FILES=$(foreach project, $(PROJECTS), \
+            $(patsubst %, $(POSFILE), $(project)) \
+            $(patsubst %, $(BOMFILE), $(project)) \
+			$(patsubst %, $(ZIPFILE), $(project)) \
+            $(foreach case, $(CASES), $(patsubst %, $(case), $(project))))
 
 .PHONY: all extra clean $(PROJECT_TARGETS)
 
 all: $(TARGETS)
 
-$(PROJECT_TARGETS): %.project: $(ZIPFILE) $(POSFILE) $(BOMFILE)
+$(PROJECT_TARGETS): %.project: $(ZIPFILE) $(POSFILE) $(BOMFILE) $(CASES)
 
 extra: $(TARGETS) $(EXTRA)
 
@@ -84,9 +90,17 @@ $(ZIPFILE): $(GERBERS) $(DRILLFILES)
 	mkdir -p $(dir $@)
 	zip -o - -j $^ > $@
 
-$(BUILDDIR)/%.stl: case/%.scad $(SCAD_DEPS)
+$(BUILDDIR)/case.stl: case/case.scad $(SCAD_DEPS)
 	mkdir -p $(dir $@)
-	openscad -o $@ $<
+	openscad -o $@ -p $(SCAD_PARAMETERS) -P $(CASE_PARAM_SET) $<
+
+$(BUILDDIR)/case_top.stl: case/case_top.scad $(SCAD_DEPS)
+	mkdir -p $(dir $@)
+	openscad -o $@ -p $(SCAD_PARAMETERS) -P $(CASE_PARAM_SET) $<
+
+$(BUILDDIR)/case_bottom.stl: case/case_bottom.scad $(SCAD_DEPS)
+	mkdir -p $(dir $@)
+	openscad -o $@ -p $(SCAD_PARAMETERS) -P $(CASE_PARAM_SET) $<
 
 clean:
-	-rm $(BUILD_FILES)
+	-rm $(INTERMEDIATE_FILES) $(BUILD_FILES)
