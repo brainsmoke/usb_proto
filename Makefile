@@ -1,5 +1,5 @@
 
-PROJECTS=simple usbserial
+PROJECTS=simple simple-v0.1 usbserial
 
 BOARDHOUSE=jlc
 PARTNO_MARKING=JLCJLCJLCJLC

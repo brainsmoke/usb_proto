@@ -1,6 +1,8 @@
 {
 	"parameterSets":
 	{
+		"simple-v0.1": {
+		},
 		"simple": {
 		},
 		"usbserial": {
