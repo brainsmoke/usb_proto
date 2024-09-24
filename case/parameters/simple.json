@@ -1,0 +1,11 @@
+{
+	"parameterSets":
+	{
+		"default": {
+			"thread": "3",
+			"head_diameter": "6",
+			"head_thickness": "2.5"
+		}
+	},
+	"fileFormatVersion": "1"
+}

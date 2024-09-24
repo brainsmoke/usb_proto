@@ -14,7 +14,6 @@ DRILL_OPTS=--format=excellon --excellon-oval-format=route --excellon-separate-th
 BOM_OPTS=$(BOM_JLC_OPTS)
 POS_OPTS=--exclude-dnp --side front --units=mm --format=csv
 
-CASE_PARAM_SET=$*
 
 LAYERS2=F.Cu B.Cu F.Mask B.Mask F.Paste B.Paste F.Silkscreen B.Silkscreen Edge.Cuts
 LAYERS4=$(LAYERS2) In1.Cu In2.Cu
@@ -41,8 +40,9 @@ GERBER_EXPORT_LIST=$(subst $(SPACE),$(COMMA),$(value LAYERS))
 
 GERBERS := $(foreach layer, $(subst .,_, $(LAYERS)), $(TMPDIR)/project-$(layer).gbr)
 
-SCAD_PARAMETERS=case/parameters.json
-SCAD_DEPS=case/case.scad case/usb.scad $(SCAD_PARAMETERS)
+SCAD_PARAMETERS=case/parameters/$*.json
+SCAD_DEPS=case/case.scad case/usb.scad $(foreach project, $(PROJECTS), case/parameters/${project}.json)
+CASE_PARAM_SET=default
 CASES=$(BUILDDIR)/case.stl \
       $(BUILDDIR)/case_bottom.stl \
       $(BUILDDIR)/case_top.stl
@@ -69,6 +69,7 @@ BUILD_FILES=$(foreach project, $(PROJECTS), \
 .DELETE_ON_ERROR:
 
 all: $(TARGETS)
+	echo $(SCAD_DEPS)
 
 $(PROJECT_TARGETS): %.project: $(ZIPFILE) $(POSFILE) $(BOMFILE) $(CASES)
 

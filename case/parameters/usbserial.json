@@ -1,14 +1,7 @@
 {
 	"parameterSets":
 	{
-		"simple-v0.1": {
-		},
-		"simple": {
-			"thread": "3",
-			"head_diameter": "6",
-			"head_thickness": "2.5"
-		},
-		"usbserial": {
+		"default": {
 			"pcb_thickness": "1.6",
 			"hole_dist_x": "70",
 			"thread": "3",
