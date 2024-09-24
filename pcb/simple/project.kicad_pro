@@ -604,7 +604,7 @@
       "group_symbols": true,
       "name": "",
       "sort_asc": false,
-      "sort_field": ""
+      "sort_field": "Reference"
     },
     "connection_grid_size": 50.0,
     "drawing": {

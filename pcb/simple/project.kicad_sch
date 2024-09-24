@@ -4554,16 +4554,6 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 157.48) (xy 50.8 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0743e846-61cf-449f-aa8b-15c72e43b52d")
-	)
-	(wire
-		(pts
 			(xy 154.94 57.15) (xy 157.48 57.15)
 		)
 		(stroke
@@ -14192,7 +14182,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8741b06c-a2e7-4017-8235-f5dd8daef219")
 		(property "Reference" "D2"
@@ -14238,7 +14228,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2290"
 			(at 41.91 157.48 0)
 			(effects
 				(font
@@ -15645,71 +15635,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 50.8 165.1 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "cb459d6c-631f-4887-bc3e-8299288e12a4")
-		(property "Reference" "#PWR012"
-			(at 50.8 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 50.927 169.4942 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 50.8 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 50.8 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 50.8 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6023c980-30e3-4f7f-90c4-1f3d09ac5800")
-		)
-		(instances
-			(project "tester"
-				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
-					(reference "#PWR012")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector:Conn_01x16_Pin")
 		(at 189.23 41.91 0)
 		(unit 1)
@@ -16437,7 +16362,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f377b9f2-3b66-42fd-9135-4b33cfc3d2f8")
 		(property "Reference" "D1"
@@ -16483,7 +16408,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C2290"
 			(at 41.91 148.59 0)
 			(effects
 				(font
@@ -16594,6 +16519,80 @@
 			(project "tester"
 				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
 					(reference "J8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 55.88 157.48 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "fe392a47-5f63-4a41-9cdb-d2614b0e3268")
+		(property "Reference" "J46"
+			(at 55.245 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 55.245 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Library:PinSocket_1x01_P2.54mm_Vertical"
+			(at 55.88 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 55.88 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 55.88 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
+			(at 55.88 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e310c86d-9ce0-4c24-83d8-35f23aea5f5b")
+		)
+		(instances
+			(project "project"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "J46")
 					(unit 1)
 				)
 			)

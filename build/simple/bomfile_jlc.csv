@@ -1,5 +1,6 @@
 "Comment","Designator","Footprint","JLCPCB Part #"
 "1uF","C1,C2","Capacitor_SMD:C_0603_1608Metric","C15849"
+"LED","D1,D2","Library:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder","C2290"
 "USB_C_Receptacle_USB2.0","J1","Library:USB_C_Receptacle_HRO_TYPE-C-31-M-12","C165948"
 "56k","R4","Resistor_SMD:R_0603_1608Metric","C23206"
 "5k1","R1,R2,R3","Resistor_SMD:R_0603_1608Metric","C23186"
