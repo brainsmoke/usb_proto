@@ -47,7 +47,7 @@ component_z = bottom_thickness+leg_height+pcb_thickness;
 grid_rows = 4;
 grid_cols = 5;
 grid_pitch = 10;
-grid_width = 1;
+grid_width = .8;
 grid_height_bottom = 1;
 grid_height_top = 2;
 
@@ -167,7 +167,7 @@ module case()
 			depth = 2*outer_radius + hole_dist_y;
 
 			translate([-outer_radius+e,-outer_radius+e,bottom_thickness-e])
-			grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch);
+			grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
 		}
 		keepout_zones();
 	}
@@ -202,7 +202,7 @@ module top()
 			depth = 2*inner_radius + hole_dist_y;
 
 			translate([-inner_radius+e,-inner_radius+e,total_height-top_thickness-grid_height_top])
-			grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch);
+			grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
 
 
 		}
