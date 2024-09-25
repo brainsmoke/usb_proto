@@ -5,6 +5,9 @@ padding=5;
 use <usb.scad>
 use <grid.scad>
 
+render_top=true;
+render_bottom=true;
+
 hole_dist_x = 50;
 hole_dist_y = 40;
 
@@ -218,7 +221,7 @@ module next()
 	translate([ 0, hole_dist_y+2*outer_radius+padding, 0 ]) children();
 }
 
-preview()
+preview() if (render_bottom)
 {
 	pcb();
 	on_pcb()
@@ -229,8 +232,10 @@ preview()
 
 render()
 {
-	case();
-	next() 
-	flip()
-	top();
+	if (render_bottom)
+	{
+		case();
+		if (render_top) next() flip() top();
+	}
+	else flip() top();
 }

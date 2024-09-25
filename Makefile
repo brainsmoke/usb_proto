@@ -69,7 +69,6 @@ BUILD_FILES=$(foreach project, $(PROJECTS), \
 .DELETE_ON_ERROR:
 
 all: $(TARGETS)
-	echo $(SCAD_DEPS)
 
 $(PROJECT_TARGETS): %.project: $(ZIPFILE) $(POSFILE) $(BOMFILE) $(CASES)
 
@@ -104,13 +103,13 @@ $(BUILDDIR)/case.stl: case/case.scad $(SCAD_DEPS)
 	mkdir -p "$(dir $@)"
 	openscad -o "$@" -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
 
-$(BUILDDIR)/case_top.stl: case/case_top.scad $(SCAD_DEPS)
+$(BUILDDIR)/case_top.stl: case/case.scad $(SCAD_DEPS)
 	mkdir -p "$(dir $@)"
-	openscad -o "$@" -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
+	openscad -o "$@" -D render_bottom=false -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
 
-$(BUILDDIR)/case_bottom.stl: case/case_bottom.scad $(SCAD_DEPS)
+$(BUILDDIR)/case_bottom.stl: case/case.scad $(SCAD_DEPS)
 	mkdir -p "$(dir $@)"
-	openscad -o "$@" -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
+	openscad -o "$@" -D render_top=false -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
 
 clean:
 	-rm $(INTERMEDIATE_FILES) $(BUILD_FILES)
