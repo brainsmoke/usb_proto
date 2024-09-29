@@ -4,9 +4,11 @@ padding=5;
 
 use <usb.scad>
 use <grid.scad>
+use <button.scad>
 
 render_top=true;
 render_bottom=true;
+use_buttons=false;
 
 hole_dist_x = 50;
 hole_dist_y = 40;
@@ -18,6 +20,7 @@ wall_thickness = 1;
 bottom_thickness = .8;
 top_thickness = .8;
 total_height = 16;
+button_height=2;
 
 top_edge_height = 2.5;
 top_edge_thickness = 1.;
@@ -37,12 +40,18 @@ head_diameter = 5;
 head_thickness = 1.7;
 screw_clearance = .25;
 
+button_pitch=4*2.54;
+button_w=5;
+button_d=5;
+n_buttons=3;
+
 outer_radius = inner_radius+wall_thickness;
 screw_grab_radius = (thread*0.9)/2;
 screw_loose_radius = (thread/0.9)/2;
 funnel_top_inner_radius = funnel_top_radius-leg_thickness;
 component_z = bottom_thickness+leg_height+pcb_thickness;
 
+button_depth = total_height-component_z-button_height;
 
 grid_rows = 4;
 grid_cols = 5;
@@ -50,6 +59,8 @@ grid_pitch = 10;
 grid_width = .8;
 grid_height_bottom = 1;
 grid_height_top = 2;
+
+
 
 module preview()
 {
@@ -77,6 +88,11 @@ module at_front()
 	translate([hole_dist_x+pcb_radius,hole_dist_y/2,0]) rotate([0,0,-90])  children();
 }
 
+module at_back()
+{
+	translate([-pcb_radius,hole_dist_y/2,0]) rotate([0,0,90])  children();
+}
+
 module at_top()
 {
 	translate([hole_dist_x/2,hole_dist_y+pcb_radius,0]) children();
@@ -88,6 +104,15 @@ module at_holes(x, y)
 		for (y = [0, hole_dist_y])
 			translate([x,y,0])
 				children();
+}
+
+module at_buttons()
+{
+	if (use_buttons)
+	at_back()
+	for (i=[0:n_buttons-1])
+		translate([button_pitch*(i-(n_buttons-1)/2), -pcb_radius, total_height])
+			children();
 }
 
 module case_shape(height, radius)
@@ -148,6 +173,8 @@ module keepout_zones()
 {
 	at_holes() leg_keepout();
 	on_pcb() at_front() usb_c_keepout();
+	at_buttons() button_keepout(button_w, button_d, top_thickness, button_depth);
+
 }
 
 module case()
@@ -179,6 +206,8 @@ module top()
 	{
 		union()
 		{
+			at_buttons() button_shape(button_w, button_d, top_thickness, button_depth);
+
 			difference()
 			{
 				translate([0,0,total_height-top_thickness])

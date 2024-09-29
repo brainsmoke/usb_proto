@@ -41,11 +41,12 @@ GERBER_EXPORT_LIST=$(subst $(SPACE),$(COMMA),$(value LAYERS))
 GERBERS := $(foreach layer, $(subst .,_, $(LAYERS)), $(TMPDIR)/project-$(layer).gbr)
 
 SCAD_PARAMETERS=case/parameters/$*.json
-SCAD_DEPS=case/case.scad case/usb.scad case/parameters/%.json
+SCAD_DEPS=case/case.scad case/usb.scad case/button.scad case/parameters/%.json
 CASE_PARAM_SET=default
 CASES=$(BUILDDIR)/case.stl \
       $(BUILDDIR)/case_bottom.stl \
-      $(BUILDDIR)/case_top.stl
+      $(BUILDDIR)/case_top.stl \
+      $(BUILDDIR)/case_top_buttons.stl
 
 TMPFILES=$(GERBERS) $(DRILLFILES) $(POSFILE_KICAD)
 
@@ -106,6 +107,10 @@ $(BUILDDIR)/case.stl: case/case.scad $(SCAD_DEPS)
 $(BUILDDIR)/case_top.stl: case/case.scad $(SCAD_DEPS)
 	mkdir -p "$(dir $@)"
 	openscad -o "$@" -D render_bottom=false -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
+
+$(BUILDDIR)/case_top_buttons.stl: case/case.scad $(SCAD_DEPS)
+	mkdir -p "$(dir $@)"
+	openscad -o "$@" -D render_bottom=false -D use_buttons=true -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
 
 $(BUILDDIR)/case_bottom.stl: case/case.scad $(SCAD_DEPS)
 	mkdir -p "$(dir $@)"
