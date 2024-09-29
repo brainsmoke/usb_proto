@@ -1,4 +1,5 @@
 
-use <case.scad>
+include <case_base.scad>
 
 case();
+

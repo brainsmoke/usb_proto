@@ -20,14 +20,6 @@ GERBER_EXPORT_LIST=$(subst $(SPACE),$(COMMA),$(value LAYERS))
 
 GERBERS := $(foreach layer, $(subst .,_, $(LAYERS)), $(TMPDIR)/project-$(layer).gbr)
 
-SCAD_PARAMETERS=case/parameters/$*.json
-SCAD_DEPS=case/case.scad case/usb.scad case/button.scad case/parameters/%.json
-CASE_PARAM_SET=default
-CASES=$(BUILDDIR)/case.stl \
-      $(BUILDDIR)/case_bottom.stl \
-      $(BUILDDIR)/case_top.stl \
-      $(BUILDDIR)/case_top_buttons.stl
-
 TMPFILES=$(GERBERS) $(DRILLFILES) $(POSFILE_KICAD)
 
 PROJECT_TARGETS=$(PROJECTS:=.project)
@@ -38,12 +30,14 @@ INTERMEDIATE_FILES=$(foreach project, $(PROJECTS), \
             $(foreach gerber, $(GERBERS), $(patsubst %, $(gerber), $(project))) \
             $(foreach drillfile, $(DRILLFILES), $(patsubst %, $(drillfile), $(project))))
 
+STLS=$(foreach part, $(SCAD_PARTS), $(BUILDDIR)/$(part).stl)
+
 BUILD_FILES=$(foreach project, $(PROJECTS), \
             $(patsubst %, $(POSFILE), $(project)) \
             $(patsubst %, $(BOMFILE), $(project)) \
             $(patsubst %, $(ZIPFILE), $(project)) \
             $(patsubst %, $(DRC_REPORT), $(project)) \
-            $(foreach case, $(CASES), $(patsubst %, $(case), $(project))))
+            $(foreach stl, $(STLS), $(patsubst %, $(stl), $(project))))
 
 .PHONY: all clean $(PROJECT_TARGETS)
 .SECONDARY:
@@ -51,7 +45,7 @@ BUILD_FILES=$(foreach project, $(PROJECTS), \
 
 all: $(TARGETS)
 
-$(PROJECT_TARGETS): %.project: $(ZIPFILE) $(POSFILE) $(BOMFILE) $(CASES)
+$(PROJECT_TARGETS): %.project: $(ZIPFILE) $(POSFILE) $(BOMFILE) $(STLS)
 
 $(DRC_REPORT): $(PCB)
 	kicad-cli pcb drc $(DRC_OPTS) -o "$@" "$<" || (cat "$@" && false)
@@ -80,21 +74,14 @@ $(ZIPFILE): $(GERBERS) $(DRILLFILES)
 	mkdir -p "$(dir $@)"
 	zip -o - -j $^ > "$@"
 
-$(BUILDDIR)/case.stl: case/case.scad $(SCAD_DEPS)
-	mkdir -p "$(dir $@)"
-	openscad -o "$@" -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
+define scad_part
+$(BUILDDIR)/$(1).stl: $(SCAD_DIR)/$(1).scad $(SCAD_DEPS) $(SCAD_PARAM_DIR)/%.json
+	mkdir -p "$$(dir $$@)"
+	openscad -o "$$@" $(SCAD_DEFINES) -p "$(SCAD_PARAM_DIR)/$$*.json" -P "$(SCAD_PARAM_SET)" $$<
 
-$(BUILDDIR)/case_top.stl: case/case.scad $(SCAD_DEPS)
-	mkdir -p "$(dir $@)"
-	openscad -o "$@" -D render_bottom=false -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
+endef
 
-$(BUILDDIR)/case_top_buttons.stl: case/case.scad $(SCAD_DEPS)
-	mkdir -p "$(dir $@)"
-	openscad -o "$@" -D render_bottom=false -D use_buttons=true -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
-
-$(BUILDDIR)/case_bottom.stl: case/case.scad $(SCAD_DEPS)
-	mkdir -p "$(dir $@)"
-	openscad -o "$@" -D render_top=false -p "$(SCAD_PARAMETERS)" -P "$(CASE_PARAM_SET)" $<
+$(foreach part, $(SCAD_PARTS), $(eval $(call scad_part,$(part))))
 
 clean:
 	-rm $(INTERMEDIATE_FILES) $(BUILD_FILES)
