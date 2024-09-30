@@ -23,7 +23,7 @@ difference()
 
 translate([0,(d-top_width)/2,-thickness-e])
 linear_extrude(thickness-flex_thickness+e)
-for (i=[d/2-gap, -d/2+thickness])
+for (i=[d/2-gap, -gap])
 translate([-w/2-gap, i])
 square([w+2*gap, gap]);
 }
