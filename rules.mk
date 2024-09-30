@@ -75,9 +75,9 @@ $(ZIPFILE): $(GERBERS) $(DRILLFILES)
 	zip -o - -j $^ > "$@"
 
 define scad_part
-$(BUILDDIR)/$(1).stl: $(SCAD_DIR)/$(1).scad $(SCAD_DEPS) $(SCAD_PARAM_DIR)/%.json
+$$(BUILDDIR)/$(1).stl: $$(SCAD_DIR)/$(1).scad $$(SCAD_DEPS) $$(SCAD_PARAM_DIR)/%.json
 	mkdir -p "$$(dir $$@)"
-	openscad -o "$$@" $(SCAD_DEFINES) -p "$(SCAD_PARAM_DIR)/$$*.json" -P "$(SCAD_PARAM_SET)" $$<
+	openscad -o "$$@" $$(SCAD_DEFINES) -p "$$(SCAD_PARAM_DIR)/$$*.json" -P "$$(SCAD_PARAM_SET)" $$<
 
 endef
 
