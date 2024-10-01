@@ -8,7 +8,7 @@ on the board such as a few LEDs and switches.
 
 # A USB-C connected protoboard with programmable USB connectivity
 
-![Image of a USB-C connected protoboard](img/protoboard_mcu.png)
+![Image of a USB-C connected protoboard](img/protoboard_mcu.jpg)
 
 A second version has an onboard STM32F042 to act for example as a USB-serial device,
 or an HID keyboard.
