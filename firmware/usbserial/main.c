@@ -72,22 +72,9 @@ int main(void)
 	for(;;)
 	{
 		usb_serial_poll();
-
-		int key, n_written=0, off=0;
-		uint8_t outbuf[10];
-
-		int c = usb_serial_getchar();
-		if ( c >= 0 )
-		{
-			outbuf[off] = c;
-			off += 1;
-		}
-
-		if (off > 0)
-		while (n_written == 0)
-		{
-			n_written = usb_serial_write_noblock(outbuf, off);
-		}
+		int c;
+		while ( (c = usb_serial_getchar()) < 0);
+		usb_serial_putchar(c);
 	}
 }
 

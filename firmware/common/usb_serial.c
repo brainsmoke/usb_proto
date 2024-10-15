@@ -49,6 +49,12 @@ static uint8_t control[128];
 
 static volatile uint32_t usb_ready;
 
+void __attribute__((weak)) usb_data_available_cb(void)
+{
+	/* */
+}
+
+
 #define VERSION_USB_2_0 (0x0200)
 
 #define DEVICE_CLASS_LOOK_AT_INTERFACE (0)
@@ -264,60 +270,51 @@ static void endpoint_setup(usbd_device *dev,
 	usbd_ep_setup(dev, desc->bEndpointAddress, desc->bmAttributes, desc->wMaxPacketSize, callback);
 }
 
-/* just read the packet 'beyond' the buffer, copy the wraparound */
-static uint8_t rx_buf[USB_RX_BUFSIZE+PACKET_SIZE_FULL_SPEED];
+static uint8_t rx_buf[PACKET_SIZE_FULL_SPEED];
+static size_t rx_start, rx_len=0;
 
-static size_t rx_start, rx_len;
-
-/* not re-entrant-safe, assumes polling */
 static void serial_rx_cb(usbd_device *dev, uint8_t ep)
 {
-	size_t rx_end = rx_start+rx_len;
-	if (rx_end > USB_RX_BUFSIZE)
-		rx_end -= USB_RX_BUFSIZE;
-
-	size_t len = PACKET_SIZE_FULL_SPEED;
-	if (len > USB_RX_BUFSIZE - rx_len)
-		len = USB_RX_BUFSIZE - rx_len;
-
-	len = usbd_ep_read_packet(dev, ep, &rx_buf[rx_end], len);
-	rx_len += len;
-	rx_end += len;
-
-	if (rx_end > USB_RX_BUFSIZE)
-		memcpy(&rx_buf[0], &rx_buf[USB_RX_BUFSIZE], rx_end - USB_RX_BUFSIZE);
+	(void)(dev);
+	(void)(ep);
+	usb_data_available_cb();
 }
 
 size_t usb_serial_read(uint8_t *buf, size_t len)
 {
-	if (len > rx_len)
-		len = rx_len;
-
-	rx_len -= len;
-
-	if (len >= USB_RX_BUFSIZE-rx_start)
+	if (rx_len > 0)
 	{
-		memcpy(buf, &rx_buf[rx_start], USB_RX_BUFSIZE-rx_start);
-		rx_start = len - (USB_RX_BUFSIZE-rx_start);
-		memcpy(buf, &rx_buf[0], rx_start);
-	}
-	else
-	{
+		if (len > rx_len)
+			rx_len = len;
 		memcpy(buf, &rx_buf[rx_start], len);
-		rx_start += len;
+		rx_len -= len;
+		return len;
 	}
 
+	if ( len >= PACKET_SIZE_FULL_SPEED )
+		return usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, buf, len);
+
+	size_t n_read = usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
+
+	memcpy(buf, rx_buf, len);
+	rx_start = len;
+	rx_len = n_read - len;
 	return len;
 }
 
 int usb_serial_getchar(void)
 {
 	if (rx_len == 0)
-		return -1;
+	{
+		rx_len = usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
+		rx_start = 0;
+		if (rx_len == 0)
+			return -1;
+	}
 
 	int c = rx_buf[rx_start++];
 
-	if (rx_start >= USB_RX_BUFSIZE)
+	if (rx_start >= PACKET_SIZE_FULL_SPEED)
 		rx_start = 0;
 
 	rx_len -= 1;
@@ -347,6 +344,8 @@ size_t usb_serial_write_noblock(const uint8_t *buf, size_t len)
 
 void usb_serial_poll(void)
 {
+	if (rx_len > 0)
+		usb_data_available_cb();
 	usbd_poll(device);
 }
 

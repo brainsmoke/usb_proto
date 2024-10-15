@@ -28,13 +28,18 @@
  *
  */
 
-#define USB_RX_BUFSIZE (1024)
-
 void usb_serial_init(void);
 void usb_serial_poll(void);
 size_t usb_serial_read(uint8_t *buf, size_t len);
 size_t usb_serial_write_noblock(const uint8_t *buf, size_t len);
+
 int usb_serial_getchar(void);
+
+/* 1 byte/packet */
 void usb_serial_putchar(int c);
+
+
+/* if implemented by user, will be called (from usb_serial_poll) when data is available */
+void usb_data_available_cb(void);
 
 #endif // USB_SERIAL_H
