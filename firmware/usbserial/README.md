@@ -1,4 +1,4 @@
-# usb serial keypad
+# usb serial proof of concept
 
 ```
 make -C ../libopencm3/ # if not done already
