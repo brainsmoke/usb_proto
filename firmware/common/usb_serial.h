@@ -2,7 +2,7 @@
 #define USB_SERIAL_H
 
 /*
- * Copyright (c) 2023 Erik Bosman <erik@minemu.org>
+ * Copyright (c) 2023-2024 Erik Bosman <erik@minemu.org>
  *
  * Permission  is  hereby  granted,  free  of  charge,  to  any  person
  * obtaining  a copy  of  this  software  and  associated documentation
@@ -27,6 +27,19 @@
  * (http://opensource.org/licenses/mit-license.html)
  *
  */
+
+#ifndef MANUFACTURER_STRING
+#define MANUFACTURER_STRING "manufacturer"
+#endif
+
+
+#ifndef PRODUCT_STRING
+#define PRODUCT_STRING "product"
+#endif
+
+#ifndef SERIAL_STRING
+#define SERIAL_STRING "00000001"
+#endif
 
 void usb_serial_init(void);
 void usb_serial_poll(void);

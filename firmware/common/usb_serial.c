@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Erik Bosman <erik@minemu.org>
+ * Copyright (c) 2023-2024 Erik Bosman <erik@minemu.org>
  *
  * Permission  is  hereby  granted,  free  of  charge,  to  any  person
  * obtaining  a copy  of  this  software  and  associated documentation
@@ -85,9 +85,9 @@ enum
 
 static const char *const string_descriptors[] =
 {
-    [MANUFACTURER-1] = "techinc",
-    [PRODUCT-1]      = "serial keypad",
-    [SERIAL-1]       = "00000001",
+    [MANUFACTURER-1] = MANUFACTURER_STRING,
+    [PRODUCT-1]      = PRODUCT_STRING,
+    [SERIAL-1]       = SERIAL_STRING,
 };
 #define N_STRING_DESCRIPTORS (sizeof(string_descriptors)/sizeof(string_descriptors[0]))
 
