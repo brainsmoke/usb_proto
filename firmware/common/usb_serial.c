@@ -272,12 +272,13 @@ static void endpoint_setup(usbd_device *dev,
 
 static uint8_t rx_buf[PACKET_SIZE_FULL_SPEED];
 static size_t rx_start, rx_len=0;
+static int data_read=0;
 
 static void serial_rx_cb(usbd_device *dev, uint8_t ep)
 {
 	(void)(dev);
 	(void)(ep);
-	usb_data_available_cb();
+	data_read=1;
 }
 
 size_t usb_serial_read(uint8_t *buf, size_t len)
@@ -306,8 +307,11 @@ int usb_serial_getchar(void)
 {
 	if (rx_len == 0)
 	{
-		rx_len = usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
-		rx_start = 0;
+		if (usb_ready)
+		{
+			rx_len = usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
+			rx_start = 0;
+		}
 		if (rx_len == 0)
 			return -1;
 	}
@@ -325,7 +329,7 @@ int usb_serial_getchar(void)
 void usb_serial_putchar(int c)
 {
 	uint8_t buf = c;
-	while ( usbd_ep_write_packet(device, UART_DEVICE_TO_HOST_ENDPOINT, &buf, 1) == 0 )
+	while ( !usb_ready || usbd_ep_write_packet(device, UART_DEVICE_TO_HOST_ENDPOINT, &buf, 1) == 0 )
 	{
 		usbd_poll(device);
 	}
@@ -344,9 +348,12 @@ size_t usb_serial_write_noblock(const uint8_t *buf, size_t len)
 
 void usb_serial_poll(void)
 {
-	if (rx_len > 0)
-		usb_data_available_cb();
 	usbd_poll(device);
+	if (rx_len > 0 || data_read)
+	{
+		usb_data_available_cb();
+		data_read = 0;
+	}
 }
 
 static enum usbd_request_return_codes serial_control_callback(usbd_device *dev,

@@ -67,13 +67,12 @@ static void init(void)
 int main(void)
 {
 	init();
-	uint32_t t_last=tick;
 
 	for(;;)
 	{
-		usb_serial_poll();
 		int c;
-		while ( (c = usb_serial_getchar()) < 0);
+		while ( (c = usb_serial_getchar()) < 0)
+			usb_serial_poll();
 		usb_serial_putchar(c);
 	}
 }
