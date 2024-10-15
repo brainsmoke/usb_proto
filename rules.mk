@@ -68,7 +68,7 @@ $(DRILLFILES): $(PCB)
 
 $(POSFILE): $(POSFILE_KICAD)
 	mkdir -p "$(dir $@)"
-	python3 script/posfile_to_boardhouse.py "$(BOARDHOUSE)" < "$<" > "$@"
+	python3 tools/posfile_to_boardhouse.py "$(BOARDHOUSE)" < "$<" > "$@"
 
 $(ZIPFILE): $(GERBERS) $(DRILLFILES)
 	mkdir -p "$(dir $@)"

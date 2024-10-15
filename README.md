@@ -13,3 +13,9 @@ on the board such as a few LEDs and switches.
 A second version has an onboard STM32F042 to act for example as a USB-serial device,
 or an HID keyboard.
 
+# License
+
+* The hardware (schematic / PCB / production files / case models ) is Licensed CC-BY-4.0
+* The firmware ( in the firmware directory uses libopencm3 which is licensed LGPLv3 and
+  all code specific to this project is distributed under the MIT license.)
+
