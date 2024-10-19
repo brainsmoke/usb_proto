@@ -26,7 +26,6 @@
  */
 
 #include <libopencm3/usb/usbd.h>
-#include <libopencm3/usb/cdc.h>
 
 #include <string.h>
 
@@ -42,6 +41,15 @@
 #ifndef ID_VERSION
 #define ID_VERSION (0x0000)
 #endif
+#ifndef MANUFACTURER_STRING
+#define MANUFACTURER_STRING "manufacturer"
+#endif
+#ifndef PRODUCT_STRING
+#define PRODUCT_STRING "product"
+#endif
+#ifndef SERIAL_STRING
+#define SERIAL_STRING "00000001"
+#endif
 
 static usbd_device *device;
 
@@ -49,9 +57,27 @@ static uint8_t control[128];
 
 static volatile uint32_t usb_ready;
 
-void __attribute__((weak)) usb_data_available_cb(void)
+void __attribute__((weak)) usb_serial_data_available_cb(void)
 {
 	/* */
+}
+
+int __attribute__((weak)) usb_serial_set_line_coding_cb(struct usb_cdc_line_coding *coding)
+{
+	(void)(coding);
+	return 0;
+}
+
+int __attribute__((weak)) usb_serial_get_line_coding_cb(struct usb_cdc_line_coding *coding)
+{
+	(void)(coding);
+	return 0;
+}
+
+int __attribute__((weak)) usb_serial_set_control_line_state_cb(uint16_t state)
+{
+	(void)(state);
+	return 0;
 }
 
 
@@ -60,7 +86,6 @@ void __attribute__((weak)) usb_data_available_cb(void)
 #define DEVICE_CLASS_LOOK_AT_INTERFACE (0)
 #define NO_SUBCLASS (0)
 #define NO_PROTOCOL (0)
-#define PACKET_SIZE_FULL_SPEED (64)
 #define CONTROL_PACKET_SIZE (16)
 
 #define BUS_POWERED   (1<<7)
@@ -71,6 +96,8 @@ void __attribute__((weak)) usb_data_available_cb(void)
 #define MILLISECONDS(x)  (x)
 
 #define COUNTRY_NONE (0)
+
+#define CDC_ACM_LINE_CAPABILITY (1<<1) /* set/get_line_coding, set/get_line_state */
 
 #define REQ_DEVICE_TO_HOST (0x80)
 #define REQ_INTERFACE      (REQ_DEVICE_TO_HOST|0x01)
@@ -206,14 +233,17 @@ static const struct __attribute__((packed))
 		.bDescriptorType = CS_INTERFACE,
 		.bDescriptorSubtype = USB_CDC_TYPE_CALL_MANAGEMENT,
 		.bmCapabilities = 0,
-		.bDataInterface = UART_DATA_INTERFACE,
+		.bDataInterface = UART_DATA_INTERFACE, /* not sure what is usually done here, but it should be moot since
+		                                        * our capabilities do not include using a data interface for call
+		                                        * management
+		                                        */
 	},
 	.acm_desc =
 	{
 		.bFunctionLength = sizeof(struct usb_cdc_acm_descriptor),
 		.bDescriptorType = CS_INTERFACE,
 		.bDescriptorSubtype = USB_CDC_TYPE_ACM,
-		.bmCapabilities = 0,
+		.bmCapabilities = CDC_ACM_LINE_CAPABILITY,
 	},
 };
 
@@ -351,9 +381,29 @@ void usb_serial_poll(void)
 	usbd_poll(device);
 	if (rx_len > 0 || data_read)
 	{
-		usb_data_available_cb();
+		usb_serial_data_available_cb();
 		data_read = 0;
 	}
+}
+
+void usb_serial_send_state(uint16_t serial_state)
+{
+	struct
+	{
+		struct usb_cdc_notification hdr;
+		uint16_t serial_state;
+
+	} __attribute((packed)) packet =
+	{
+		.hdr.bmRequestType = -1,
+		.hdr.bNotification = USB_CDC_NOTIFY_SERIAL_STATE,
+		.hdr.wValue = 0,
+		.hdr.wIndex = UART_NOTIFICATION_INTERFACE,
+		.hdr.wLength = sizeof(uint16_t),
+		.serial_state = serial_state,
+	};
+
+	usbd_ep_write_packet(device, UART_NOTIFICATION_ENDPOINT, &packet, sizeof(packet));
 }
 
 static enum usbd_request_return_codes serial_control_callback(usbd_device *dev,
@@ -363,11 +413,35 @@ static enum usbd_request_return_codes serial_control_callback(usbd_device *dev,
 {
 	(void)dev;
 	(void)complete;
-	(void)buf;
-	(void)req;
-	(void)len;
 
-	return USBD_REQ_NOTSUPP;
+	if (req->wIndex != UART_NOTIFICATION_INTERFACE)
+		return USBD_REQ_NEXT_CALLBACK;
+
+	int ok = 0;
+
+	switch (req->bRequest)
+	{
+		case USB_CDC_REQ_SET_CONTROL_LINE_STATE:
+			ok = usb_serial_set_control_line_state_cb(req->wValue);
+			break;
+
+		case USB_CDC_REQ_SET_LINE_CODING:
+			if ( *len < sizeof(struct usb_cdc_line_coding) )
+				break;
+			ok = usb_serial_set_line_coding_cb( (struct usb_cdc_line_coding *)*buf );
+			break;
+
+		case USB_CDC_REQ_GET_LINE_CODING:
+			if ( *len < sizeof(struct usb_cdc_line_coding) )
+				break;
+			ok = usb_serial_get_line_coding_cb( (struct usb_cdc_line_coding *)*buf );
+			break;
+
+		default:
+			break;
+	}
+
+	return ok ? USBD_REQ_HANDLED : USBD_REQ_NOTSUPP;
 }
 
 static void serial_set_config(usbd_device *dev, uint16_t wValue)
