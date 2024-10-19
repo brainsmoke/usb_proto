@@ -93,7 +93,7 @@ int __attribute__((weak)) usb_serial_set_control_line_state_cb(uint16_t state)
 #define REMOTE_WAKEUP (1<<5)
 
 #define MILLIAMPS(x)    ((x+1)>>1)
-#define MILLISECONDS(x)  (x)
+#define MILLISECONDS(x) (x)
 
 #define COUNTRY_NONE (0)
 
@@ -105,16 +105,16 @@ int __attribute__((weak)) usb_serial_set_control_line_state_cb(uint16_t state)
 enum
 {
 	NO_STRING = 0,
-    MANUFACTURER,
-    PRODUCT,
-    SERIAL,
+	MANUFACTURER,
+	PRODUCT,
+	SERIAL,
 };
 
 static const char *const string_descriptors[] =
 {
-    [MANUFACTURER-1] = MANUFACTURER_STRING,
-    [PRODUCT-1]      = PRODUCT_STRING,
-    [SERIAL-1]       = SERIAL_STRING,
+	[MANUFACTURER-1] = MANUFACTURER_STRING,
+	[PRODUCT-1]      = PRODUCT_STRING,
+	[SERIAL-1]       = SERIAL_STRING,
 };
 #define N_STRING_DESCRIPTORS (sizeof(string_descriptors)/sizeof(string_descriptors[0]))
 
