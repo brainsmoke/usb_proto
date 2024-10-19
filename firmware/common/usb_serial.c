@@ -393,7 +393,7 @@ void usb_serial_send_state(uint16_t serial_state)
 		struct usb_cdc_notification hdr;
 		uint16_t serial_state;
 
-	} __attribute((packed)) packet =
+	} __attribute__((packed)) packet =
 	{
 		.hdr.bmRequestType = -1,
 		.hdr.bNotification = USB_CDC_NOTIFY_SERIAL_STATE,
