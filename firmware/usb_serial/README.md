@@ -1,4 +1,4 @@
-# usb serial proof of concept
+# usb serial to uart
 
 ```
 make -C ../libopencm3/ # if not done already
@@ -10,7 +10,7 @@ make dfu_flash
 
 # using black magic probe:
 
-gdb-multiarch usbserial.elf
+gdb-multiarch usb_serial.elf
 set mem inaccessible-by-default off
 target extended-remote /dev/ttyACM0
 monitor swdp_scan
