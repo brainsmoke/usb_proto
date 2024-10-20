@@ -367,13 +367,28 @@ void usb_serial_putchar(int c)
 
 size_t usb_serial_write_noblock(const uint8_t *buf, size_t len)
 {
-	if (!usb_ready)
+	if ( !usb_ready || len == 0 )
 		return 0;
 
 	if (len > PACKET_SIZE_FULL_SPEED)
 		len = PACKET_SIZE_FULL_SPEED;
 
 	return usbd_ep_write_packet(device, UART_DEVICE_TO_HOST_ENDPOINT, buf, len);
+}
+
+size_t usb_serial_write(const uint8_t *buf, size_t len)
+{
+	size_t off = 0;
+
+	for (;;)
+	{
+		off += usb_serial_write_noblock(&buf[off], len-off);
+
+		if (off >= len)
+			return off;
+
+		usbd_poll(device);
+	}
 }
 
 void usb_serial_poll(void)
