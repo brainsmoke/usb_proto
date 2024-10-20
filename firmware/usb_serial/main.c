@@ -110,6 +110,19 @@ static void uart_init(long baudrate_prescale)
 	USART_CR1(UART) |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;
 }
 
+static void init(void)
+{
+	rcc_clock_setup_in_hsi_out_48mhz();
+	rcc_periph_clock_enable(RCC_GPIOA);
+	rcc_periph_clock_enable(RCC_GPIOB);
+	rcc_periph_clock_enable(RCC_USART1);
+	rcc_periph_clock_enable(RCC_DMA1);
+
+	remap_usb_pins();
+	usb_serial_init();
+	uart_init(DEFAULT_BAUDRATE);
+}
+
 void dma1_channel2_3_dma2_channel1_2_isr(void)
 {
 	DMA_CCR(UART_DMA, DMA_CHANNEL_TX) &=~ DMA_CCR_EN;
@@ -140,19 +153,6 @@ void dma1_channel2_3_dma2_channel1_2_isr(void)
 static void uart_tx_restart_dma(void)
 {
 	dma1_channel2_3_dma2_channel1_2_isr();
-}
-
-static void init(void)
-{
-	rcc_clock_setup_in_hsi_out_48mhz();
-	rcc_periph_clock_enable(RCC_GPIOA);
-	rcc_periph_clock_enable(RCC_GPIOB);
-	rcc_periph_clock_enable(RCC_USART1);
-	rcc_periph_clock_enable(RCC_DMA1);
-
-	remap_usb_pins();
-	usb_serial_init();
-	uart_init(DEFAULT_BAUDRATE);
 }
 
 static uint32_t get_rx_head(void)
