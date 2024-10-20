@@ -49,8 +49,8 @@
 void usb_serial_init(void);
 void usb_serial_poll(void);
 size_t usb_serial_read(uint8_t *buf, size_t len);
-size_t usb_serial_write(const uint8_t *buf, size_t len);
 size_t usb_serial_write_noblock(const uint8_t *buf, size_t len);
+size_t usb_serial_write(const uint8_t *buf, size_t len);
 
 int usb_serial_getchar(void);
 

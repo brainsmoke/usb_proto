@@ -10,4 +10,6 @@
 #define F_CPU (48000000)
 #define F_SYS_TICK_CLK (F_CPU/8)
 
+#define DEFAULT_BAUDRATE (115200)
+
 #endif // CONFIG_H
