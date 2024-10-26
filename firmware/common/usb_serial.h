@@ -52,7 +52,13 @@ size_t usb_serial_read(uint8_t *buf, size_t len);
 size_t usb_serial_write_noblock(const uint8_t *buf, size_t len);
 size_t usb_serial_write(const uint8_t *buf, size_t len);
 
+/* finish bulk transports with a zero-length packet if needed */
+void usb_serial_flush(void);
+
 int usb_serial_getchar(void);
+
+int usb_serial_can_read(void);
+int usb_serial_can_write(void);
 
 /* 1 byte/packet */
 void usb_serial_putchar(int c);
@@ -68,7 +74,6 @@ void usb_serial_send_state(uint16_t serial_state);
 
 /* --- CALLBACKS --- */
 /* if implemented by user, will be called (from usb_serial_poll) when data is available */
-
 void usb_serial_data_available_cb(void);
 
 /* these should return 0 on failure and 1 on success */

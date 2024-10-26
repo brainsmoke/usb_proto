@@ -29,5 +29,7 @@
  */
 
 void remap_usb_pins(void);
+void trigger_usb_reset(void);
+void reset_system(void);
 
 #endif // UTIL_H

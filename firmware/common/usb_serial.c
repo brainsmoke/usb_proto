@@ -26,6 +26,7 @@
  */
 
 #include <libopencm3/usb/usbd.h>
+#include <libopencm3/stm32/st_usbfs.h> /* read the buffer state directly from registers */
 
 #include <string.h>
 
@@ -54,32 +55,6 @@
 static usbd_device *device;
 
 static uint8_t control[128];
-
-static volatile uint32_t usb_ready;
-
-void __attribute__((weak)) usb_serial_data_available_cb(void)
-{
-	/* */
-}
-
-int __attribute__((weak)) usb_serial_set_line_coding_cb(struct usb_cdc_line_coding *coding)
-{
-	(void)(coding);
-	return 0;
-}
-
-int __attribute__((weak)) usb_serial_get_line_coding_cb(struct usb_cdc_line_coding *coding)
-{
-	(void)(coding);
-	return 0;
-}
-
-int __attribute__((weak)) usb_serial_set_control_line_state_cb(uint16_t state)
-{
-	(void)(state);
-	return 0;
-}
-
 
 #define VERSION_USB_2_0 (0x0200)
 
@@ -300,24 +275,49 @@ static void endpoint_setup(usbd_device *dev,
 	usbd_ep_setup(dev, desc->bEndpointAddress, desc->bmAttributes, desc->wMaxPacketSize, callback);
 }
 
+static volatile uint32_t usb_ready = 0;
+
+int usb_serial_can_write(void)
+{
+	return usb_ready && ((*USB_EP_REG(UART_DEVICE_TO_HOST_ENDPOINT) & USB_EP_TX_STAT) != USB_EP_TX_STAT_VALID);
+}
+
+void __attribute__((weak)) usb_serial_data_available_cb(void)
+{
+	/* */
+}
+
+int __attribute__((weak)) usb_serial_set_line_coding_cb(struct usb_cdc_line_coding *coding)
+{
+	(void)(coding);
+	return 0;
+}
+
+int __attribute__((weak)) usb_serial_get_line_coding_cb(struct usb_cdc_line_coding *coding)
+{
+	(void)(coding);
+	return 0;
+}
+
+int __attribute__((weak)) usb_serial_set_control_line_state_cb(uint16_t state)
+{
+	(void)(state);
+	return 0;
+}
+
 static uint8_t rx_buf[PACKET_SIZE_FULL_SPEED];
 static size_t rx_start, rx_len=0;
-static int data_read=0;
+static int need_zlp = 0, schedule_zlp = 0;
 
-static void serial_rx_cb(usbd_device *dev, uint8_t ep)
-{
-	(void)(dev);
-	(void)(ep);
-	data_read=1;
-}
 
 size_t usb_serial_read(uint8_t *buf, size_t len)
 {
 	if (rx_len > 0)
 	{
 		if (len > rx_len)
-			rx_len = len;
+			len = rx_len;
 		memcpy(buf, &rx_buf[rx_start], len);
+		rx_start += len;
 		rx_len -= len;
 		return len;
 	}
@@ -327,6 +327,9 @@ size_t usb_serial_read(uint8_t *buf, size_t len)
 
 	size_t n_read = usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
 
+	if (len > n_read)
+		len = n_read;
+
 	memcpy(buf, rx_buf, len);
 	rx_start = len;
 	rx_len = n_read - len;
@@ -335,34 +338,12 @@ size_t usb_serial_read(uint8_t *buf, size_t len)
 
 int usb_serial_getchar(void)
 {
-	if (rx_len == 0)
-	{
-		if (usb_ready)
-		{
-			rx_len = usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
-			rx_start = 0;
-		}
-		if (rx_len == 0)
-			return -1;
-	}
-
-	int c = rx_buf[rx_start++];
-
-	if (rx_start >= PACKET_SIZE_FULL_SPEED)
-		rx_start = 0;
-
-	rx_len -= 1;
-
-	return c;
-}
-
-void usb_serial_putchar(int c)
-{
-	uint8_t buf = c;
-	while ( !usb_ready || usbd_ep_write_packet(device, UART_DEVICE_TO_HOST_ENDPOINT, &buf, 1) == 0 )
-	{
-		usbd_poll(device);
-	}
+	uint8_t c_buf[1];
+	size_t n = usb_serial_read(c_buf, 1);
+	if ( n == 0 )
+		return -1;
+	else
+		return c_buf[0];
 }
 
 size_t usb_serial_write_noblock(const uint8_t *buf, size_t len)
@@ -373,6 +354,7 @@ size_t usb_serial_write_noblock(const uint8_t *buf, size_t len)
 	if (len > PACKET_SIZE_FULL_SPEED)
 		len = PACKET_SIZE_FULL_SPEED;
 
+	need_zlp = (len == PACKET_SIZE_FULL_SPEED);
 	return usbd_ep_write_packet(device, UART_DEVICE_TO_HOST_ENDPOINT, buf, len);
 }
 
@@ -391,14 +373,32 @@ size_t usb_serial_write(const uint8_t *buf, size_t len)
 	}
 }
 
+void usb_serial_flush(void)
+{
+	uint8_t buf[1];
+	if (need_zlp)
+	{
+		if (usb_serial_can_write())
+		{
+			usb_serial_write_noblock(buf, 0);
+			need_zlp = 0;
+		}
+		else
+			schedule_zlp = 1;
+	}
+
+}
+
+void usb_serial_putchar(int c)
+{
+	uint8_t c_buf[1];
+	c_buf[0] = (uint8_t)c;
+	usb_serial_write(c_buf, 1);
+}
+
 void usb_serial_poll(void)
 {
 	usbd_poll(device);
-	if (rx_len > 0 || data_read)
-	{
-		usb_serial_data_available_cb();
-		data_read = 0;
-	}
 }
 
 void usb_serial_send_state(uint16_t serial_state)
@@ -419,6 +419,21 @@ void usb_serial_send_state(uint16_t serial_state)
 	};
 
 	usbd_ep_write_packet(device, UART_NOTIFICATION_ENDPOINT, &packet, sizeof(packet));
+}
+
+static void serial_rx_cb(usbd_device *dev, uint8_t ep)
+{
+	(void)dev;
+	(void)ep;
+	usb_serial_data_available_cb();
+}
+
+static void serial_tx_cb(usbd_device *dev, uint8_t ep)
+{
+	(void)dev;
+	(void)ep;
+	if (schedule_zlp)
+		usb_serial_flush();
 }
 
 static enum usbd_request_return_codes serial_control_callback(usbd_device *dev,
@@ -464,13 +479,14 @@ static void serial_set_config(usbd_device *dev, uint16_t wValue)
 	(void)wValue;
 
 	endpoint_setup(dev, DATA_OUT_ENDPOINT, serial_rx_cb);
-	endpoint_setup(dev, DATA_IN_ENDPOINT, NULL);
+	endpoint_setup(dev, DATA_IN_ENDPOINT, serial_tx_cb);
 	endpoint_setup(dev, &notification_endpoint, NULL);
 
 	usbd_register_control_callback(dev,
 	                               USB_REQ_TYPE_CLASS|USB_REQ_TYPE_INTERFACE,
 	                               USB_REQ_TYPE_TYPE|USB_REQ_TYPE_RECIPIENT,
 	                               serial_control_callback);
+
 	usb_ready = 1;
 }
 
@@ -485,7 +501,5 @@ void usb_serial_init(void)
 	                   control, sizeof(control));
 
 	usbd_register_set_config_callback(device, serial_set_config);
-
-	usb_ready = 0;
 }
 

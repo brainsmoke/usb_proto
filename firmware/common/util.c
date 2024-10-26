@@ -28,6 +28,7 @@
 #include <libopencmsis/core_cm3.h>
 
 #include <libopencm3/stm32/rcc.h>
+#include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/syscfg.h>
 
 #include "util.h"
@@ -36,5 +37,21 @@ void remap_usb_pins(void)
 {
 	RCC_APB2ENR |= RCC_APB2ENR_SYSCFGCOMPEN;
 	SYSCFG_CFGR1 |= SYSCFG_CFGR1_PA11_PA12_RMP;
+}
+
+void trigger_usb_reset(void)
+{
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12);
+	gpio_clear(GPIOA, GPIO12);
+	int i;
+	for(i=0; i<50; i++)
+		__asm__("nop;");
+}
+
+void reset_system(void)
+{
+    SCB_AIRCR = SCB_AIRCR_VECTKEY | SCB_AIRCR_SYSRESETREQ;
+	__asm__("dsb;");
+    while (1);
 }
 

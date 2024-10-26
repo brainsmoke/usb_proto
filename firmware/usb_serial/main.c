@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Erik Bosman <erik@minemu.org>
+ * Copyright (c) 2024 Erik Bosman <erik@minemu.org>
  *
  * Permission  is  hereby  granted,  free  of  charge,  to  any  person
  * obtaining  a copy  of  this  software  and  associated documentation
@@ -39,14 +39,34 @@
 #include "util.h"
 #include "usb_serial.h"
 
-#define PACKET_SIZE (64)
-#define OVERFLOW_DEADZONE (128)
-#define UART_RX_BUFSIZE (1024+OVERFLOW_DEADZONE)
-#define UART_TX_BUFSIZE (1024)
+#define PACKET_SIZE (64UL)
+#define OVERFLOW_DEADZONE (128UL)
 
-static uint8_t buf_uart_rx[UART_RX_BUFSIZE+PACKET_SIZE];
-static uint8_t buf_uart_tx[UART_TX_BUFSIZE+PACKET_SIZE];
-static volatile uint32_t off_tx_head, off_tx_tail, off_tx_next_tail, off_tx_end;
+#define UART_RX_CAPACITY (1024UL)
+#define UART_RX_RINGSIZE (UART_RX_CAPACITY+OVERFLOW_DEADZONE)
+
+#define UART_TX_CAPACITY (1024UL)
+#define UART_TX_RINGSIZE (UART_TX_CAPACITY)
+
+/* RX / TX are used in ths file from the point of view of the UART */
+
+/* some modifications have been made the the data structures
+ * since our usb serial library is not ringbuffer aware.
+ */
+
+/* DMA ringbuffer with an extra packet of padding,
+ * up to 64 bytes from the start of the buffer get mirrored
+ * on the end.
+ */
+static uint8_t buf_uart_rx[UART_RX_RINGSIZE+PACKET_SIZE];
+static uint8_t buf_uart_tx[UART_TX_RINGSIZE+PACKET_SIZE];
+
+uint32_t rx_head, rx_tail, rx_transfer_size;
+
+volatile uint32_t tx_head, tx_size, tx_transfer_size;
+uint32_t tx_tail;
+
+int overflow;
 
 #define UART (USART1)
 #define UART_RX_PORT (GPIOB)
@@ -56,8 +76,10 @@ static volatile uint32_t off_tx_head, off_tx_tail, off_tx_next_tail, off_tx_end;
 #define UART_TX_PIN  (GPIO6)
 
 #define UART_DMA (DMA1)
-#define DMA_CHANNEL_RX (DMA_CHANNEL2)
-#define DMA_CHANNEL_TX (DMA_CHANNEL3)
+#define DMA_CHANNEL_RX (DMA_CHANNEL3)
+#define DMA_CHANNEL_TX (DMA_CHANNEL2)
+
+#define DMA_ISR_TCIF_TX (DMA_ISR_TCIF2)
 
 #define DMA_CONFIG_RX ( DMA_CCR_MINC | DMA_CCR_CIRC | \
                         DMA_CCR_MSIZE_8BIT | DMA_CCR_PSIZE_8BIT )
@@ -71,11 +93,11 @@ static void uart_rx_init(void)
 {
 	DMA_CPAR(UART_DMA, DMA_CHANNEL_RX) = (uint32_t)&USART_RDR(UART);
 	DMA_CMAR(UART_DMA, DMA_CHANNEL_RX) = (uint32_t)&buf_uart_rx;
-	DMA_CNDTR(UART_DMA, DMA_CHANNEL_RX) = (uint32_t)UART_RX_BUFSIZE;
+	DMA_CNDTR(UART_DMA, DMA_CHANNEL_RX) = UART_RX_RINGSIZE;
 	DMA_CCR(UART_DMA, DMA_CHANNEL_RX) = DMA_CONFIG_RX;
 	USART_CR3(UART) |= USART_CR3_DMAR;
 	gpio_mode_setup(UART_RX_PORT, GPIO_MODE_AF, GPIO_PUPD_NONE, UART_RX_PIN);
-	gpio_set_af(UART_RX_PORT, GPIO_AF1, UART_RX_PIN);
+	gpio_set_af(UART_RX_PORT, GPIO_AF0, UART_RX_PIN);
 }
 
 static void uart_tx_init(void)
@@ -86,9 +108,9 @@ static void uart_tx_init(void)
 	DMA_CCR(UART_DMA, DMA_CHANNEL_TX) = DMA_CONFIG_TX;
 	USART_CR3(UART) |= USART_CR3_DMAT;
 	gpio_mode_setup(UART_TX_PORT, GPIO_MODE_AF, GPIO_PUPD_NONE, UART_TX_PIN);
-	gpio_set_af(UART_TX_PORT, GPIO_AF1, UART_TX_PIN);
-
-	off_tx_head = off_tx_tail = off_tx_next_tail = off_tx_end = 0;
+	gpio_set_af(UART_TX_PORT, GPIO_AF0, UART_TX_PIN);
+	nvic_enable_irq(NVIC_DMA1_CHANNEL2_3_DMA2_CHANNEL1_2_IRQ);
+	nvic_set_priority(NVIC_DMA1_CHANNEL2_3_DMA2_CHANNEL1_2_IRQ, 1);
 }
 
 static void uart_init(long baudrate_prescale)
@@ -110,6 +132,11 @@ static void uart_init(long baudrate_prescale)
 	USART_CR1(UART) |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;
 }
 
+void wwdg_isr(void)
+{
+	reset_system();
+}
+
 static void init(void)
 {
 	rcc_clock_setup_in_hsi_out_48mhz();
@@ -119,35 +146,70 @@ static void init(void)
 	rcc_periph_clock_enable(RCC_DMA1);
 
 	remap_usb_pins();
+//	trigger_usb_reset();
 	usb_serial_init();
-	uart_init(DEFAULT_BAUDRATE);
+	uart_init(F_CPU/DEFAULT_BAUDRATE);
+
+	rx_head = rx_tail = rx_transfer_size = 0;
+	tx_head = tx_tail = tx_size = tx_transfer_size = 0;
+
+	overflow = 0;
 }
 
+static volatile int switch_coding = 0;
+static struct usb_cdc_line_coding line_coding;
+
+int usb_serial_set_line_coding_cb(struct usb_cdc_line_coding *coding)
+{
+	(void)(coding);
+	return 0;
+}
+
+int usb_serial_get_line_coding_cb(struct usb_cdc_line_coding *coding)
+{
+	(void)(coding);
+	return 0;
+}
+
+static void switch_line_coding(void)
+{
+//	switch_coding = 0;
+}
+
+int usb_serial_set_control_line_state_cb(uint16_t state)
+{
+	(void)(state);
+	return 0;
+}
+
+/* worst case, we've got tens of cycles to prevent a stutter */
 void dma1_channel2_3_dma2_channel1_2_isr(void)
 {
 	DMA_CCR(UART_DMA, DMA_CHANNEL_TX) &=~ DMA_CCR_EN;
-	DMA_CMAR(UART_DMA, DMA_CHANNEL_TX) = (uint32_t)&buf_uart_tx[off_tx_next_tail];
+	DMA_IFCR(UART_DMA) = DMA_ISR_TCIF_TX;
+	USART_ICR(UART) = USART_ICR_TCCF;
 
-	uint32_t size = off_tx_end - off_tx_next_tail;
+	uint32_t size = tx_size-tx_transfer_size;
+	tx_size = size;
 
-	if (off_tx_end < UART_TX_BUFSIZE && size > PACKET_SIZE)
+	uint32_t next = tx_head+tx_transfer_size;
+	if (next >= UART_TX_RINGSIZE) /* really == */
+		next = 0;
+
+	if (size > UART_TX_RINGSIZE-next)
+		size = UART_TX_RINGSIZE-next;
+
+	if (size > PACKET_SIZE)
 		size = PACKET_SIZE;
 
-	DMA_CNDTR(UART_DMA, DMA_CHANNEL_TX) = (uint32_t)size;
+	DMA_CMAR(UART_DMA, DMA_CHANNEL_TX) = (uint32_t)&buf_uart_tx[next];
+	DMA_CNDTR(UART_DMA, DMA_CHANNEL_TX) = size;
 
 	if (size)
 		DMA_CCR(UART_DMA, DMA_CHANNEL_TX) |= DMA_CCR_EN;
 
-	off_tx_tail = off_tx_next_tail;
-	off_tx_next_tail += size;
-
-	if (off_tx_next_tail >= UART_TX_BUFSIZE)
-	{
-		off_tx_next_tail = 0;
-		off_tx_end = off_tx_head;
-	}
-
-	DMA_IFCR(UART_DMA) = DMA_ISR_TCIF4;
+	tx_transfer_size = size;
+	tx_head = next;
 }
 
 static void uart_tx_restart_dma(void)
@@ -155,71 +217,91 @@ static void uart_tx_restart_dma(void)
 	dma1_channel2_3_dma2_channel1_2_isr();
 }
 
-static uint32_t get_rx_head(void)
+static void read_from_usb(void)
 {
-	return UART_RX_BUFSIZE-1-DMA_CNDTR(UART_DMA, DMA_CHANNEL_RX);
+	cm_disable_interrupts();
+	if ( !switch_coding && tx_size+PACKET_SIZE <= UART_TX_RINGSIZE )
+	{
+		cm_enable_interrupts();
+		uint32_t n = usb_serial_read(&buf_uart_tx[tx_tail], PACKET_SIZE);
+		cm_disable_interrupts();
+
+		if (n != 0)
+		{
+//			buf_uart_tx[tx_tail]=0x30+n;
+//			n=1;
+			tx_size += n;
+			tx_tail += n;
+			if (tx_tail >= UART_TX_RINGSIZE)
+			{
+				tx_tail -= UART_TX_RINGSIZE;
+				memcpy(&buf_uart_tx[0], &buf_uart_tx[UART_TX_RINGSIZE], tx_tail);
+			}
+
+			if (!( DMA_CCR(UART_DMA, DMA_CHANNEL_TX) & DMA_CCR_EN ) )
+				uart_tx_restart_dma();
+		}
+	}
+	cm_enable_interrupts();
+}
+
+static void write_to_usb(void)
+{
+	rx_head += usb_serial_write_noblock(&buf_uart_rx[rx_head], rx_transfer_size);
+	if (rx_head >= UART_RX_RINGSIZE)
+		rx_head -= UART_RX_RINGSIZE;
+	rx_transfer_size = 0;
+}
+
+static void uart_update_buffer_state(void)
+{
+	uint32_t rx_prev = rx_tail;
+	rx_tail = UART_RX_RINGSIZE-DMA_CNDTR(UART_DMA, DMA_CHANNEL_RX);
+
+	if (rx_prev == rx_tail)
+		return;
+
+	if (rx_prev > rx_tail)
+		rx_prev = 0;
+
+	for (; rx_prev < PACKET_SIZE && rx_prev < rx_tail; rx_prev++)
+		buf_uart_rx[UART_RX_RINGSIZE+rx_prev] = buf_uart_rx[rx_prev];
+
+	uint32_t len = rx_tail-rx_head;
+	if (len > UART_RX_RINGSIZE)
+		len += UART_RX_RINGSIZE;
+
+	if (len+OVERFLOW_DEADZONE > UART_RX_RINGSIZE)
+	{
+//		overflow = 1;
+		rx_head = rx_tail + OVERFLOW_DEADZONE;
+		if (rx_head >= UART_RX_RINGSIZE)
+			rx_head -= UART_RX_RINGSIZE;
+	}
+
+	if (len > PACKET_SIZE)
+		len = PACKET_SIZE;
+
+	rx_transfer_size = len;
 }
 
 int main(void)
 {
 	init();
-
-//	int overflow = 0;
-	uint32_t rx_tail = 0, rx_head = 0;
 	for(;;)
 	{
-		if ( (off_tx_tail - off_tx_head) > PACKET_SIZE )
-		{
-			uint32_t n = usb_serial_read(&buf_uart_tx[off_tx_head], PACKET_SIZE);
-
-			if (n != 0)
-			{
-				cm_disable_interrupts();
-				uint32_t next_head = off_tx_head + n;
-
-				if (off_tx_end < next_head)
-					off_tx_end = next_head;
-
-				if (next_head >= UART_TX_BUFSIZE)
-					next_head = 0;
-
-				off_tx_head = next_head;
-
-				if (!( DMA_CCR(UART_DMA, DMA_CHANNEL_TX) & DMA_CCR_EN ) )
-				{
-					cm_enable_interrupts();
-					uart_tx_restart_dma();
-				}
-				cm_enable_interrupts();
-			}
-		}
-
-		uint32_t i = rx_head;
-		rx_head = get_rx_head();
-		for (; i < PACKET_SIZE && i < rx_head; i++)
-			buf_uart_rx[i+UART_RX_BUFSIZE] = buf_uart_rx[i];
-
-		uint32_t len = rx_head-rx_tail;
-		if (len > UART_RX_BUFSIZE)
-			len += UART_RX_BUFSIZE;
-
-		if (len > UART_RX_BUFSIZE-OVERFLOW_DEADZONE)
-		{
-//			overflow = 1;
-			rx_tail = rx_head - OVERFLOW_DEADZONE;
-			if (rx_tail > UART_RX_BUFSIZE)
-				rx_tail += UART_RX_BUFSIZE;
-		}
-
-		if (len > PACKET_SIZE)
-			len = PACKET_SIZE;
-
-		rx_tail += usb_serial_write_noblock(&buf_uart_rx[rx_tail], len);
-
-		if ( rx_tail >= UART_RX_BUFSIZE )
-			rx_tail -= UART_RX_BUFSIZE;
-
 		usb_serial_poll();
+
+		read_from_usb();
+
+		uart_update_buffer_state();
+
+		if (rx_transfer_size && usb_serial_can_write())
+			write_to_usb();
+
+		if ( switch_coding && tx_size == 0 )
+			switch_line_coding();
 	}
+
 }
 
