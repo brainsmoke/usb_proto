@@ -146,7 +146,6 @@ static void init(void)
 	rcc_periph_clock_enable(RCC_DMA1);
 
 	remap_usb_pins();
-//	trigger_usb_reset();
 	usb_serial_init();
 	uart_init(F_CPU/DEFAULT_BAUDRATE);
 
@@ -228,8 +227,6 @@ static void read_from_usb(void)
 
 		if (n != 0)
 		{
-//			buf_uart_tx[tx_tail]=0x30+n;
-//			n=1;
 			tx_size += n;
 			tx_tail += n;
 			if (tx_tail >= UART_TX_RINGSIZE)
