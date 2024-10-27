@@ -11,5 +11,7 @@
 #define F_SYS_TICK_CLK (F_CPU/8)
 
 #define DEFAULT_BAUDRATE (115200)
+#define MIN_BAUDRATE (2400UL) /*?*/
+#define MAX_BAUDRATE (4000000UL)
 
 #endif // CONFIG_H

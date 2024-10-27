@@ -113,23 +113,68 @@ static void uart_tx_init(void)
 	nvic_set_priority(NVIC_DMA1_CHANNEL2_3_DMA2_CHANNEL1_2_IRQ, 1);
 }
 
-static void uart_init(long baudrate_prescale)
+static void uart_enable(void)
 {
+	USART_CR1(UART) |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;
+}
+
+static void uart_disable(void)
+{
+	USART_CR1(UART) &=~ (USART_CR1_RE | USART_CR1_TE | USART_CR1_UE);
+}
+
+static void uart_set_parity(uint32_t parity)
+{
+	USART_CR1(UART) &=~ USART_PARITY_MASK;
+	USART_CR1(UART) |= parity;
+}
+
+static void uart_set_stop_bits(uint32_t stop_bits)
+{
+	USART_CR2(UART) &=~ USART_CR2_STOPBITS_MASK;
+	USART_CR2(UART) |= stop_bits;
+}
+
+static void uart_set_word_length(uint32_t length)
+{
+	USART_CR1(UART) &=~ (USART_CR1_M0|USART_CR1_M1);
+	switch (length)
+	{
+		case 7:
+			USART_CR1(UART) |= USART_CR1_M1;
+			break;
+		case 9:
+			break;
+			USART_CR1(UART) |= USART_CR1_M0;
+		case 8:
+		default:
+			break;
+	}
+}
+
+static void uart_set_baudrate(uint32_t baudrate)
+{
+	uint32_t baudrate_prescale = F_CPU/baudrate;
+
 	if (baudrate_prescale < 0x10)
 	{
-		USART_CR1(UART) = USART_CR1_OVER8;
+		USART_CR1(UART) |= USART_CR1_OVER8;
 		USART_BRR(UART) = baudrate_prescale+(baudrate_prescale&~7);
 	}
 	else
 	{
-		USART_CR1(UART) = 0;
+		USART_CR1(UART) &=~ USART_CR1_OVER8;
 		USART_BRR(UART) = baudrate_prescale;
 	}
+}
 
+static void uart_init(void)
+{
+	uart_set_baudrate(DEFAULT_BAUDRATE);
 	uart_rx_init();
 	uart_tx_init();
 	DMA_CCR(UART_DMA, DMA_CHANNEL_RX) |= DMA_CCR_EN;
-	USART_CR1(UART) |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;
+	uart_enable();
 }
 
 void wwdg_isr(void)
@@ -147,7 +192,7 @@ static void init(void)
 
 	remap_usb_pins();
 	usb_serial_init();
-	uart_init(F_CPU/DEFAULT_BAUDRATE);
+	uart_init();
 
 	rx_head = rx_tail = rx_transfer_size = 0;
 	tx_head = tx_tail = tx_size = tx_transfer_size = 0;
@@ -158,21 +203,59 @@ static void init(void)
 static volatile int switch_coding = 0;
 static struct usb_cdc_line_coding line_coding;
 
+const uint32_t stop_bits_map[] =
+{
+	[USB_CDC_1_STOP_BITS] = USART_CR2_STOPBITS_1,
+	[USB_CDC_1_5_STOP_BITS] = USART_CR2_STOPBITS_1_5,
+	[USB_CDC_2_STOP_BITS] = USART_CR2_STOPBITS_2,
+};
+
+const uint32_t parity_map[] =
+{
+	[USB_CDC_NO_PARITY] = 0,
+	[USB_CDC_ODD_PARITY] = USART_PARITY_ODD,
+	[USB_CDC_EVEN_PARITY] = USART_PARITY_EVEN,
+};
+
+static int line_coding_ok(struct usb_cdc_line_coding *coding)
+{
+	return (coding->bCharFormat <= USB_CDC_2_STOP_BITS) &&
+	       (coding->bParityType <= USB_CDC_EVEN_PARITY) && /* mark/space parity not supported */
+	       (coding->dwDTERate <= MAX_BAUDRATE) &&
+	       (coding->dwDTERate >= MIN_BAUDRATE) &&
+	     ( (coding->bDataBits == 7) || (coding->bDataBits == 8) );
+}
+
+
 int usb_serial_set_line_coding_cb(struct usb_cdc_line_coding *coding)
 {
-	(void)(coding);
-	return 0;
+	if ( !line_coding_ok(coding) )
+		return 0;
+
+	if ( memcmp(&line_coding, coding, sizeof(line_coding)) == 0 )
+	{
+		line_coding = *coding;
+		switch_coding = 1;
+	}
+
+	return 1;
 }
 
 int usb_serial_get_line_coding_cb(struct usb_cdc_line_coding *coding)
 {
-	(void)(coding);
-	return 0;
+	*coding = line_coding;
+	return 1;
 }
 
 static void switch_line_coding(void)
 {
-//	switch_coding = 0;
+	uart_disable();
+	uart_set_baudrate(line_coding.dwDTERate);
+	uart_set_parity(parity_map[line_coding.bParityType]);
+	uart_set_stop_bits(stop_bits_map[line_coding.bCharFormat]);
+	uart_set_word_length(line_coding.bDataBits);
+	uart_enable();
+	switch_coding = 0;
 }
 
 int usb_serial_set_control_line_state_cb(uint16_t state)
@@ -295,6 +378,8 @@ int main(void)
 
 		if (rx_transfer_size && usb_serial_can_write())
 			write_to_usb();
+		else
+			usb_serial_flush();
 
 		if ( switch_coding && tx_size == 0 )
 			switch_line_coding();
