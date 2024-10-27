@@ -8614,16 +8614,6 @@
 	)
 	(wire
 		(pts
-			(xy 96.52 16.51) (xy 96.52 24.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3c16b61c-8045-427e-bc04-080aac445426")
-	)
-	(wire
-		(pts
 			(xy 27.94 113.03) (xy 30.48 113.03)
 		)
 		(stroke
@@ -19109,6 +19099,82 @@
 			(project "tester"
 				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
 					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 96.52 20.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6239102a-5de6-48c1-abfd-7c87ca251f13")
+		(property "Reference" "R8"
+			(at 91.2622 20.32 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5.1k"
+			(at 93.5736 20.32 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 94.742 20.32 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 96.52 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 96.52 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25905"
+			(at 96.52 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "cd0d3910-a0af-4bfb-9d4b-f3b3565412c2")
+		)
+		(pin "1"
+			(uuid "b4de097d-cc4e-47dd-91eb-3e9c144b8a79")
+		)
+		(instances
+			(project "project"
+				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
+					(reference "R8")
 					(unit 1)
 				)
 			)
