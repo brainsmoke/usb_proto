@@ -10,13 +10,15 @@ module button_keepout(w, d, thickness, height, top_width=2, top_height=3, gap=0.
 {
 rotate([0,0,180])
 {
-translate([0,(d-top_width)/2,-thickness-e])
-linear_extrude(thickness+2*e)
 difference()
 {
+translate([0,(d-top_width)/2,-height-e])
+linear_extrude(height+e)
 	translate([-w/2-gap, -d/2-gap])
 	square([w+2*gap, d+gap]);
 
+translate([0,(d-top_width)/2,-thickness-e])
+linear_extrude(thickness+2*e)
 	translate([-w/2, -d/2])
 	square([w, d+e]);
 }
@@ -83,6 +85,6 @@ translate([-20,-10, -thickness])
 cube([40,20,thickness]);
 for (i=[-pitch,0,pitch])
 translate([i,0,0])
-button_keepout(w, d, thickness);
+button_keepout(w, d, thickness, height);
 }
 }

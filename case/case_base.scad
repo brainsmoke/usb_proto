@@ -7,6 +7,7 @@ use <grid.scad>
 use <button.scad>
 
 with_buttons=false;
+with_dfu_button=false;
 
 hole_dist_x = 50;
 hole_dist_y = 40;
@@ -50,6 +51,9 @@ funnel_top_inner_radius = funnel_top_radius-leg_thickness;
 component_z = bottom_thickness+leg_height+pcb_thickness;
 
 button_depth = total_height-component_z-button_height;
+
+dfu_button_pos = [ -1, -1 ];
+dfu_button_angle = 0;
 
 grid_rows = 4;
 grid_cols = 5;
@@ -107,10 +111,17 @@ module at_holes(x, y)
 module at_buttons()
 {
 	if (with_buttons)
-	at_back()
-	for (i=[0:n_buttons-1])
-		translate([button_pitch*(i-(n_buttons-1)/2), -pcb_radius, total_height])
-			children();
+	{
+		at_back()
+			for (i=[0:n_buttons-1])
+				translate([button_pitch*(i-(n_buttons-1)/2), -pcb_radius, total_height])
+					children();
+
+	if (with_dfu_button)
+		translate([ dfu_button_pos[0], dfu_button_pos[1], total_height ])
+			rotate([0,0,dfu_button_angle])
+				children();
+	}
 }
 
 module case_shape(height, radius)
@@ -200,11 +211,11 @@ module case()
 
 module top()
 {
+	at_buttons() button_shape(button_w, button_d, top_thickness, button_depth);
 	difference()
 	{
 		union()
 		{
-			at_buttons() button_shape(button_w, button_d, top_thickness, button_depth);
 
 			difference()
 			{
