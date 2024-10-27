@@ -410,7 +410,7 @@ void usb_serial_send_state(uint16_t serial_state)
 
 	} __attribute__((packed)) packet =
 	{
-		.hdr.bmRequestType = -1,
+		.hdr.bmRequestType = 0xa1,
 		.hdr.bNotification = USB_CDC_NOTIFY_SERIAL_STATE,
 		.hdr.wValue = 0,
 		.hdr.wIndex = UART_NOTIFICATION_INTERFACE,
