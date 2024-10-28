@@ -166,6 +166,11 @@ static void uart_set_baudrate(uint32_t baudrate)
 		USART_CR1(UART) &=~ USART_CR1_OVER8;
 		USART_BRR(UART) = baudrate_prescale;
 	}
+	uint32_t ospeed = GPIO_OSPEED_LOW;
+	if (baudrate > MAX_LOWSPEED_BAUDRATE)
+		ospeed = GPIO_OSPEED_MED;
+
+	gpio_set_output_options(UART_TX_PORT, GPIO_OTYPE_PP, ospeed, UART_TX_PIN);
 }
 
 static void uart_init(void)
@@ -182,6 +187,11 @@ void wwdg_isr(void)
 	reset_system();
 }
 
+static void gpio_write_mask(uint32_t gpioport, uint16_t gpios, uint16_t mask)
+{
+	GPIO_BSRR(gpioport) = ( (mask &~ gpios) << 16) | (mask & gpios);
+}
+
 static void init(void)
 {
 	rcc_clock_setup_in_hsi_out_48mhz();
@@ -194,6 +204,9 @@ static void init(void)
 	usb_serial_init();
 	uart_init();
 
+	gpio_write_mask(PORT_LINE_STATE, LINE_STATE_DEFAULT, LINE_STATE_PIN_MASK);
+	gpio_mode_setup(PORT_LINE_STATE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LINE_STATE_PIN_MASK);
+
 	rx_head = rx_tail = rx_transfer_size = 0;
 	tx_head = tx_tail = tx_size = tx_transfer_size = 0;
 
@@ -203,14 +216,14 @@ static void init(void)
 static volatile int switch_coding = 0;
 static struct usb_cdc_line_coding line_coding;
 
-const uint32_t stop_bits_map[] =
+static const uint32_t stop_bits_map[] =
 {
 	[USB_CDC_1_STOP_BITS] = USART_CR2_STOPBITS_1,
 	[USB_CDC_1_5_STOP_BITS] = USART_CR2_STOPBITS_1_5,
 	[USB_CDC_2_STOP_BITS] = USART_CR2_STOPBITS_2,
 };
 
-const uint32_t parity_map[] =
+static const uint32_t parity_map[] =
 {
 	[USB_CDC_NO_PARITY] = 0,
 	[USB_CDC_ODD_PARITY] = USART_PARITY_ODD,
@@ -258,10 +271,21 @@ static void switch_line_coding(void)
 	switch_coding = 0;
 }
 
+/* DTR/RTS are active low, PIN_ESP_GPIO0 and PIN_ESP_EN should match the reset circuitry esptool.py expects */
+static const uint32_t control_state_map[] =
+{
+	[0] =                                                                    PIN_RTS | PIN_DTR | PIN_ESP_GPIO0 | PIN_ESP_EN ,
+	[USB_SERIAL_CONTROL_LINE_STATE_DTR] =                                    PIN_RTS |           PIN_ESP_GPIO0              ,
+	[USB_SERIAL_CONTROL_LINE_STATE_RTS] =                                              PIN_DTR |                 PIN_ESP_EN ,
+	[USB_SERIAL_CONTROL_LINE_STATE_RTS|USB_SERIAL_CONTROL_LINE_STATE_DTR] =                      PIN_ESP_GPIO0 | PIN_ESP_EN ,
+};
+
 int usb_serial_set_control_line_state_cb(uint16_t state)
 {
-	(void)(state);
-	return 0;
+	uint32_t pin_state = control_state_map[state&USB_SERIAL_CONTROL_LINE_STATE_MASK];
+	gpio_write_mask(PORT_LINE_STATE, pin_state, LINE_STATE_PIN_MASK);
+	usb_serial_send_state(USB_SERIAL_STATE_DEFAULT);
+	return 1;
 }
 
 /* worst case, we've got tens of cycles to prevent a stutter */
@@ -331,6 +355,7 @@ static void write_to_usb(void)
 	if (rx_head >= UART_RX_RINGSIZE)
 		rx_head -= UART_RX_RINGSIZE;
 	rx_transfer_size = 0;
+	overflow = 0;
 }
 
 static void uart_update_buffer_state(void)
@@ -353,7 +378,9 @@ static void uart_update_buffer_state(void)
 
 	if (len+OVERFLOW_DEADZONE > UART_RX_RINGSIZE)
 	{
-//		overflow = 1;
+		if (!overflow)
+			usb_serial_send_state(USB_SERIAL_STATE_DEFAULT | USB_SERIAL_STATE_OVERRUN);
+		overflow = 1;
 		rx_head = rx_tail + OVERFLOW_DEADZONE;
 		if (rx_head >= UART_RX_RINGSIZE)
 			rx_head -= UART_RX_RINGSIZE;
@@ -368,6 +395,9 @@ static void uart_update_buffer_state(void)
 int main(void)
 {
 	init();
+
+	usb_serial_send_state(USB_SERIAL_STATE_DEFAULT);
+
 	for(;;)
 	{
 		usb_serial_poll();

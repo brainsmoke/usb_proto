@@ -70,6 +70,9 @@ void usb_serial_putchar(int c);
 #define USB_SERIAL_STATE_FRAMING_ERROR (1<<4)
 #define USB_SERIAL_STATE_PARITY_ERROR  (1<<5)
 #define USB_SERIAL_STATE_OVERRUN       (1<<6)
+
+#define USB_SERIAL_STATE_DEFAULT (USB_SERIAL_STATE_RX_CARRIER|USB_SERIAL_STATE_TX_CARRIER)
+
 void usb_serial_send_state(uint16_t serial_state);
 
 /* --- CALLBACKS --- */
@@ -81,6 +84,7 @@ int usb_serial_set_line_coding_cb(struct usb_cdc_line_coding *coding);
 int usb_serial_get_line_coding_cb(struct usb_cdc_line_coding *coding);
 #define USB_SERIAL_CONTROL_LINE_STATE_DTR (1<<0)
 #define USB_SERIAL_CONTROL_LINE_STATE_RTS (1<<1)
+#define USB_SERIAL_CONTROL_LINE_STATE_MASK (USB_SERIAL_CONTROL_LINE_STATE_DTR|USB_SERIAL_CONTROL_LINE_STATE_RTS)
 int usb_serial_set_control_line_state_cb(uint16_t state);
 
 #endif // USB_SERIAL_H

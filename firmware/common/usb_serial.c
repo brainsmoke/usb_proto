@@ -418,7 +418,8 @@ void usb_serial_send_state(uint16_t serial_state)
 		.serial_state = serial_state,
 	};
 
-	usbd_ep_write_packet(device, UART_NOTIFICATION_ENDPOINT, &packet, sizeof(packet));
+	while ( !usb_ready || usbd_ep_write_packet(device, UART_NOTIFICATION_ENDPOINT, &packet, sizeof(packet)) == 0 )
+		usbd_poll(device);
 }
 
 static void serial_rx_cb(usbd_device *dev, uint8_t ep)
