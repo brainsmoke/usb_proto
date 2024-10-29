@@ -245,7 +245,7 @@ int usb_serial_set_line_coding_cb(struct usb_cdc_line_coding *coding)
 	if ( !line_coding_ok(coding) )
 		return 0;
 
-	if ( memcmp(&line_coding, coding, sizeof(line_coding)) == 0 )
+	if ( memcmp(&line_coding, coding, sizeof(line_coding)) != 0 )
 	{
 		line_coding = *coding;
 		switch_coding = 1;
