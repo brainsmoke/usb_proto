@@ -32,6 +32,7 @@
 
 #include "config.h"
 #include "usb_serial.h"
+#include "usb_double_buf.h"
 
 #ifndef ID_VENDOR
 #define ID_VENDOR  (0x4242)
@@ -132,8 +133,8 @@ static const struct usb_config_descriptor config_desc =
 };
 
 #define UART_HOST_TO_DEVICE_ENDPOINT (1)
-#define UART_DEVICE_TO_HOST_ENDPOINT (1)
-#define UART_NOTIFICATION_ENDPOINT   (2)
+#define UART_DEVICE_TO_HOST_ENDPOINT (2)
+#define UART_NOTIFICATION_ENDPOINT   (3)
 
 #define UART_NOTIFICATION_INTERFACE  (0)
 #define UART_DATA_INTERFACE          (1)
@@ -323,9 +324,9 @@ size_t usb_serial_read(uint8_t *buf, size_t len)
 	}
 
 	if ( len >= PACKET_SIZE_FULL_SPEED )
-		return usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, buf, len);
+		return usb_double_buffer_read_packet(UART_HOST_TO_DEVICE_ENDPOINT, buf, len);
 
-	size_t n_read = usbd_ep_read_packet(device, UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
+	size_t n_read = usb_double_buffer_read_packet(UART_HOST_TO_DEVICE_ENDPOINT, rx_buf, PACKET_SIZE_FULL_SPEED);
 
 	if (len > n_read)
 		len = n_read;
@@ -355,7 +356,7 @@ size_t usb_serial_write_noblock(const uint8_t *buf, size_t len)
 		len = PACKET_SIZE_FULL_SPEED;
 
 	need_zlp = (len == PACKET_SIZE_FULL_SPEED);
-	return usbd_ep_write_packet(device, UART_DEVICE_TO_HOST_ENDPOINT, buf, len);
+	return usb_double_buffer_write_packet(UART_DEVICE_TO_HOST_ENDPOINT, buf, len);
 }
 
 size_t usb_serial_write(const uint8_t *buf, size_t len)
@@ -479,8 +480,8 @@ static void serial_set_config(usbd_device *dev, uint16_t wValue)
 {
 	(void)wValue;
 
-	endpoint_setup(dev, DATA_OUT_ENDPOINT, serial_rx_cb);
-	endpoint_setup(dev, DATA_IN_ENDPOINT, serial_tx_cb);
+	usb_double_buffer_endpoint_setup(dev, DATA_OUT_ENDPOINT->bEndpointAddress, DATA_OUT_ENDPOINT->wMaxPacketSize, serial_rx_cb); 
+	usb_double_buffer_endpoint_setup(dev, DATA_IN_ENDPOINT->bEndpointAddress, DATA_IN_ENDPOINT->wMaxPacketSize, serial_tx_cb); 
 	endpoint_setup(dev, &notification_endpoint, NULL);
 
 	usbd_register_control_callback(dev,

@@ -2,7 +2,7 @@
 OPENCM3_DIR=../libopencm3
 SHARED_DIR=../common
 PROJECT=usb_serial
-CFILES=main.c usb_serial.c util.c
+CFILES=main.c usb_serial.c usb_double_buf.c util.c
 
 DFU_FILE=$(PROJECT).dfu
 
