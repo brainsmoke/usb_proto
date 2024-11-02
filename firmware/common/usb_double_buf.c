@@ -1,3 +1,34 @@
+/*
+ * Copyright (c) 2024 Erik Bosman <erik@minemu.org>
+ *
+ * Permission  is  hereby  granted,  free  of  charge,  to  any  person
+ * obtaining  a copy  of  this  software  and  associated documentation
+ * files (the "Software"),  to deal in the Software without restriction,
+ * including  without  limitation  the  rights  to  use,  copy,  modify,
+ * merge, publish, distribute, sublicense, and/or sell copies of the
+ * Software,  and to permit persons to whom the Software is furnished to
+ * do so, subject to the following conditions:
+ *
+ * The  above  copyright  notice  and this  permission  notice  shall be
+ * included  in  all  copies  or  substantial portions  of the Software.
+ *
+ * THE SOFTWARE  IS  PROVIDED  "AS IS", WITHOUT WARRANTY  OF ANY KIND,
+ * EXPRESS OR IMPLIED,  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY,  FITNESS  FOR  A  PARTICULAR  PURPOSE  AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM,  DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT,  TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN
+ * CONNECTION  WITH THE SOFTWARE  OR THE USE  OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * (http://opensource.org/licenses/mit-license.html)
+ *
+ */
+
+/* Libopencm3 does not do double buffering on stm32, so we'll need to setup the
+ * peripheral ourself.
+ *
+ */
 
 #include <libopencm3/usb/usbd.h>
 #include <../libopencm3/lib/usb/usb_private.h>
@@ -5,6 +36,17 @@
 #include <libopencm3/stm32/st_usbfs.h>
 
 #include "usb_double_buf.h"
+
+/* optional callbacks */
+void __attribute__((weak)) usb_double_buffer_data_available_cb(uint8_t endpoint)
+{
+	(void)endpoint;
+}
+
+void __attribute__((weak)) usb_double_buffer_can_write_cb(uint8_t endpoint)
+{
+	(void)endpoint;
+}
 
 #define USB_ENDPOINT_NORMAL_BITS     ( USB_EP_SETUP | USB_EP_TYPE | USB_EP_KIND | USB_EP_ADDR )
 #define USB_ENDPOINT_TOGGLE_BITS     ( USB_EP_RX_STAT | USB_EP_TX_STAT | USB_EP_RX_DTOG | USB_EP_TX_DTOG )
@@ -22,17 +64,6 @@
 #define USB_TX_ENDPOINT_SWAP_BUFFER(endpoint) \
 	SET_REG( USB_EP_REG(endpoint), \
 	       ( *USB_EP_REG(endpoint) & USB_ENDPOINT_NORMAL_BITS ) | USB_ENDPOINT_CLEAR_TX_CTR | USB_EP_TX_SWBUF )
-
-#define USB_CLR_EP_RX_SWBUF(reg) USB_CLR_EP_TX_DTOG(reg)
-#define USB_CLR_EP_TX_SWBUF(reg) USB_CLR_EP_RX_DTOG(reg)
-
-#define USB_SET_EP_RX_SWBUF(endpoint) \
-	SET_REG( USB_EP_REG(endpoint), \
-	       ( ( *USB_EP_REG(endpoint) & (USB_ENDPOINT_NORMAL_BITS|USB_EP_RX_SWBUF) ) | USB_ENDPOINT_CLEAR_ONLY_BITS) ^ USB_EP_RX_SWBUF )
-
-#define USB_SET_EP_TX_SWBUF(endpoint) \
-	SET_REG( USB_EP_REG(endpoint), \
-	       ( ( *USB_EP_REG(endpoint) & (USB_ENDPOINT_NORMAL_BITS|USB_EP_TX_SWBUF) ) | USB_ENDPOINT_CLEAR_ONLY_BITS) ^ USB_EP_TX_SWBUF )
 
 typedef struct
 {
@@ -60,7 +91,7 @@ static usb_endpoint_buffers_t * const btable = (usb_endpoint_buffers_t *)USB_PMA
 
 #define DBUF_FULL 1
 #define DBUF_EMPTY 0
-#define DBUF_NEW 2
+#define DBUF_IDLE 2
 
 uint8_t dbuf_state[8];
 
@@ -139,7 +170,7 @@ uint16_t usb_double_buffer_write_packet(uint8_t endpoint, const uint8_t *buf, ui
 	st_usbfs_copy_to_pm(USB_BUFFER_ADDR(pack_buf), buf, len);
 	pack_buf->count = len;
 
-	if ( (*USB_EP_REG(endpoint) & USB_EP_TX_CTR) || (dbuf_state[endpoint] == DBUF_NEW) )
+	if ( (*USB_EP_REG(endpoint) & USB_EP_TX_CTR) || (dbuf_state[endpoint] == DBUF_IDLE) )
 	{
 		USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
 		dbuf_state[endpoint] = DBUF_EMPTY;
@@ -148,6 +179,33 @@ uint16_t usb_double_buffer_write_packet(uint8_t endpoint, const uint8_t *buf, ui
 		dbuf_state[endpoint] = DBUF_FULL;
 
 	return len;
+}
+
+static void _usb_double_buffer_data_read(usbd_device *dev, uint8_t endpoint)
+{
+	(void)dev;
+	(void)endpoint;
+	if ( dbuf_state[endpoint] == DBUF_EMPTY )
+	{
+		USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
+		dbuf_state[endpoint] = DBUF_FULL;
+	}
+
+	usb_double_buffer_data_available_cb(endpoint);
+}
+
+static void _usb_double_buffer_data_written(usbd_device *dev, uint8_t endpoint)
+{
+	(void)dev;
+	if ( dbuf_state[endpoint] == DBUF_FULL )
+	{
+		USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
+		dbuf_state[endpoint] = DBUF_EMPTY;
+	}
+	else
+		dbuf_state[endpoint] = DBUF_IDLE;
+
+	usb_double_buffer_can_write_cb(endpoint);
 }
 
 static uint16_t receive_buf_size(uint16_t max_size)
@@ -167,45 +225,47 @@ static uint16_t receive_buf_blockfield(uint16_t max_size)
 		return 0x8000 | ( real_size << (10-5) );
 }
 
-void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uint16_t max_size, usbd_endpoint_callback cb)
+void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uint16_t max_size)
 {
+	for (uint32_t i=device->pm_top; i<0x400; i+=2)
+		*(volatile uint16_t *)(0x40006000+i) = i;
+
 	uint8_t real_endpoint = endpoint & 0x7; //0x7f;
 
-//	for (uint32_t i=device->pm_top; i<0x400; i+=2)
-//		*(volatile uint16_t *)(0x40006000+i) = i;
+	volatile uint32_t *ep_reg = USB_EP_REG(real_endpoint);
+
+	max_size = receive_buf_size(max_size);
+	USB_SET_EP_RX_ADDR(real_endpoint, device->pm_top);
+	device->pm_top += max_size;
+	USB_SET_EP_TX_ADDR(real_endpoint, device->pm_top);
+	device->pm_top += max_size;
+
 
 	if ( endpoint & 0x80 ) /* TX */
 	{
-		dbuf_state[real_endpoint] = DBUF_NEW;
-		USB_CLR_EP_TX_DTOG(real_endpoint);
-		USB_CLR_EP_TX_SWBUF(real_endpoint);
-		USB_SET_EP_RX_STAT(real_endpoint, USB_EP_RX_STAT_DISABLED);
-		USB_SET_EP_RX_ADDR(real_endpoint, device->pm_top);
+		USB_SET_EP_RX_COUNT(real_endpoint, 0);
+		USB_SET_EP_TX_COUNT(real_endpoint, 0);
+
+		uint16_t init_normal_bits = USB_EP_TYPE_BULK | USB_EP_KIND | (real_endpoint & 0xf);
+		uint16_t init_toggle_bits = USB_EP_TX_STAT_VALID | USB_EP_RX_STAT_DISABLED | USB_EP_TX_DTOG | USB_EP_TX_SWBUF;
+		uint16_t init_clear_only_bits = USB_ENDPOINT_CLEAR_ONLY_BITS;
+
+		*ep_reg = ( (*ep_reg & init_toggle_bits) ^ init_toggle_bits ) | init_normal_bits | init_clear_only_bits;
+		dbuf_state[real_endpoint] = DBUF_IDLE;
+		device->user_callback_ctr[real_endpoint][USB_TRANSACTION_IN] = _usb_double_buffer_data_written;
 	}
 	else /* RX */
 	{
-		dbuf_state[real_endpoint] = DBUF_EMPTY;
-		USB_SET_EP_RX_SWBUF(real_endpoint);
-		USB_CLR_EP_RX_DTOG(real_endpoint);
-		USB_SET_EP_TX_STAT(real_endpoint, USB_EP_TX_STAT_DISABLED);
-		USB_SET_EP_TX_ADDR(real_endpoint, device->pm_top);
+		USB_SET_EP_RX_COUNT(real_endpoint, receive_buf_blockfield(max_size));
 		USB_SET_EP_TX_COUNT(real_endpoint, receive_buf_blockfield(max_size));
-		max_size = receive_buf_size(max_size);
+
+		uint16_t init_normal_bits = USB_EP_TYPE_BULK | USB_EP_KIND | (real_endpoint & 0xf);
+		uint16_t init_toggle_bits = USB_EP_RX_STAT_VALID | USB_EP_TX_STAT_DISABLED |/* USB_EP_RX_DTOG |*/ USB_EP_RX_SWBUF;
+		uint16_t init_clear_only_bits = USB_ENDPOINT_CLEAR_ONLY_BITS;
+
+		*ep_reg = ( (*ep_reg & init_toggle_bits) ^ init_toggle_bits ) | init_normal_bits | init_clear_only_bits;
+		dbuf_state[real_endpoint] = DBUF_EMPTY;
+		device->user_callback_ctr[real_endpoint][USB_TRANSACTION_OUT] = _usb_double_buffer_data_read;
 	}
-	device->pm_top += max_size;
-	usbd_ep_setup(device, endpoint, USB_ENDPOINT_ATTR_BULK, max_size, cb);
-
-	USB_SET_EP_KIND(real_endpoint);
-	if ( endpoint & 0x80 ) /* TX */
-		USB_SET_EP_TX_STAT(real_endpoint, USB_EP_TX_STAT_VALID);
-
-//
-//	if ( endpoint & 0x80 )
-  //  SET_REG( USB_EP_REG(real_endpoint), \
-    //       ( ( *USB_EP_REG(real_endpoint) & (USB_ENDPOINT_NORMAL_BITS|USB_EP_TX_STAT_VALID) ) | USB_EP_KIND /* | USB_ENDPOINT_CLEAR_ONLY_BITS */) ^ USB_EP_TX_STAT_VALID );
-	//else
-//    SET_REG( USB_EP_REG(real_endpoint), \
-  //         ( ( *USB_EP_REG(real_endpoint) & (USB_ENDPOINT_NORMAL_BITS|USB_EP_RX_STAT_VALID) ) | USB_EP_KIND /* | USB_ENDPOINT_CLEAR_ONLY_BITS */) ^ USB_EP_RX_STAT_VALID );
-
 }
 
