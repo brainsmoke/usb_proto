@@ -4,11 +4,13 @@
 
 #include <libopencm3/usb/usbd.h>
 
-
 void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uint16_t max_size, usbd_endpoint_callback cb);
 
-uint16_t usb_double_buffer_read_packet(uint8_t endpoint, uint8_t *buf, uint16_t len);
+/* these also swap buffers when possible */
+int usb_double_buffer_can_read(uint8_t endpoint);
+int usb_double_buffer_can_write(uint8_t endpoint);
 
+uint16_t usb_double_buffer_read_packet(uint8_t endpoint, uint8_t *buf, uint16_t len);
 uint16_t usb_double_buffer_write_packet(uint8_t endpoint, const uint8_t *buf, uint16_t len);
 
 

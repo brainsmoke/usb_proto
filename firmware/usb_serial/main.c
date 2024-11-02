@@ -283,7 +283,7 @@ static const uint32_t control_state_map[] =
 int usb_serial_set_control_line_state_cb(uint16_t state)
 {
 	uint32_t pin_state = control_state_map[state&USB_SERIAL_CONTROL_LINE_STATE_MASK];
-	gpio_write_mask(PORT_LINE_STATE, pin_state, LINE_STATE_PIN_MASK);
+//	gpio_write_mask(PORT_LINE_STATE, pin_state, LINE_STATE_PIN_MASK);
 	usb_serial_send_state(USB_SERIAL_STATE_DEFAULT);
 	return 1;
 }
@@ -406,7 +406,7 @@ int main(void)
 
 		uart_update_buffer_state();
 
-		if (rx_transfer_size && usb_serial_can_write())
+		if (rx_transfer_size)
 			write_to_usb();
 		else
 			usb_serial_flush();

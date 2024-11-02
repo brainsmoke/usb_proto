@@ -280,7 +280,7 @@ static volatile uint32_t usb_ready = 0;
 
 int usb_serial_can_write(void)
 {
-	return usb_ready && ((*USB_EP_REG(UART_DEVICE_TO_HOST_ENDPOINT) & USB_EP_TX_STAT) != USB_EP_TX_STAT_VALID);
+	return usb_double_buffer_can_write(UART_DEVICE_TO_HOST_ENDPOINT);
 }
 
 void __attribute__((weak)) usb_serial_data_available_cb(void)
@@ -426,14 +426,14 @@ void usb_serial_send_state(uint16_t serial_state)
 static void serial_rx_cb(usbd_device *dev, uint8_t ep)
 {
 	(void)dev;
-	(void)ep;
+	usb_double_buffer_can_read(ep);
 	usb_serial_data_available_cb();
 }
 
 static void serial_tx_cb(usbd_device *dev, uint8_t ep)
 {
 	(void)dev;
-	(void)ep;
+	usb_double_buffer_can_write(ep);
 	if (schedule_zlp)
 		usb_serial_flush();
 }
@@ -480,8 +480,8 @@ static void serial_set_config(usbd_device *dev, uint16_t wValue)
 {
 	(void)wValue;
 
-	usb_double_buffer_endpoint_setup(dev, DATA_OUT_ENDPOINT->bEndpointAddress, DATA_OUT_ENDPOINT->wMaxPacketSize, serial_rx_cb); 
-	usb_double_buffer_endpoint_setup(dev, DATA_IN_ENDPOINT->bEndpointAddress, DATA_IN_ENDPOINT->wMaxPacketSize, serial_tx_cb); 
+	usb_double_buffer_endpoint_setup(dev, DATA_OUT_ENDPOINT->bEndpointAddress, DATA_OUT_ENDPOINT->wMaxPacketSize, serial_rx_cb);
+	usb_double_buffer_endpoint_setup(dev, DATA_IN_ENDPOINT->bEndpointAddress, DATA_IN_ENDPOINT->wMaxPacketSize, serial_tx_cb);
 	endpoint_setup(dev, &notification_endpoint, NULL);
 
 	usbd_register_control_callback(dev,
