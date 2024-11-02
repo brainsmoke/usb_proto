@@ -187,7 +187,7 @@ static void _usb_double_buffer_data_read(usbd_device *dev, uint8_t endpoint)
 	(void)endpoint;
 	if ( dbuf_state[endpoint] == DBUF_EMPTY )
 	{
-		USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
+		USB_RX_ENDPOINT_SWAP_BUFFER(endpoint);
 		dbuf_state[endpoint] = DBUF_FULL;
 	}
 
