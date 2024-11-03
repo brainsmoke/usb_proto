@@ -54,6 +54,10 @@ void __attribute__((weak)) usb_double_buffer_can_write_cb(uint8_t endpoint)
 #define USB_ENDPOINT_CLEAR_RX_CTR    ( USB_ENDPOINT_CLEAR_ONLY_BITS &~ USB_EP_RX_CTR )
 #define USB_ENDPOINT_CLEAR_TX_CTR    ( USB_ENDPOINT_CLEAR_ONLY_BITS &~ USB_EP_TX_CTR )
 
+
+#define USB_ENDPOINT_BUFSTATE_BITS   ( USB_EP_RX_DTOG | USB_EP_TX_DTOG )
+#define USB_ENDPOINT_BUSY(endpoint)  ( { uint32_t status = *USB_EP_REG(endpoint) & USB_ENDPOINT_BUFSTATE_BITS; (status != 0 && status != USB_ENDPOINT_BUFSTATE_BITS); } )
+
 #define USB_EP_RX_SWBUF USB_EP_TX_DTOG
 #define USB_EP_TX_SWBUF USB_EP_RX_DTOG
 
@@ -89,20 +93,19 @@ static usb_endpoint_buffers_t * const btable = (usb_endpoint_buffers_t *)USB_PMA
 #define USB_BUFFER_ADDR(buf) \
 	(uint8_t *)(USB_PMA_BASE + (buf)->addr)
 
-#define DBUF_FULL 1
 #define DBUF_EMPTY 0
-#define DBUF_IDLE 2
+#define DBUF_FULL 1
 
 uint8_t dbuf_state[8];
 
 int usb_double_buffer_can_read(uint8_t endpoint)
 {
-	endpoint = endpoint & 0x7; //0x7f;
+	endpoint &= 0x7; //0x7f;
 
 	if ( dbuf_state[endpoint] != DBUF_EMPTY )
 		return 1;
 
-	if ( !(*USB_EP_REG(endpoint) & USB_EP_RX_CTR) )
+	if ( USB_ENDPOINT_BUSY(endpoint) )
 		return 0;
 
 	USB_RX_ENDPOINT_SWAP_BUFFER(endpoint);
@@ -113,11 +116,11 @@ int usb_double_buffer_can_read(uint8_t endpoint)
 
 uint16_t usb_double_buffer_read_packet(uint8_t endpoint, uint8_t *buf, uint16_t len)
 {
-	endpoint = endpoint & 0x7; //0x7f;
+	endpoint &= 0x7; //0x7f;
 
 	if ( dbuf_state[endpoint] == DBUF_EMPTY )
 	{
-		if ( *USB_EP_REG(endpoint) & USB_EP_RX_CTR )
+		if ( !USB_ENDPOINT_BUSY(endpoint) )
 			USB_RX_ENDPOINT_SWAP_BUFFER(endpoint);
 		else
 			return 0;
@@ -127,7 +130,7 @@ uint16_t usb_double_buffer_read_packet(uint8_t endpoint, uint8_t *buf, uint16_t 
 	uint16_t packet_size = MIN(len, pack_buf->count & 0x3ff);
 	st_usbfs_copy_from_pm(buf, USB_BUFFER_ADDR(pack_buf), packet_size);
 
-	if ( *USB_EP_REG(endpoint) & USB_EP_RX_CTR )
+	if ( !USB_ENDPOINT_BUSY(endpoint) )
 	{
 		USB_RX_ENDPOINT_SWAP_BUFFER(endpoint);
 		dbuf_state[endpoint] = DBUF_FULL;
@@ -140,12 +143,12 @@ uint16_t usb_double_buffer_read_packet(uint8_t endpoint, uint8_t *buf, uint16_t 
 
 int usb_double_buffer_can_write(uint8_t endpoint)
 {
-	endpoint = endpoint & 0x7; //0x7f;
+	endpoint &= 0x7; //0x7f;
 
-	if ( dbuf_state[endpoint] != DBUF_FULL )
+	if ( dbuf_state[endpoint] == DBUF_EMPTY )
 		return 1;
 
-	if ( !(*USB_EP_REG(endpoint) & USB_EP_TX_CTR) )
+	if ( USB_ENDPOINT_BUSY(endpoint) )
 		return 0;
 
 	USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
@@ -156,11 +159,11 @@ int usb_double_buffer_can_write(uint8_t endpoint)
 
 uint16_t usb_double_buffer_write_packet(uint8_t endpoint, const uint8_t *buf, uint16_t len)
 {
-	endpoint = endpoint & 0x7; //0x7f;
+	endpoint &= 0x7; //0x7f;
 
-	if ( dbuf_state[endpoint] == DBUF_FULL )
+	if ( dbuf_state[endpoint] != DBUF_EMPTY )
 	{
-		if ( *USB_EP_REG(endpoint) & USB_EP_TX_CTR )
+		if ( !USB_ENDPOINT_BUSY(endpoint) )
 			USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
 		else
 			return 0;
@@ -170,7 +173,7 @@ uint16_t usb_double_buffer_write_packet(uint8_t endpoint, const uint8_t *buf, ui
 	st_usbfs_copy_to_pm(USB_BUFFER_ADDR(pack_buf), buf, len);
 	pack_buf->count = len;
 
-	if ( (*USB_EP_REG(endpoint) & USB_EP_TX_CTR) || (dbuf_state[endpoint] == DBUF_IDLE) )
+	if ( !USB_ENDPOINT_BUSY(endpoint) )
 	{
 		USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
 		dbuf_state[endpoint] = DBUF_EMPTY;
@@ -184,11 +187,12 @@ uint16_t usb_double_buffer_write_packet(uint8_t endpoint, const uint8_t *buf, ui
 static void _usb_double_buffer_data_read(usbd_device *dev, uint8_t endpoint)
 {
 	(void)dev;
-	(void)endpoint;
-	if ( dbuf_state[endpoint] == DBUF_EMPTY )
+	uint8_t real_endpoint = endpoint & 0x7;
+
+	if ( dbuf_state[real_endpoint] == DBUF_EMPTY )
 	{
-		USB_RX_ENDPOINT_SWAP_BUFFER(endpoint);
-		dbuf_state[endpoint] = DBUF_FULL;
+		USB_RX_ENDPOINT_SWAP_BUFFER(real_endpoint);
+		dbuf_state[real_endpoint] = DBUF_FULL;
 	}
 
 	usb_double_buffer_data_available_cb(endpoint);
@@ -197,13 +201,13 @@ static void _usb_double_buffer_data_read(usbd_device *dev, uint8_t endpoint)
 static void _usb_double_buffer_data_written(usbd_device *dev, uint8_t endpoint)
 {
 	(void)dev;
-	if ( dbuf_state[endpoint] == DBUF_FULL )
+	uint8_t real_endpoint = endpoint & 0x7;
+
+	if ( dbuf_state[real_endpoint] != DBUF_EMPTY )
 	{
-		USB_TX_ENDPOINT_SWAP_BUFFER(endpoint);
-		dbuf_state[endpoint] = DBUF_EMPTY;
+		USB_TX_ENDPOINT_SWAP_BUFFER(real_endpoint);
+		dbuf_state[real_endpoint] = DBUF_EMPTY;
 	}
-	else
-		dbuf_state[endpoint] = DBUF_IDLE;
 
 	usb_double_buffer_can_write_cb(endpoint);
 }
@@ -227,8 +231,8 @@ static uint16_t receive_buf_blockfield(uint16_t max_size)
 
 void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uint16_t max_size)
 {
-	for (uint32_t i=device->pm_top; i<0x400; i+=2)
-		*(volatile uint16_t *)(0x40006000+i) = i;
+	for (uint32_t i=device->pm_top; i<0x400; i++)
+		*(volatile uint8_t *)(0x40006000+i) = 0xaa;
 
 	uint8_t real_endpoint = endpoint & 0x7; //0x7f;
 
@@ -241,6 +245,7 @@ void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uin
 	device->pm_top += max_size;
 
 
+	dbuf_state[real_endpoint] = DBUF_EMPTY;
 	if ( endpoint & 0x80 ) /* TX */
 	{
 		USB_SET_EP_RX_COUNT(real_endpoint, 0);
@@ -251,20 +256,19 @@ void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uin
 		uint16_t init_clear_only_bits = USB_ENDPOINT_CLEAR_ONLY_BITS;
 
 		*ep_reg = ( (*ep_reg & init_toggle_bits) ^ init_toggle_bits ) | init_normal_bits | init_clear_only_bits;
-		dbuf_state[real_endpoint] = DBUF_IDLE;
 		device->user_callback_ctr[real_endpoint][USB_TRANSACTION_IN] = _usb_double_buffer_data_written;
 	}
 	else /* RX */
 	{
-		USB_SET_EP_RX_COUNT(real_endpoint, receive_buf_blockfield(max_size));
-		USB_SET_EP_TX_COUNT(real_endpoint, receive_buf_blockfield(max_size));
+		uint16_t count_field = receive_buf_blockfield(max_size);
+		USB_SET_EP_RX_COUNT(real_endpoint, count_field);
+		USB_SET_EP_TX_COUNT(real_endpoint, count_field);
 
 		uint16_t init_normal_bits = USB_EP_TYPE_BULK | USB_EP_KIND | (real_endpoint & 0xf);
 		uint16_t init_toggle_bits = USB_EP_RX_STAT_VALID | USB_EP_TX_STAT_DISABLED |/* USB_EP_RX_DTOG |*/ USB_EP_RX_SWBUF;
 		uint16_t init_clear_only_bits = USB_ENDPOINT_CLEAR_ONLY_BITS;
 
 		*ep_reg = ( (*ep_reg & init_toggle_bits) ^ init_toggle_bits ) | init_normal_bits | init_clear_only_bits;
-		dbuf_state[real_endpoint] = DBUF_EMPTY;
 		device->user_callback_ctr[real_endpoint][USB_TRANSACTION_OUT] = _usb_double_buffer_data_read;
 	}
 }
