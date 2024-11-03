@@ -229,6 +229,32 @@ static uint16_t receive_buf_blockfield(uint16_t max_size)
 		return 0x8000 | ( ( real_size << (10-5) ) - 1 );
 }
 
+static enum usbd_request_return_codes _usb_double_buf_stall_cb(usbd_device *device,
+                                                               struct usb_setup_data *req,
+                                                               uint8_t **buf, uint16_t *len,
+                                                               usbd_control_complete_callback *complete)
+{
+	(void)device;
+	(void)buf;
+	(void)len;
+	(void)complete;
+	if (req->wValue == USB_FEAT_ENDPOINT_HALT)
+	{
+		if (req->bRequest == USB_REQ_CLEAR_FEATURE)
+		{
+			/* implement double buffer stall */
+			return USBD_REQ_NOTSUPP;
+		}
+		if (req->bRequest == USB_REQ_SET_FEATURE)
+		{
+			/* implement double buffer stall */
+			return USBD_REQ_NOTSUPP;
+		}
+	}
+	return USBD_REQ_NEXT_CALLBACK;
+}
+
+
 void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uint16_t max_size)
 {
 	for(uint32_t i=device->pm_top; i<0x400; i++)
@@ -270,6 +296,13 @@ void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uin
 
 		*ep_reg = ( (*ep_reg & init_toggle_bits) ^ init_toggle_bits ) | init_normal_bits | init_clear_only_bits;
 		device->user_callback_ctr[real_endpoint][USB_TRANSACTION_OUT] = _usb_double_buffer_data_read;
+	}
+
+	static int once = 0;
+	if (!once)
+	{
+		usbd_register_control_callback(device, USB_REQ_TYPE_ENDPOINT, USB_REQ_TYPE_RECIPIENT, _usb_double_buf_stall_cb);
+		once = 1;
 	}
 }
 
