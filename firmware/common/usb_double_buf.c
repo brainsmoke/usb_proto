@@ -91,7 +91,7 @@ typedef struct
 static usb_endpoint_buffers_t * const btable = (usb_endpoint_buffers_t *)USB_PMA_BASE; /* + USB_GET_BTABLE, which is 0 */
 
 #define USB_BUFFER_ADDR(buf) \
-	(uint8_t *)(USB_PMA_BASE + (buf)->addr)
+	((uint8_t *)(USB_PMA_BASE + (buf)->addr))
 
 #define DBUF_EMPTY 0
 #define DBUF_FULL 1
@@ -226,22 +226,22 @@ static uint16_t receive_buf_blockfield(uint16_t max_size)
 	if (real_size <= 62)
 		return real_size << (10-1);
 	else
-		return 0x8000 | ( real_size << (10-5) );
+		return 0x8000 | ( ( real_size << (10-5) ) - 1 );
 }
 
 void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uint16_t max_size)
 {
-	for (uint32_t i=device->pm_top; i<0x400; i++)
-		*(volatile uint8_t *)(0x40006000+i) = 0xaa;
+	for(uint32_t i=device->pm_top; i<0x400; i++)
+		*(volatile uint8_t *)(USB_PMA_BASE+i) = 0xaa;
 
 	uint8_t real_endpoint = endpoint & 0x7; //0x7f;
 
 	volatile uint32_t *ep_reg = USB_EP_REG(real_endpoint);
 
 	max_size = receive_buf_size(max_size);
-	USB_SET_EP_RX_ADDR(real_endpoint, device->pm_top);
-	device->pm_top += max_size;
 	USB_SET_EP_TX_ADDR(real_endpoint, device->pm_top);
+	device->pm_top += max_size;
+	USB_SET_EP_RX_ADDR(real_endpoint, device->pm_top);
 	device->pm_top += max_size;
 
 
