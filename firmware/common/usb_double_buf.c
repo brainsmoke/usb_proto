@@ -257,9 +257,6 @@ static enum usbd_request_return_codes _usb_double_buf_stall_cb(usbd_device *devi
 
 void usb_double_buffer_endpoint_setup(usbd_device *device, uint8_t endpoint, uint16_t max_size)
 {
-	for(uint32_t i=device->pm_top; i<0x400; i++)
-		*(volatile uint8_t *)(USB_PMA_BASE+i) = 0xaa;
-
 	uint8_t real_endpoint = endpoint & 0x7; //0x7f;
 
 	volatile uint32_t *ep_reg = USB_EP_REG(real_endpoint);
