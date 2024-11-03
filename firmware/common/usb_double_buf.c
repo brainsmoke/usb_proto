@@ -226,7 +226,7 @@ static uint16_t receive_buf_blockfield(uint16_t max_size)
 	if (real_size <= 62)
 		return real_size << (10-1);
 	else
-		return 0x8000 | ( ( real_size << (10-5) ) - 1 );
+		return 0x8000 | ( (real_size-32) << (10-5) );
 }
 
 static enum usbd_request_return_codes _usb_double_buf_stall_cb(usbd_device *device,
