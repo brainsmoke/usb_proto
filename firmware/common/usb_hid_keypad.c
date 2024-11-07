@@ -31,7 +31,7 @@
 #include <string.h>
 
 #include "config.h"
-#include "hid_keypad.h"
+#include "usb_hid_keypad.h"
 
 #ifndef ID_VENDOR
 #define ID_VENDOR  (0x4242)
@@ -41,6 +41,15 @@
 #endif
 #ifndef ID_VERSION
 #define ID_VERSION (0x0000)
+#endif
+#ifndef MANUFACTURER_STRING
+#define MANUFACTURER_STRING "manufacturer"
+#endif
+#ifndef PRODUCT_STRING
+#define PRODUCT_STRING "product"
+#endif
+#ifndef SERIAL_STRING
+#define SERIAL_STRING "00000001"
 #endif
 
 static usbd_device *device;
@@ -81,9 +90,9 @@ enum
 
 static const char *const string_descriptors[] =
 {
-    [MANUFACTURER-1] = "techinc",
-    [PRODUCT-1]      = "keypad",
-    [SERIAL-1]       = "00000001",
+	[MANUFACTURER-1] = MANUFACTURER_STRING,
+	[PRODUCT-1]      = PRODUCT_STRING,
+	[SERIAL-1]       = SERIAL_STRING,
 };
 #define N_STRING_DESCRIPTORS (sizeof(string_descriptors)/sizeof(string_descriptors[0]))
 

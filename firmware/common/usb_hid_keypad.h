@@ -1,5 +1,5 @@
-#ifndef HID_KEYPAD_H
-#define HID_KEYPAD_H
+#ifndef USB_HID_KEYPAD_H
+#define USB_HID_KEYPAD_H
 
 /*
  * Copyright (c) 2023 Erik Bosman <erik@minemu.org>
@@ -36,4 +36,4 @@ void usb_hid_keypad_key_up(uint32_t key_index);
 void usb_hid_keypad_key_down(uint32_t key_index);
 void usb_hid_keypad_poll(void);
 
-#endif // HID_KEYPAD_H
+#endif // USB_HID_KEYPAD_H

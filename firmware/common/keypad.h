@@ -30,7 +30,51 @@
 
 #include <stdint.h>
 
+#include <libopencm3/stm32/gpio.h>
+
 #include "config.h"
+
+
+#define PORT_KEY_ROWS (GPIOA)
+
+#define PIN_KEY_ROW_0 (GPIO4)
+#define PIN_KEY_ROW_1 (GPIO5)
+#define PIN_KEY_ROW_2 (GPIO6)
+#define PIN_KEY_ROW_3 (GPIO7)
+
+#define PORT_KEY_COLUMNS (GPIOA)
+
+#define PIN_KEY_COLUMN_0 (GPIO0)
+#define PIN_KEY_COLUMN_1 (GPIO1)
+#define PIN_KEY_COLUMN_2 (GPIO2)
+#define PIN_KEY_COLUMN_3 (GPIO3)
+
+#define N_COLUMNS (4)
+#define N_ROWS (4)
+#define N_KEYS (N_ROWS*N_COLUMNS)
+
+#define MASK_KEY_ROWS (PIN_KEY_ROW_0|PIN_KEY_ROW_1|PIN_KEY_ROW_2|PIN_KEY_ROW_3)
+#define SELECT_ROW(n) ( PIN_KEY_ROW_##n | (MASK_KEY_ROWS^PIN_KEY_ROW_##n)<<16 )
+#define SELECT_ROWS { SELECT_ROW(0), SELECT_ROW(1), SELECT_ROW(2), SELECT_ROW(3) }
+
+#define MASK_KEY_COLUMNS (PIN_KEY_COLUMN_0|PIN_KEY_COLUMN_1|PIN_KEY_COLUMN_2|PIN_KEY_COLUMN_3)
+#define COLUMN_LOOKUP { PIN_KEY_COLUMN_0, PIN_KEY_COLUMN_1, PIN_KEY_COLUMN_2, PIN_KEY_COLUMN_3 }
+
+
+#ifndef DEBOUNCE_COUNTDOWN
+#define DEBOUNCE_COUNTDOWN (20*2) // 20ms
+#endif
+
+#ifndef KEY_MAPPING
+#include "hid_keydef.h"
+#define KEY_MAPPING \
+{\
+	KEY_PLAY,                KEY_MUTE,            KEY_VOLUME_DOWN,         KEY_VOLUME_UP, \
+	KEY_SCAN_PREVIOUS_TRACK, KEY_SCAN_NEXT_TRACK, KEY_DECREASE_BRIGHTNESS, KEY_INCREASE_BRIGHTNESS, \
+	KEY_TOGGLE_FULL_SCREEN,  KEY_ZOOM_OUT,        KEY_ZOOM_IN,             KEY_CALCULATOR,\
+    KEY_A,                   KEY_B,               KEY_C,                   KEY_D, \
+};
+#endif
 
 enum
 {
