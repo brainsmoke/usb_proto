@@ -9,6 +9,7 @@ or an HID keyboard.
 
 * [usb_serial](firmware/usb_serial) USB serial to UART adapter firmware, with RTS/DTR signals & reset/boot signals for directly programming ESP32s.
 * [usb_hid_keymatrix](firmware/usb_hid_keymatrix) USB HID Keypad firmware, for a keyboard matrix
+* [usb_hid_simple](firmware/usb_hid_simple) USB HID Keypad firmware for a few buttons
 
 
 # License
