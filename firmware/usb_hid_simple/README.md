@@ -1,4 +1,4 @@
-# usb hid buttons
+# usb hid buttons (untested)
 
 ![buttons in pull-down configuration](usb_hid_simple.png)
 
