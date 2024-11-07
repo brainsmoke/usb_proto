@@ -43,7 +43,7 @@ static const uint32_t keys[N_KEYS] =
 	KEY_PLAY,                KEY_MUTE,            KEY_VOLUME_DOWN,         KEY_VOLUME_UP,
 	KEY_SCAN_PREVIOUS_TRACK, KEY_SCAN_NEXT_TRACK, KEY_DECREASE_BRIGHTNESS, KEY_INCREASE_BRIGHTNESS,
 	KEY_TOGGLE_FULL_SCREEN,  KEY_ZOOM_OUT,        KEY_ZOOM_IN,             KEY_CALCULATOR,
-    KEY('A'),                KEY('B'),            KEY('C'),                KEY('D'),
+	KEY('A'),                KEY('B'),            KEY('C'),                KEY('D'),
 };
 
 static void init(void)
