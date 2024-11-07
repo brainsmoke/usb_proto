@@ -62,7 +62,7 @@
 
 
 #ifndef DEBOUNCE_COUNTDOWN
-#define DEBOUNCE_COUNTDOWN (20*2) // 20ms
+#define DEBOUNCE_COUNTDOWN (40) // hmmz... should probably test this
 #endif
 
 enum
