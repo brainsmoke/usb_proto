@@ -1,6 +1,13 @@
-# usb serial to uart
+# usb hid keypad matrix (untested)
 
-# edit keys in config.h
+![pin description](usb_hid_matrix.png)
+
+![matrix schematic](schematic.png)
+
+# build instructions
+
+Edit keys in `main.c`
+
 ```
 make -C ../libopencm3/ # if not done already
 make

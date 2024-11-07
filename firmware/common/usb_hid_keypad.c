@@ -58,7 +58,9 @@ static uint8_t report_descriptor[256];
 static uint8_t report[32];
 static uint8_t control[128];
 
-static uint32_t report_bits;
+static uint32_t keymap[HID_KEYPAD_MAX_KEYS];
+
+static uint32_t report_bits=0;
 static volatile uint32_t need_update, usb_ready;
 
 #define VERSION_USB_2_0 (0x0200)
@@ -289,6 +291,18 @@ static void hid_set_config(usbd_device *dev, uint16_t wValue)
 
 int usb_hid_keypad_init(const uint32_t keys[], size_t n_keys)
 {
+	if (n_keys > HID_KEYPAD_MAX_KEYS)
+		return 0;
+
+	size_t i, j;
+	for (i=0, j=0; i<n_keys; i++)
+		if (keys[i] != ~0UL)
+			keymap[j++] = i;
+	n_keys = j;
+
+
+	memcpy(keymap, keys, sizeof(uint32_t)*n_keys);
+
 	size_t len = create_hid_keypad_descriptor(report_descriptor, sizeof(report_descriptor),
 		                                      keys, n_keys);
 
@@ -312,19 +326,33 @@ int usb_hid_keypad_init(const uint32_t keys[], size_t n_keys)
 	return 1;
 }
 
-void usb_hid_keypad_key_up(uint32_t key_index)
+static int get_index(uint32_t hid_key)
 {
-	if (key_index < report_bits)
-		report[key_index>>3] &=~ (1<<(key_index&0x7));
+	size_t i;
+	for (i=0; i<report_bits; i++)
+		if (keymap[i] == hid_key)
+			return i;
 
+	return -1;
+}
+
+void usb_hid_keypad_key_up(uint32_t hid_key)
+{
+	int ix = get_index(hid_key);
+	if (ix < 0)
+		return;
+
+	report[ix>>3] &=~ (1<<(ix&0x7));
 	need_update = 1;
 }
 
-void usb_hid_keypad_key_down(uint32_t key_index)
+void usb_hid_keypad_key_down(uint32_t hid_key)
 {
-	if (key_index < report_bits)
-		report[key_index>>3] |= 1<<(key_index&0x7);
+	int ix = get_index(hid_key);
+	if (ix < 0)
+		return;
 
+	report[ix>>3] |= 1<<(ix&0x7);
 	need_update = 1;
 }
 

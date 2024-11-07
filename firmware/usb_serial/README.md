@@ -1,5 +1,8 @@
 # usb serial to uart
 
+![pin description](usb_serial_firmware.png)
+
+
 ```
 make -C ../libopencm3/ # if not done already
 make

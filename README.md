@@ -8,7 +8,7 @@ or an HID keyboard.
 # Firmware (still untested!)
 
 * [usb_serial](firmware/usb_serial)
-  <img src="img/usb_serial_firmware.png" width="50%" height="50%" alt="Image of IO Port usage for the usb-serial firmware" >
+* [usb_hid_matrix](firmware/usb_hid_matrix)
 
 
 # License

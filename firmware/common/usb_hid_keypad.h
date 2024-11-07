@@ -31,9 +31,11 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#define HID_KEYPAD_MAX_KEYS (48)
+
 int usb_hid_keypad_init(const uint32_t keys[], size_t n_keys);
-void usb_hid_keypad_key_up(uint32_t key_index);
-void usb_hid_keypad_key_down(uint32_t key_index);
+void usb_hid_keypad_key_up(uint32_t hid_key);
+void usb_hid_keypad_key_down(uint32_t hid_key);
 void usb_hid_keypad_poll(void);
 
 #endif // USB_HID_KEYPAD_H
