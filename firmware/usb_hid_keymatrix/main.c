@@ -39,6 +39,8 @@
 #include "usb_hid_keypad.h"
 #include "hid_keydef.h"
 
+/* For possible keys, see ../common/hid_keydef.h */
+
 static const uint32_t keys[N_KEYS] =
 {
 	KEY_PLAY,                KEY_MUTE,            KEY_VOLUME_DOWN,         KEY_VOLUME_UP,
