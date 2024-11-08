@@ -35,32 +35,46 @@
 
 #define N_KEYS (10)
 
+#include "config.h"
 #include "util.h"
 #include "usb_hid_keypad.h"
 #include "hid_keydef.h"
 
 static const uint32_t keys[N_KEYS] =
 {
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
-	KEY_NONE,
+	KEY('A'),
+	KEY('B'),
+	KEY('C'),
+	KEY('D'),
+	KEY('E'),
+	KEY('F'),
+	KEY('G'),
+	KEY('H'),
+	KEY('I'),
+	KEY('J'),
 };
 
 static uint32_t keystate = 0;
 
-#define DEBOUNCE (100) // untested
+#define DEBOUNCE (20) // ms
 
 #define GPIOA_MASK (0xff)
 #define GPIOB_MASK ((1<<6)|(1<<7))
 
 static uint32_t keys_debounce[N_KEYS] = { 0, };
+
+static void enable_sys_tick(uint32_t ticks)
+{
+	STK_RVR = ticks;
+	STK_CVR = 0;
+	STK_CSR = STK_CSR_ENABLE|STK_CSR_TICKINT;
+}
+
+volatile uint32_t tick=0, last_tick=0;
+void SysTick_Handler(void)
+{
+	tick+=1;
+}
 
 static void init(void)
 {
@@ -72,40 +86,46 @@ static void init(void)
 
 	remap_usb_pins();
 	usb_hid_keypad_init(keys, N_KEYS);
+	enable_sys_tick(F_SYS_TICK_CLK/1000);
 }
 
 static void set_keystate(int key_index, int state)
 {
 	if (keys_debounce[key_index])
-	{
-		keys_debounce[key_index]--;
 		return;
-	}
 
 	if ( !(keystate & (1<<key_index)) && state)
 	{
 		usb_hid_keypad_key_down(keys[key_index]);
 		keys_debounce[key_index] = DEBOUNCE;
+		keystate |= (1<<key_index);
 	}
 
 	if ( (keystate & (1<<key_index)) && !state)
 	{
 		usb_hid_keypad_key_up(keys[key_index]);
 		keys_debounce[key_index] = DEBOUNCE;
+		keystate &=~ (1<<key_index);
 	}
 }
 
 static void keys_poll(void)
 {
+	int i;
+	if (tick != last_tick)
+		for (i=0; i<N_KEYS; i++)
+			if (keys_debounce[i])
+				keys_debounce[i]--;
+	last_tick = tick;
+
 	uint32_t porta = gpio_get(GPIOA, GPIOA_MASK);
 	uint32_t portb = gpio_get(GPIOB, GPIOB_MASK);
 
-	int i;
 	for (i=0; i<8; i++)
-		set_keystate(7-i, !!(porta & (1<<i)));
+		set_keystate(7-i, !(porta & (1<<i)));
 
-	set_keystate(8, !!(portb & (1<<7)));
-	set_keystate(9, !!(portb & (1<<6)));
+	set_keystate(8, !(portb & (1<<7)));
+	set_keystate(9, !(portb & (1<<6)));
 }
 
 int main(void)

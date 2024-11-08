@@ -33,6 +33,7 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 
+#include "config.h"
 #include "util.h"
 #include "keypad.h"
 #include "usb_hid_keypad.h"
@@ -46,6 +47,19 @@ static const uint32_t keys[N_KEYS] =
 	KEY('A'),                KEY('B'),            KEY('C'),                KEY('D'),
 };
 
+static void enable_sys_tick(uint32_t ticks)
+{
+	STK_RVR = ticks;
+	STK_CVR = 0;
+	STK_CSR = STK_CSR_ENABLE|STK_CSR_TICKINT;
+}
+
+volatile uint32_t tick=0;
+void SysTick_Handler(void)
+{
+	tick+=1;
+}
+
 static void init(void)
 {
 	rcc_clock_setup_in_hsi_out_48mhz();
@@ -54,6 +68,7 @@ static void init(void)
 	remap_usb_pins();
 	keypad_init();
 	usb_hid_keypad_init(keys, N_KEYS);
+	enable_sys_tick(F_SYS_TICK_CLK/1000);
 }
 
 void keypad_down(int key_index)
@@ -72,7 +87,7 @@ int main(void)
 
 	for(;;)
 	{
-		keypad_poll();
+		keypad_poll(tick);
 		usb_hid_keypad_poll();
 	}
 }

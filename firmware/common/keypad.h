@@ -62,7 +62,7 @@
 
 
 #ifndef DEBOUNCE_COUNTDOWN
-#define DEBOUNCE_COUNTDOWN (40) // hmmz... should probably test this
+#define DEBOUNCE_COUNTDOWN (20) // milliseconds
 #endif
 
 enum
@@ -72,7 +72,7 @@ enum
 };
 
 int keypad_state(uint32_t key);
-void keypad_poll(void);
+void keypad_poll(uint32_t time);
 void keypad_init(void);
 
 /* to be implemented by user */

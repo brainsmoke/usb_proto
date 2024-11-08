@@ -61,12 +61,10 @@ static void keypad_read_column(void)
 	for (col=0; col<N_COLUMNS; col++)
 	{
 		int key = col*N_ROWS+row;
-		if (debounce[key] > 0)
-		{
-			debounce[key]--;
+
+		if (debounce[key])
 			continue;
-		}
-		
+
 		int pressed = (port & column_lookup[col]);
 
 		if (pressed && status[key] == KEY_UP)
@@ -84,7 +82,8 @@ static void keypad_read_column(void)
 	}
 }
 
-void keypad_poll(void)
+static uint32_t last_time=0;
+void keypad_poll(uint32_t time)
 {
 	static enum
 	{
@@ -92,6 +91,13 @@ void keypad_poll(void)
 		PHASE_READ,
 
 	} phase = PHASE_SELECT;
+
+	int key;
+	if (last_time != time)
+		for(key=0; key<N_KEYS; key++)
+			if (debounce[key])
+				debounce[key]--;
+	last_time = time;
 
 	if ( phase == PHASE_SELECT )
 	{

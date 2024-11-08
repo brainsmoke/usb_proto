@@ -1,4 +1,4 @@
-# usb hid keypad matrix (untested)
+# usb hid keypad matrix
 
 ![pin description](usb_hid_matrix.png)
 
