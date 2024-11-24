@@ -18746,7 +18746,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Library:SWDHeader_covered"
+		(property "Footprint" "Library:SWDHeader_through_hole"
 			(at 212.09 152.4 0)
 			(effects
 				(font
