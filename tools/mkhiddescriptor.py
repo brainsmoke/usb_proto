@@ -212,7 +212,11 @@ new_usage_page("Button", 0x09, {
 
 
 new_usage_page("LED", 0x08, {
-
+	"Num Lock"    : 0x01,
+	"Caps Lock"   : 0x02,
+	"Scroll Lock" : 0x03,
+	"Compose"     : 0x04,
+	"Kana"        : 0x05,
 })
 
 new_usage_page("Consumer", 0x0c, {
