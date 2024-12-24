@@ -2,15 +2,6 @@
 	"parameterSets":
 	{
 		"default": {
-			"pcb_thickness": "1.6",
-			"hole_dist_x": "70",
-			"thread": "3",
-			"head_diameter": "6",
-			"head_thickness": "2.5",
-			"grid_cols": 6,
-			"with_dfu_button": true,
-			"dfu_button_pos" : "[ 63, 40 ]",
-			"dfu_button_angle" : 0
 
 		}
 	},

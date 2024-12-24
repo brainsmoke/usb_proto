@@ -2,9 +2,10 @@
 	"parameterSets":
 	{
 		"default": {
-			"thread": "3",
-			"head_diameter": "6",
-			"head_thickness": "2.5"
+			"pcb_thickness": "1.2",
+			"hole_dist_x": "50",
+			"grid_cols": 5,
+			"with_dfu_button": false
 		}
 	},
 	"fileFormatVersion": "1"

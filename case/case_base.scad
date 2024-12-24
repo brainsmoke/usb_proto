@@ -7,14 +7,14 @@ use <grid.scad>
 use <button.scad>
 
 with_buttons=false;
-with_dfu_button=false;
+with_dfu_button=true;
 
-hole_dist_x = 50;
+hole_dist_x = 70;
 hole_dist_y = 40;
 
 inner_radius = 4;
 pcb_radius = 3.5;
-pcb_thickness = 1.2;
+pcb_thickness = 1.6;
 wall_thickness = 1;
 bottom_thickness = .8;
 top_thickness = .8;
@@ -34,9 +34,9 @@ funnel_top_height = 3;
 usb_c_board_offset=2.5 ;
 
 /* (countersunk) screw specs */
-thread = 2.5;
-head_diameter = 5;
-head_thickness = 1.7;
+thread = 3;
+head_diameter = 6;
+head_thickness = 2.5;
 screw_clearance = .25;
 
 button_pitch=4*2.54;
@@ -52,11 +52,11 @@ component_z = bottom_thickness+leg_height+pcb_thickness;
 
 button_depth = total_height-component_z-button_height;
 
-dfu_button_pos = [ -1, -1 ];
+dfu_button_pos = [ 63, 40 ];
 dfu_button_angle = 0;
 
 grid_rows = 4;
-grid_cols = 5;
+grid_cols = 6;
 grid_pitch = 10;
 grid_width = .8;
 grid_height_bottom = 1;
@@ -108,6 +108,14 @@ module at_holes(x, y)
 				children();
 }
 
+module at_dfu_button()
+{
+	if (with_dfu_button)
+		translate([ dfu_button_pos[0], dfu_button_pos[1], total_height ])
+			rotate([0,0,dfu_button_angle])
+				children();
+}
+
 module at_buttons()
 {
 	if (with_buttons)
@@ -117,10 +125,7 @@ module at_buttons()
 				translate([button_pitch*(i-(n_buttons-1)/2), -pcb_radius, total_height])
 					children();
 
-	if (with_dfu_button)
-		translate([ dfu_button_pos[0], dfu_button_pos[1], total_height ])
-			rotate([0,0,dfu_button_angle])
-				children();
+		at_dfu_button() children();
 	}
 }
 
