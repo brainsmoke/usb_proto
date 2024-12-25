@@ -1,5 +1,5 @@
 
-PROJECTS=simple simple-v0.1 usbserial
+PROJECTS=simple simple-v0.1 mcu
 
 BOARDHOUSE=jlc
 PARTNO_MARKING=JLCJLCJLCJLC
