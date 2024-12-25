@@ -2,4 +2,9 @@ project-backups/
 fp-info-cache
 Library.bak
 project.drc
+firmware/*/*.bin
+firmware/*/*.elf
+firmware/*/*.dfu
+firmware/*/*.ld
+firmware/*/bin
 /tmp/
