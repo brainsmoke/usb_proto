@@ -7673,7 +7673,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2290"
+		(property "LCSC" "C72038"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13940,7 +13940,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2290"
+		(property "LCSC" "C2286"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -29816,6 +29816,19 @@
 				)
 			)
 		)
+		(property "LCSC" "C15999"
+			(at 0 0 45)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9099e83a-6d72-4213-8638-204ff5903595")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "SOT?666*")
 		(path "/ff94b496-8922-44e2-b6be-9ec9e5b028a3")
 		(sheetname "Root")
@@ -36514,7 +36527,7 @@
 				)
 			)
 		)
-		(property "Value" "5.1k"
+		(property "Value" "1k"
 			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "212b3c7f-021d-40a0-b17f-a86ea5f9f22e")
@@ -36564,7 +36577,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C25905"
+		(property "LCSC" "C11702"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -39746,7 +39759,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2290"
+		(property "LCSC" "C12065"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -41894,7 +41907,7 @@
 				)
 			)
 		)
-		(property "Value" "5.1k"
+		(property "Value" "180"
 			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "0ebc7fbe-654a-4386-beb3-63f0533da799")
@@ -41944,7 +41957,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C25905"
+		(property "LCSC" "C38941"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
