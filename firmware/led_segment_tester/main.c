@@ -248,9 +248,8 @@ for i in range(0, 256, 8):
 
 uint32_t iter = 0;
 
-uint32_t error = 0;
 
-static void fill_out_frame(int n_segments)
+static void fill_out_frame(int n_segments, int error)
 {
 	uint32_t v = iter++;
 
@@ -266,8 +265,8 @@ static void fill_out_frame(int n_segments)
 		fb[i].r = wave[ ( i*3 + iter ) & 0xff ];
 		if (!error)
 		{
-			fb[i].g = wave[ ( i*3 + iter +  85 ) & 0xff ];
-			fb[i].b = wave[ ( i*3 + iter + 170 ) & 0xff ];
+			fb[i].g = wave[ ( i*3 + iter*5 +  85 ) & 0xff ];
+			fb[i].b = wave[ ( i*3 + iter*5 + 170 ) & 0xff ];
 		}
 		else
 		{
@@ -359,28 +358,38 @@ static void usb_print(const char *s)
 	usb_serial_write_noblock((uint8_t *)s, strlen(s));
 }
 
+static void gpio_write_mask(uint32_t gpioport, uint16_t gpios, uint16_t mask)
+{
+	GPIO_BSRR(gpioport) = ( (mask &~ gpios) << 16) | (mask & gpios);
+}
+
+#define N_ITERS (120)
+
 int main(void)
 {
-	int i;
+	int i, error=0;
 
 	init();
 
 	usb_serial_poll();
 	for(;;)
 	{
+
+		gpio_write_mask(GPIOA, GPIO4|GPIO5|GPIO6|GPIO7, error ? (GPIO4|GPIO5|GPIO6) : 0 );
+
 		while ( !button_down() )
 			usb_serial_poll();
 		uint32_t t;
 
 		int n=6;
 		error = 0;
-		for (i=0; i<60; i++)
+		for (i=0; i<N_ITERS; i++)
 		{
 			t=tick;
 			while(t==tick);
 			t=tick;
 			
-			fill_out_frame(n);
+			fill_out_frame(n, ( i== N_ITERS-1 ) && error );
 			clear_in_frame();
 			uart_rx_flush();
 			uart_write(out_frame, out_frame_len);
