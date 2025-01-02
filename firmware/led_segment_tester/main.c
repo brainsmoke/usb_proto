@@ -126,7 +126,7 @@ static void uart_enable(void)
 static void uart_set_baudrate(uint32_t baudrate)
 {
 	uint32_t baudrate_prescale = F_CPU/baudrate;
-	
+
 	if (baudrate_prescale < 0x10)
 	{
 		USART_CR1(UART) |= USART_CR1_OVER8;
@@ -301,13 +301,13 @@ static int in_poll(void)
 	if (in_frame_ix < sizeof(in_frame))
 		in_frame[in_frame_ix++] = c;
 
+	if (ff_count == 3 && c == 0xf0)
+		return 1;
+
 	if (c == 0xff)
 		ff_count += 1;
 	else
 		ff_count = 0;
-
-	if (ff_count == 3 && c == 0xf0)
-		return 1;
 
 	return 0;
 }
@@ -329,6 +329,11 @@ void SysTick_Handler(void)
 	tick+=1;
 }
 
+static void gpio_write_mask(uint32_t gpioport, uint16_t gpios, uint16_t mask)
+{
+	GPIO_BSRR(gpioport) = ( (mask &~ gpios) << 16) | (mask & gpios);
+}
+
 static void init(void)
 {
 	rcc_clock_setup_in_hsi_out_48mhz();
@@ -339,6 +344,8 @@ static void init(void)
 
 	gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, GPIO0);
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO4|GPIO5|GPIO6|GPIO7);
+
+	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, GPIO8);
 
     remap_usb_pins();
     usb_serial_init();
@@ -353,62 +360,105 @@ static int button_down(void)
 	return gpio_get(GPIOA, GPIO0) == 0;
 }
 
+static int dfu_button_down(void)
+{
+	return gpio_get(GPIOB, GPIO8) != 0;
+}
+
+static void led_status(int error)
+{
+	gpio_write_mask(GPIOA, error ? (GPIO4|GPIO5|GPIO6) : 0, GPIO4|GPIO5|GPIO6|GPIO7);
+}
+
 static void usb_print(const char *s)
 {
 	usb_serial_write_noblock((uint8_t *)s, strlen(s));
 }
 
-static void gpio_write_mask(uint32_t gpioport, uint16_t gpios, uint16_t mask)
+#define N_ITERS (120)
+
+static int send_recv_test(void)
 {
-	GPIO_BSRR(gpioport) = ( (mask &~ gpios) << 16) | (mask & gpios);
+	int i, error=0, res=0;
+
+	uint32_t t;
+
+	int n=6;
+	for (i=0; i<N_ITERS; i++)
+	{
+		fill_out_frame(n, ( i== N_ITERS-1 ) && res );
+		clear_in_frame();
+
+		t=tick;
+		while(t==tick);
+		t=tick;
+
+		uart_rx_flush();
+		uart_write(out_frame, out_frame_len);
+
+		while ( !in_poll() && t==tick );
+
+		error = ( ( in_frame_ix != out_frame_len - SEGMENT_SIZE ) ||
+		          ( memcmp(&out_frame[SEGMENT_SIZE], in_frame, out_frame_len - SEGMENT_SIZE) != 0 ) );
+
+		if (error)
+			res = 1;
+
+		usb_serial_poll();
+		while(tx_busy);
+
+		n--;
+		if (n<1)
+			n=6;
+
+		led_status(error);
+	}
+
+	return res;
 }
 
-#define N_ITERS (120)
+
+static int recv_test(void)
+{
+	uint32_t t;
+	t=tick;
+	uart_rx_flush();
+	clear_in_frame();
+
+	while ( !in_poll() )
+		if ( tick - t > 10 )
+			return 1;
+
+	clear_in_frame();
+
+	while ( !in_poll() )
+		if ( tick - t > 10 )
+			return 1;
+
+	int n_data = in_frame_ix-END_MARKER_SIZE;
+	int error = (n_data % SEGMENT_SIZE) != 0;
+	return error;
+}
 
 int main(void)
 {
-	int i, error=0;
+	int error=0;
 
 	init();
 
 	usb_serial_poll();
+
 	for(;;)
 	{
 
-		gpio_write_mask(GPIOA, GPIO4|GPIO5|GPIO6|GPIO7, error ? (GPIO4|GPIO5|GPIO6) : 0 );
-
-		while ( !button_down() )
-			usb_serial_poll();
-		uint32_t t;
-
-		int n=6;
-		error = 0;
-		for (i=0; i<N_ITERS; i++)
-		{
-			t=tick;
-			while(t==tick);
-			t=tick;
-			
-			fill_out_frame(n, ( i== N_ITERS-1 ) && error );
-			clear_in_frame();
-			uart_rx_flush();
-			uart_write(out_frame, out_frame_len);
-
-			while ( !in_poll() && t==tick );
-
-			if ( ( in_frame_ix != out_frame_len - SEGMENT_SIZE ) ||
-			     ( memcmp(&out_frame[SEGMENT_SIZE], in_frame, out_frame_len - SEGMENT_SIZE) != 0 ) )
-				error = 1;
-			
-			usb_serial_poll();
-			while(tx_busy);
-
-			n--;
-			if (n<1)
-				n=6;
-		}
+		if (button_down())
+			error = send_recv_test();
+		if (dfu_button_down())
+			error = recv_test();
 
 		usb_print( error ? "error\n" : "ok\n" );
+		led_status(error);
+		usb_serial_poll();
 
 	}
 }
