@@ -367,7 +367,7 @@ static int dfu_button_down(void)
 
 static void led_status(int error)
 {
-	gpio_write_mask(GPIOA, error ? (GPIO4|GPIO5|GPIO6) : 0, GPIO4|GPIO5|GPIO6|GPIO7);
+	gpio_write_mask(GPIOA, error ? (GPIO4|GPIO6|GPIO7) : 0, GPIO4|GPIO5|GPIO6|GPIO7);
 }
 
 static void usb_print(const char *s)
@@ -383,7 +383,7 @@ static int send_recv_test(void)
 
 	uint32_t t;
 
-	int n=6;
+	int n=N_SEGMENTS, n_min=N_SEGMENTS;
 	for (i=0; i<N_ITERS; i++)
 	{
 		fill_out_frame(n, ( i== N_ITERS-1 ) && res );
@@ -398,8 +398,15 @@ static int send_recv_test(void)
 
 		while ( !in_poll() && t==tick );
 
-		error = ( ( in_frame_ix != out_frame_len - SEGMENT_SIZE ) ||
-		          ( memcmp(&out_frame[SEGMENT_SIZE], in_frame, out_frame_len - SEGMENT_SIZE) != 0 ) );
+		int n_data = in_frame_ix-END_MARKER_SIZE;
+
+		if ( (n_data % SEGMENT_SIZE) == 0 )
+		{
+			n_min = N_SEGMENTS - n_data / SEGMENT_SIZE;
+			error = memcmp(&out_frame[out_frame_len-in_frame_ix], in_frame, in_frame_ix);
+		}
+		else
+			error = 1;
 
 		if (error)
 			res = 1;
@@ -408,8 +415,8 @@ static int send_recv_test(void)
 		while(tx_busy);
 
 		n--;
-		if (n<1)
-			n=6;
+		if (n<n_min)
+			n=N_SEGMENTS;
 
 		led_status(error);
 	}
