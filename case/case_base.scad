@@ -8,6 +8,7 @@ use <button.scad>
 
 with_buttons=false;
 with_dfu_button=true;
+with_light_pipes=false;
 
 hole_dist_x = 70;
 hole_dist_y = 40;
@@ -20,6 +21,7 @@ bottom_thickness = .8;
 top_thickness = .8;
 total_height = 16;
 button_height=2;
+led_height = 1.2;
 
 top_edge_height = 2.5;
 top_edge_thickness = 1.;
@@ -62,7 +64,14 @@ grid_width = .8;
 grid_height_bottom = 1;
 grid_height_top = 2;
 
+light_pipe_diameter = 2.2;
+light_pipe_border = .8;
+light_pipe_base_border = 2.;
+light_pipe_depth = total_height-component_z-led_height;
+light_pipe_base_height = light_pipe_depth/3;
 
+
+function breadboard_pos(x, y) = [ hole_dist_x - 11 - 2.54*x, hole_dist_y/2 - (8.5-y)*2.54, component_z ];
 
 module preview()
 {
@@ -129,6 +138,32 @@ module at_buttons()
 	}
 }
 
+module at_light_pipes()
+{
+	if (with_light_pipes)
+		for (i=[0,1,2,3])
+			translate( breadboard_pos(-1, 2+i) )
+			translate( [0,0,led_height] )
+				children();
+}
+
+module light_pipe()
+{
+	cylinder(light_pipe_depth, r=light_pipe_diameter/2+light_pipe_border);
+}
+module light_pipe_base()
+{
+	translate([0,0,light_pipe_depth-light_pipe_base_height])
+		cylinder(light_pipe_base_height,
+			r1=light_pipe_diameter/2+light_pipe_border,
+			r2=light_pipe_diameter/2+light_pipe_base_border);
+}
+module light_pipe_keepout()
+{
+	translate([0,0,-e])
+	cylinder(light_pipe_depth+2*e, r=light_pipe_diameter/2);
+}
+
 module case_shape(height, radius)
 {
 	hull()
@@ -188,7 +223,7 @@ module keepout_zones()
 	at_holes() leg_keepout();
 	on_pcb() at_front() usb_c_keepout();
 	at_buttons() button_keepout(button_w, button_d, top_thickness, button_depth);
-
+	at_light_pipes() light_pipe_keepout(); 
 }
 
 module case()
@@ -248,6 +283,10 @@ module top()
 			grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
 
 
+			hull() { at_light_pipes() light_pipe(); } 
+			hull() { at_light_pipes() light_pipe_base(); } 
+
+
 		}
 		keepout_zones();
 	}
@@ -263,4 +302,3 @@ module next()
 {
 	translate([ 0, hole_dist_y+2*outer_radius+padding, 0 ]) children();
 }
-
