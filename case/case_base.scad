@@ -6,9 +6,9 @@ use <usb.scad>
 use <grid.scad>
 use <button.scad>
 
-with_buttons=false;
+with_buttons=true;
 with_dfu_button=true;
-with_light_pipes=false;
+with_light_pipes=true;
 
 hole_dist_x = 70;
 hole_dist_y = 40;

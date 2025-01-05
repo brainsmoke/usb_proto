@@ -22,7 +22,7 @@ SCAD_DIR=case
 SCAD_DEPS=case/case_base.scad case/usb.scad case/button.scad
 SCAD_PARAM_DIR=case/parameters
 SCAD_PARAM_SET=default
-SCAD_PARTS=case case_bottom case_top case_top_buttons
+SCAD_PARTS=case case_bottom case_top case_top_plain
 SCAD_DEFINES=
 
 include rules.mk
