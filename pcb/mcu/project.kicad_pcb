@@ -41907,7 +41907,7 @@
 				)
 			)
 		)
-		(property "Value" "180"
+		(property "Value" "330R"
 			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "0ebc7fbe-654a-4386-beb3-63f0533da799")
@@ -41957,7 +41957,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C38941"
+		(property "LCSC" "C25104"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")

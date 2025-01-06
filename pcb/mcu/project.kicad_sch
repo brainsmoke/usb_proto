@@ -23182,7 +23182,7 @@
 				)
 			)
 		)
-		(property "Value" "180"
+		(property "Value" "330R"
 			(at 146.9136 156.21 90)
 			(effects
 				(font
@@ -23217,7 +23217,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C38941"
+		(property "LCSC" "C25104"
 			(at 149.86 156.21 0)
 			(effects
 				(font
