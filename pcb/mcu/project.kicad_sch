@@ -14848,16 +14848,6 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 146.05) (xy 120.65 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ed7b336a-d76c-433e-b41c-0126eeb75242")
-	)
-	(wire
-		(pts
 			(xy 60.96 29.21) (xy 60.96 34.29)
 		)
 		(stroke
@@ -15682,6 +15672,26 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 120.65 148.59 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "65a213ff-ce26-4286-b2d2-e56ea490df2c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 120.65 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
@@ -20642,7 +20652,7 @@
 				)
 			)
 		)
-		(property "Value" "5.1k"
+		(property "Value" "1k"
 			(at 120.2436 156.21 90)
 			(effects
 				(font
@@ -20677,7 +20687,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25905"
+		(property "LCSC" "C11702"
 			(at 123.19 156.21 0)
 			(effects
 				(font
@@ -21017,7 +21027,7 @@
 				)
 			)
 		)
-		(property "Value" "5.1k"
+		(property "Value" "330R"
 			(at 129.1336 156.21 90)
 			(effects
 				(font
@@ -21052,7 +21062,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25905"
+		(property "LCSC" "C25104"
 			(at 132.08 156.21 0)
 			(effects
 				(font
@@ -21093,7 +21103,7 @@
 				)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "330R"
 			(at 138.0236 156.21 90)
 			(effects
 				(font
@@ -21128,7 +21138,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C11702"
+		(property "LCSC" "C25104"
 			(at 140.97 156.21 0)
 			(effects
 				(font
@@ -22164,71 +22174,6 @@
 			(project "tester"
 				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
 					(reference "J15")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VCC")
-		(at 120.65 146.05 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b5201339-1e8e-4d20-a5ff-0512ae408e77")
-		(property "Reference" "#PWR016"
-			(at 120.65 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VCC"
-			(at 121.0818 141.6558 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 120.65 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 120.65 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 120.65 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "549cb928-b6ca-4fe2-aabf-8a40eb3e8649")
-		)
-		(instances
-			(project "project"
-				(path "/dcd3e9a3-3064-4a63-a185-81cd67bb2bda"
-					(reference "#PWR016")
 					(unit 1)
 				)
 			)
