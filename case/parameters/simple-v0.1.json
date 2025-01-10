@@ -8,8 +8,8 @@
 			"pcb_thickness": "1.2",
 			"hole_dist_x": "50",
 			"grid_cols": 5,
-			"with_dfu_button": false,
-			"with_light_pipes": false
+			"has_dfu_button": false,
+			"has_leds": false
 		}
 	},
 	"fileFormatVersion": "1"

@@ -2,13 +2,14 @@ e=.0001;
 $fn=48;
 padding=5;
 
+use <sculpt.scad>
 use <usb.scad>
 use <grid.scad>
 use <button.scad>
 
-with_buttons=true;
-with_dfu_button=true;
-with_light_pipes=true;
+has_buttons=true;
+has_dfu_button=true;
+has_leds=true;
 
 hole_dist_x = 70;
 hole_dist_y = 40;
@@ -91,6 +92,8 @@ module usb_c(margin=0)
 
 module usb_c_keepout()
 {
+	sculpt()
+	sculpt_carve()
 	usb_c(margin=.5);
 }
 
@@ -119,7 +122,7 @@ module at_holes(x, y)
 
 module at_dfu_button()
 {
-	if (with_dfu_button)
+	if (has_dfu_button)
 		translate([ dfu_button_pos[0], dfu_button_pos[1], total_height ])
 			rotate([0,0,dfu_button_angle])
 				children();
@@ -127,41 +130,45 @@ module at_dfu_button()
 
 module at_buttons()
 {
-	if (with_buttons)
-	{
+	if (has_buttons)
 		at_back()
 			for (i=[0:n_buttons-1])
 				translate([button_pitch*(i-(n_buttons-1)/2), -pcb_radius, total_height])
 					children();
-
-		at_dfu_button() children();
-	}
 }
 
 module at_light_pipes()
 {
-	if (with_light_pipes)
-		for (i=[0,1,2,3])
-			translate( breadboard_pos(-1, 2+i) )
-			translate( [0,0,led_height] )
-				children();
+	if (has_leds)
+	for (i=[0,1,2,3])
+		translate( breadboard_pos(-1, 2+i) )
+		translate( [0,0,led_height] )
+			children();
 }
 
-module light_pipe()
+module light_pipes()
 {
-	cylinder(light_pipe_depth, r=light_pipe_diameter/2+light_pipe_border);
-}
-module light_pipe_base()
-{
-	translate([0,0,light_pipe_depth-light_pipe_base_height])
+	sculpt()
+	{
+		sculpt_add()
+		hull()
+		at_light_pipes()
+		cylinder(light_pipe_depth, r=light_pipe_diameter/2+light_pipe_border);
+
+		sculpt_add()
+		hull()
+		at_light_pipes()
+		translate([0,0,light_pipe_depth-light_pipe_base_height])
 		cylinder(light_pipe_base_height,
 			r1=light_pipe_diameter/2+light_pipe_border,
 			r2=light_pipe_diameter/2+light_pipe_base_border);
-}
-module light_pipe_keepout()
-{
-	translate([0,0,-e])
-	cylinder(light_pipe_depth+2*e, r=light_pipe_diameter/2);
+
+		sculpt_carve()
+		at_light_pipes()
+		translate([0,0,-e])
+		cylinder(light_pipe_depth+2*e, r=light_pipe_diameter/2);
+
+	}
 }
 
 module case_shape(height, radius)
@@ -199,16 +206,42 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 
 module leg()
 {
-	intersection()
+	sculpt()
 	{
-		screw_shape(leg_thickness);
-		translate([0,0,e]) cylinder(leg_height-e, r=leg_thickness+head_diameter/2+1); 
+		sculpt_add()
+		intersection()
+		{
+			screw_shape(leg_thickness);
+			translate([0,0,e]) cylinder(leg_height+bottom_thickness-e, r=leg_thickness+head_diameter/2+1); 
+		}
+
+		sculpt_carve()
+		screw_shape(0, bottom_epsilon=-e);
 	}
 }
 
-module leg_keepout()
+module screw_guide()
 {
-	screw_shape(0, bottom_epsilon=-e);
+	sculpt()
+	{
+		sculpt_add()
+		intersection()
+		{
+			screw_shape(leg_thickness);
+			translate([0,0,component_z])
+			cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
+		}
+
+		sculpt_carve()
+		intersection()
+		{
+			screw_shape(leg_thickness);
+			translate([0,0,e]) cylinder(leg_height-e, r=leg_thickness+head_diameter/2+1); 
+		}
+
+		sculpt_carve()
+		screw_shape(0, bottom_epsilon=-e);
+	}
 }
 
 module pcb()
@@ -218,21 +251,14 @@ module pcb()
 			case_shape(pcb_thickness, pcb_radius);
 }
 
-module keepout_zones()
-{
-	at_holes() leg_keepout();
-	on_pcb() at_front() usb_c_keepout();
-	at_buttons() button_keepout(button_w, button_d, top_thickness, button_depth);
-	at_light_pipes() light_pipe_keepout(); 
-}
-
 module case()
 {
-	difference()
+	sculpt()
 	{
-		union()
+		at_holes() leg();
+
+		sculpt_base()
 		{
-			at_holes() translate([0, 0, bottom_thickness]) leg();
 			difference()
 			{
 				case_shape(total_height-top_thickness, outer_radius);
@@ -245,52 +271,47 @@ module case()
 			translate([-outer_radius+e,-outer_radius+e,bottom_thickness-e])
 			grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
 		}
-		keepout_zones();
+		on_pcb() at_front() usb_c_keepout();
 	}
 }
 
 module top()
 {
-	at_buttons() button_shape(button_w, button_d, top_thickness, button_depth);
-	difference()
+	sculpt()
 	{
-		union()
+		sculpt_base()
 		{
-
 			difference()
 			{
+				union()
 				translate([0,0,total_height-top_thickness])
 				{
 					case_shape(top_thickness, outer_radius);
 					translate([0,0,-top_edge_height])
-						case_shape(top_edge_height+e, inner_radius);
+						case_shape(top_edge_height+top_thickness/2, inner_radius);
 				}
 				translate([0,0,total_height-top_thickness-top_edge_height-e])
-					case_shape(top_edge_height+e, inner_radius-top_edge_thickness);
-			}
-
-			at_holes() intersection()
-			{
-				screw_shape(leg_thickness);
-				translate([0,0,component_z])
-				cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
+					case_shape(top_edge_height+e, inner_radius-top_edge_thickness+e);
 			}
 
 			width = 2*inner_radius + hole_dist_x;
 			depth = 2*inner_radius + hole_dist_y;
 
 			translate([-inner_radius+e,-inner_radius+e,total_height-top_thickness-grid_height_top])
-			grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
-
-
-			hull() { at_light_pipes() light_pipe(); } 
-			hull() { at_light_pipes() light_pipe_base(); } 
-
-
+				grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
 		}
-		keepout_zones();
-	}
 
+		at_holes() screw_guide();
+
+		children();
+	}
+}
+
+module top_features()
+{
+	at_dfu_button() button(button_w, button_d, top_thickness, button_depth);
+	at_buttons() button(button_w, button_d, top_thickness, button_depth);
+	light_pipes();
 }
 
 module flip()
@@ -302,3 +323,4 @@ module next()
 {
 	translate([ 0, hole_dist_y+2*outer_radius+padding, 0 ]) children();
 }
+

@@ -1,20 +1,15 @@
 
 include <case_base.scad>
+include <sculpt.scad>
 
-
-with_buttons=true;
-with_light_pipes=true;
+has_leds=true;
 flip()
-difference()
+sculpt()
 {
-union(){
-translate([55,-8,total_height-1])
-cube([10,30,1]);
+	sculpt_base()
+	translate([55,-8,total_height-1])
+		cube([10,30,1]);
 
-			hull() { at_light_pipes() light_pipe();
-
-
-		}}
-keepout_zones();
+	light_pipes();
 }
 
