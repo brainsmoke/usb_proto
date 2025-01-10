@@ -29,9 +29,9 @@ top_edge_thickness = 1.;
 top_edge_margin = 0.;
 
 leg_height = 3;
-leg_thickness = 1;
+leg_thickness = 1.2;
 
-funnel_top_radius = 3;
+funnel_top_radius = 3.2;
 funnel_top_height = 3;
 
 usb_c_board_offset=2.5 ;
@@ -66,8 +66,8 @@ grid_height_bottom = 1;
 grid_height_top = 2;
 
 light_pipe_diameter = 2.2;
-light_pipe_border = .8;
-light_pipe_base_border = 2.;
+light_pipe_border = 1.2;
+light_pipe_base_border = 3.2;
 light_pipe_depth = total_height-component_z-led_height;
 light_pipe_base_height = light_pipe_depth/3;
 
