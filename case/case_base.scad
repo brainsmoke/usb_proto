@@ -116,7 +116,7 @@ module at_top()
 	translate([hole_dist_x/2,hole_dist_y+pcb_radius,0]) children();
 }
 
-module at_holes(x, y)
+module at_holes()
 {
 	for (x = [0, hole_dist_x])
 		for (y = [0, hole_dist_y])
