@@ -7,7 +7,7 @@ thickness=.8;
 
 use <sculpt.scad>;
 
-module button_carveout(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, flex_thickness=0.2)
+module button_carveout(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, wall_thickness=1.2, flex_thickness=0.2)
 {
 rotate([0,0,180])
 translate([0,(d-top_width)/2,-height])
@@ -17,7 +17,7 @@ linear_extrude(height+e)
 
 }
 
-module button_shape(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, flex_thickness=0.2)
+module button_shape(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, wall_thickness=1.2, flex_thickness=0.2)
 {
 
 h=height-thickness;
@@ -47,10 +47,10 @@ translate([0,-d/2+thickness,0])
 	polygon([ [-w/2,0], [w/2, 0], [top_width/2, -h-e], [-top_width/2, -h-e]]);
 
 
-for (i=[-w/2-gap-thickness-e, w/2+gap+e])
+for (i=[-w/2-gap-wall_thickness-e, w/2+gap+e])
 translate([i,0,0])
 rotate([90,0,90])
-	linear_extrude(thickness)
+	linear_extrude(wall_thickness)
 	polygon([ [-d/2, e], [d/2, e], [-d/2+top_width, -h-e], [-d/2, -h-e]]);
 
 translate([-top_width/2,0,0])
@@ -67,15 +67,15 @@ translate([-w/2-gap-e,-d/2,-h])
 }
 }
 
-module button(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, flex_thickness=0.2)
+module button(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, wall_thickness=1.2, flex_thickness=0.2)
 {
 	sculpt()
 	{
 		sculpt_base_carve()
-			button_carveout(w, d, thickness, height, top_width, top_height, gap, flex_thickness);
+			button_carveout(w, d, thickness, height, top_width, top_height, gap, wall_thickness, flex_thickness);
 
 		sculpt_add()
-			button_shape(w, d, thickness, height, top_width, top_height, gap, flex_thickness);
+			button_shape(w, d, thickness, height, top_width, top_height, gap, wall_thickness, flex_thickness);
 	}
 }
 

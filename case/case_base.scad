@@ -58,6 +58,8 @@ button_depth = total_height-component_z-button_height;
 dfu_button_pos = [ 63, 40 ];
 dfu_button_angle = 0;
 
+grid_x_off = 0;
+grid_y_off = 0;
 grid_rows = 4;
 grid_cols = 6;
 grid_pitch = 10;
@@ -73,6 +75,8 @@ light_pipe_base_height = light_pipe_depth/3;
 
 
 function breadboard_pos(x, y) = [ hole_dist_x - 11 - 2.54*x, hole_dist_y/2 - (8.5-y)*2.54, component_z ];
+
+function grid_pos(x, y) = [ hole_dist_x/2+grid_x_off+grid_pitch*(x-(grid_cols-1)/2), hole_dist_y/2+grid_y_off+grid_pitch*(y-(grid_rows-1)/2), total_height ];
 
 module preview()
 {
@@ -268,8 +272,14 @@ module case()
 			width = 2*outer_radius + hole_dist_x;
 			depth = 2*outer_radius + hole_dist_y;
 
-			translate([-outer_radius+e,-outer_radius+e,bottom_thickness-e])
-			grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
+			intersection()
+			{
+				translate([0,0,-e])
+				case_shape(total_height+2*e, (outer_radius+inner_radius)/2);
+
+				translate([-outer_radius+e,-outer_radius+e,bottom_thickness-e])
+				grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
+			}
 		}
 		on_pcb() at_front() usb_c_keepout();
 	}
@@ -297,8 +307,14 @@ module top()
 			width = 2*inner_radius + hole_dist_x;
 			depth = 2*inner_radius + hole_dist_y;
 
-			translate([-inner_radius+e,-inner_radius+e,total_height-top_thickness-grid_height_top])
-				grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width);
+			intersection()
+			{
+				translate([0,0,-e])
+				case_shape(total_height+2*e, inner_radius-top_edge_thickness/2);
+
+				translate([-inner_radius+e,-inner_radius+e,total_height-top_thickness-grid_height_top])
+				grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
+			}
 		}
 
 		at_holes() screw_guide();
@@ -307,10 +323,15 @@ module top()
 	}
 }
 
+module case_button()
+{
+	button(button_w, button_d, top_thickness, button_depth);
+}
+
 module top_features()
 {
-	at_dfu_button() button(button_w, button_d, top_thickness, button_depth);
-	at_buttons() button(button_w, button_d, top_thickness, button_depth);
+	at_dfu_button() case_button();
+	at_buttons() case_button();
 	light_pipes();
 }
 
