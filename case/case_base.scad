@@ -269,15 +269,15 @@ module case()
 				translate([0,0,bottom_thickness])
 				case_shape(total_height-top_thickness, inner_radius);
 			}
-			width = 2*outer_radius + hole_dist_x;
-			depth = 2*outer_radius + hole_dist_y;
+			width = max( 2*outer_radius + hole_dist_x, grid_cols * grid_pitch + grid_x_off*2);
+			depth = max( 2*outer_radius + hole_dist_y, grid_rows * grid_pitch + grid_y_off*2);
 
 			intersection()
 			{
 				translate([0,0,-e])
 				case_shape(total_height+2*e, (outer_radius+inner_radius)/2);
 
-				translate([-outer_radius+e,-outer_radius+e,bottom_thickness-e])
+				translate([-(width-hole_dist_x)/2+e,-(depth-hole_dist_y)/2+e,bottom_thickness-e])
 				grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
 			}
 		}
@@ -304,15 +304,15 @@ module top()
 					case_shape(top_edge_height+e, inner_radius-top_edge_thickness+e);
 			}
 
-			width = 2*inner_radius + hole_dist_x;
-			depth = 2*inner_radius + hole_dist_y;
+			width = max( 2*outer_radius + hole_dist_x, grid_cols * grid_pitch + grid_x_off*2);
+			depth = max( 2*outer_radius + hole_dist_y, grid_rows * grid_pitch + grid_y_off*2);
 
 			intersection()
 			{
 				translate([0,0,-e])
 				case_shape(total_height+2*e, inner_radius-top_edge_thickness/2);
 
-				translate([-inner_radius+e,-inner_radius+e,total_height-top_thickness-grid_height_top])
+				translate([-(width-hole_dist_x)/2+e,-(depth-hole_dist_y)/2+e,total_height-top_thickness-grid_height_top])
 				grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
 			}
 		}
