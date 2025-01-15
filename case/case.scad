@@ -13,5 +13,3 @@ preview()
 case();
 
 next() flip() top() top_features();
-
-

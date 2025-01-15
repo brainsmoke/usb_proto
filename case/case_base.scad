@@ -1,4 +1,6 @@
 e=.0001;
+b=1; // Big value which can be used in difference operations instead of e
+     // to prevent render glitches.
 $fn=48;
 padding=5;
 
@@ -17,6 +19,10 @@ hole_dist_y = 40;
 inner_radius = 4;
 pcb_radius = 3.5;
 pcb_thickness = 1.6;
+pcb_screw_hole_diameter = 3.2;
+breadboard_hole_diameter = 1.;
+breadboard_silkscreen_diameter = 2.2;
+silkscreen_thickness = .1;
 wall_thickness = 1;
 bottom_thickness = .8;
 top_thickness = .8;
@@ -38,6 +44,7 @@ usb_c_board_offset=2.5 ;
 
 /* (countersunk) screw specs */
 thread = 3;
+
 head_diameter = 6;
 head_thickness = 2.5;
 screw_clearance = .25;
@@ -169,8 +176,8 @@ module light_pipes()
 
 		sculpt_carve()
 		at_light_pipes()
-		translate([0,0,-e])
-		cylinder(light_pipe_depth+2*e, r=light_pipe_diameter/2);
+		translate([0,0,-b])
+		cylinder(light_pipe_depth+2*b, r=light_pipe_diameter/2);
 
 	}
 }
@@ -193,15 +200,15 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 	dz2 = (sqrt(x*x+y*y)/x - y/x)*padding;
 
 	path = [
-		[0, -e],
-		[padding+head_diameter/2, -e],
+		[0, -bottom_epsilon],
+		[padding+head_diameter/2, -bottom_epsilon],
 		[padding+head_diameter/2, screw_clearance+dz],
 		[padding+screw_loose_radius, screw_clearance+head_thickness+dz],
-		[padding+screw_loose_radius, bottom_thickness+leg_height+e],
-		[padding+screw_grab_radius, bottom_thickness+leg_height+e],
+		[padding+screw_loose_radius, bottom_thickness+leg_height+pcb_thickness/2],
+		[padding+screw_grab_radius, bottom_thickness+leg_height+pcb_thickness/2],
 		[padding+screw_grab_radius, total_height-top_thickness-funnel_top_height-dz2],
-		[padding+funnel_top_inner_radius, total_height-top_thickness+e],
-		[0, total_height-top_thickness+e],
+		[padding+funnel_top_inner_radius, total_height-top_thickness+top_epsilon],
+		[0, total_height-top_thickness+top_epsilon],
 
  ];
 
@@ -215,12 +222,12 @@ module leg()
 		sculpt_add()
 		intersection()
 		{
-			screw_shape(leg_thickness);
+			screw_shape(leg_thickness, bottom_epsilon=b, top_epsilon=b);
 			translate([0,0,e]) cylinder(leg_height+bottom_thickness-e, r=leg_thickness+head_diameter/2+1); 
 		}
 
 		sculpt_carve()
-		screw_shape(0, bottom_epsilon=-e);
+		screw_shape(0, bottom_epsilon=b);
 	}
 }
 
@@ -235,24 +242,77 @@ module screw_guide()
 			translate([0,0,component_z])
 			cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
 		}
-
 		sculpt_carve()
-		intersection()
-		{
-			screw_shape(leg_thickness);
-			translate([0,0,e]) cylinder(leg_height-e, r=leg_thickness+head_diameter/2+1); 
-		}
+		screw_shape(0, bottom_epsilon=b);
+	}
+}
 
-		sculpt_carve()
-		screw_shape(0, bottom_epsilon=-e);
+
+module breadboard_hole(x, y)
+{
+	translate(breadboard_pos(x,y))
+	translate([0,0,-pcb_thickness-b])
+	cylinder(pcb_thickness+2*b, r=breadboard_hole_diameter/2, $fn=8);
+}
+
+module breadboard_hole_silk(x, y)
+{
+	color("white")
+	translate(breadboard_pos(x,y))
+	translate([0,0,-pcb_thickness-silkscreen_thickness])
+	cylinder(pcb_thickness+2*silkscreen_thickness, r=breadboard_silkscreen_diameter/2, $fn=8);
+}
+
+module breadboard_line_silk(x1, y1, x2, y2)
+{
+	color("white")
+	hull()
+	{
+		breadboard_hole_silk(x1, y1);
+		breadboard_hole_silk(x2, y2);
 	}
 }
 
 module pcb()
 {
-	translate([0,0,bottom_thickness+leg_height])
-		color("green")
+	difference()
+	{
+		union()
+		{
+			color("green")
+			translate([0,0,component_z-pcb_thickness])
 			case_shape(pcb_thickness, pcb_radius);
+
+			for (y=[0, 1, 16, 17])
+			breadboard_line_silk(1, y, 21, y);
+
+			for (y=[2, 9])
+			for (x=[1:21])
+			breadboard_line_silk(x, y, x, y+6);
+
+			for (y=[2:15])
+			breadboard_hole_silk(0, y);
+
+			for (y=[4,5,8,9,12,13])
+			breadboard_hole_silk(22, y);
+		}
+
+		union()
+		{
+			translate([0,0,component_z-pcb_thickness-b])
+			at_holes()
+			cylinder(pcb_thickness+2*b, r=pcb_screw_hole_diameter/2);
+
+			for (x=[0:21])
+			for (y=[0:17])
+			if ( (x > 0) || ( (y > 1) && (y < 16) ) )
+				breadboard_hole(x, y);
+
+			for (y=[4,5,8,9,12,13])
+			breadboard_hole(22, y);
+
+		}
+	}
 }
 
 module case()
@@ -300,8 +360,8 @@ module top()
 					translate([0,0,-top_edge_height])
 						case_shape(top_edge_height+top_thickness/2, inner_radius);
 				}
-				translate([0,0,total_height-top_thickness-top_edge_height-e])
-					case_shape(top_edge_height+e, inner_radius-top_edge_thickness+e);
+				translate([0,0,total_height-top_thickness-top_edge_height-b])
+					case_shape(top_edge_height+b, inner_radius-top_edge_thickness+e);
 			}
 
 			width = max( 2*outer_radius + hole_dist_x, grid_cols * grid_pitch + grid_x_off*2);
@@ -344,4 +404,3 @@ module next()
 {
 	translate([ 0, hole_dist_y+2*outer_radius+padding, 0 ]) children();
 }
-
