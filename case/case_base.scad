@@ -62,8 +62,8 @@ component_z = bottom_thickness+leg_height+pcb_thickness;
 
 button_depth = total_height-component_z-button_height;
 
-dfu_button_pos = [ 63, 40 ];
-dfu_button_angle = 0;
+dfu_button_pos = [ 7, 0 ];
+dfu_button_angle = 180;
 
 grid_x_off = 0;
 grid_y_off = 0;
@@ -81,7 +81,7 @@ light_pipe_depth = total_height-component_z-led_height;
 light_pipe_base_height = light_pipe_depth/3;
 
 
-function breadboard_pos(x, y) = [ hole_dist_x - 11 - 2.54*x, hole_dist_y/2 - (8.5-y)*2.54, component_z ];
+function breadboard_pos(x, y) = [ 11 + 2.54*x, hole_dist_y/2 + (8.5-y)*2.54, component_z ];
 
 function grid_pos(x, y) = [ hole_dist_x/2+grid_x_off+grid_pitch*(x-(grid_cols-1)/2), hole_dist_y/2+grid_y_off+grid_pitch*(y-(grid_rows-1)/2), total_height ];
 
@@ -110,17 +110,12 @@ module usb_c_keepout()
 
 module at_front()
 {
-	translate([hole_dist_x+pcb_radius,hole_dist_y/2,0]) rotate([0,0,-90])  children();
+	translate([-pcb_radius,hole_dist_y/2,0]) rotate([0,0,90])  children();
 }
 
 module at_back()
 {
-	translate([-pcb_radius,hole_dist_y/2,0]) rotate([0,0,90])  children();
-}
-
-module at_top()
-{
-	translate([hole_dist_x/2,hole_dist_y+pcb_radius,0]) children();
+	translate([hole_dist_x+pcb_radius,hole_dist_y/2,0]) rotate([0,0,-90])  children();
 }
 
 module at_holes()

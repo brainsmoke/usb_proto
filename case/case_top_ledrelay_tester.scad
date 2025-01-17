@@ -25,8 +25,8 @@ module cable_tube()
 		sculpt_add()
 		cylinder(tube_height-e, tube_d/2+tube_width_top, tube_d/2+tube_width_base);
 		sculpt_carve()
-		translate([0,0,-e])
-		cylinder(8+2*e, r=tube_d/2);
+		translate([0,0,-b])
+		cylinder(8+2*b, r=tube_d/2);
 	}
 }
 
@@ -34,7 +34,7 @@ flip() top()
 {
 	top_features();
 
-	for (x=[15,25])
+	for (x=[45,55])
 	translate([x, 10, 0])
 	cable_tube();
 }

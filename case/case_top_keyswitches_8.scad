@@ -26,8 +26,8 @@ module keyswitch()
 		sculpt_carve()
 		{
 			cube([hole_dim, hole_dim, 10], center=true);
-			translate([-panel_dim/2, -panel_dim/2, -panel_thickness*2])
-			cube([panel_dim, panel_dim, panel_thickness]);
+			translate([-panel_dim/2-e, -panel_dim/2-e, -panel_thickness*2])
+			cube([panel_dim+2*e, panel_dim+2*e, panel_thickness+e]);
 		}
 	}
 }

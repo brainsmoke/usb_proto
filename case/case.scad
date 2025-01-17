@@ -12,4 +12,7 @@ preview()
 
 case();
 
-next() flip() top() top_features();
+next() flip() top()
+{
+	top_features();
+};
