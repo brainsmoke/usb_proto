@@ -38,7 +38,7 @@ next() next() flip() top()
 	top_features();
 
 	at_extra_holes()
-	sculpt_add()
+	graft_add()
 	intersection()
 	{
 		screw_shape(leg_thickness);

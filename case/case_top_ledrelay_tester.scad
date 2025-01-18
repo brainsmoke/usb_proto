@@ -1,7 +1,7 @@
 
 include <case_base.scad>
 
-use <sculpt.scad>
+use <graft.scad>
 
 module at_buttons()
 {   
@@ -19,12 +19,12 @@ tube_height=5;
 
 module cable_tube()
 {
-	sculpt()
+	graft()
 	translate([ 0, 20, total_height-tube_height])
 	{
-		sculpt_add()
+		graft_add()
 		cylinder(tube_height-e, tube_d/2+tube_width_top, tube_d/2+tube_width_base);
-		sculpt_carve()
+		graft_remove()
 		translate([0,0,-b])
 		cylinder(8+2*b, r=tube_d/2);
 	}

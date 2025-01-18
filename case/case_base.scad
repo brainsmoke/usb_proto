@@ -4,7 +4,7 @@ b=1; // Big value which can be used in difference operations instead of e
 $fn=48;
 padding=5;
 
-use <sculpt.scad>
+use <graft.scad>
 use <usb.scad>
 use <grid.scad>
 use <button.scad>
@@ -103,8 +103,8 @@ module usb_c(margin=0)
 
 module usb_c_keepout()
 {
-	sculpt()
-	sculpt_carve()
+	graft()
+	graft_remove()
 	usb_c(margin=.5);
 }
 
@@ -154,14 +154,14 @@ module at_light_pipes()
 
 module light_pipes()
 {
-	sculpt()
+	graft()
 	{
-		sculpt_add()
+		graft_add()
 		hull()
 		at_light_pipes()
 		cylinder(light_pipe_depth, r=light_pipe_diameter/2+light_pipe_border);
 
-		sculpt_add()
+		graft_add()
 		hull()
 		at_light_pipes()
 		translate([0,0,light_pipe_depth-light_pipe_base_height])
@@ -169,7 +169,7 @@ module light_pipes()
 			r1=light_pipe_diameter/2+light_pipe_border,
 			r2=light_pipe_diameter/2+light_pipe_base_border);
 
-		sculpt_carve()
+		graft_remove()
 		at_light_pipes()
 		translate([0,0,-b])
 		cylinder(light_pipe_depth+2*b, r=light_pipe_diameter/2);
@@ -212,32 +212,32 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 
 module leg()
 {
-	sculpt()
+	graft()
 	{
-		sculpt_add()
+		graft_add()
 		intersection()
 		{
 			screw_shape(leg_thickness, bottom_epsilon=b, top_epsilon=b);
 			translate([0,0,e]) cylinder(leg_height+bottom_thickness-e, r=leg_thickness+head_diameter/2+1); 
 		}
 
-		sculpt_carve()
+		graft_remove()
 		screw_shape(0, bottom_epsilon=b);
 	}
 }
 
 module screw_guide()
 {
-	sculpt()
+	graft()
 	{
-		sculpt_add()
+		graft_add()
 		intersection()
 		{
 			screw_shape(leg_thickness);
 			translate([0,0,component_z])
 			cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
 		}
-		sculpt_carve()
+		graft_remove()
 		screw_shape(0, bottom_epsilon=b);
 	}
 }
@@ -312,11 +312,11 @@ module pcb()
 
 module case()
 {
-	sculpt()
+	graft()
 	{
 		at_holes() leg();
 
-		sculpt_base()
+		graft_base()
 		{
 			difference()
 			{
@@ -342,9 +342,9 @@ module case()
 
 module top()
 {
-	sculpt()
+	graft()
 	{
-		sculpt_base()
+		graft_base()
 		{
 			difference()
 			{

@@ -1,6 +1,6 @@
 e=.001;
 
-use <sculpt.scad>;
+use <graft.scad>;
 
 module jst_sm(n=3, margin=0)
 {
@@ -56,9 +56,9 @@ module _jst_sm_cavity(n, margin, z)
 
 module jst_sm_case_hole(n, margin, z, b)
 {
-	sculpt()
+	graft()
 	{
-		sculpt_add()
+		graft_add()
 		{
 			difference()
 			{
@@ -71,7 +71,7 @@ module jst_sm_case_hole(n, margin, z, b)
 				cube([w_over, d_over, h_over]);
 			}
 		}
-		sculpt_carve()
+		graft_remove()
 		{
 			_jst_sm_cavity(n, margin, z+e);
 		}

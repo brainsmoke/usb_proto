@@ -1,6 +1,6 @@
 
 include <case_base.scad>
-use <sculpt.scad>
+use <graft.scad>
 
 e=.001;
 
@@ -16,14 +16,14 @@ panel_thickness = 1.5;
 
 module keyswitch()
 {
-	sculpt()
+	graft()
 	{
-		sculpt_add()
+		graft_add()
 		{
 			translate([-panel_dim/2, -panel_dim/2, -panel_thickness])
 			cube([panel_dim, panel_dim, panel_thickness]);
 		}
-		sculpt_carve()
+		graft_remove()
 		{
 			cube([hole_dim, hole_dim, 10], center=true);
 			translate([-panel_dim/2-e, -panel_dim/2-e, -panel_thickness*2])

@@ -5,7 +5,7 @@ d=7;
 height=10;
 thickness=.8;
 
-use <sculpt.scad>;
+use <graft.scad>;
 
 module button_carveout(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, wall_thickness=1.2, flex_thickness=0.2)
 {
@@ -69,12 +69,12 @@ translate([-w/2-gap-e,-d/2,-h])
 
 module button(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, wall_thickness=1.2, flex_thickness=0.2)
 {
-	sculpt()
+	graft()
 	{
-		sculpt_base_carve()
+		graft_base_carve()
 			button_carveout(w, d, thickness, height, top_width, top_height, gap, wall_thickness, flex_thickness);
 
-		sculpt_add()
+		graft_add()
 			button_shape(w, d, thickness, height, top_width, top_height, gap, wall_thickness, flex_thickness);
 	}
 }
@@ -88,9 +88,9 @@ pitch=4*2.54;
 
 
 flip()
-sculpt()
+graft()
 {
-	sculpt_base()
+	graft_base()
 	translate([-20,-10, -thickness])
 	cube([40,20,thickness]);
 
