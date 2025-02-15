@@ -9,6 +9,8 @@
 Edit keys in `main.c`
 
 ```
+git submodule init
+git submodule update
 make -C ../libopencm3/ # if not done already
 make
 

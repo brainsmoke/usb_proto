@@ -2,6 +2,8 @@
 
 * connect pins 4..7 to the four LEDs
 
+git submodule init
+git submodule update
 make -C ../libopencm3/ # if not done already
 make
 
