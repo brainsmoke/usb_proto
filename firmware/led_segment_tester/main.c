@@ -367,7 +367,7 @@ static int dfu_button_down(void)
 
 static void led_status(int error)
 {
-	gpio_write_mask(GPIOA, error ? (GPIO4|GPIO6|GPIO7) : 0, GPIO4|GPIO5|GPIO6|GPIO7);
+	gpio_write_mask(GPIOA, error ? (GPIO4|GPIO5|GPIO6) : 0, GPIO4|GPIO5|GPIO6|GPIO7);
 }
 
 static void usb_print(const char *s)
