@@ -33,6 +33,12 @@ module graft()
 			children();
 		}
 	}
+
+	if ($preview)
+	{
+		$_graft = "preview";
+		children();
+	}
 }
 
 module graft_base()
@@ -65,6 +71,16 @@ module graft_remove()
 module graft_base_carve()
 {
 	if ($_graft == "base_carve")
+	union()
+	{
+		$_graft = undef;
+		children();
+	}
+}
+
+module graft_preview()
+{
+	if ($_graft == "preview")
 	union()
 	{
 		$_graft = undef;
