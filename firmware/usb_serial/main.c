@@ -207,6 +207,10 @@ static void init(void)
 	gpio_write_mask(PORT_LINE_STATE, LINE_STATE_DEFAULT, LINE_STATE_PIN_MASK);
 	gpio_mode_setup(PORT_LINE_STATE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LINE_STATE_PIN_MASK);
 
+	gpio_write_mask(PORT_LINE_STATE, 0, ESP_SIGNALS_MASK);
+	gpio_mode_setup(PORT_LINE_STATE, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, ESP_SIGNALS_DEFAULT);
+	gpio_mode_setup(PORT_LINE_STATE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, ESP_SIGNALS_MASK^ESP_SIGNALS_DEFAULT);
+
 	rx_head = rx_tail = rx_transfer_size = 0;
 	tx_head = tx_tail = tx_size = tx_transfer_size = 0;
 
@@ -272,18 +276,22 @@ static void switch_line_coding(void)
 }
 
 /* DTR/RTS are active low, PIN_ESP_GPIO0 and PIN_ESP_EN should match the reset circuitry esptool.py expects */
-static const uint32_t control_state_map[] =
+static const uint16_t control_state_map[] =
 {
 	[0] =                                                                    PIN_RTS | PIN_DTR | PIN_ESP_GPIO0 | PIN_ESP_EN ,
-	[USB_SERIAL_CONTROL_LINE_STATE_DTR] =                                    PIN_RTS |           PIN_ESP_GPIO0              ,
-	[USB_SERIAL_CONTROL_LINE_STATE_RTS] =                                              PIN_DTR |                 PIN_ESP_EN ,
+	[USB_SERIAL_CONTROL_LINE_STATE_DTR] =                                    PIN_RTS |                           PIN_ESP_EN ,
+	[USB_SERIAL_CONTROL_LINE_STATE_RTS] =                                              PIN_DTR | PIN_ESP_GPIO0              ,
 	[USB_SERIAL_CONTROL_LINE_STATE_RTS|USB_SERIAL_CONTROL_LINE_STATE_DTR] =                      PIN_ESP_GPIO0 | PIN_ESP_EN ,
 };
 
 int usb_serial_set_control_line_state_cb(uint16_t state)
 {
 	uint32_t pin_state = control_state_map[state&USB_SERIAL_CONTROL_LINE_STATE_MASK];
+
 	gpio_write_mask(PORT_LINE_STATE, pin_state, LINE_STATE_PIN_MASK);
+
+	gpio_mode_setup(PORT_LINE_STATE, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, ESP_SIGNALS_MASK & pin_state);
+	gpio_mode_setup(PORT_LINE_STATE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, ESP_SIGNALS_MASK &~pin_state );
 	usb_serial_send_state(USB_SERIAL_STATE_DEFAULT);
 	return 1;
 }
