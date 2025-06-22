@@ -1,10 +1,9 @@
 # IKEA OBEGRÄNSAD driver directly from USB-serial, untested
 
 
-Driver side identical to, IO has to be boosted to 5V:
+Driver side identical to: [brainsmoke/esp32leddriver/.../obegraensad](https://github.com/brainsmoke/esp32leddriver/tree/master/firmware/stm32/obegraensad)
 
-[brainsmoke/esp32leddriver/.../obegraensad](https://github.com/brainsmoke/esp32leddriver/tree/master/firmware/stm32/obegraensad)
-
+IO has to be boosted to 5V.
 
 ```
 git submodule init
