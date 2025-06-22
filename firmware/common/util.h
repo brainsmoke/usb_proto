@@ -28,6 +28,7 @@
  *
  */
 
+void enable_sys_tick(uint32_t ticks);
 void remap_usb_pins(void);
 void reset_system(void);
 

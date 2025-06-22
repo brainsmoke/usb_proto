@@ -33,6 +33,14 @@
 
 #include "util.h"
 
+
+void enable_sys_tick(uint32_t ticks)
+{
+	STK_RVR = ticks-1;
+	STK_CVR = 0;
+	STK_CSR = STK_CSR_ENABLE|STK_CSR_TICKINT;
+}
+
 void remap_usb_pins(void)
 {
 	RCC_APB2ENR |= RCC_APB2ENR_SYSCFGCOMPEN;

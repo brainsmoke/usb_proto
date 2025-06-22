@@ -49,13 +49,6 @@ static const uint32_t keys[N_KEYS] =
 	KEY('A'),                KEY('B'),            KEY('C'),                KEY('D'),
 };
 
-static void enable_sys_tick(uint32_t ticks)
-{
-	STK_RVR = ticks;
-	STK_CVR = 0;
-	STK_CSR = STK_CSR_ENABLE|STK_CSR_TICKINT;
-}
-
 volatile uint32_t tick=0;
 void SysTick_Handler(void)
 {

@@ -31,6 +31,7 @@
 #define PACKET_SIZE_FULL_SPEED (64)
 
 #include <stdint.h>
+#include <stddef.h>
 #include <libopencm3/usb/cdc.h>
 
 /* usb serial (usb cdc acm) implementation which tries to minimize copying

@@ -38,13 +38,6 @@
 #include "config.h"
 #include "util.h"
 
-static void enable_sys_tick(uint32_t ticks)
-{
-    STK_RVR = ticks;
-    STK_CVR = 0;
-    STK_CSR = STK_CSR_ENABLE|STK_CSR_TICKINT;
-}
-
 static void gpio_write_mask(uint32_t gpioport, uint16_t gpios, uint16_t mask)
 {
 	GPIO_BSRR(gpioport) = ( (mask &~ gpios) << 16) | (mask & gpios);
