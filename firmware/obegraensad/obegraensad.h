@@ -20,6 +20,8 @@
 #define PIN_LATCH              (5)
 #define PIN_NOT_OUTPUT_ENABLE  (6)
 
+#define PIN_BUTTON             (7) /* input, button pulls down to ground when pressed */
+
 #define BIT_DATA_0             (1<<PIN_DATA_0)
 #define BIT_DATA_1             (1<<PIN_DATA_1)
 #define BIT_DATA_2             (1<<PIN_DATA_2)
@@ -27,6 +29,8 @@
 #define BIT_CLK                (1<<PIN_CLK)
 #define BIT_LATCH              (1<<PIN_LATCH)
 #define BIT_NOT_OUTPUT_ENABLE  (1<<PIN_NOT_OUTPUT_ENABLE)
+
+#define BIT_BUTTON             (1<<PIN_BUTTON)
 
 #define MASK_CLK (BIT_CLK)
 #define MASK_DATA (BIT_DATA_0|BIT_DATA_1|BIT_DATA_2|BIT_DATA_3)
@@ -42,13 +46,19 @@
 #define N_BITS_PER_CHANNEL   (N_CHIPS_PER_CHANNEL*N_PINS_PER_CHIP)
 #define N_LEDS               (N_BITS_PER_CHANNEL*N_CHANNELS)
 
+#define DEBOUNCE_MS (50)
+#define BUTTON_DOWN (0)
+#define BUTTON_UP (BIT_BUTTON)
+
 #ifndef __ASSEMBLER__
 
 #include <stdint.h>
 #include "config.h"
 
 #define GPIO_OUT (GPIOA)
-#define GPIO_OUT_BSRR (GPIO_BSRR(GPIOA))
+#define GPIO_OUT_BSRR (GPIO_BSRR(GPIO_OUT))
+
+#define GPIO_IN (GPIOA)
 
 /* sends 64x (max 8) bits parallel at ~1/6th the clockspeed to GPIO[0-7]
  * gpio is the GPIO base address
