@@ -3,7 +3,10 @@
 
 Driver side identical to: [brainsmoke/esp32leddriver/.../obegraensad](https://github.com/brainsmoke/esp32leddriver/tree/master/firmware/stm32/obegraensad)
 
-IO has to be boosted to 5V.
+![pin description](obegraensad.png)
+
+Outputs have to be boosted to 5V.
+The side-button pulls to ground when pressed.
 
 ```
 git submodule init
