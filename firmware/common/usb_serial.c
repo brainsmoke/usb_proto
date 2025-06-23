@@ -323,6 +323,9 @@ size_t usb_serial_read(uint8_t *buf, size_t len)
 		return len;
 	}
 
+	if (!usb_ready)
+		return 0;
+
 	if ( len >= PACKET_SIZE_FULL_SPEED )
 		return usb_double_buffer_read_packet(UART_HOST_TO_DEVICE_ENDPOINT, buf, len);
 
