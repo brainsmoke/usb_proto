@@ -2,7 +2,7 @@
 OPENCM3_DIR=../libopencm3
 SHARED_DIR=../common
 PROJECT=obegraensad
-CFILES=obegraensad.c obegraensad_io.c  usb_serial.c usb_double_buf.c util.c
+CFILES=obegraensad.c obegraensad_io.c  usb_serial.c usb_double_buf.c util.c millis.c
 AFILES=bitbang.S
 
 DFU_FILE=$(PROJECT).dfu

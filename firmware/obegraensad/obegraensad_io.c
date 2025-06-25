@@ -5,20 +5,7 @@
 #include "obegraensad.h"
 #include "util.h"
 #include "usb_serial.h"
-
-static void millis_timer_init(void)
-{
-	rcc_periph_clock_enable(RCC_TIM14);
-	TIM_ARR(TIM14) = 0xffff;
-	TIM_PSC(TIM14) = F_CPU/1000;
-	TIM_CR1(TIM14) = TIM_CR1_CEN;
-}
-
-static uint16_t millis_u16(void)
-{
-	return TIM_CNT(TIM14);
-}
-
+#include "millis.h"
 
 static const char hex[] = "0123456789ABCDEF";
 
