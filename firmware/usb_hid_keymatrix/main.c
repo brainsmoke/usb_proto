@@ -35,7 +35,7 @@
 
 #include "config.h"
 #include "util.h"
-#include "keypad.h"
+#include "keymatrix.h"
 #include "usb_hid_keypad.h"
 #include "hid_keydef.h"
 
@@ -61,17 +61,17 @@ static void init(void)
 	rcc_periph_clock_enable(RCC_GPIOA);
 
 	remap_usb_pins();
-	keypad_init();
+	keymatrix_init();
 	usb_hid_keypad_init(keys, N_KEYS);
 	enable_sys_tick(F_SYS_TICK_CLK/1000);
 }
 
-void keypad_down(int key_index)
+void keymatrix_down(int key_index)
 {
 	usb_hid_keypad_key_down(keys[key_index]);
 }
 
-void keypad_up(int key_index)
+void keymatrix_up(int key_index)
 {
 	usb_hid_keypad_key_up(keys[key_index]);
 }
@@ -82,7 +82,7 @@ int main(void)
 
 	for(;;)
 	{
-		keypad_poll(tick);
+		keymatrix_poll(tick);
 		usb_hid_keypad_poll();
 	}
 }

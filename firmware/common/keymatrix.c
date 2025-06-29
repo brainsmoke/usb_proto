@@ -31,7 +31,7 @@
 #include <libopencmsis/core_cm3.h>
 #include <libopencm3/stm32/gpio.h>
 
-#include "keypad.h"
+#include "keymatrix.h"
 
 static const uint32_t select_row[N_ROWS] = SELECT_ROWS;
 static const uint16_t column_lookup[N_COLUMNS] = COLUMN_LOOKUP;
@@ -39,14 +39,14 @@ static uint16_t debounce[N_KEYS];
 static uint16_t status[N_KEYS];
 static int row;
 
-int keypad_state(uint32_t key)
+int keymatrix_state(uint32_t key)
 {
 	if (key >= N_KEYS)
 		return -1;
 	return status[key];
 }
 
-static void keypad_next_row(void)
+static void keymatrix_next_row(void)
 {
 	row += 1;
 	if (row >= N_ROWS)
@@ -54,7 +54,7 @@ static void keypad_next_row(void)
 	GPIO_BSRR(PORT_KEY_ROWS) = select_row[row];
 }
 
-static void keypad_read_column(void)
+static void keymatrix_read_column(void)
 {
 	int col;
 	uint16_t port = gpio_get(PORT_KEY_COLUMNS, MASK_KEY_COLUMNS);
@@ -69,13 +69,13 @@ static void keypad_read_column(void)
 
 		if (pressed && status[key] == KEY_UP)
 		{
-			keypad_down(key);
+			keymatrix_down(key);
 			status[key] = KEY_DOWN;
 			debounce[key] = DEBOUNCE_COUNTDOWN;
 		}
 		if (!pressed && status[key] != KEY_UP)
 		{
-			keypad_up(key);
+			keymatrix_up(key);
 			status[key] = KEY_UP;
 			debounce[key] = DEBOUNCE_COUNTDOWN;
 		}
@@ -83,7 +83,7 @@ static void keypad_read_column(void)
 }
 
 static uint32_t last_time=0;
-void keypad_poll(uint32_t time)
+void keymatrix_poll(uint32_t time)
 {
 	static enum
 	{
@@ -101,17 +101,17 @@ void keypad_poll(uint32_t time)
 
 	if ( phase == PHASE_SELECT )
 	{
-		keypad_next_row();
+		keymatrix_next_row();
 		phase = PHASE_READ;
 	}
 	else
 	{
-		keypad_read_column();
+		keymatrix_read_column();
 		phase = PHASE_SELECT;
 	}
 }
 
-void keypad_init(void)
+void keymatrix_init(void)
 {
 	memset(debounce, 0, sizeof(debounce));
 	memset(status, 0, sizeof(status));

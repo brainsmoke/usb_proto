@@ -2,7 +2,7 @@
 OPENCM3_DIR=../libopencm3
 SHARED_DIR=../common
 PROJECT=usb_hid_keymatrix
-CFILES=main.c usb_hid_keypad.c keypad.c util.c
+CFILES=main.c usb_hid_keypad.c keymatrix.c util.c
 
 DFU_FILE=$(PROJECT).dfu
 

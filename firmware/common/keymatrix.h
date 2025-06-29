@@ -1,5 +1,5 @@
-#ifndef KEYPAD_H
-#define KEYPAD_H
+#ifndef KEYMATRIX_H
+#define KEYMATRIX_H
 
 /*
  * Copyright (c) 2023 Erik Bosman <erik@minemu.org>
@@ -71,12 +71,12 @@ enum
 	KEY_DOWN,
 };
 
-int keypad_state(uint32_t key);
-void keypad_poll(uint32_t time);
-void keypad_init(void);
+int keymatrix_state(uint32_t key);
+void keymatrix_poll(uint32_t time);
+void keymatrix_init(void);
 
 /* to be implemented by user */
-void keypad_up(int key);
-void keypad_down(int key);
+void keymatrix_up(int key);
+void keymatrix_down(int key);
 
-#endif // KEYPAD_H
+#endif // KEYMATRIX_H
