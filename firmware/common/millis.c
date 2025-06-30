@@ -17,3 +17,15 @@ uint16_t millis_u16(void)
 	return TIM_CNT(TIMER_MILLIS);
 }
 
+static uint32_t last = 0;
+
+uint32_t millis(void)
+{
+	uint32_t t = (last &~ 0xffff) | TIM_CNT(TIMER_MILLIS);
+	if (last > t)
+		t += 0x10000;
+
+	last = t;
+	return t;
+}
+

@@ -16,4 +16,14 @@
 void millis_timer_init(void);
 uint16_t millis_u16(void);
 
+
+/* Slight hack:
+ *
+ * - due to the underlying 16 bit timer, must be called at least every ~minute
+ * - technically not safe to both call inside and outside interrupts, but probably ok
+ *
+ */
+uint32_t millis(void);
+
+
 #endif // MILLIS_H
