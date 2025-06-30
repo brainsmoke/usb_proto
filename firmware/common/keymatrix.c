@@ -33,15 +33,26 @@
 
 #include "keymatrix.h"
 
-static const uint32_t select_row[N_ROWS] = SELECT_ROWS;
-static const uint16_t column_lookup[N_COLUMNS] = COLUMN_LOOKUP;
-static uint16_t debounce[N_KEYS];
-static uint16_t status[N_KEYS];
+#define CLEAR(x) ((x)<<16)
+#define SET(x) (x)
+
+#define BIT(n) (1<<n)
+#define OR_BIT(n) BIT(n) |
+#define SELECT_ROW(n) ( SET(BIT(n)) | CLEAR(rows_mask^BIT(n)) ) ,
+#define BIT_LIST(n) BIT(n) ,
+
+static const uint16_t rows_mask = ( KEYMATRIX_ROWS(OR_BIT) 0 );
+static const uint16_t columns_mask = ( KEYMATRIX_COLUMNS(OR_BIT) 0 );
+static const uint32_t select_row[] = { KEYMATRIX_ROWS(SELECT_ROW) };
+static const uint16_t column_lookup[KEYMATRIX_N_COLUMNS] = { KEYMATRIX_COLUMNS(BIT_LIST) };
+
+static uint16_t debounce[KEYMATRIX_N_KEYS];
+static uint16_t status[KEYMATRIX_N_KEYS];
 static int row;
 
 int keymatrix_state(uint32_t key)
 {
-	if (key >= N_KEYS)
+	if (key >= KEYMATRIX_N_KEYS)
 		return -1;
 	return status[key];
 }
@@ -49,18 +60,18 @@ int keymatrix_state(uint32_t key)
 static void keymatrix_next_row(void)
 {
 	row += 1;
-	if (row >= N_ROWS)
+	if (row >= KEYMATRIX_N_ROWS)
 		row=0;
-	GPIO_BSRR(PORT_KEY_ROWS) = select_row[row];
+	GPIO_BSRR(KEYMATRIX_ROWS_PORT) = select_row[row];
 }
 
 static void keymatrix_read_column(void)
 {
 	int col;
-	uint16_t port = gpio_get(PORT_KEY_COLUMNS, MASK_KEY_COLUMNS);
-	for (col=0; col<N_COLUMNS; col++)
+	uint16_t port = gpio_get(KEYMATRIX_COLUMNS_PORT, columns_mask);
+	for (col=0; col<KEYMATRIX_N_COLUMNS; col++)
 	{
-		int key = col*N_ROWS+row;
+		int key = col*KEYMATRIX_N_ROWS+row;
 
 		if (debounce[key])
 			continue;
@@ -94,7 +105,7 @@ void keymatrix_poll(uint32_t time)
 
 	int key;
 	if (last_time != time)
-		for(key=0; key<N_KEYS; key++)
+		for(key=0; key<KEYMATRIX_N_KEYS; key++)
 			if (debounce[key])
 				debounce[key]--;
 	last_time = time;
@@ -115,8 +126,8 @@ void keymatrix_init(void)
 {
 	memset(debounce, 0, sizeof(debounce));
 	memset(status, 0, sizeof(status));
-	gpio_mode_setup(PORT_KEY_ROWS, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, MASK_KEY_ROWS);
-	gpio_mode_setup(PORT_KEY_COLUMNS, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, MASK_KEY_COLUMNS);
-	row = N_ROWS-1;
+	gpio_mode_setup(KEYMATRIX_ROWS_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, rows_mask);
+	gpio_mode_setup(KEYMATRIX_COLUMNS_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, columns_mask);
+	row = KEYMATRIX_N_ROWS-1;
 }
 

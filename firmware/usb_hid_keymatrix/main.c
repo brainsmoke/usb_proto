@@ -41,7 +41,7 @@
 
 /* For possible keys, see ../common/hid_keydef.h */
 
-static const uint32_t keys[N_KEYS] =
+static const uint32_t keys[KEYMATRIX_N_KEYS] =
 {
 	KEY_PLAY,                KEY_MUTE,            KEY_VOLUME_DOWN,         KEY_VOLUME_UP,
 	KEY_SCAN_PREVIOUS_TRACK, KEY_SCAN_NEXT_TRACK, KEY_DECREASE_BRIGHTNESS, KEY_INCREASE_BRIGHTNESS,
@@ -62,7 +62,7 @@ static void init(void)
 
 	remap_usb_pins();
 	keymatrix_init();
-	usb_hid_keypad_init(keys, N_KEYS);
+	usb_hid_keypad_init(keys, KEYMATRIX_N_KEYS);
 	enable_sys_tick(F_SYS_TICK_CLK/1000);
 }
 
