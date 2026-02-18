@@ -294,17 +294,14 @@ int usb_hid_keypad_init(const uint32_t keys[], size_t n_keys)
 	if (n_keys > HID_KEYPAD_MAX_KEYS)
 		return 0;
 
-	size_t i, j;
-	for (i=0, j=0; i<n_keys; i++)
+	size_t i, j=0;
+	for (i=0; i<n_keys; i++)
 		if (keys[i] != ~0UL)
-			keymap[j++] = i;
+			keymap[j++] = keys[i];
 	n_keys = j;
 
-
-	memcpy(keymap, keys, sizeof(uint32_t)*n_keys);
-
 	size_t len = create_hid_keypad_descriptor(report_descriptor, sizeof(report_descriptor),
-		                                      keys, n_keys);
+		                                      keymap, n_keys);
 
 	if (len == 0)
 		return 0;
