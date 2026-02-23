@@ -33,7 +33,7 @@
 #define HID_KEYBOARD_PAGE (0x07)
 #define HID_CONSUMER_PAGE (0x0c)
 
-#define KEY_NONE (~0UL)
+#define KEY_NONE (0)
 
 /* key definitions from: https://www.usb.org/sites/default/files/hut1_4.pdf */
 #define KEY_RETURN              (HID_KEY(HID_KEYBOARD_PAGE, 0x28))
