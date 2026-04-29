@@ -9,7 +9,9 @@ DRC_REPORT=pcb/%/$(BASENAME).drc
 else
 DRC_REPORT=
 endif
-POSFILE_KICAD=$(TMPDIR)/posfile_top_kicad.csv
+BOM_KICAD_OPTS=--fields='*' --group-by='' --ref-range-delimiter='' --exclude-dnp
+BOMFILE_KICAD=$(TMPDIR)/bomfile_kicad.csv
+POSFILE_KICAD=$(TMPDIR)/posfile_kicad.csv
 POSFILE=$(BUILDDIR)/posfile_$(BOARDHOUSE).csv
 ZIPFILE=$(BUILDDIR)/gerbers_$(BOARDHOUSE).zip
 BOMFILE=$(BUILDDIR)/bomfile_$(BOARDHOUSE).csv
@@ -58,6 +60,10 @@ $(GERBERS): $(PCB) $(DRC_REPORT)
 	mkdir -p "$(dir $@)"
 	kicad-cli pcb export gerbers $(GERBER_OPTS) -o "$(dir $@)" --layers="$(GERBER_EXPORT_LIST)" "$<"
 
+$(BOMFILE_KICAD): $(SCHEMATIC)
+	mkdir -p "$(dir $@)"
+	kicad-cli sch export bom -o "$@" $(BOM_KICAD_OPTS) "$<"
+
 $(POSFILE_KICAD): $(PCB)
 	mkdir -p "$(dir $@)"
 	kicad-cli pcb export pos "$<" $(POS_OPTS) -o "$@"
@@ -70,9 +76,9 @@ $(DRILLFILES): $(PCB)
 	mkdir -p "$(dir $@)"
 	kicad-cli pcb export drill $(DRILL_OPTS) -o "$(dir $@)" "$<"
 
-$(POSFILE): $(POSFILE_KICAD)
+$(POSFILE): $(POSFILE_KICAD) $(BOMFILE_KICAD)
 	mkdir -p "$(dir $@)"
-	python3 tools/posfile_to_boardhouse.py "$(BOARDHOUSE)" < "$<" > "$@"
+	python3 tools/posfile_to_boardhouse.py "$(BOARDHOUSE)" $^ > "$@"
 
 $(ZIPFILE): $(GERBERS) $(DRILLFILES)
 	mkdir -p "$(dir $@)"
