@@ -1,6 +1,6 @@
 
-PROJECTS=simple simple-v0.1 mcu
-PCBA=simple simple-v0.1 mcu
+PROJECTS=simple simple-v0.1 mcu mcu_tiny
+PCBA=simple simple-v0.1 mcu mcu_tiny
 
 BASENAME=project
 BOARDHOUSE=jlc

@@ -1,0 +1,101 @@
+(footprint "SWDHeader_covered"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "Through hole straight pin header, 1x07, 2.54mm pitch, single row")
+	(tags "Through hole pin header THT 1x07 2.54mm single row")
+	(property "Reference" "J39"
+		(at 0 -2.33 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "33b51ec4-05fa-4207-91dd-43c2ba9e1ba8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "~"
+		(at 0 21.589999 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "203a542e-ec12-4cbd-aa26-0cb157392b72")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" "Library:SWDHeader"
+		(at 0 22.86 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0b785e49-6dee-4ef5-99eb-8f5a774f8b3d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 6.62 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "45925afc-d31e-45e9-bfdd-36737cfd40e3")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 24.130001 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fd76cf2a-4637-4591-8c8b-1c21ab07e103")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole dnp)
+	(fp_text user "${REFERENCE}"
+		(at 0 26.67 0)
+		(layer "F.Fab")
+		(uuid "874f78dd-d0b5-4077-af27-9cc2011ea271")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "SWDCLK" smd oval
+		(at 0 2.54)
+		(size 1.7 1.7)
+		(layers "F.Cu")
+		(uuid "60b8cbe4-b9ee-4aab-bf66-8906a03b03fe")
+	)
+	(pad "SWDGND" smd oval
+		(at 0 5.079999)
+		(size 1.7 1.7)
+		(layers "F.Cu")
+		(uuid "9e04c92c-fcf3-4bb9-893f-e79b5daeacea")
+	)
+	(pad "SWDIO" smd circle
+		(at 0 0)
+		(size 1.7 1.7)
+		(layers "F.Cu")
+		(uuid "2ac8773e-d0c1-4f55-b2d3-030fccd7198f")
+	)
+)
