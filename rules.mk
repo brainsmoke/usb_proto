@@ -9,9 +9,9 @@ DRC_REPORT=pcb/%/$(BASENAME).drc
 else
 DRC_REPORT=
 endif
-BOM_KICAD_OPTS=--fields='*' --group-by='' --ref-range-delimiter='' --exclude-dnp
-BOMFILE_KICAD=$(TMPDIR)/bomfile_kicad.csv
-POSFILE_KICAD=$(TMPDIR)/posfile_kicad.csv
+BOM_COMPLETE_OPTS=--fields='*' --group-by='' --ref-range-delimiter='' --exclude-dnp
+BOMFILE_TMP=$(TMPDIR)/bomfile_kicad.csv
+POSFILE_TMP=$(TMPDIR)/posfile_kicad.csv
 POSFILE=$(BUILDDIR)/posfile_$(BOARDHOUSE).csv
 ZIPFILE=$(BUILDDIR)/gerbers_$(BOARDHOUSE).zip
 BOMFILE=$(BUILDDIR)/bomfile_$(BOARDHOUSE).csv
@@ -23,7 +23,7 @@ GERBER_EXPORT_LIST=$(subst $(SPACE),$(COMMA),$(value LAYERS))
 
 GERBERS := $(foreach layer, $(subst .,_, $(LAYERS)), $(TMPDIR)/$(BASENAME)-$(layer).gbr)
 
-TMPFILES=$(GERBERS) $(DRILLFILES) $(POSFILE_KICAD)
+TMPFILES=$(GERBERS) $(DRILLFILES) $(BOMFILE_TMP) $(POSFILE_TMP)
 
 PROJECT_TARGETS=$(PROJECTS:=.project)
 PCBA_TARGETS=$(PCBA:=.pcba)
@@ -31,7 +31,8 @@ PCBA_TARGETS=$(PCBA:=.pcba)
 TARGETS=$(PROJECT_TARGETS) $(PCBA_TARGETS)
 
 INTERMEDIATE_FILES=$(foreach project, $(PROJECTS), \
-            $(patsubst %, $(POSFILE_KICAD), $(project)) \
+            $(patsubst %, $(BOMFILE_TMP), $(project)) \
+            $(patsubst %, $(POSFILE_TMP), $(project)) \
             $(foreach gerber, $(GERBERS), $(patsubst %, $(gerber), $(project))) \
             $(foreach drillfile, $(DRILLFILES), $(patsubst %, $(drillfile), $(project))))
 
@@ -60,11 +61,11 @@ $(GERBERS): $(PCB) $(DRC_REPORT)
 	mkdir -p "$(dir $@)"
 	kicad-cli pcb export gerbers $(GERBER_OPTS) -o "$(dir $@)" --layers="$(GERBER_EXPORT_LIST)" "$<"
 
-$(BOMFILE_KICAD): $(SCHEMATIC)
+$(BOMFILE_TMP): $(SCHEMATIC)
 	mkdir -p "$(dir $@)"
-	kicad-cli sch export bom -o "$@" $(BOM_KICAD_OPTS) "$<"
+	kicad-cli sch export bom -o "$@" $(BOM_COMPLETE_OPTS) "$<"
 
-$(POSFILE_KICAD): $(PCB)
+$(POSFILE_TMP): $(PCB)
 	mkdir -p "$(dir $@)"
 	kicad-cli pcb export pos "$<" $(POS_OPTS) -o "$@"
 
@@ -76,7 +77,7 @@ $(DRILLFILES): $(PCB)
 	mkdir -p "$(dir $@)"
 	kicad-cli pcb export drill $(DRILL_OPTS) -o "$(dir $@)" "$<"
 
-$(POSFILE): $(POSFILE_KICAD) $(BOMFILE_KICAD)
+$(POSFILE): $(POSFILE_TMP) $(BOMFILE_TMP)
 	mkdir -p "$(dir $@)"
 	python3 tools/posfile_to_boardhouse.py "$(BOARDHOUSE)" $^ > "$@"
 
