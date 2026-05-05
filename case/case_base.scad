@@ -118,12 +118,22 @@ module at_back()
 	translate([hole_dist_x+pcb_radius,hole_dist_y/2,0]) rotate([0,0,-90])  children();
 }
 
-module at_holes()
+module at_pcb_holes()
 {
 	for (x = [0, hole_dist_x])
 		for (y = [0, hole_dist_y])
 			translate([x,y,0])
 				children();
+}
+
+module at_extra_holes()
+{
+}
+
+module at_holes()
+{
+	at_pcb_holes() children();
+	at_extra_holes() children();
 }
 
 module at_dfu_button()
@@ -184,6 +194,13 @@ module case_shape(height, radius)
 			cylinder(height, r=radius);
 }
 
+module pcb_shape(height, radius)
+{
+	hull()
+		at_pcb_holes()
+			cylinder(height, r=radius);
+}
+
 module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 {
 	x = head_diameter/2 - screw_loose_radius;
@@ -194,16 +211,20 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 	y2 = funnel_top_height;
 	dz2 = (sqrt(x*x+y*y)/x - y/x)*padding;
 
+	z4 = screw_clearance+head_thickness+dz;
+	z3 = max(z4, bottom_thickness+leg_height+pcb_thickness-e);
+
 	path = [
-		[0, -bottom_epsilon],
-		[padding+head_diameter/2, -bottom_epsilon],
-		[padding+head_diameter/2, screw_clearance+dz],
-		[padding+screw_loose_radius, screw_clearance+head_thickness+dz],
-		[padding+screw_loose_radius, bottom_thickness+leg_height+pcb_thickness/2],
-		[padding+screw_grab_radius, bottom_thickness+leg_height+pcb_thickness/2],
-		[padding+screw_grab_radius, total_height-top_thickness-funnel_top_height-dz2],
+		[0,                               -bottom_epsilon],
+		[padding+head_diameter/2,         -bottom_epsilon],
+		[padding+head_diameter/2,         screw_clearance+dz],
+		[padding+screw_loose_radius,      z4],
+		[padding+screw_loose_radius,      z3],
+		[padding+screw_grab_radius,       z3],
+		[padding+screw_grab_radius,       total_height-top_thickness-funnel_top_height-dz2],
+
 		[padding+funnel_top_inner_radius, total_height-top_thickness+top_epsilon],
-		[0, total_height-top_thickness+top_epsilon],
+		[0,                               total_height-top_thickness+top_epsilon],
 
  ];
 
@@ -226,6 +247,22 @@ module leg()
 	}
 }
 
+module leg_no_pcb()
+{
+	graft()
+	{
+		graft_add()
+		intersection()
+		{
+			screw_shape(leg_thickness, bottom_epsilon=b, top_epsilon=b);
+			translate([0,0,e]) cylinder(component_z-e, r=leg_thickness+head_diameter/2+1);
+		}
+
+		graft_remove()
+		screw_shape(0, bottom_epsilon=b);
+	}
+}
+
 module screw_guide()
 {
 	graft()
@@ -241,7 +278,6 @@ module screw_guide()
 		screw_shape(0, bottom_epsilon=b);
 	}
 }
-
 
 module breadboard_hole(x, y)
 {
@@ -276,7 +312,7 @@ module pcb()
 		{
 			color("green")
 			translate([0,0,component_z-pcb_thickness])
-			case_shape(pcb_thickness, pcb_radius);
+			pcb_shape(pcb_thickness, pcb_radius);
 
 			for (y=[0, 1, 16, 17])
 			breadboard_line_silk(1, y, 21, y);
@@ -295,7 +331,7 @@ module pcb()
 		union()
 		{
 			translate([0,0,component_z-pcb_thickness-b])
-			at_holes()
+			at_pcb_holes()
 			cylinder(pcb_thickness+2*b, r=pcb_screw_hole_diameter/2);
 
 			for (x=[0:21])
@@ -314,7 +350,8 @@ module case()
 {
 	graft()
 	{
-		at_holes() leg();
+		at_pcb_holes() leg();
+		at_extra_holes() leg_no_pcb();
 
 		graft_base()
 		{

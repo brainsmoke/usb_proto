@@ -21,30 +21,11 @@ module at_extra_holes()
 			children();
 }
 
-module at_holes()
-{
-	for (x = [0, hole_dist_x])
-		for (y = [0, hole_dist_y])
-			translate([x,y,0])
-				children();
-
-	at_extra_holes() children();
-}
-
 case();
 
 next() next() flip() top()
 {
 	top_features();
-
-	at_extra_holes()
-	graft_add()
-	intersection()
-	{
-		screw_shape(leg_thickness);
-		translate([0,0,bottom_thickness+leg_height+e*2])
-		cylinder(component_z-bottom_thickness+leg_height, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
-	}
 }
 
 
