@@ -2,6 +2,7 @@ project-backups/
 fp-info-cache
 Library.bak
 project.drc
+project.kicad_prl
 firmware/*/*.bin
 firmware/*/*.elf
 firmware/*/*.dfu
