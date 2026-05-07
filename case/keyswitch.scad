@@ -5,8 +5,9 @@ e=.001;
 b=1;
 
 u=19.05;
+cherry_mx_panel_hole=14;
 
-module keyswitch_panel(size=u, thickness=1.5, hole_size=13.8)
+module keyswitch_panel(size=u, thickness=1.5, hole_size=cherry_mx_panel_hole)
 {
 	graft()
 	{
