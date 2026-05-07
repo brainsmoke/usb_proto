@@ -1,7 +1,7 @@
 
 include <case_base.scad>
 
-leg_height = 1.5;
+leg_height = 1.4;
 
 pcb_depth = 22;
 pcb_radius_back = 2;
@@ -16,6 +16,7 @@ has_dfu_button = true;
 
 grid_x_off = 2;
 grid_cols = 10;
+grid_height_bottom = 1.2;
 
 module at_pcb_holes()
 {
