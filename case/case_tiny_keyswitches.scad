@@ -20,6 +20,14 @@ grid_width=1.2;
 panel_dim = key_pitch-grid_width;
 panel_thickness = 1.5;
 
+module top_features()
+{
+	for (x = [ 1 : 2 : n_keys*2-1 ])
+	for (y = [ 1 ])
+	translate(grid_pos(x,y))
+	keyswitch_panel(panel_dim, panel_thickness);
+}
+
 preview()
 {
 	pcb();
@@ -29,13 +37,7 @@ preview()
 	}
 }
 
-case();
+bottom();
 
-next() flip() top()
-{
-	for (x = [ 1 : 2 : n_keys*2-1 ])
-	for (y = [ 1 ])
-	translate(grid_pos(x,y))
-	keyswitch_panel(panel_dim, panel_thickness);
-};
+next() flip() top() top_features();
 

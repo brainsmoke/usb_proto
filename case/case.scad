@@ -10,7 +10,7 @@ preview()
 	}
 }
 
-case();
+bottom();
 
 next() flip() top()
 {

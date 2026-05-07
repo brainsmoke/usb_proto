@@ -194,11 +194,11 @@ module case_shape(height, radius)
 			cylinder(height, r=radius);
 }
 
-module pcb_shape(height, radius)
+module pcb_shape()
 {
 	hull()
 		at_pcb_holes()
-			cylinder(height, r=radius);
+			cylinder(pcb_thickness, r=pcb_radius);
 }
 
 module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
@@ -212,7 +212,7 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 	dz2 = (sqrt(x*x+y*y)/x - y/x)*padding;
 
 	z4 = screw_clearance+head_thickness+dz;
-	z3 = max(z4, bottom_thickness+leg_height+pcb_thickness-e);
+	z3 = max(z4, bottom_thickness+leg_height+pcb_thickness-e/2);
 
 	path = [
 		[0,                               -bottom_epsilon],
@@ -239,23 +239,7 @@ module leg()
 		intersection()
 		{
 			screw_shape(leg_thickness, bottom_epsilon=b, top_epsilon=b);
-			translate([0,0,e]) cylinder(leg_height+bottom_thickness-e, r=leg_thickness+head_diameter/2+1); 
-		}
-
-		graft_remove()
-		screw_shape(0, bottom_epsilon=b);
-	}
-}
-
-module leg_no_pcb()
-{
-	graft()
-	{
-		graft_add()
-		intersection()
-		{
-			screw_shape(leg_thickness, bottom_epsilon=b, top_epsilon=b);
-			translate([0,0,e]) cylinder(component_z-e, r=leg_thickness+head_diameter/2+1);
+			translate([0,0,e]) cylinder(component_z-2*e, r=leg_thickness+head_diameter/2+1);
 		}
 
 		graft_remove()
@@ -312,7 +296,7 @@ module pcb()
 		{
 			color("green")
 			translate([0,0,component_z-pcb_thickness])
-			pcb_shape(pcb_thickness, pcb_radius);
+			pcb_shape();
 
 			for (y=[0, 1, 16, 17])
 			breadboard_line_silk(1, y, 21, y);
@@ -346,12 +330,19 @@ module pcb()
 	}
 }
 
-module case()
+module pcb_keepout()
+{
+	graft()
+	graft_remove()
+	translate([0,0,component_z-pcb_thickness])
+	pcb_shape();
+}
+
+module bottom()
 {
 	graft()
 	{
-		at_pcb_holes() leg();
-		at_extra_holes() leg_no_pcb();
+		at_holes() leg();
 
 		graft_base()
 		{
@@ -374,6 +365,8 @@ module case()
 			}
 		}
 		on_pcb() at_front() usb_c_keepout();
+
+		pcb_keepout();
 	}
 }
 

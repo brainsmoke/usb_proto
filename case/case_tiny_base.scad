@@ -34,15 +34,15 @@ module at_extra_holes()
                 children();
 }
 
-module pcb_shape(height)
+module pcb_shape()
 {
 	hull()
 	{
-		at_pcb_holes() cylinder(height, r=pcb_radius);
+		at_pcb_holes() cylinder(pcb_thickness, r=pcb_radius);
 		for (x = [pcb_depth-pcb_radius-pcb_radius_back])
 		for (y = [pcb_radius_back-pcb_radius, hole_dist_y+pcb_radius-pcb_radius_back])
 		translate([x,y,0])
-		cylinder(height, r=pcb_radius_back);
+		cylinder(pcb_thickness, r=pcb_radius_back);
 	}
 }
 
@@ -56,7 +56,7 @@ module pcb()
 		{
 			color("green")
 			translate([0,0,component_z-pcb_thickness])
-			pcb_shape(pcb_thickness);
+			pcb_shape();
  
 			for (y=[0:9])
 			breadboard_hole_silk(0, y);

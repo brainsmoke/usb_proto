@@ -13,8 +13,7 @@ preview()
 	}
 }
 
-case();
-
+bottom();
 
 module led_connector_at(x, y)
 {
@@ -26,7 +25,6 @@ jst_sm_case_hole(3, .3, z, .8);
 //graft_preview()translate([0,0,-z])jst_sm(3);
 }
 }
-
 
 
 next()

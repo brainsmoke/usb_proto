@@ -69,7 +69,7 @@ module rounded_block(height, radius)
 	at_holes() cylinder(h=height, r=radius);
 }
 
-module case()
+module bottom()
 {
 	at_holes() translate([0, 0, bottom_thickness])leg();
 
@@ -104,5 +104,5 @@ module next()
 	translate([0,hole_dist_y+2*outer_radius+padding, 0]) children();
 }
 
-case();
+bottom();
 next() top();
