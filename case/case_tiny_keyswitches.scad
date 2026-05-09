@@ -20,24 +20,42 @@ grid_width=1.2;
 panel_dim = key_pitch-grid_width;
 panel_thickness = 1.5;
 
-module top_features()
+module at_keys()
 {
 	for (x = [ 1 : 2 : n_keys*2-1 ])
 	for (y = [ 1 ])
 	translate(grid_pos(x,y))
+	children();
+}
+
+module top_features()
+{
+	at_keys()
 	keyswitch_panel(panel_dim, panel_thickness);
 }
 
-preview()
+module mockup()
 {
-	pcb();
-	on_pcb()
+	preview()
 	{
-		at_front() usb_c();
+		pcb();
+		on_pcb()
+		{
+			at_front()
+			usb_c();
+		}
+
+		at_keys()
+		at_mx_panel()
+		mx_keepout();
 	}
 }
 
 bottom();
+mockup();
 
-next() flip() top() top_features();
-
+next() flip()
+{
+	top() top_features();
+	mockup();
+}
