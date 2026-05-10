@@ -1,5 +1,5 @@
 
-key_pitch = 19;
+key_pitch = 20;
 n_keys = 4;
 
 include <case_tiny_base.scad>
