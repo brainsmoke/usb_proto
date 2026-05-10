@@ -23,10 +23,22 @@ mx_keystem_h = 3.6;
 mx_fix_pin_holes =  [ [-5.08, 0], [5.08,0] ];
 mx_pin_holes =  [ [-3.81, 2.54], [2.54,5.08] ];
 
+mx_travel=3.75;
+mx_keycap_clearance_bottom=2.5;
+mx_panel_thickness = 1.5;
+
+max_overhang=55;
 
 module at_mx_panel()
 {
 	translate([0,0,-mx_panel_height]) children();
+}
+
+module at_mx_flush(clearance=0)
+{
+	translate([0,0,clearance - mx_travel - mx_keycap_clearance_bottom])
+	at_mx_panel()
+	children();
 }
 
 module mx_keepout(fix_pins=true)
@@ -37,7 +49,7 @@ module mx_keepout(fix_pins=true)
 		block(mx_edge_dim, [0,0,-1]);
 
 		block([mx_panel_hole,mx_panel_hole,mx_body_height], [0,0,-1]);
-		block([4,mx_panel_hole+2,mx_pin_height+e], [0,0,-1]);
+		block([4,mx_panel_hole+2,mx_panel_height-mx_panel_thickness+e], [0,0,-1]);
 
 		translate([0,0,mx_body_height-e])
 		{
@@ -84,10 +96,59 @@ module keyswitch_panel(size=u, thickness=1.5, hole_size=mx_panel_hole)
 	}
 }
 
-graft()
-keyswitch_panel();
+module keyswitch_flush(size=u, thickness=1.5, border=0.8, clearance=0)
+{
+	z_off = clearance - mx_travel - mx_keycap_clearance_bottom;
+
+	graft()
+	{
+
+		graft_add()
+		translate([0,0,z_off-mx_panel_thickness])
+		hull()
+		{
+			block([mx_edge_dim.x+2*border,mx_edge_dim.y+2*border,mx_keycap_clearance_bottom], [0,0,-1]);
+			translate([0,0,mx_keycap_clearance_bottom])
+			block([size+2*border,size+2*border,mx_travel+mx_panel_thickness], [0,0,-1]);
+		}
+
+		graft_remove()
+		translate([0,0,z_off])
+		hull()
+		{
+			block([mx_edge_dim.x,mx_edge_dim.y,mx_keycap_clearance_bottom], [0,0,-1]);
+			translate([0,0,mx_keycap_clearance_bottom])
+			block([size,size,mx_travel+e], [0,0,-1]);
+			translate([0,0,-(mx_edge_dim.x-mx_panel_hole)/2/tan(max_overhang)])
+			block([mx_panel_hole,mx_panel_hole,e], [0,0,-1]);
+		}
+
+		graft_remove()
+		translate([0,0,z_off-mx_panel_thickness-e])
+		block([mx_panel_hole,mx_panel_hole,mx_panel_thickness+2*e], [0,0,-1]);
+	}
+
+}
+
+module next()
+{
+	translate([40,0,0])
+	children();
+}
+
+next()
+{
+	graft()
+	keyswitch_panel();
+
+	preview()
+	at_mx_panel()
+	mx_keepout();
+}
+
+keyswitch_flush();
 
 preview()
-at_mx_panel()
+at_mx_flush()
 mx_keepout();
 
