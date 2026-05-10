@@ -1,5 +1,5 @@
 
-use <case_tiny_keyswitches.scad>
+use <keypad_proud_mcu_tiny.scad>
 
 flip()
 {
