@@ -68,7 +68,7 @@ module pcb()
 		union()
 		{
 			translate([0,0,component_z-pcb_thickness-b])
-			at_holes()
+			at_pcb_holes()
 			cylinder(pcb_thickness+2*b, r=pcb_screw_hole_diameter/2);
  
 			for (y=[0:9])
