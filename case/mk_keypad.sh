@@ -10,6 +10,11 @@ if [ "$n_keys" -lt 1 ]; then
 	exit 1
 fi
 
+if ! which openscad; then
+	echo "openscad not found" >&2
+	exit 1
+fi
+
 echo generating keypad_"$n_keys"_keys_top.stl >&2
 openscad -o keypad_"$n_keys"_keys_top.stl -D n_keys="$n_keys" keypad_flush_top_mcu_tiny.scad &
 echo generating keypad_"$n_keys"_keys_bottom.stl >&2
