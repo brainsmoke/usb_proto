@@ -11,7 +11,7 @@ programs.
 
 ## A protoboard with an STM32F042 for usb connectivity & GPIO / UART functionality.
 
-Production files: [gerbers](build/mcu/gerbers_jlc.zip) [BOM](build/mcu/bomfile_jlc.csv) [POS](build/mcu/posfile_jlc.csv)
+Production files (JLCPCB): [gerbers](build/mcu/gerbers_jlc.zip) [BOM](build/mcu/bomfile_jlc.csv) [POS](build/mcu/posfile_jlc.csv)
 
 Cases: [basic](build/mcu/case.stl) [hexagon](build/mcu/case_almost_regular_hexagon.stl) [keyswitches](build/mcu/case_top_keyswitches_8.stl) [led strips](build/mcu/case_top_led_connector.stl)
 
@@ -31,7 +31,7 @@ Cases: [basic](build/mcu/case.stl) [hexagon](build/mcu/case_almost_regular_hexag
 
 ## An STM32F042 breakout board
 
-Production files: [gerbers](build/mcu_tiny/gerbers_jlc.zip) [BOM](build/mcu_tiny/bomfile_jlc.csv) [POS](build/mcu_tiny/posfile_jlc.csv)
+Production files (JLCPCB): [gerbers](build/mcu_tiny/gerbers_jlc.zip) [BOM](build/mcu_tiny/bomfile_jlc.csv) [POS](build/mcu_tiny/posfile_jlc.csv)
 
 ![Image of a panel with 6 breakout boards](img/mcu_tiny.jpg)
 
