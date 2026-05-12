@@ -11,6 +11,10 @@ programs.
 
 ## A protoboard with an STM32F042 for usb connectivity & GPIO / UART functionality.
 
+Production files: ![gerbers](build/mcu/gerbers_jlc.zip) ![BOM](build/mcu/bomfile_jlc.csv) ![POS](build/mcu/posfile_jlc.csv)
+
+Cases: ![basic](build/mcu/case.stl) ![hexagon](build/mcu/case_almost_regular_hexagon.stl) ![keyswitches](build/mcu/case_top_keyswitches_8.stl) ![led strips](build/mcu/case_top_led_connector.stl)
+
 ![Image of a USB-C connected protoboard](img/protoboard_mcu.jpg)
 
 * 5v USB-C fed (with 5k1 resistors for true USB-C compatibility)
