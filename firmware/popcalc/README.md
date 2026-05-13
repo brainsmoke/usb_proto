@@ -1,4 +1,8 @@
-# usb hid buttons
+# USB device that 'pops calc' on many systems
+
+![A small black 3D-printed box with rounded edges and a single black keyboard key on top.](/img/popcalc.jpg)
+
+# schematic
 
 ![buttons in pull-down configuration](popcalc.png)
 
