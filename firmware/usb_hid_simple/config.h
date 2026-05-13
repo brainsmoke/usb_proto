@@ -10,4 +10,18 @@
 #define F_CPU (48000000)
 #define F_SYS_TICK_CLK (F_CPU/8)
 
+#include "hid_keydef.h"
+
+#define KEYS \
+    KEY('A'), \
+    KEY('B'), \
+    KEY('C'), \
+    KEY('D'), \
+    KEY('E'), \
+    KEY('F'), \
+    KEY('G'), \
+    KEY('H'), \
+    KEY('I'), \
+    KEY('J'),
+
 #endif // CONFIG_H

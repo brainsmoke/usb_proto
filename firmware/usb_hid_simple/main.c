@@ -33,7 +33,6 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 
-#define N_KEYS (10)
 
 #include "config.h"
 #include "util.h"
@@ -42,19 +41,16 @@
 
 /* For possible keys, see ../common/hid_keydef.h */
 
-static const uint32_t keys[N_KEYS] =
+static const uint32_t keys[] =
 {
-	KEY('A'),
-	KEY('B'),
-	KEY('C'),
-	KEY('D'),
-	KEY('E'),
-	KEY('F'),
-	KEY('G'),
-	KEY('H'),
-	KEY('I'),
-	KEY('J'),
+	KEYS
 };
+
+#define N_KEYS (sizeof(keys)/sizeof(keys[0]))
+
+#define MAX_KEYS (10) /* 8 on PORT A 0..7, 2 on rx/tx */
+
+_Static_assert(N_KEYS <= MAX_KEYS, "too many keys defined");
 
 static uint32_t keystate = 0;
 
@@ -84,8 +80,11 @@ static void init(void)
 	enable_sys_tick(F_SYS_TICK_CLK/1000);
 }
 
-static void set_keystate(int key_index, int state)
+static void set_keystate(unsigned int key_index, int state)
 {
+	if (key_index >= N_KEYS)
+		return;
+
 	if (keys_debounce[key_index])
 		return;
 
@@ -106,7 +105,7 @@ static void set_keystate(int key_index, int state)
 
 static void keys_poll(void)
 {
-	int i;
+	unsigned int i;
 	if (tick != last_tick)
 		for (i=0; i<N_KEYS; i++)
 			if (keys_debounce[i])
