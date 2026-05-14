@@ -41,7 +41,7 @@ module pcb_clip()
 {
 	translate([pcb_depth-pcb_radius+.4,hole_dist_y/2,bottom_thickness])
 	{
-		snap([4,12,component_z-bottom_thickness+.8],[1.4,4,2.2],1);
+		snap([4,12,component_z-bottom_thickness+.7],[1.3,4,2],pcb_thickness+1);
 		graft_remove()
 		block([2.5,12,component_z-bottom_thickness-pcb_thickness+e],[1,0,-1]);
 	}

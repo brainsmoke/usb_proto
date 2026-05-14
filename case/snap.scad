@@ -16,8 +16,9 @@ module snap(dim, dim_overhang, grip, border=.8)
 			polygon([
 				[0,0],
 				[0,dim.z],
-				[border*2,dim.z],
-				[dim.x,border*2],
+				[border,dim.z],
+				[border*2,border*2],
+				[dim.x,border],
 				[dim.x,0],
 			]);
 
@@ -47,13 +48,8 @@ module snap(dim, dim_overhang, grip, border=.8)
 			translate([border,0,-e])
 			block([dim.x-border+e,dim.y-2*border,dim.z+2*e], [-1,0,-1]);
 
-			difference()
-			{
-				translate([-e,0,-e])
-				block([border+2*e,dim.y-2*border,dim.z-dim_overhang.z/2-border+e], [-1,0,-1]);
-				translate([-e,0,-e])
-				block([border+4*e,dim_overhang.y,dim.z-dim_overhang.z/2-border+3*e], [-1,0,-1]);
-			}
+			translate([-e,0,-e])
+			block([border+2*e,dim.y-4*border,dim.z-dim_overhang.z/2-border+e], [-1,0,-1]);
 
 			translate([border,0,0])
 			hull()
@@ -72,4 +68,4 @@ module snap(dim, dim_overhang, grip, border=.8)
 }
 
 
-snap([4,12,3.2+.8],[1.4,4,2.2],1);
+snap([4,12,3.2+.7],[1.3,4,2],1+1);
