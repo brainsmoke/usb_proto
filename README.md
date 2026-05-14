@@ -1,4 +1,4 @@
-# USB-C connected boards with programmable USB connectivity
+# USB-C powered boards with programmable USB connectivity
 
 This repository contains a few boards aimed at rapid prototyping.
 
