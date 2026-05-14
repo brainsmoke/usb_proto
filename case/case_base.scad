@@ -263,28 +263,62 @@ module screw_guide()
 	}
 }
 
-module breadboard_hole(x, y)
+module pcb_pad()
 {
-	translate(breadboard_pos(x,y))
 	translate([0,0,-pcb_thickness-b])
 	cylinder(pcb_thickness+2*b, r=breadboard_hole_diameter/2, $fn=8);
 }
 
-module breadboard_hole_silk(x, y)
+module pcb_pad_silk()
 {
-	color("white")
-	translate(breadboard_pos(x,y))
 	translate([0,0,-pcb_thickness-silkscreen_thickness])
 	cylinder(pcb_thickness+2*silkscreen_thickness, r=breadboard_silkscreen_diameter/2, $fn=8);
 }
 
-module breadboard_line_silk(x1, y1, x2, y2)
+module at_pcb_single_pads()
 {
-	color("white")
+	for (y=[2:15])
+	translate(breadboard_pos(0,y))
+	children();
+
+	for (y=[4,5,8,9,12,13])
+	translate(breadboard_pos(22,y))
+	children();
+}
+
+module at_pcb_pads()
+{
+	at_pcb_single_pads()
+	children();
+
+	for (x=[1:21])
+	for (y=[0:17])
+	translate(breadboard_pos(x,y))
+	children();
+}
+
+module pcb_draw_breadboard_lines()
+{
+	for (y=[0, 1, 16, 17])
 	hull()
 	{
-		breadboard_hole_silk(x1, y1);
-		breadboard_hole_silk(x2, y2);
+		translate(breadboard_pos(1,y))
+		children();
+
+		translate(breadboard_pos(21,y))
+		children();
+	}
+
+	for (y=[2, 9])
+	for (x=[1:21])
+	hull()
+	{
+		translate(breadboard_pos(x,y))
+		children();
+
+		translate(breadboard_pos(x,y+6))
+		children();
+
 	}
 }
 
@@ -298,18 +332,14 @@ module pcb()
 			translate([0,0,component_z-pcb_thickness])
 			pcb_shape();
 
-			for (y=[0, 1, 16, 17])
-			breadboard_line_silk(1, y, 21, y);
+			color("white")
+			{
+				pcb_draw_breadboard_lines()
+				pcb_pad_silk();
 
-			for (y=[2, 9])
-			for (x=[1:21])
-			breadboard_line_silk(x, y, x, y+6);
-
-			for (y=[2:15])
-			breadboard_hole_silk(0, y);
-
-			for (y=[4,5,8,9,12,13])
-			breadboard_hole_silk(22, y);
+				at_pcb_single_pads()
+				pcb_pad_silk();
+			}
 		}
 
 		union()
@@ -318,14 +348,8 @@ module pcb()
 			at_pcb_holes()
 			cylinder(pcb_thickness+2*b, r=pcb_screw_hole_diameter/2);
 
-			for (x=[0:21])
-			for (y=[0:17])
-			if ( (x > 0) || ( (y > 1) && (y < 16) ) )
-				breadboard_hole(x, y);
-
-			for (y=[4,5,8,9,12,13])
-			breadboard_hole(22, y);
-
+			at_pcb_pads()
+			pcb_pad();
 		}
 	}
 }
@@ -337,6 +361,8 @@ module pcb_keepout()
 	translate([0,0,component_z-pcb_thickness])
 	pcb_shape();
 }
+
+module bottom_extra() { }
 
 module bottom()
 {
@@ -366,9 +392,15 @@ module bottom()
 		}
 		on_pcb() at_front() usb_c_keepout();
 
+		bottom_extra();
+
 		pcb_keepout();
+
+		children();
 	}
 }
+
+module top_extra() { }
 
 module top()
 {
@@ -403,6 +435,10 @@ module top()
 		}
 
 		at_holes() screw_guide();
+
+		top_extra();
+
+		pcb_keepout();
 
 		children();
 	}

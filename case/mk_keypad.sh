@@ -19,6 +19,8 @@ echo generating keypad_"$n_keys"_keys_top.stl >&2
 openscad -o keypad_"$n_keys"_keys_top.stl -D n_keys="$n_keys" keypad_flush_top_mcu_tiny.scad &
 echo generating keypad_"$n_keys"_keys_bottom.stl >&2
 openscad -o keypad_"$n_keys"_keys_bottom.stl -D n_keys="$n_keys" keypad_flush_bottom_mcu_tiny.scad &
+echo generating keypad_"$n_keys"_keys.stl >&2
+openscad -o keypad_"$n_keys"_keys.stl -D n_keys="$n_keys" keypad_flush_mcu_tiny.scad &
 
 wait
 wait
