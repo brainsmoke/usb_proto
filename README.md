@@ -33,9 +33,9 @@ Cases: [basic](build/mcu/case.stl) [hexagon](build/mcu/case_almost_regular_hexag
 
 Production files (JLCPCB): [gerbers](build/mcu_tiny/gerbers_jlc.zip) [BOM](build/mcu_tiny/bomfile_jlc.csv) [POS](build/mcu_tiny/posfile_jlc.csv)
 
-![Image of a panel with 6 breakout boards](img/mcu_tiny.jpg)
-
 Cases: [keypad](build/mcu_tiny/keypad_flush_mcu_tiny.stl) [keypad](build/mcu_tiny/keypad_proud_mcu_tiny.stl)
+
+![Image of a panel with 6 breakout boards](img/mcu_tiny.jpg)
 
 * for smaller enclosures (27x22mm)
 * I/O & firmware compatible with the protoboard
