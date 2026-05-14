@@ -35,7 +35,9 @@ mcu/case_top_ledrelay_tester_v2 \
 mcu/case_almost_regular_hexagon \
 mcu/case_top_keyswitches \
 mcu/case_top_keyswitches_8 \
-mcu/case_top_led_connector
+mcu/case_top_led_connector \
+mcu_tiny/keypad_flush_mcu_tiny \
+mcu_tiny/keypad_proud_mcu_tiny
 
 SCAD_DEFINES=
 

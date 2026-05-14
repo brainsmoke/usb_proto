@@ -35,6 +35,8 @@ Production files (JLCPCB): [gerbers](build/mcu_tiny/gerbers_jlc.zip) [BOM](build
 
 ![Image of a panel with 6 breakout boards](img/mcu_tiny.jpg)
 
+Cases: [keypad](build/mcu_tiny/keypad_flush_mcu_tiny.stl) [keypad](build/mcu_tiny/keypad_proud_mcu_tiny.stl)
+
 * for smaller enclosures (27x22mm)
 * I/O & firmware compatible with the protoboard
 * 5v USB-C fed (with 5k1 resistors for true USB-C compatibility)
