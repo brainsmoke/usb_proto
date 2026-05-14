@@ -23,7 +23,7 @@ mx_keystem_h = 3.6;
 mx_fix_pin_holes =  [ [-5.08, 0], [5.08,0] ];
 mx_pin_holes =  [ [-3.81, 2.54], [2.54,5.08] ];
 
-mx_travel=3.75;
+mx_travel=4;
 mx_keycap_clearance_bottom=2.5;
 mx_panel_thickness = 1.5;
 

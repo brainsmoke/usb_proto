@@ -7,7 +7,7 @@ use <keyswitch.scad>
 
 hole_dist_x = n_keys * key_pitch;
 
-total_height=12.5+6.25;
+total_height=20;
 
 has_dfu_button=false;
 
