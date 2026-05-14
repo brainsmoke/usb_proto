@@ -1,10 +1,10 @@
-# USB device that 'pops calc' on many systems
+# Flappy Bird controller
 
 ![A small black 3D-printed box with rounded edges and a single black keyboard key on top.](/img/popcalc.jpg)
 
 # schematic
 
-![buttons in pull-down configuration](popcalc.png)
+![buttons in pull-down configuration](../popcalc/popcalc.png)
 
 # 3D printed case:
 

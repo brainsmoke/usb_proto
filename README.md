@@ -33,7 +33,7 @@ Cases: [basic](build/mcu/case.stl) [hexagon](build/mcu/case_almost_regular_hexag
 
 Production files (JLCPCB): [gerbers](build/mcu_tiny/gerbers_jlc.zip) [BOM](build/mcu_tiny/bomfile_jlc.csv) [POS](build/mcu_tiny/posfile_jlc.csv)
 
-Cases: [keypad](build/mcu_tiny/keypad_flush_mcu_tiny.stl) [keypad](build/mcu_tiny/keypad_proud_mcu_tiny.stl)
+Cases: [keypad (keycaps flush)](build/mcu_tiny/keypad_flush_mcu_tiny.stl) [keypad (keyswitches visible)](build/mcu_tiny/keypad_proud_mcu_tiny.stl) [single key controller](build/mcu_tiny/single_key.stl)
 
 ![Image of a panel with 6 breakout boards](img/mcu_tiny.jpg)
 
