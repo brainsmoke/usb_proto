@@ -8,7 +8,7 @@ hole_dist_x = 50;
 
 total_height=17;
 
-has_dfu_button=false;
+has_dfu_button=true;
 
 grid_rows=14;
 grid_cols=6;
@@ -53,12 +53,6 @@ module at_keys()
 	children();
 }
 
-module top_features()
-{
-	at_keys()
-	keyswitch_flush(panel_dim);
-}
-
 module next ()
 {
 	translate([70,0,0])
@@ -87,6 +81,11 @@ mockup();
 
 next() flip()
 {
-	top() top_features();
+	top()
+	{
+		top_features();
+		at_keys()
+		keyswitch_flush(panel_dim);
+	}
 	mockup();
 }
