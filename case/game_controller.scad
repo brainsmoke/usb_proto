@@ -4,9 +4,11 @@ key_pitch = 20;
 include <case_tiny_base.scad>
 use <keyswitch.scad>
 
+total_height=17;
+controller_width=140;
 hole_dist_x = 50;
 
-total_height=17;
+keycenter_off = controller_width/2-hole_dist_x/2-outer_radius;
 
 has_dfu_button=true;
 
@@ -14,42 +16,49 @@ grid_rows=14;
 grid_cols=6;
 grid_pitch=key_pitch/2;
 grid_x_off=0;
-grid_width=1.2;
+grid_width=.8;
 
 panel_dim = key_pitch-0.8;
-panel_thickness = 1.5;
 
-pod_d=60;
+module at_keycenters()
+{
+	translate([hole_dist_x/2,hole_dist_y/2,0])
+	for (r=[0,180])
+	rotate([0,0,r])
+	translate([0,keycenter_off,0])
+	children();
+}
 
 module case_shape(height, radius)
 {
 	hull()
-	for (y=[-40,40])
-	translate([25,y+hole_dist_y/2,0])
-	cylinder(height, r=pod_d/2-outer_radius+radius);
+	at_keycenters()
+	cylinder(height, r=hole_dist_x/2+radius);
 }
 
 module at_extra_holes()
 {
-	for (y=[-40,40])
-	translate([25,y+hole_dist_y/2,0])
-	for(r=[0,90,180,270])
+	at_keycenters()
+	for(r=[0,90])
 	rotate([0,0,r])
-	translate([-key_pitch*3/4,-key_pitch*3/4,0])
+	translate([key_pitch*3/4,key_pitch*3/4,0])
+	children();
+
+	translate([30,hole_dist_y/2,0])
 	children();
 }
 
 module at_keys()
 {
-	for (y=[-40,40])
-	translate([25,y+hole_dist_y/2,total_height])
+	at_keycenters()
+	translate([0,0,total_height])
 	for(r=[45,135,-135,-45])
 	rotate([0,0,r])
 	translate([-key_pitch/2,-key_pitch/2,0])
 	children();
 
 	for (y=[-key_pitch/2,key_pitch/2])
-	translate([43,y+hole_dist_y/2,total_height])
+	translate([hole_dist_x-7,y+hole_dist_y/2,total_height])
 	children();
 }
 
