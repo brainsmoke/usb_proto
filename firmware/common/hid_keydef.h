@@ -29,11 +29,12 @@
  */
 
 #define HID_KEY(page, key) ( (((page)&0xffff)<<16) | ((key)&0xffff) )
+#define HID_UNDEFINED_PAGE (0x00)
 #define HID_GENERIC_DESKTOP_PAGE (0x01)
 #define HID_KEYBOARD_PAGE (0x07)
 #define HID_CONSUMER_PAGE (0x0c)
 
-#define KEY_NONE (0)
+#define KEY_NONE (0UL)
 
 /* key definitions from: https://www.usb.org/sites/default/files/hut1_4.pdf */
 #define KEY_RETURN              (HID_KEY(HID_KEYBOARD_PAGE, 0x28))
@@ -44,29 +45,30 @@
 #define KEY_NUMBER(n)           (HID_KEY(HID_KEYBOARD_PAGE, 0x1E + (n + 1) % 10))
 #define KEY_ALPHA(n)            (HID_KEY(HID_KEYBOARD_PAGE, 0x4 + (n)))
 
-#define KEY_LEFT_CONTROL        (HID_KEY(HID_KEYBOARD_PAGE, 0xE0)
-#define KEY_LEFT_SHIFT          (HID_KEY(HID_KEYBOARD_PAGE, 0xE1)
-#define KEY_LEFT_ALT            (HID_KEY(HID_KEYBOARD_PAGE, 0xE2)
-#define KEY_LEFT_WINDOWS        (HID_KEY(HID_KEYBOARD_PAGE, 0xE3)
-#define KEY_RIGHT_CONTROL       (HID_KEY(HID_KEYBOARD_PAGE, 0xE4)
-#define KEY_RIGHT_SHIFT         (HID_KEY(HID_KEYBOARD_PAGE, 0xE5)
-#define KEY_RIGHT_ALT           (HID_KEY(HID_KEYBOARD_PAGE, 0xE6)
-#define KEY_RIGHT_WINDOWS       (HID_KEY(HID_KEYBOARD_PAGE, 0xE7)
+#define KEY_LEFT_CONTROL        (HID_KEY(HID_KEYBOARD_PAGE, 0xE0))
+#define KEY_LEFT_SHIFT          (HID_KEY(HID_KEYBOARD_PAGE, 0xE1))
+#define KEY_LEFT_ALT            (HID_KEY(HID_KEYBOARD_PAGE, 0xE2))
+#define KEY_LEFT_WINDOWS        (HID_KEY(HID_KEYBOARD_PAGE, 0xE3))
+#define KEY_RIGHT_CONTROL       (HID_KEY(HID_KEYBOARD_PAGE, 0xE4))
+#define KEY_RIGHT_SHIFT         (HID_KEY(HID_KEYBOARD_PAGE, 0xE5))
+#define KEY_RIGHT_ALT           (HID_KEY(HID_KEYBOARD_PAGE, 0xE6))
+#define KEY_RIGHT_WINDOWS       (HID_KEY(HID_KEYBOARD_PAGE, 0xE7))
 
-#define KEY_PRINTSCREEN         (HID_KEY(HID_KEYBOARD_PAGE, 0x46)
-#define KEY_SCROLL_LOCK         (HID_KEY(HID_KEYBOARD_PAGE, 0x47)
+#define KEY_PRINTSCREEN         (HID_KEY(HID_KEYBOARD_PAGE, 0x46))
+#define KEY_SCROLL_LOCK         (HID_KEY(HID_KEYBOARD_PAGE, 0x47))
 
-#define KEY_INSERT              (HID_KEY(HID_KEYBOARD_PAGE, 0x49)
-#define KEY_HOME                (HID_KEY(HID_KEYBOARD_PAGE, 0x4A)
-#define KEY_PAGE_UP             (HID_KEY(HID_KEYBOARD_PAGE, 0x4B)
-#define KEY_DELETE              (HID_KEY(HID_KEYBOARD_PAGE, 0x4C)
-#define KEY_END                 (HID_KEY(HID_KEYBOARD_PAGE, 0x4D)
-#define KEY_PAGE_DOWN           (HID_KEY(HID_KEYBOARD_PAGE, 0x4E)
-#define KEY_RIGHT_ARROW         (HID_KEY(HID_KEYBOARD_PAGE, 0x4F)
-#define KEY_LEFT_ARROW          (HID_KEY(HID_KEYBOARD_PAGE, 0x50)
-#define KEY_DOWN_ARROW          (HID_KEY(HID_KEYBOARD_PAGE, 0x51)
+#define KEY_INSERT              (HID_KEY(HID_KEYBOARD_PAGE, 0x49))
+#define KEY_HOME                (HID_KEY(HID_KEYBOARD_PAGE, 0x4A))
+#define KEY_PAGE_UP             (HID_KEY(HID_KEYBOARD_PAGE, 0x4B))
+#define KEY_DELETE              (HID_KEY(HID_KEYBOARD_PAGE, 0x4C))
+#define KEY_END                 (HID_KEY(HID_KEYBOARD_PAGE, 0x4D))
+#define KEY_PAGE_DOWN           (HID_KEY(HID_KEYBOARD_PAGE, 0x4E))
+#define KEY_RIGHT_ARROW         (HID_KEY(HID_KEYBOARD_PAGE, 0x4F))
+#define KEY_LEFT_ARROW          (HID_KEY(HID_KEYBOARD_PAGE, 0x50))
+#define KEY_DOWN_ARROW          (HID_KEY(HID_KEYBOARD_PAGE, 0x51))
+#define KEY_UP_ARROW            (HID_KEY(HID_KEYBOARD_PAGE, 0x52))
 
-#define KEY_CAPSLOCK            (HID_KEY(HID_KEYBOARD_PAGE, 0x39)
+#define KEY_CAPSLOCK            (HID_KEY(HID_KEYBOARD_PAGE, 0x39))
 
 /*  don't invoke with side-effect in argmuent */
 #define KEY_FUNCTION(n)         (HID_KEY(HID_KEYBOARD_PAGE, \
@@ -74,7 +76,7 @@
 	n <= 12 ? 0x3A+(n-1)  : \
 	n <= 24 ? 0x68+(n-13) : \
 	KEY_NONE \
-)
+))
 
 /* keyboard keys, not actual characters, don't invoke with side-effect in argmuent */
 #define KEY(c) ( \
