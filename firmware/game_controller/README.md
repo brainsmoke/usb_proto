@@ -1,8 +1,10 @@
 # Game controller
 
+![A case resembling a game controller, but all the controls are cherry mx style keyswitches](/img/game_controller.jpg)
+
 # schematic
 
-TODO
+![buttons in pull-down configuration](circuit.png)
 
 # 3D printed case:
 
