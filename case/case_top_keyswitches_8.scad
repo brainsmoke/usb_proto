@@ -11,13 +11,12 @@ grid_x_off=0;
 grid_width=1.2;
 
 panel_dim = key_pitch-grid_width;
-panel_thickness = 1.5;
 
 flip() top()
 {
 	for (x = [ 1, 3, 5, 7 ])
 	for (y = [ 1, 3 ])
 	translate(grid_pos(x,y))
-	keyswitch_panel(panel_dim, panel_thickness);
+	keyswitch_panel(panel_dim);
 };
 

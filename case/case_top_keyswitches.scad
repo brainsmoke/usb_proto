@@ -11,7 +11,6 @@ grid_x_off=2;
 grid_width=1.2;
 
 panel_dim = key_pitch-grid_width;
-panel_thickness = 1.5;
 
 flip() top()
 {
@@ -21,6 +20,6 @@ flip() top()
 	for (x = [ 2, 4, 6 ])
 	for (y = [ 1, 3 ])
 	translate(grid_pos(x,y))
-	keyswitch_panel(panel_dim, panel_thickness);
+	keyswitch_panel(panel_dim);
 };
 

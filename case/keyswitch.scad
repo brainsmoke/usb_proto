@@ -78,25 +78,25 @@ module mx_keepout(fix_pins=true)
 	}
 }
 
-module keyswitch_panel(size=u, thickness=1.5, hole_size=mx_panel_hole)
+module keyswitch_panel(size=u, hole_size=mx_panel_hole)
 {
 	graft()
 	{
 		graft_add()
 		{
-			translate([-size/2, -size/2, -thickness-e])
-			cube([size, size, thickness+e]);
+			translate([-size/2, -size/2, -mx_panel_thickness-e])
+			cube([size, size, mx_panel_thickness+e]);
 		}
 		graft_remove()
 		{
-			cube([hole_size, hole_size, thickness*3+b], center=true);
-			translate([-size/2, -size/2, -thickness*2])
-			cube([size, size, thickness]);
+			cube([hole_size, hole_size, mx_panel_thickness*3+b], center=true);
+			translate([-size/2, -size/2, -mx_panel_thickness*2])
+			cube([size, size, mx_panel_thickness]);
 		}
 	}
 }
 
-module keyswitch_flush(size=u, thickness=1.5, border=0.8, clearance=0)
+module keyswitch_flush(size=u, border=0.8, clearance=0)
 {
 	z_off = clearance - mx_travel - mx_keycap_clearance_bottom;
 

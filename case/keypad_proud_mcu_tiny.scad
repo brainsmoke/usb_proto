@@ -18,7 +18,6 @@ grid_x_off=0;
 grid_width=1.2;
 
 panel_dim = key_pitch-grid_width;
-panel_thickness = 1.5;
 
 module at_keys()
 {
@@ -31,7 +30,7 @@ module at_keys()
 module top_features()
 {
 	at_keys()
-	keyswitch_panel(panel_dim, panel_thickness);
+	keyswitch_panel(panel_dim);
 }
 
 module mockup()
