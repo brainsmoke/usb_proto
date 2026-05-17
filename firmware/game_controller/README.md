@@ -2,6 +2,9 @@
 
 ![A case resembling a game controller, but all the controls are cherry mx style keyswitches](/img/game_controller.jpg)
 
+
+![The same case, opened, the mcu_tiny board visible inside](/img/game_controller_open.jpg)
+
 # schematic
 
 ![buttons in pull-down configuration](circuit.png)
