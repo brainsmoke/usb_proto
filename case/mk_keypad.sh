@@ -15,12 +15,18 @@ if ! which openscad; then
 	exit 1
 fi
 
-echo generating keypad_"$n_keys"_keys_top.stl >&2
-openscad -o keypad_"$n_keys"_keys_top.stl -D n_keys="$n_keys" keypad_flush_top_mcu_tiny.scad &
-echo generating keypad_"$n_keys"_keys_bottom.stl >&2
-openscad -o keypad_"$n_keys"_keys_bottom.stl -D n_keys="$n_keys" keypad_flush_bottom_mcu_tiny.scad &
-echo generating keypad_"$n_keys"_keys.stl >&2
-openscad -o keypad_"$n_keys"_keys.stl -D n_keys="$n_keys" keypad_flush_mcu_tiny.scad &
+gen() {
+	name="$1"
+	n_keys="$2"
 
+	echo generating "$name"_"$n_keys".stl >&2
+	openscad -o "$name"_"$n_keys".stl -D n_keys="$n_keys" "$name".scad &
+}
+
+gen keypad "$n_keys"
+gen keypad_top "$n_keys"
+gen keypad_bottom "$n_keys"
+
+wait
 wait
 wait
