@@ -1,10 +1,11 @@
 
-use <keypad_proud_mcu_tiny.scad>
+use <keypad.scad>
 
 flip()
 {
 	top()
 	top_features();
+
 	mockup();
 }
 

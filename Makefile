@@ -36,8 +36,8 @@ mcu/case_almost_regular_hexagon \
 mcu/case_top_keyswitches \
 mcu/case_top_keyswitches_8 \
 mcu/case_top_led_connector \
-mcu_tiny/keypad_flush_mcu_tiny \
-mcu_tiny/keypad_proud_mcu_tiny \
+mcu_tiny/keypad \
+mcu_tiny/old_keypad \
 mcu_tiny/game_controller \
 mcu_tiny/single_key
 

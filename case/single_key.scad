@@ -1,5 +1,5 @@
 
-include <keypad_flush_mcu_tiny.scad>
+include <keypad.scad>
 
 n_keys=1;
 
