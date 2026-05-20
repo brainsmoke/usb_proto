@@ -50,6 +50,7 @@ thread = 3;
 head_diameter = 6;
 head_thickness = 2.5;
 screw_clearance = .25;
+screw_guaranteed_depth = 10;
 
 button_pitch=4*2.54;
 button_w=5;
@@ -82,6 +83,7 @@ light_pipe_base_border = 3.2;
 light_pipe_depth = total_height-component_z-led_height;
 light_pipe_base_height = light_pipe_depth/3;
 
+assert(screw_guaranteed_depth <= total_height - top_thickness);
 
 function breadboard_pos(x, y) = [ 11 + 2.54*x, hole_dist_y/2 + (8.5-y)*2.54, component_z ];
 
@@ -225,6 +227,7 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 		[padding+screw_grab_radius,       z3],
 		[padding+screw_grab_radius,       total_height-top_thickness-funnel_top_height-dz2],
 
+		[padding+funnel_top_inner_radius, total_height-top_thickness],
 		[padding+funnel_top_inner_radius, total_height-top_thickness+top_epsilon],
 		[0,                               total_height-top_thickness+top_epsilon],
 
@@ -233,19 +236,41 @@ module screw_shape(padding=0, bottom_epsilon=0, top_epsilon=0)
 	rotate_extrude() polygon(path);
 }
 
+module screw_guaranteed_cutout()
+{
+	intersection()
+	{
+		screw_shape(0, bottom_epsilon=b);
+		translate([0,0,-e]) cylinder(screw_guaranteed_depth+e, r=leg_thickness+head_diameter/2+1);
+	}
+}
+
+module screw_opportunistic_cutout()
+{
+	difference()
+	{
+		screw_shape(0, bottom_epsilon=b);
+		translate([0,0,-b-e]) cylinder(screw_guaranteed_depth+b+e, r=leg_thickness+head_diameter/2+1);
+	}
+}
+
 module leg()
 {
 	graft()
 	{
 		graft_add()
-		intersection()
+		difference()
 		{
-			screw_shape(leg_thickness, bottom_epsilon=b, top_epsilon=b);
-			translate([0,0,e]) cylinder(component_z-2*e, r=leg_thickness+head_diameter/2+1);
+			intersection()
+			{
+				screw_shape(leg_thickness);
+				translate([0,0,e]) cylinder(component_z-2*e, r=leg_thickness+head_diameter/2+1);
+			}
+			screw_opportunistic_cutout();
 		}
 
 		graft_remove()
-		screw_shape(0, bottom_epsilon=b);
+		screw_guaranteed_cutout();
 	}
 }
 
@@ -254,14 +279,19 @@ module screw_guide()
 	graft()
 	{
 		graft_add()
-		intersection()
+		difference()
 		{
-			screw_shape(leg_thickness);
-			translate([0,0,component_z])
-			cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
+			intersection()
+			{
+				screw_shape(leg_thickness);
+				translate([0,0,component_z])
+				cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
+			}
+			screw_opportunistic_cutout();
 		}
+
 		graft_remove()
-		screw_shape(0, bottom_epsilon=b);
+		screw_guaranteed_cutout();
 	}
 }
 
