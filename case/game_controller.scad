@@ -1,11 +1,12 @@
 
 key_pitch = 20;
 
+controller_width=140;
+
 include <case_tiny_base.scad>
 use <keyswitch.scad>
 
 total_height=17;
-controller_width=140;
 hole_dist_x = 50;
 
 keycenter_off = controller_width/2-hole_dist_x/2-outer_radius;
@@ -19,6 +20,10 @@ grid_x_off=0;
 grid_width=.8;
 
 panel_dim = key_pitch-0.8;
+
+bounding_box = [ [            -outer_radius, hole_dist_y/2-controller_width/2, 0           ],
+                 [ hole_dist_x+outer_radius, hole_dist_y/2+controller_width/2, total_height] ];
+
 
 module at_keycenters()
 {

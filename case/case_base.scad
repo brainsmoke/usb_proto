@@ -76,13 +76,13 @@ component_z = bottom_thickness+leg_height+pcb_thickness;
 
 button_depth = total_height-component_z-button_height;
 
-bounded_box = [ [            -outer_radius,            -outer_radius, 0           ],
-                [ hole_dist_x+outer_radius, hole_dist_y+outer_radius, total_height] ];
+bounding_box = [ [            -outer_radius,            -outer_radius, 0           ],
+                 [ hole_dist_x+outer_radius, hole_dist_y+outer_radius, total_height] ];
 
 dfu_button_pos = [ 7, 0 ];
 dfu_button_angle = 180;
 
-grid_dim = bounded_box;
+grid_dim = bounding_box;
 grid_x_off = 0;
 grid_y_off = 0;
 grid_rows = 4;

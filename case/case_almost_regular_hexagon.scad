@@ -3,6 +3,9 @@ include <case_base.scad>
 
 grid_rows = 10;
 
+bounding_box = [ [            -outer_radius, -outer_radius-hole_dist_y*.5, 0           ],
+                 [ hole_dist_x+outer_radius,  outer_radius+hole_dist_y*1.5, total_height] ];
+
 preview()
 {
 	pcb();
