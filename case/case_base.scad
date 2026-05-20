@@ -398,6 +398,7 @@ module bottom_extra() { }
 
 module bottom()
 {
+	render()
 	graft()
 	{
 		at_holes() leg();
@@ -436,6 +437,7 @@ module top_extra() { }
 
 module top()
 {
+	render()
 	graft()
 	{
 		graft_base()
