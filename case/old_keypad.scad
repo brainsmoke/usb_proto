@@ -21,9 +21,9 @@ panel_dim = key_pitch-grid_width;
 
 module at_keys()
 {
-	for (x = [ 1 : 2 : n_keys*2-1 ])
-	for (y = [ 1 ])
-	translate(grid_pos(x,y))
+	for (x = [ 0 : n_keys-1 ])
+	for (y = [ 0 ])
+	translate([x*key_pitch+key_pitch/2,y*key_pitch+key_pitch/2,total_height])
 	children();
 }
 

@@ -65,9 +65,13 @@ component_z = bottom_thickness+leg_height+pcb_thickness;
 
 button_depth = total_height-component_z-button_height;
 
+bounded_box = [ [            -outer_radius,            -outer_radius, 0           ],
+                [ hole_dist_x+outer_radius, hole_dist_y+outer_radius, total_height] ];
+
 dfu_button_pos = [ 7, 0 ];
 dfu_button_angle = 180;
 
+grid_dim = bounded_box;
 grid_x_off = 0;
 grid_y_off = 0;
 grid_rows = 4;
@@ -86,8 +90,6 @@ light_pipe_base_height = light_pipe_depth/3;
 assert(screw_guaranteed_depth <= total_height - top_thickness);
 
 function breadboard_pos(x, y) = [ 11 + 2.54*x, hole_dist_y/2 + (8.5-y)*2.54, component_z ];
-
-function grid_pos(x, y) = [ hole_dist_x/2+grid_x_off+grid_pitch*(x-(grid_cols-1)/2), hole_dist_y/2+grid_y_off+grid_pitch*(y-(grid_rows-1)/2), total_height ];
 
 module preview()
 {
@@ -396,6 +398,16 @@ module pcb_keepout()
 
 module bottom_extra() { }
 
+module case_grid(thickness)
+{
+	x=grid_dim[0][0];
+	y=grid_dim[0][1];
+	w=grid_dim[1][0]-grid_dim[0][0];
+	d=grid_dim[1][1]-grid_dim[0][1];
+	translate([x,y,0])
+	grid(w,d, thickness, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
+}
+
 module bottom()
 {
 	render()
@@ -411,16 +423,13 @@ module bottom()
 				translate([0,0,bottom_thickness])
 				case_shape(total_height-top_border_height, inner_radius);
 			}
-			width = max( 2*outer_radius + hole_dist_x, grid_cols * grid_pitch + grid_x_off*2);
-			depth = max( 2*outer_radius + hole_dist_y, grid_rows * grid_pitch + grid_y_off*2);
-
 			intersection()
 			{
 				translate([0,0,-e])
 				case_shape(total_height+2*e, (outer_radius+inner_radius)/2);
 
-				translate([-(width-hole_dist_x)/2+e,-(depth-hole_dist_y)/2+e,bottom_thickness-e])
-				grid(width-e*2, depth-e*2, grid_height_bottom+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
+				translate([0,0,bottom_thickness-e])
+				case_grid(grid_height_bottom+e);
 			}
 		}
 		on_pcb() at_front() usb_c_keepout();
@@ -454,17 +463,13 @@ module top()
 				translate([0,0,total_height-top_border_height-top_ledge_height-b])
 					case_shape(top_ledge_height+top_border_height-top_thickness+b, inner_radius-top_ledge_thickness+e);
 			}
-
-			width = max( 2*outer_radius + hole_dist_x, grid_cols * grid_pitch + grid_x_off*2);
-			depth = max( 2*outer_radius + hole_dist_y, grid_rows * grid_pitch + grid_y_off*2);
-
 			intersection()
 			{
 				translate([0,0,-e])
 				case_shape(total_height+2*e, inner_radius-top_ledge_thickness/2);
 
-				translate([-(width-hole_dist_x)/2+e,-(depth-hole_dist_y)/2+e,total_height-top_thickness-grid_height_top])
-				grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
+				translate([0,0,total_height-top_thickness-grid_height_top])
+				case_grid(grid_height_top+e);
 			}
 		}
 
