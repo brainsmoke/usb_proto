@@ -30,9 +30,11 @@ total_height = 16;
 button_height=2;
 led_height = 1.2;
 
-top_edge_height = 2.5;
-top_edge_thickness = 1.;
-top_edge_margin = 0.;
+top_border_height = .8;
+
+top_ledge_height = 2.5;
+top_ledge_thickness = 1.;
+top_ledge_margin = 0.;
 
 leg_height = 3;
 leg_thickness = 1.2;
@@ -374,9 +376,9 @@ module bottom()
 		{
 			difference()
 			{
-				case_shape(total_height-top_thickness, outer_radius);
+				case_shape(total_height-top_border_height, outer_radius);
 				translate([0,0,bottom_thickness])
-				case_shape(total_height-top_thickness, inner_radius);
+				case_shape(total_height-top_border_height, inner_radius);
 			}
 			width = max( 2*outer_radius + hole_dist_x, grid_cols * grid_pitch + grid_x_off*2);
 			depth = max( 2*outer_radius + hole_dist_y, grid_rows * grid_pitch + grid_y_off*2);
@@ -411,14 +413,14 @@ module top()
 			difference()
 			{
 				union()
-				translate([0,0,total_height-top_thickness])
+				translate([0,0,total_height-top_border_height])
 				{
-					case_shape(top_thickness, outer_radius);
-					translate([0,0,-top_edge_height])
-						case_shape(top_edge_height+top_thickness/2, inner_radius);
+					case_shape(top_border_height, outer_radius);
+					translate([0,0,-top_ledge_height])
+						case_shape(top_ledge_height+top_border_height/2, inner_radius);
 				}
-				translate([0,0,total_height-top_thickness-top_edge_height-b])
-					case_shape(top_edge_height+b, inner_radius-top_edge_thickness+e);
+				translate([0,0,total_height-top_border_height-top_ledge_height-b])
+					case_shape(top_ledge_height+top_border_height-top_thickness+b, inner_radius-top_ledge_thickness+e);
 			}
 
 			width = max( 2*outer_radius + hole_dist_x, grid_cols * grid_pitch + grid_x_off*2);
@@ -427,7 +429,7 @@ module top()
 			intersection()
 			{
 				translate([0,0,-e])
-				case_shape(total_height+2*e, inner_radius-top_edge_thickness/2);
+				case_shape(total_height+2*e, inner_radius-top_ledge_thickness/2);
 
 				translate([-(width-hole_dist_x)/2+e,-(depth-hole_dist_y)/2+e,total_height-top_thickness-grid_height_top])
 				grid(width-e*2, depth-e*2, grid_height_top+e, grid_rows, grid_cols, grid_pitch, bar_width=grid_width, x_off=grid_x_off, y_off=grid_y_off);
