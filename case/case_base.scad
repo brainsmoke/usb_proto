@@ -30,7 +30,7 @@ total_height = 16;
 button_height=2;
 led_height = 1.2;
 
-top_border_height = 2;
+top_border_height = .8;
 
 top_ledge_height = 2.5;
 top_ledge_thickness = 1.;
