@@ -7,7 +7,7 @@ git submodule init
 git submodule update
 make -C ../libopencm3/ # if not done already
 make
-```
+
 # using DFU
 # push DFU boot button while inserting the device
 make dfu_flash
