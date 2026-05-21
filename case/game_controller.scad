@@ -1,11 +1,14 @@
 
-chamfer = 1.2;
 key_pitch = 20;
 
 controller_width=140;
 
 include <case_tiny_base.scad>
 use <keyswitch.scad>
+
+chamfer = 1.2;
+
+top_border_height = 2.;
 
 total_height=17;
 hole_dist_x = 50;
