@@ -51,15 +51,23 @@ Cases: [keypad (keycaps flush)](build/mcu_tiny/keypad.stl) [keypad (keyswitches 
 The first version of the protoboard did not have a microcontroller:
 [pcb/simple](pcb/simple)
 
-# Firmware (still untested!)
+# Firmware (seems to work, no guarantees!)
 
 * [usb_serial](firmware/usb_serial) USB serial to UART adapter firmware, with RTS/DTR signals & reset/boot signals for directly programming ESP32s.
 * [usb_hid_keymatrix](firmware/usb_hid_keymatrix) USB HID Keypad firmware, for a keyboard matrix
 * [usb_hid_simple](firmware/usb_hid_simple) USB HID Keypad firmware for a few buttons
+* [flappy](firmware/flappy) Flappy bird controller / spacebar only USB HID Keypad
+* [game_controller](firmware/game_controller) Gamepad controller / USB HID Keypad
+* [popcalc](firmware/popcalc) USB device that 'pops calc'
+* [led_segment_tester](firmware/led_segment_tester) tester firmware for a LED installation
+* [obegraensad](firmware/obegraensad) USB-serial to 16 bit IKEA OBEGRÄNSAD display driver
+
 
 # License
 
 * The hardware (schematic / PCB / production files / case models ) is Licensed CC-BY-4.0
 * The firmware (in the firmware directory) uses libopencm3 which is licensed LGPLv3 and
   all code specific to this project is distributed under the MIT license.
+* This repo contains nothing vibe-coded
+* LLM assisted contributions not welcome
 
