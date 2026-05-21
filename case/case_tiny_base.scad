@@ -19,7 +19,7 @@ has_dfu_button = true;
 
 grid_x_off = 2;
 grid_cols = 10;
-grid_height_bottom = 1.4;
+grid_height_bottom = 1.;
 
 module at_pcb_holes()
 {
@@ -46,6 +46,20 @@ module pcb_clip()
 		block([2.5,12,component_z-bottom_thickness-pcb_thickness+e],[1,0,-1]);
 	}
 
+	graft_add()
+	for (y=[-10,10])
+	{
+		translate([pcb_depth-pcb_radius-pcb_radius_back,hole_dist_y/2+y,bottom_thickness])
+		{
+			block([4,0.8,component_z-bottom_thickness-pcb_thickness+e],[-1,0,-1]);
+
+			hull()
+			{
+				block([.8,.8,component_z-bottom_thickness-pcb_thickness+e],[-1,0,-1]);
+				block([.8,4, e],[-1,0,-1]);
+			}
+		}
+	}
 }
 
 module bottom_extra()

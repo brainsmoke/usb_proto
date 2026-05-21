@@ -15,10 +15,12 @@ grid_rows=3;
 grid_cols=n_keys*2+1;
 grid_pitch=key_pitch/2;
 grid_x_off=0;
-grid_width=1.2;
+grid_width=.8;
 
 panel_dim = key_pitch-0.8;
 panel_thickness = 1.5;
+
+grid_height_bottom=0.8;
 
 module at_keys()
 {

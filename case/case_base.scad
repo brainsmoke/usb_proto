@@ -36,16 +36,16 @@ top_ledge_height = 2.5;
 top_ledge_thickness = 1.;
 top_ledge_margin = 0.;
 
-chamfer = 1.2;
+chamfer = 0;
 
-chamfer_w = chamfer;
-chamfer_h = chamfer;
+chamfer_top = chamfer;
+chamfer_bottom = chamfer;
 
-chamfer_top_w = chamfer_w;
-chamfer_top_h = chamfer_h;
+chamfer_top_w = chamfer_top;
+chamfer_top_h = chamfer_top;
 
-chamfer_bottom_w = chamfer_w;
-chamfer_bottom_h = chamfer_h;
+chamfer_bottom_w = chamfer_bottom;
+chamfer_bottom_h = chamfer_bottom;
 
 leg_height = 3;
 leg_thickness = 1.2;
@@ -61,7 +61,8 @@ thread = 3;
 head_diameter = 6;
 head_thickness = 2.5;
 screw_clearance = .25;
-screw_guaranteed_depth = 10;
+screw_min_grip = 3;
+screw_min_guaranteed_depth = 10;
 
 button_pitch=4*2.54;
 button_w=5;
@@ -73,6 +74,8 @@ screw_grab_radius = (thread*0.9)/2;
 screw_loose_radius = (thread/0.9)/2;
 funnel_top_inner_radius = funnel_top_radius-leg_thickness;
 component_z = bottom_thickness+leg_height+pcb_thickness;
+
+screw_guaranteed_depth = max(screw_min_guaranteed_depth, component_z + screw_min_grip);
 
 button_depth = total_height-component_z-button_height;
 

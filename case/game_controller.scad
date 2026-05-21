@@ -1,4 +1,5 @@
 
+chamfer = 1.2;
 key_pitch = 20;
 
 controller_width=140;
@@ -19,6 +20,8 @@ grid_pitch=key_pitch/2;
 grid_x_off=0;
 grid_width=.8;
 
+leg_height=6;
+
 panel_dim = key_pitch-0.8;
 
 bounding_box = [ [            -outer_radius, hole_dist_y/2-controller_width/2, 0           ],
@@ -38,7 +41,7 @@ module case_shape(height, radius)
 {
 	hull()
 	at_keycenters()
-	cylinder(height, r=hole_dist_x/2+radius);
+	cylinder(height, r=hole_dist_x/2+radius, $fn=100);
 }
 
 module at_extra_holes()
