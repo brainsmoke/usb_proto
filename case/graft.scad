@@ -12,12 +12,12 @@ module graft()
 			{
 				union()
 				{
-					$_graft = "base";
+					$_graft = "base_add";
 					children();
 				}
 				union()
 				{
-					$_graft = "base_carve";
+					$_graft = "base_remove";
 					children();
 				}
 			}
@@ -29,7 +29,7 @@ module graft()
 		}
 		union()
 		{
-			$_graft = "carve";
+			$_graft = "remove";
 			children();
 		}
 	}
@@ -41,9 +41,9 @@ module graft()
 	}
 }
 
-module graft_base()
+module graft_base_add()
 {
-	if ($_graft == "base")
+	if ($_graft == "base_add")
 	{
 		$_graft = undef;
 		children();
@@ -61,16 +61,16 @@ module graft_add()
 
 module graft_remove()
 {
-	if ($_graft == "carve")
+	if ($_graft == "remove")
 	{
 		$_graft = undef;
 		children();
 	}
 }
 
-module graft_base_carve()
+module graft_base_remove()
 {
-	if ($_graft == "base_carve")
+	if ($_graft == "base_remove")
 	union()
 	{
 		$_graft = undef;

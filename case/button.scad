@@ -71,7 +71,7 @@ module button(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, wall_
 {
 	graft()
 	{
-		graft_base_carve()
+		graft_base_remove()
 			button_carveout(w, d, thickness, height, top_width, top_height, gap, wall_thickness, flex_thickness);
 
 		graft_add()
@@ -90,7 +90,7 @@ pitch=4*2.54;
 flip()
 graft()
 {
-	graft_base()
+	graft_base_add()
 	translate([-20,-10, -thickness])
 	cube([40,20,thickness]);
 
