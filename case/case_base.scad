@@ -286,17 +286,16 @@ module leg()
 {
 	graft()
 	{
-		graft_add()
-		difference()
+		graft_base_add()
+		intersection()
 		{
-			intersection()
-			{
-				screw_shape(leg_thickness);
-				translate([0,0,bottom_thickness])
-				cylinder(component_z-e-bottom_thickness, r=leg_thickness+head_diameter/2+1);
-			}
-			screw_opportunistic_cutout();
+			screw_shape(leg_thickness);
+			translate([0,0,bottom_thickness])
+			cylinder(component_z-e-bottom_thickness, r=leg_thickness+head_diameter/2+1);
 		}
+
+		graft_base_remove()
+		screw_opportunistic_cutout();
 
 		graft_remove()
 		screw_guaranteed_cutout();
@@ -307,17 +306,16 @@ module screw_guide()
 {
 	graft()
 	{
-		graft_add()
-		difference()
+		graft_base_add()
+		intersection()
 		{
-			intersection()
-			{
-				screw_shape(leg_thickness);
-				translate([0,0,component_z])
-				cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
-			}
-			screw_opportunistic_cutout();
+			screw_shape(leg_thickness);
+			translate([0,0,component_z])
+			cylinder(total_height-component_z-e, r=max(screw_loose_radius,funnel_top_inner_radius)+leg_thickness+1);
 		}
+
+		graft_base_remove()
+		screw_opportunistic_cutout();
 
 		graft_remove()
 		screw_guaranteed_cutout();
@@ -446,12 +444,8 @@ module bottom()
 		{
 			difference()
 			{
-				union()
-				{
-					translate([0,0,chamfer_bottom_h])
-					case_shape(total_height-top_border_height-chamfer_bottom_h, outer_radius);
-					case_shape_chamfer(chamfer_bottom_h, outer_radius-chamfer_bottom_w, outer_radius);
-				}
+				case_shape(total_height-top_border_height, outer_radius);
+
 				translate([0,0,bottom_thickness])
 				union()
 				{
@@ -462,25 +456,28 @@ module bottom()
 					case_shape_chamfer(chamfer_inner_h, inner_radius-chamfer_inner_w, inner_radius);
 				}
 			}
+
 			intersection()
 			{
-				translate([0,0,e])
-				union()
-				{
-					translate([0,0,chamfer_bottom_h])
-					case_shape(total_height-top_border_height-chamfer_bottom_h, outer_radius);
-					case_shape_chamfer(chamfer_bottom_h, outer_radius-chamfer_bottom_w, outer_radius);
-				}
+				translate([0,0,-e])
+				case_shape(total_height+2*e, (outer_radius+inner_radius)/2);
 
 				translate([0,0,bottom_thickness-e])
 				case_grid(grid_height_bottom+e);
 			}
 		}
+
+		graft_base_remove()
+		difference()
+		{
+			case_shape(chamfer_bottom_h, outer_radius+b);
+			case_shape_chamfer(chamfer_bottom_h, outer_radius-chamfer_bottom_w, outer_radius);
+		}
+
 		on_pcb() at_front() usb_c_keepout();
+		pcb_keepout();
 
 		bottom_extra();
-
-		pcb_keepout();
 
 		children();
 	}
@@ -500,9 +497,7 @@ module top()
 				union()
 				{
 					translate([0,0,total_height-top_border_height])
-					case_shape(top_border_height-chamfer_top_h, outer_radius);
-					translate([0,0,total_height-chamfer_top_h])
-					case_shape_chamfer(chamfer_top_h, outer_radius, outer_radius-chamfer_top_w);
+					case_shape(top_border_height, outer_radius);
 					translate([0,0,total_height-top_border_height-top_ledge_height])
 					case_shape(top_ledge_height+e, inner_radius);
 				}
@@ -532,6 +527,15 @@ module top()
 				translate([0,0,total_height-top_thickness-grid_height_top])
 				case_grid(grid_height_top+e);
 			}
+		}
+
+		graft_base_remove()
+		difference()
+		{
+			translate([0,0,total_height-chamfer_top_h])
+			case_shape(chamfer_top_h+e, outer_radius+b);
+			translate([0,0,total_height-chamfer_top_h])
+			case_shape_chamfer(chamfer_top_h, outer_radius, outer_radius-chamfer_top_w);
 		}
 
 		at_holes() screw_guide();
