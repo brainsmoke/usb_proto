@@ -444,7 +444,7 @@ module bottom()
 		{
 			difference()
 			{
-				case_shape(total_height-top_border_height, outer_radius);
+				case_shape(total_height-top_border_height-chamfer_top_h, outer_radius);
 
 				translate([0,0,bottom_thickness])
 				union()
@@ -452,7 +452,7 @@ module bottom()
 					chamfer_inner_h = max(0, chamfer_bottom_h-bottom_thickness);
 					chamfer_inner_w = chamfer_bottom_w/chamfer_bottom_h * chamfer_inner_h;
 					translate([0,0,chamfer_inner_h])
-					case_shape(total_height-top_border_height-chamfer_inner_h, inner_radius);
+					case_shape(total_height-top_border_height-chamfer_top_h-chamfer_inner_h, inner_radius);
 					case_shape_chamfer(chamfer_inner_h, inner_radius-chamfer_inner_w, inner_radius);
 				}
 			}
@@ -496,9 +496,9 @@ module top()
 			{
 				union()
 				{
-					translate([0,0,total_height-top_border_height])
-					case_shape(top_border_height, outer_radius);
-					translate([0,0,total_height-top_border_height-top_ledge_height])
+					translate([0,0,total_height-top_border_height-chamfer_top_h])
+					case_shape(top_border_height+chamfer_top_h, outer_radius);
+					translate([0,0,total_height-top_border_height-chamfer_top_h-top_ledge_height])
 					case_shape(top_ledge_height+e, inner_radius);
 				}
 
@@ -509,13 +509,13 @@ module top()
 						chamfer_inner_h = max(0, chamfer_top_h-top_thickness);
 						chamfer_inner_w = chamfer_top_w/chamfer_top_h * chamfer_inner_h;
 
-						translate([0,0,total_height-top_border_height-top_ledge_height-b])
-						case_shape(top_ledge_height+top_border_height-top_thickness-chamfer_inner_h+b, inner_radius+e);
+						translate([0,0,total_height-top_border_height-chamfer_top_h-top_ledge_height-b])
+						case_shape(top_ledge_height+top_border_height+chamfer_top_h-top_thickness-chamfer_inner_h+b, inner_radius+e);
 						translate([0,0,total_height-top_thickness-chamfer_inner_h])
 						case_shape_chamfer(chamfer_inner_h, inner_radius, inner_radius-chamfer_inner_w);
 					}
-					translate([0,0,total_height-top_border_height-top_ledge_height-e])
-					case_shape(top_ledge_height+top_border_height+e, inner_radius-top_ledge_thickness);
+					translate([0,0,total_height-top_border_height-chamfer_top_h-top_ledge_height-e])
+					case_shape(top_ledge_height+top_border_height+chamfer_top_h+e, inner_radius-top_ledge_thickness);
 				}
 			}
 

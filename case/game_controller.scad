@@ -8,8 +8,6 @@ use <keyswitch.scad>
 
 chamfer = 1.2;
 
-top_border_height = 2.;
-
 total_height=17;
 hole_dist_x = 50;
 
