@@ -101,6 +101,12 @@ light_pipe_base_border = 3.2;
 light_pipe_depth = total_height-component_z-led_height;
 light_pipe_base_height = light_pipe_depth/3;
 
+chamfer_bottom_inner_h = max(0, chamfer_bottom_h-bottom_thickness);
+chamfer_bottom_inner_w = chamfer_bottom_w/chamfer_bottom_h * chamfer_bottom_inner_h;
+
+chamfer_top_inner_h = max(0, chamfer_top_h-top_thickness);
+chamfer_top_inner_w = chamfer_top_w/chamfer_top_h * chamfer_top_inner_h;
+
 assert(screw_guaranteed_depth <= total_height - top_thickness);
 
 function breadboard_pos(x, y) = [ 11 + 2.54*x, hole_dist_y/2 + (8.5-y)*2.54, component_z ];
@@ -275,11 +281,16 @@ module screw_guaranteed_cutout()
 
 module screw_opportunistic_cutout()
 {
-	difference()
+	intersection()
 	{
 		screw_shape(0, bottom_epsilon=b);
-		translate([0,0,-b-e]) cylinder(screw_guaranteed_depth+b+e, r=leg_thickness+head_diameter/2+1);
+		union()
+		{
+			translate([0,0,screw_guaranteed_depth]) cylinder(total_height-chamfer_top_h-screw_guaranteed_depth, r=inner_radius+e);
+			translate([0,0,total_height-chamfer_top_h]) cylinder(chamfer_top_inner_h, r1=inner_radius+e, r2=inner_radius-chamfer_top_inner_w);
+		}
 	}
+
 }
 
 module leg()
@@ -449,11 +460,9 @@ module bottom()
 				translate([0,0,bottom_thickness])
 				union()
 				{
-					chamfer_inner_h = max(0, chamfer_bottom_h-bottom_thickness);
-					chamfer_inner_w = chamfer_bottom_w/chamfer_bottom_h * chamfer_inner_h;
-					translate([0,0,chamfer_inner_h])
-					case_shape(total_height-top_border_height-chamfer_top_h-chamfer_inner_h, inner_radius);
-					case_shape_chamfer(chamfer_inner_h, inner_radius-chamfer_inner_w, inner_radius);
+					translate([0,0,chamfer_bottom_inner_h])
+					case_shape(total_height-top_border_height-chamfer_top_h-chamfer_bottom_inner_h, inner_radius);
+					case_shape_chamfer(chamfer_bottom_inner_h, inner_radius-chamfer_bottom_inner_w, inner_radius);
 				}
 			}
 
@@ -506,13 +515,10 @@ module top()
 				{
 					union()
 					{
-						chamfer_inner_h = max(0, chamfer_top_h-top_thickness);
-						chamfer_inner_w = chamfer_top_w/chamfer_top_h * chamfer_inner_h;
-
 						translate([0,0,total_height-top_border_height-chamfer_top_h-top_ledge_height-b])
-						case_shape(top_ledge_height+top_border_height+chamfer_top_h-top_thickness-chamfer_inner_h+b, inner_radius+e);
-						translate([0,0,total_height-top_thickness-chamfer_inner_h])
-						case_shape_chamfer(chamfer_inner_h, inner_radius, inner_radius-chamfer_inner_w);
+						case_shape(top_ledge_height+top_border_height+chamfer_top_h-top_thickness-chamfer_top_inner_h+b, inner_radius+e);
+						translate([0,0,total_height-top_thickness-chamfer_top_inner_h])
+						case_shape_chamfer(chamfer_top_inner_h, inner_radius, inner_radius-chamfer_top_inner_w);
 					}
 					translate([0,0,total_height-top_border_height-chamfer_top_h-top_ledge_height-e])
 					case_shape(top_ledge_height+top_border_height+chamfer_top_h+e, inner_radius-top_ledge_thickness);
