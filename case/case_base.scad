@@ -107,7 +107,8 @@ chamfer_bottom_inner_w = chamfer_bottom_w/chamfer_bottom_h * chamfer_bottom_inne
 chamfer_top_inner_h = max(0, chamfer_top_h-top_thickness);
 chamfer_top_inner_w = chamfer_top_w/chamfer_top_h * chamfer_top_inner_h;
 
-assert(inner_radius-chamfer_top_inner_w > 0, "Chamfer too big");
+assert((chamfer_top_h == 0) || (inner_radius-chamfer_top_inner_w > 0), "Chamfer too big");
+assert((chamfer_bottom_h == 0) || (inner_radius-chamfer_bottom_inner_w > 0), "Chamfer too big");
 assert(screw_guaranteed_depth <= total_height - top_thickness, "No room for screws");
 
 function breadboard_pos(x, y) = [ 11 + 2.54*x, hole_dist_y/2 + (8.5-y)*2.54, component_z ];
