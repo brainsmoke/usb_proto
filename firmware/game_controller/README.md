@@ -3,7 +3,7 @@
 ![A case resembling a game controller, but all the controls are cherry mx style keyswitches](/img/game_controller.jpg)
 
 
-![The same case, opened, the mcu_tiny board visible inside](/img/game_controller_open.jpg)
+![The same case, opened, the usb_proto board visible inside](/img/game_controller_open.jpg)
 
 # schematic
 
@@ -11,7 +11,7 @@
 
 # 3D printed case:
 
-[game controller](/build/mcu_tiny/game_controller.stl)
+[game controller](/build/usb_proto/game_controller.stl)
 
 # build instructions
 

@@ -1,6 +1,6 @@
 
-PROJECTS=simple simple-v0.1 mcu mcu_tiny
-PCBA=simple simple-v0.1 mcu mcu_tiny
+PROJECTS=simple simple-v0.1 usb_proto usb_mini_io
+PCBA=simple simple-v0.1 usb_proto usb_mini_io
 
 BASENAME=project
 BOARDHOUSE=jlc
@@ -25,21 +25,21 @@ SCAD_DEPS=case/case_base.scad case/usb.scad case/button.scad
 SCAD_PARAM_DIR=case/parameters
 SCAD_PARAM_SET=default
 SCAD_PARTS=simple/case simple-v0.1/case \
-mcu/case \
-mcu/case_bottom \
-mcu/case_top \
-mcu/case_top_plain \
-mcu/case_bottom_ledrelay_tester \
-mcu/case_top_ledrelay_tester \
-mcu/case_top_ledrelay_tester_v2 \
-mcu/case_almost_regular_hexagon \
-mcu/case_top_keyswitches \
-mcu/case_top_keyswitches_8 \
-mcu/case_top_led_connector \
-mcu_tiny/keypad \
-mcu_tiny/old_keypad \
-mcu_tiny/game_controller \
-mcu_tiny/single_key
+usb_proto/case \
+usb_proto/case_bottom \
+usb_proto/case_top \
+usb_proto/case_top_plain \
+usb_proto/case_bottom_ledrelay_tester \
+usb_proto/case_top_ledrelay_tester \
+usb_proto/case_top_ledrelay_tester_v2 \
+usb_proto/case_almost_regular_hexagon \
+usb_proto/case_top_keyswitches \
+usb_proto/case_top_keyswitches_8 \
+usb_proto/case_top_led_connector \
+usb_mini_io/keypad \
+usb_mini_io/old_keypad \
+usb_mini_io/game_controller \
+usb_mini_io/single_key
 
 SCAD_DEFINES=
 

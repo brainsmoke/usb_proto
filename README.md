@@ -11,9 +11,9 @@ programs.
 
 ## A protoboard with an STM32F042 for usb connectivity & GPIO / UART functionality.
 
-Production files (JLCPCB): [gerbers](build/mcu/gerbers_jlc.zip) [BOM](build/mcu/bomfile_jlc.csv) [POS](build/mcu/posfile_jlc.csv)
+Production files (JLCPCB): [gerbers](build/usb_proto/gerbers_jlc.zip) [BOM](build/usb_proto/bomfile_jlc.csv) [POS](build/usb_proto/posfile_jlc.csv)
 
-Cases: [basic](build/mcu/case.stl) [hexagon](build/mcu/case_almost_regular_hexagon.stl) [keyswitches](build/mcu/case_top_keyswitches_8.stl) [led strips](build/mcu/case_top_led_connector.stl)
+Cases: [basic](build/usb_proto/case.stl) [hexagon](build/usb_proto/case_almost_regular_hexagon.stl) [keyswitches](build/usb_proto/case_top_keyswitches_8.stl) [led strips](build/usb_proto/case_top_led_connector.stl)
 
 ![Image of a USB-C connected protoboard](img/protoboard_mcu.jpg)
 
@@ -31,11 +31,11 @@ Cases: [basic](build/mcu/case.stl) [hexagon](build/mcu/case_almost_regular_hexag
 
 ## An STM32F042 breakout board
 
-Production files (JLCPCB): [gerbers](build/mcu_tiny/gerbers_jlc.zip) [BOM](build/mcu_tiny/bomfile_jlc.csv) [POS](build/mcu_tiny/posfile_jlc.csv)
+Production files (JLCPCB): [gerbers](build/usb_mini_io/gerbers_jlc.zip) [BOM](build/usb_mini_io/bomfile_jlc.csv) [POS](build/usb_mini_io/posfile_jlc.csv)
 
-Cases: [keypad (keycaps flush)](build/mcu_tiny/keypad.stl) [keypad (keyswitches visible)](build/mcu_tiny/old_keypad.stl) [single key controller](build/mcu_tiny/single_key.stl)
+Cases: [keypad (keycaps flush)](build/usb_mini_io/keypad.stl) [keypad (keyswitches visible)](build/usb_mini_io/old_keypad.stl) [single key controller](build/usb_mini_io/single_key.stl)
 
-![Image of a panel with 6 breakout boards](img/mcu_tiny.jpg)
+![Image of a panel with 6 breakout boards](img/usb_mini_io.jpg)
 
 * for smaller enclosures (27x22mm)
 * I/O & firmware compatible with the protoboard
