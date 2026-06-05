@@ -11,7 +11,7 @@
 
 # 3D printed case:
 
-[game controller](/build/usb_proto/game_controller.stl)
+[game controller](/build/usb_mini_io/game_controller.stl)
 
 # build instructions
 

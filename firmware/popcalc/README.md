@@ -8,7 +8,7 @@
 
 # 3D printed case:
 
-[single key controller](/build/usb_proto/single_key.stl)
+[single key controller](/build/usb_mini_io/single_key.stl)
 
 # build instructions
 
