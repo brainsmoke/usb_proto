@@ -13,7 +13,7 @@ programs.
 
 Production files (JLCPCB): [gerbers](build/usb_proto/gerbers_jlc.zip) [BOM](build/usb_proto/bomfile_jlc.csv) [POS](build/usb_proto/posfile_jlc.csv)
 
-Cases: [basic](build/usb_proto/case.stl) [hexagon](build/usb_proto/case_almost_regular_hexagon.stl) [keyswitches](build/usb_proto/case_top_keyswitches_8.stl) [led strips](build/usb_proto/case_top_led_connector.stl)
+Cases: [basic](build/usb_proto/case.stl) [hexagon](build/usb_proto/case_almost_regular_hexagon.stl) [keyswitches](build/usb_proto/case_keyswitches_8.stl) [led strips](build/usb_proto/case_led_strip_connector.stl)
 
 ![Image of a USB-C connected protoboard](img/usb_proto.jpg)
 
