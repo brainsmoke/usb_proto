@@ -15,7 +15,7 @@ Production files (JLCPCB): [gerbers](build/usb_proto/gerbers_jlc.zip) [BOM](buil
 
 Cases: [basic](build/usb_proto/case.stl) [hexagon](build/usb_proto/case_almost_regular_hexagon.stl) [keyswitches](build/usb_proto/case_top_keyswitches_8.stl) [led strips](build/usb_proto/case_top_led_connector.stl)
 
-![Image of a USB-C connected protoboard](img/protoboard_mcu.jpg)
+![Image of a USB-C connected protoboard](img/usb_proto.jpg)
 
 * 5v USB-C fed (with 5k1 resistors for true USB-C compatibility)
 * 3v3 linear regulator
