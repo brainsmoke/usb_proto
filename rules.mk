@@ -88,9 +88,9 @@ $(ZIPFILE): $(GERBERS) $(DRILLFILES)
 define scad_part
 $(1).project: $$(BUILDDIR:\%=$(2).stl)
 
-$$(BUILDDIR:\%=$(2).stl): $$(SCAD_DIR)/$(patsubst $(1)/%,%.scad,$(2)) $$(SCAD_DEPS) $$(SCAD_PARAM_DIR)/$(1).json
+$$(BUILDDIR:\%=$(2).stl): $$(SCAD_DIR)/$(2).scad $$(SCAD_DEPS)
 	mkdir -p "$$(dir $$@)"
-	openscad -o "$$@" $$(SCAD_DEFINES) -p "$$(SCAD_PARAM_DIR)/$(1).json" -P "$$(SCAD_PARAM_SET)" $$<
+	openscad -o "$$@" $$(SCAD_DEFINES) $$<
 
 endef
 

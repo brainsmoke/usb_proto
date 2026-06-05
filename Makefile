@@ -21,25 +21,25 @@ LAYERS4=$(LAYERS2) In1.Cu In2.Cu
 LAYERS :=$(LAYERS4)
 
 SCAD_DIR=case
-SCAD_DEPS=case/case_base.scad case/usb.scad case/button.scad
-SCAD_PARAM_DIR=case/parameters
-SCAD_PARAM_SET=default
-SCAD_PARTS=simple/case simple-v0.1/case \
-usb_proto/case \
-usb_proto/case_bottom \
-usb_proto/case_top \
-usb_proto/case_top_plain \
-usb_proto/case_bottom_ledrelay_tester \
-usb_proto/case_top_ledrelay_tester \
-usb_proto/case_top_ledrelay_tester_v2 \
-usb_proto/case_almost_regular_hexagon \
-usb_proto/case_top_keyswitches \
-usb_proto/case_top_keyswitches_8 \
-usb_proto/case_top_led_connector \
-usb_mini_io/keypad \
-usb_mini_io/old_keypad \
+SCAD_DEPS=case/lib/*.scad
+SCAD_PARTS=usb_mini_io/case \
 usb_mini_io/game_controller \
-usb_mini_io/single_key
+usb_mini_io/keypad \
+usb_mini_io/keypad_bottom \
+usb_mini_io/keypad_top \
+usb_mini_io/old_keypad \
+usb_mini_io/old_keypad_bottom \
+usb_mini_io/old_keypad_top \
+usb_mini_io/single_key \
+usb_proto/case \
+usb_proto/case_almost_regular_hexagon \
+usb_proto/case_bottom \
+usb_proto/case_keyswitches \
+usb_proto/case_keyswitches_8 \
+usb_proto/case_led_strip_connector \
+usb_proto/case_ledrelay_tester \
+usb_proto/case_top \
+usb_proto/case_top_plain
 
 SCAD_DEFINES=
 
