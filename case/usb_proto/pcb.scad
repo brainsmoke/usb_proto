@@ -6,6 +6,8 @@ $fn=48;
 use <../lib/utils.scad>
 use <../lib/usb.scad>
 
+use <gen/components.scad>
+
 hole_dist_x = 70;
 hole_dist_y = 40;
 
@@ -14,6 +16,7 @@ pcb_screw_hole_diameter = 3.2;
 breadboard_hole_diameter = 1.;
 breadboard_silkscreen_diameter = 2.2;
 silkscreen_thickness = .1;
+
 
 usb_c_board_offset=2.5 ;
 
@@ -35,6 +38,8 @@ function button_height()      = 2;
 function led_height()         = 1.2;
 function led_arrays_pos()     = [ [ for(i=[0,1,2,3]) breadboard_pos(-1, 2+i) ] ];
 
+components_origin = breadboard_pos(0,8.5);
+
 module usb_c(margin=0)
 {
 	translate([0,-usb_c_board_offset,0]) 
@@ -45,6 +50,17 @@ module usb_c(margin=0)
 module usb_c_keepout()
 {
 	usb_c(margin=.5);
+}
+
+module pcb_components()
+{
+	translate(components_origin)
+	{
+		components_top();
+ 
+		translate([0,0,-pcb_thickness()])
+		components_bottom();
+	}
 }
 
 module at_front()
@@ -202,8 +218,7 @@ module pcb()
 		pcb_holes_and_pads();
 	}
 
-	at_front()
-	usb_c();
+	pcb_components();
 }
 
 module pcb_keepout()

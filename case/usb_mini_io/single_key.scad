@@ -1,7 +1,8 @@
 
 include <keypad.scad>
 
-n_keys=1;
+n_rows=1;
+n_cols=1;
 
 bottom();
 mockup();

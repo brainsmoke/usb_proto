@@ -1,19 +1,18 @@
 
 key_pitch = 20;
-n_keys = 4;
+n_cols = 1;
+n_rows = 4;
 
 include <case_pcb.scad>
 use <../lib/keyswitch.scad>
 
-hole_dist_x = n_keys * key_pitch;
-
 total_height=19;
 
 /*
-chamfer_top=4.35;
-chamfer_top_h=9;
+chamfer_top=2.2;
 chamfer_bottom=.6;
 */
+chamfer_top=0;
 
 has_dfu_button=false;
 
@@ -23,13 +22,48 @@ grid_width=.8;
 panel_dim = key_pitch-0.8;
 panel_thickness = 1.5;
 
-grid_height_bottom=0.8;
+grid_height_bottom=1.6;
+
+pcb_pos = [-10, n_rows*key_pitch/2, top_component_z ];
+pcb_angle = -90;
 
 module at_keys()
 {
-	for (x = [ 0 : n_keys-1 ])
-	for (y = [ 0 ])
-	translate([x*key_pitch+key_pitch/2,y*key_pitch+key_pitch/2,total_height])
+	for (x = [ 0 : n_cols-1 ])
+	for (y = [ 0 : n_rows-1 ])
+	translate([(x-(n_cols-1)/2)*key_pitch,(y-(n_rows-1)/2)*key_pitch,total_height])
+	children();
+}
+
+module at_extra_holes()
+{
+	y_range = (n_cols == 1) ? [-n_rows*key_pitch/2] : [-n_rows*key_pitch/2, n_rows*key_pitch/2];
+	x_range = [-n_cols*key_pitch/2, n_cols*key_pitch/2];
+
+	for (x = x_range)
+	for (y = y_range)
+	translate([x,y,0])
+	children();
+}
+
+module next()
+{
+	if (n_cols > n_rows)
+	{
+		translate([0, n_rows*key_pitch+2*outer_radius+padding,0])
+		children();
+	}
+	else
+	{
+		translate([n_cols*key_pitch+2*outer_radius+padding,0])
+		children();
+	}
+}
+
+module flip()
+{
+	rotate([0,180,0])
+	translate([0,0,-total_height])
 	children();
 }
 

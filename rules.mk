@@ -1,5 +1,6 @@
 MAKEFLAGS += --no-builtin-rules
 
+DEPSDIR=tmp/deps/%
 BUILDDIR=build/%
 TMPDIR=tmp/%
 PCB=pcb/%/$(BASENAME).kicad_pcb
@@ -16,6 +17,8 @@ POSFILE=$(BUILDDIR)/posfile_$(BOARDHOUSE).csv
 ZIPFILE=$(BUILDDIR)/gerbers_$(BOARDHOUSE).zip
 BOMFILE=$(BUILDDIR)/bomfile_$(BOARDHOUSE).csv
 DRILLFILES=$(TMPDIR)/$(BASENAME)-NPTH.drl $(TMPDIR)/$(BASENAME)-PTH.drl
+
+SCAD_COMPONENTS=$(SCAD_DIR)/%/gen/components.scad
 
 COMMA :=,
 SPACE :=$() $()
@@ -34,7 +37,8 @@ INTERMEDIATE_FILES=$(foreach project, $(PROJECTS), \
             $(patsubst %, $(BOMFILE_TMP), $(project)) \
             $(patsubst %, $(POSFILE_TMP), $(project)) \
             $(foreach gerber, $(GERBERS), $(patsubst %, $(gerber), $(project))) \
-            $(foreach drillfile, $(DRILLFILES), $(patsubst %, $(drillfile), $(project))))
+            $(foreach drillfile, $(DRILLFILES), $(patsubst %, $(drillfile), $(project))) \
+			$(SCAD_DIR)/$(project)/gen/components.scad )
 
 STLS=$(foreach part, $(SCAD_PARTS), $(BUILDDIR:\%=$(part).stl))
 
@@ -77,7 +81,7 @@ $(DRILLFILES): $(PCB)
 	mkdir -p "$(dir $@)"
 	kicad-cli pcb export drill $(DRILL_OPTS) -o "$(dir $@)" "$<"
 
-$(POSFILE): $(POSFILE_TMP) $(BOMFILE_TMP)
+$(POSFILE): $(POSFILE_TMP) $(BOMFILE_TMP) tools/posfile_to_boardhouse.py
 	mkdir -p "$(dir $@)"
 	python3 tools/posfile_to_boardhouse.py "$(BOARDHOUSE)" $^ > "$@"
 
@@ -85,12 +89,19 @@ $(ZIPFILE): $(GERBERS) $(DRILLFILES)
 	mkdir -p "$(dir $@)"
 	zip -o - -j $^ > "$@"
 
+$(SCAD_COMPONENTS): $(POSFILE_TMP) tools/posfile_to_scad.py
+	mkdir -p "$(dir $@)"
+	python3 tools/posfile_to_scad.py $^ > "$@"
+
 define scad_part
 $(1).project: $$(BUILDDIR:\%=$(2).stl)
 
+$$(BUILDDIR:\%=$(2).stl): $$(SCAD_DIR)/$(1)/gen/components.scad
+
 $$(BUILDDIR:\%=$(2).stl): $$(SCAD_DIR)/$(2).scad $$(SCAD_DEPS)
 	mkdir -p "$$(dir $$@)"
-	openscad -o "$$@" $$(SCAD_DEFINES) $$<
+	mkdir -p "$$(dir $$(DEPSDIR:\%=$(2).stl.d))"
+	openscad -d $$(DEPSDIR:\%=$(2).stl.d) -o "$$@" $$(SCAD_DEFINES) $$<
 
 endef
 
@@ -98,6 +109,8 @@ $(foreach project, $(PROJECTS), \
 $(foreach part, $(filter $(project)/%, $(SCAD_PARTS)), \
 $(eval $(call scad_part,$(project),$(part))) \
 ))
+
+include $(wildcard tmp/deps/*/*.stl.d)
 
 clean:
 	-rm $(INTERMEDIATE_FILES) $(BUILD_FILES)

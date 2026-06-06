@@ -6,6 +6,8 @@ $fn=48;
 use <../lib/utils.scad>
 use <../lib/usb.scad>
 
+use <gen/components.scad>
+
 hole_dist_y = 20;
 
 pcb_radius = 3.5;
@@ -16,6 +18,8 @@ pcb_screw_hole_diameter = 3.2;
 breadboard_hole_diameter = 1.;
 breadboard_silkscreen_diameter = 2.2;
 silkscreen_thickness = .1;
+
+components_origin = [15,10,0];
 
 usb_c_board_offset=2.5 ;
 
@@ -42,6 +46,17 @@ module usb_c(margin=0)
 	translate([0,-usb_c_board_offset,0])
 	usb_c_type_c31_m12(margin)
 	usb_c_plug(margin);
+}
+
+module pcb_components()
+{
+	translate(components_origin)
+	{
+		components_top();
+
+		translate([0,0,-pcb_thickness()])
+		components_bottom();
+	}
 }
 
 module usb_c_keepout()
@@ -148,8 +163,7 @@ module pcb()
 		pcb_holes_and_pads();
 	}
 
-	at_front()
-	usb_c();
+	pcb_components();
 }
 
 module pcb_keepout()
