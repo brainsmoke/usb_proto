@@ -142,6 +142,10 @@ module at_pcb_single_pads()
 	for (y=[4,5,8,9,12,13])
 	translate(breadboard_pos(22,y))
 	children();
+
+	for (y=[8,9])
+	translate(breadboard_pos(-2,y))
+	children();
 }
 
 module at_pcb_pads()
