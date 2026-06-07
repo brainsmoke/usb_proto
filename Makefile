@@ -1,5 +1,5 @@
 
-PROJECTS=simple simple-v0.1 usb_proto usb_mini_io
+PROJECTS=simple simple-v0.1 usb_proto usb_mini_io mxmatrix
 PCBA=simple simple-v0.1 usb_proto usb_mini_io
 
 BASENAME=project
