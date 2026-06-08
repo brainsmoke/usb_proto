@@ -72,7 +72,7 @@ static void keymatrix_read_column(void)
 	if (port)
 	for (col=0; col<KEYMATRIX_N_COLUMNS; col++)
 	{
-		int key = col*KEYMATRIX_N_ROWS+row;
+		int key = col+row*KEYMATRIX_N_ROWS;
 
 		if (debounce[key])
 			continue;
