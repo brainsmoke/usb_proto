@@ -62,7 +62,8 @@ The first version of the protoboard did not have a microcontroller:
 # Firmware (seems to work, no guarantees!)
 
 * [usb_serial](firmware/usb_serial) USB serial to UART adapter firmware, with RTS/DTR signals & reset/boot signals for directly programming ESP32s.
-* [usb_hid_keymatrix](firmware/usb_hid_keymatrix) USB HID Keypad firmware, for a keyboard matrix
+* [usb_hid_keymatrix](firmware/usb_hid_keymatrix) USB HID Keypad firmware, for a keyboard matrix (max. 16 keys)
+* [usb_hid_keymatrix](firmware/usb_hid_keymatrix_5x5) USB HID Keypad firmware, for a keyboard matrix (max. 25 keys)
 * [usb_hid_simple](firmware/usb_hid_simple) USB HID Keypad firmware for a few buttons
 * [flappy](firmware/flappy) Flappy bird controller / spacebar only USB HID Keypad
 * [game_controller](firmware/game_controller) Gamepad controller / USB HID Keypad
