@@ -25,6 +25,8 @@ package_map = {
 
 	'SOT-23-5' : 'sot235()',
 
+	'SO-5_4.4x3.6mm_P1.27mm' : 'so5()',
+
 	'QFN-28_4x4mm_P0.5mm': 'ufqfpn28()',
 
 	'SOT-666': 'sot666()',

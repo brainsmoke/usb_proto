@@ -29,8 +29,11 @@ corrections = {
 
     'jlc': {
 
-		# AP2112K-3.3
+        # AP2112K-3.3
         'C51118' : { 'pos': ('0','0'), 'rot': '-90' },
+
+        # ME6211C33M5G-N
+        'C82942' : { 'pos': ('0','0'), 'rot': '-90' },
 
         # AP22652AW6-7
         'C5329413' : { 'pos': ('0','0'), 'rot': '-90' },
@@ -47,8 +50,15 @@ corrections = {
         # STM32F030F4Px
         'C89040' : { 'pos': ('0','0'), 'rot': '-90' },
 
-		# STM32F042G6Ux
+        # STM32F030CC
+        'C81787' : { 'pos': ('0','0'), 'rot': '-90' },
+
+        # STM32F042F6Px
+        'C81000' : { 'pos': ('0','0'), 'rot': '-90' },
+
+        # STM32F042G6Ux
         'C961597' : { 'pos': ('0','0'), 'rot': '-90' },
+        'C547496' : { 'pos': ('0','0'), 'rot': '-90' },
 
         # STM32F072C8Tx
         'C81720' : { 'pos': ('0','0'), 'rot': '-90' },
@@ -64,6 +74,12 @@ corrections = {
 
         # 74LVC2G17
         'C10429' : { 'pos': ('0','0'), 'rot': '-90' },
+
+        # 74HCT245 tssop
+        'C5980' : { 'pos': ('0','0'), 'rot': '-90' },
+
+        # 74HCT245BQ
+        'C547496' : { 'pos': ('0','0'), 'rot': '-90' },
 
         # TLP2361
         'C107626' : { 'pos': ('0','0'), 'rot': '180' },
@@ -108,7 +124,7 @@ def process(row, boardhouse='jlc'):
     
 
 for row in records:
-    processed_row = process(row, boardhouse)
-    new_row = { y:processed_row[x] for x,y in zip(in_cols, out_cols[boardhouse]) }
-    out.writerow( new_row )
-
+    if row['Ref'] != '':
+        processed_row = process(row, boardhouse)
+        new_row = { y:processed_row[x] for x,y in zip(in_cols, out_cols[boardhouse]) }
+        out.writerow( new_row )

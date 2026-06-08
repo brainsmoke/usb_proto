@@ -5,6 +5,8 @@ d=7;
 height=10;
 thickness=.8;
 
+stabilizers_needed = 3.5;
+
 use <graft.scad>;
 
 module button_carveout(w, d, thickness, height, top_width=2, top_height=3, gap=0.5, wall_thickness=1.2, flex_thickness=0.2)
@@ -46,22 +48,28 @@ translate([0,-d/2+thickness,0])
 	linear_extrude(thickness)
 	polygon([ [-w/2,0], [w/2, 0], [top_width/2, -h-e], [-top_width/2, -h-e]]);
 
+translate([-top_width/2,0,0])
+rotate([90,0,90])
+	linear_extrude(top_width)
+difference()
+{
+	polygon([ [-d/2, -h-e+top_height], [-d/2+top_width, -h-e], [-d/2, -h-e]]);
+	translate([-d/2-e,0])
+	 square([top_width+2*e, top_height]);
+}
 
+    if (height >= stabilizers_needed)
+	{
 for (i=[-w/2-gap-wall_thickness-e, w/2+gap+e])
 translate([i,0,0])
 rotate([90,0,90])
 	linear_extrude(wall_thickness)
 	polygon([ [-d/2, e], [d/2, e], [-d/2+top_width, -h-e], [-d/2, -h-e]]);
 
-translate([-top_width/2,0,0])
-rotate([90,0,90])
-	linear_extrude(top_width)
-	polygon([ [-d/2, -h-e+top_height], [-d/2+top_width, -h-e], [-d/2, -h-e]]);
-
-
 translate([-w/2-gap-e,-d/2,-h])
 	cube([w+(gap+e)*2, top_width, flex_thickness]);
 
+	}
 }
 
 }

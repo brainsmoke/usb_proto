@@ -71,40 +71,78 @@ module ufqfpn28()
 	qfn(A=.55, D=4, D1=3, E=4, E1=3, L= .4, L1=.35, b=.25, e=.5);
 }
 
-module sot_pin()
+module pin(w=.5,d=1.2,h=.8)
 {
 	metallic()
 	{
-		translate([0,.3,0])
+		translate([0,d/2,0])
 		{
-			block([.5,.6,.2], [0,-1,-1]);
-			block([.5,.3,.8], [0,0,-1]);
-			translate([0,0,.8])
-			block([.5,.6,.2], [0,1,1]);
+			block([w,d/2,.2], [0,-1,-1]);
+			block([w,.3,h], [0,0,-1]);
+			translate([0,0,h])
+			block([w,d/2,.2], [0,1,1]);
 		}
 	}
 }
 
-module sot235(n1, n2)
+module bulge_block(dim, b, anchor)
 {
-	A=2.9;
-	B=1.6;
-	C=1.2;
-	chip_package()
-	block([B,A,C],[0,0,-1]);
+	anchor(dim, anchor)
+	hull()
+	{
+		translate([b,b,0])
+		cube([dim[0]-2*b,dim[1]-2*b,dim[2]]);
 
-	for (y=[-.95,0,.95])
-	translate([-B/2,y,0])
+		translate([0,0,dim[2]/2-.0005])
+		cube([dim[0],dim[1],.001]);
+	}
+}
+
+module so5()
+{
+	D=4.55;
+	E=3.7;
+	A=2.1;
+	pitch = 1.27;
+
+	for (y=[-pitch,pitch])
+	translate([-1.5,y,0])
 	rotate([0,0,90])
-	sot_pin();
+	pin(.5, 2., A/2);
 
-	for (y=[-.95,.95])
-	translate([B/2,y,0])
+	for (y=[-pitch,0,pitch])
+	translate([1.5,y,0])
 	rotate([0,0,-90])
-	sot_pin();
+	pin(.5, 2., A/2);
+
+	chip_package()
+	bulge_block([D,E,A], .1, [0,0,-1]);
 
 	chip_notch()
-	translate([-B/2+.5,A/2-.8, A-.001])
+	translate([-D/2+.8,E/2-.8,A-.001])
+	cylinder(.021, r=.4, $fn=12);
+}
+
+module sot235()
+{
+	D=1.6;
+	E=2.9;
+	A=1.2;
+	chip_package()
+	block([D,E,A],[0,0,-1]);
+
+	for (y=[-.95,0,.95])
+	translate([-D/2+.3,y,0])
+	rotate([0,0,90])
+	pin(.5, 1.2, .8);
+
+	for (y=[-.95,.95])
+	translate([D/2-.3,y,0])
+	rotate([0,0,-90])
+	pin(.5, 1.2, .8);
+
+	chip_notch()
+	translate([-D/2+.5,E/2-.5,A-.001])
 	cylinder(.021, r=.2, $fn=12);
 }
 
@@ -219,33 +257,28 @@ module l0603()
 	block([E,E,A], [0,0,-1]);
 }
 
-preview()
+module display(pitch=10)
 {
 	color("green")
-	block([200,200,1],[0,0,1]);
+	block([($children+1)*pitch, 2*pitch,1],[-1,0,1]);
+	for (i = [0:$children-1])
+	translate([pitch*(i+1),0,0])
+	children(i);
+}
 
-	translate([0,0,0])
-	ufqfpn28();
-
-	translate([10,0,0])
-	sot235();
-
-	translate([20,0,0])
-	kmr2();
-
-	translate([30,0,0])
-	sot666();
-
-	translate([40,0,0])
-	r0402();
-
-	translate([50,0,0])
-	r0603();
-
-	translate([60,0,0])
-	c0402();
-
-	translate([70,0,0])
-	c0603();
+preview()
+{
+	display()
+	{
+		ufqfpn28();
+		so5();
+		sot235();
+		sot666();
+		kmr2();
+		r0402();
+		r0603();
+		c0402();
+		c0603();
+	}
 }
 

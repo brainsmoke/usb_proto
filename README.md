@@ -46,6 +46,14 @@ Cases: [keypad (keycaps flush)](build/usb_mini_io/keypad.stl) [keypad (keyswitch
 * no LEDs / general purpose buttons / protoboard space
 * 2 M3 holes 20mm apart
 
+# USB <-> USB 'null-modem' (but electrically isolated) [UNTESTED]
+
+<img src="img/usb_null.png" width="640">
+
+<img src="img/usb_null.jpg" width="640">
+
+<img src="img/usb_null_closeup.jpg" width="640">
+
 ## (old) USB-C Fed Protoboard
 
 The first version of the protoboard did not have a microcontroller:
@@ -61,7 +69,6 @@ The first version of the protoboard did not have a microcontroller:
 * [popcalc](firmware/popcalc) USB device that 'pops calc'
 * [led_segment_tester](firmware/led_segment_tester) tester firmware for a LED installation
 * [obegraensad](firmware/obegraensad) USB-serial to 16 bit IKEA OBEGRÄNSAD display driver
-
 
 # License
 

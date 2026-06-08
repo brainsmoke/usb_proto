@@ -1,6 +1,6 @@
 
-PROJECTS=simple simple-v0.1 usb_proto usb_mini_io mxmatrix
-PCBA=simple simple-v0.1 usb_proto usb_mini_io
+PROJECTS=simple simple-v0.1 usb_proto usb_mini_io usb_null mxmatrix
+PCBA=simple simple-v0.1 usb_proto usb_mini_io usb_null
 
 BASENAME=project
 BOARDHOUSE=jlc
@@ -21,8 +21,9 @@ LAYERS4=$(LAYERS2) In1.Cu In2.Cu
 LAYERS :=$(LAYERS4)
 
 SCAD_DIR=case
-SCAD_DEPS=case/usb_mini_io/gen/components.scad case/usb_proto/gen/components.scad
-SCAD_PARTS=usb_mini_io/case \
+SCAD_DEPS=case/usb_mini_io/gen/components.scad case/usb_proto/gen/components.scad case/usb_null/gen/components.scad
+SCAD_PARTS=usb_null/case \
+usb_mini_io/case \
 usb_mini_io/game_controller \
 usb_mini_io/keypad \
 usb_mini_io/keypad_bottom \
