@@ -1,4 +1,3 @@
-e=.0001;
 
 module get_x_axis(y, z)
 {
@@ -30,17 +29,29 @@ module get_z_axis(x, y)
 
 module bbox(margin=0)
 {
-	m = max(e,margin);
+	if (margin == 0)
+	{
+		intersection()
+		{
+			translate([-1,-1,-1])
+			bbox(1)
+			children();
 
+			translate([ 1, 1, 1])
+			bbox(1)
+			children();
+		}
+	}
+	else
 	minkowski()
 	{
-		get_x_axis(m, m)
+		get_x_axis(margin, margin)
 		children();
 
-		get_y_axis(m, m)
+		get_y_axis(margin, margin)
 		children();
 
-		get_z_axis(m, m)
+		get_z_axis(margin, margin)
 		children();
 	}
 }

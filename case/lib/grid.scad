@@ -111,7 +111,7 @@ module slats(origin, rotation, pitch, width, n_slats=undef)
 	{
 		grid_orient(origin, rotation)
 		_slats(pitch, width, n_slats)
-		bbox()
+		bbox(e)
 		grid_orient_inv(origin, rotation)
 		children();
 
