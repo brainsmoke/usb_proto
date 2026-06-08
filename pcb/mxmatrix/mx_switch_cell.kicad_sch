@@ -529,7 +529,7 @@
 		)
 		(uuid "ad1ec005-4f31-4281-b32d-093d6e8331ab")
 	)
-	(hierarchical_label "column"
+	(hierarchical_label "row"
 		(shape input)
 		(at 34.29 34.29 180)
 		(effects
@@ -540,7 +540,7 @@
 		)
 		(uuid "7bbff426-e1db-461f-a247-2f2c8f87a8a0")
 	)
-	(hierarchical_label "row"
+	(hierarchical_label "column"
 		(shape input)
 		(at 34.29 67.31 180)
 		(effects
