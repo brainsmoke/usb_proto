@@ -16,5 +16,10 @@
 #define KEYMATRIX_COLUMNS_PORT (GPIOA)
 #define KEYMATRIX_COLUMNS(X) X(0) X(1) X(2) X(3)
 
+#define KEYS \
+	KEY_PLAY,                KEY_MUTE,            KEY_VOLUME_DOWN,         KEY_VOLUME_UP, \
+	KEY_SCAN_PREVIOUS_TRACK, KEY_SCAN_NEXT_TRACK, KEY_DECREASE_BRIGHTNESS, KEY_INCREASE_BRIGHTNESS, \
+	KEY_TOGGLE_FULL_SCREEN,  KEY_ZOOM_OUT,        KEY_ZOOM_IN,             KEY_CALCULATOR, \
+	KEY('A'),                KEY('B'),            KEY('C'),                KEY('D'), \
 
 #endif // CONFIG_H
