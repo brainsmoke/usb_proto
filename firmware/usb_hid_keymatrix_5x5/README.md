@@ -1,5 +1,7 @@
 # usb hid keypad matrix (5x5)
 
+untested
+
 ![pin description](usb_hid_matrix.png)
 
 ![matrix schematic](schematic.png)

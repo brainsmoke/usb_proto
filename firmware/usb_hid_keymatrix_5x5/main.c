@@ -61,7 +61,7 @@ enum
 
 #define COLUMNS_PORT_B (GPIOB)
 #define COLUMNS_MASK_B (0x60)
-#define COLUMNS_RSHIFT_B (6)
+#define COLUMNS_RSHIFT_B (5)
 
 #define CLEAR(x) ((x)<<16)
 #define SET(x) (x)
