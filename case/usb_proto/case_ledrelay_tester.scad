@@ -31,10 +31,8 @@ module mockup()
 	pcb();
 }
  
-bottom()
-{
-	mockup();
-};
+bottom();
+mockup();
  
 next() flip() top()
 {
