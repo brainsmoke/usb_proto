@@ -7,6 +7,18 @@ and a microcontroller that can act as a USB-serial to UART
 (usb-cdc-acm) device, a HID keyboard/keypad or run other simple
 programs.
 
+# Firmware (seems to work, no guarantees!)
+
+* [usb_serial](firmware/usb_serial) USB serial to UART adapter firmware, with RTS/DTR signals & reset/boot signals for directly programming ESP32s.
+* [usb_hid_keymatrix](firmware/usb_hid_keymatrix) USB HID Keypad firmware, for a keyboard matrix (max. 16 keys)
+* [usb_hid_keymatrix](firmware/usb_hid_keymatrix_5x5) USB HID Keypad firmware, for a keyboard matrix (max. 25 keys)
+* [usb_hid_simple](firmware/usb_hid_simple) USB HID Keypad firmware for a few buttons
+* [flappy](firmware/flappy) Flappy bird controller / spacebar only USB HID Keypad
+* [game_controller](firmware/game_controller) Gamepad controller / USB HID Keypad
+* [popcalc](firmware/popcalc) USB device that 'pops calc'
+* [led_segment_tester](firmware/led_segment_tester) tester firmware for a LED installation
+* [obegraensad](firmware/obegraensad) USB-serial to 16 bit IKEA OBEGRÄNSAD display driver
+
 # PCBs
 
 ## A protoboard with an STM32F042 for usb connectivity & GPIO / UART functionality.
@@ -58,18 +70,6 @@ Cases: [keypad (keycaps flush)](build/usb_mini_io/keypad.stl) [keypad (keyswitch
 
 The first version of the protoboard did not have a microcontroller:
 [pcb/simple](pcb/simple)
-
-# Firmware (seems to work, no guarantees!)
-
-* [usb_serial](firmware/usb_serial) USB serial to UART adapter firmware, with RTS/DTR signals & reset/boot signals for directly programming ESP32s.
-* [usb_hid_keymatrix](firmware/usb_hid_keymatrix) USB HID Keypad firmware, for a keyboard matrix (max. 16 keys)
-* [usb_hid_keymatrix](firmware/usb_hid_keymatrix_5x5) USB HID Keypad firmware, for a keyboard matrix (max. 25 keys)
-* [usb_hid_simple](firmware/usb_hid_simple) USB HID Keypad firmware for a few buttons
-* [flappy](firmware/flappy) Flappy bird controller / spacebar only USB HID Keypad
-* [game_controller](firmware/game_controller) Gamepad controller / USB HID Keypad
-* [popcalc](firmware/popcalc) USB device that 'pops calc'
-* [led_segment_tester](firmware/led_segment_tester) tester firmware for a LED installation
-* [obegraensad](firmware/obegraensad) USB-serial to 16 bit IKEA OBEGRÄNSAD display driver
 
 # License
 
