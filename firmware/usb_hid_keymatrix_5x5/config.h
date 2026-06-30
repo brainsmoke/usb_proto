@@ -6,6 +6,7 @@
 #define MANUFACTURER_STRING "example co."
 #define PRODUCT_STRING "usb hid demo"
 #define SERIAL_STRING "00000001"
+#define ID_PRODUCT (0x4343)
 
 #define F_CPU (48000000)
 #define F_SYS_TICK_CLK (F_CPU/8)

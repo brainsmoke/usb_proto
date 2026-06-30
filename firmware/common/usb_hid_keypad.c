@@ -296,7 +296,7 @@ int usb_hid_keypad_init(const uint32_t keys[], size_t n_keys)
 
 	size_t i, j=0;
 	for (i=0; i<n_keys; i++)
-		if (keys[i] != ~0UL)
+		if (keys[i] != 0UL)
 			keymap[j++] = keys[i];
 	n_keys = j;
 

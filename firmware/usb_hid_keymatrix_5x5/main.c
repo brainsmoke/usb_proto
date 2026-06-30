@@ -60,8 +60,8 @@ enum
 #define COLUMNS_LSHIFT_A (2)
 
 #define COLUMNS_PORT_B (GPIOB)
-#define COLUMNS_MASK_B (0x60)
-#define COLUMNS_RSHIFT_B (5)
+#define COLUMNS_MASK_B (0xC0)
+#define COLUMNS_RSHIFT_B (6)
 
 #define CLEAR(x) ((x)<<16)
 #define SET(x) (x)
@@ -116,7 +116,6 @@ static void keymatrix_read_column(void)
 	uint16_t col_bits = ( gpio_get(COLUMNS_PORT_A, COLUMNS_MASK_A)<<COLUMNS_LSHIFT_A ) |
 	                    ( gpio_get(COLUMNS_PORT_B, COLUMNS_MASK_B)>>COLUMNS_RSHIFT_B ) ;
 
-	if (col_bits)
 	for (col=0; col<KEYMATRIX_N_COLUMNS; col++)
 	{
 		int key = col+row*KEYMATRIX_N_ROWS;
