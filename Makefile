@@ -1,6 +1,6 @@
 
-PROJECTS=simple simple-v0.1 usb_proto usb_mini_io usb_null mxmatrix
-PCBA=simple simple-v0.1 usb_proto usb_mini_io usb_null
+PROJECTS=simple simple-v0.1 usb_proto usb_mini_io usb_null mxmatrix pdk_prog swd_prog
+PCBA=simple simple-v0.1 usb_proto usb_mini_io usb_null pdk_prog swd_prog
 
 BASENAME=project
 BOARDHOUSE=jlc
