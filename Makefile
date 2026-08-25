@@ -41,6 +41,7 @@ usb_proto/case_led_strip_connector \
 usb_proto/case_ledrelay_tester \
 usb_proto/case_top \
 usb_proto/case_top_plain \
+pdk_prog/case \
 swd_prog/case \
 swd_prog/case_all
 
