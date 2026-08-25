@@ -18,6 +18,16 @@ module block(dim, anchor=[0,0,0])
 	cube(dim);
 }
 
+module rounded_block_z(dim, anchor=[0,0,0], r=0)
+{
+	anchor(dim, anchor)
+	linear_extrude(dim.z)
+	hull()
+	for (p=[ [r,r], [dim.x-r, r], [dim.x-r, dim.y-r], [r, dim.y-r] ] )
+	translate(p)
+	circle(r);
+}
+
 module rounded_block_y(dim, anchor=[0,0,0], r=0)
 {
 	anchor(dim, anchor)
