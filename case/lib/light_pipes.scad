@@ -2,7 +2,7 @@
 use <graft.scad>
 
 b=1;
-light_pipe_diameter = 2.2;
+light_pipe_diameter = 2.1;
 light_pipe_border = 1.2;
 light_pipe_base_border = 3.2;
 light_pipe_depth = 12;

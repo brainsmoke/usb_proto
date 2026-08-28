@@ -18,7 +18,7 @@ button_w=5;
 button_d=5;
 button_depth = total_height-top_component_z-button_height();
 
-light_pipe_diameter = 2.2;
+light_pipe_diameter = 2.1;
 light_pipe_border = 1.2;
 light_pipe_base_border = 3.2;
 light_pipe_depth = total_height-top_component_z-led_height();
