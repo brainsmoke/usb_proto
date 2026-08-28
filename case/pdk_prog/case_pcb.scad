@@ -10,7 +10,8 @@ include <../lib/case_pcb_standard.scad>
 /* overrides */
 
 grid_origin = pcb_center();
-grid_rows = 2;
+grid_rows = 4;
+grid_cols = 5;
 
 has_buttons=false;
 has_dfu_button=true;
