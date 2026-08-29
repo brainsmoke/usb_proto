@@ -24,10 +24,13 @@ package_map = {
 	'SW_Push_1P1T_NO_CK_KMR2': 'kmr2()',
 
 	'SOT-23-5' : 'sot235()',
+	'SOT-23-6' : 'sot236()',
 
 	'SO-5_4.4x3.6mm_P1.27mm' : 'so5()',
 
 	'QFN-28_4x4mm_P0.5mm': 'ufqfpn28()',
+
+	'LQFP-48_7x7mm_P0.5mm': 'lqfp48()',
 
 	'SOT-666': 'sot666()',
 

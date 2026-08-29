@@ -25,7 +25,7 @@ module button_body()
 	children();
 }
 
-module qfn(n, A, D, D1, E, E1, L, L1, T, b, e)
+module qfn(A, D, D1, E, E1, L, L1, T, b, e)
 {
 	chip_package()
 	block([D,E,A], [0,0,-1]);
@@ -71,6 +71,17 @@ module ufqfpn28()
 	qfn(A=.55, D=4, D1=3, E=4, E1=3, L= .4, L1=.35, b=.25, e=.5);
 }
 
+module ufqfpn32()
+{
+	qfn(A=.55, D=5, D1=3.5, E=5, E1=3.5, L= .4, L1=.4, b=.23, e=.5);
+}
+
+module ufqfpn48()
+{
+	qfn(A=.55, D=7, D1=5.5, E=7, E1=5.5, L= .4, L1=.4, b=.25, e=.5);
+}
+
+
 module pin(w=.5,d=1.2,h=.8)
 {
 	metallic()
@@ -98,6 +109,65 @@ module bulge_block(dim, b, anchor)
 	}
 }
 
+module lqfp_block(dim, anchor)
+{
+	b = dim[2]/10;
+	bulge_block(dim-[-b*2,-b/2, 0], b, anchor);
+}
+
+module lqfp(A1, A2, D, D1, D3, E, E1, E3, e, L, L1, T, b)
+{
+	chip_package()
+	lqfp_block([D1,E1,A2], [0,0,-1]);
+
+	metallic()
+	{
+		n_e = round(E3/e);
+		if (n_e > 0)
+		{
+			for (r=[0, 180])
+			rotate([0,0,r])
+			for (x=[0:n_e])
+			translate([-E3/2+x*e,D1/2,0])
+			pin(b, L1, (A2+A1)/2);
+		}
+
+		n_d = round(D3/e);
+		if (n_d > 0)
+		{
+			for (r=[90, 270])
+			rotate([0,0,r])
+			for (x=[0:n_d])
+			translate([-D3/2+x*e,E1/2,0])
+			pin(b, L1, (A2+A1)/2);
+		}
+	}
+	chip_notch()
+	translate([-E3/2, D3/2, A2-.001])
+	cylinder(.021, r=e/2, $fn=12);
+}
+
+
+module lqfp32()
+{
+	lqfp(A1=.1, A2=1.4, D=9, D1=7, D3=5.6, E=9, E1=7, E3=5.6, L=.6, L1=1, e=.8, b=.37);
+}
+
+module lqfp48()
+{
+	lqfp(A1=.1, A2=1.4, D=9, D1=7, D3=5.5, E=9, E1=7, E3=5.5, L=.6, L1=1, e=.5, b=.22);
+}
+
+module lqfp64()
+{
+	lqfp(A1=.1, A2=1.4, D=12, D1=10, D3=7.5, E=12, E1=10, E3=7.5, L=.6, L1=1, e=.5, b=.22);
+}
+
+module lqfp100()
+{
+	lqfp(A1=.1, A2=1.4, D=16, D1=14, D3=12, E=16, E1=14, E3=12, L=.6, L1=1, e=.5, b=.22);
+}
+
 module so5()
 {
 	D=4.55;
@@ -123,7 +193,7 @@ module so5()
 	cylinder(.021, r=.4, $fn=12);
 }
 
-module sot235()
+module sot23x(row_top, row_bottom)
 {
 	D=1.6;
 	E=2.9;
@@ -131,12 +201,12 @@ module sot235()
 	chip_package()
 	block([D,E,A],[0,0,-1]);
 
-	for (y=[-.95,0,.95])
+	for (y=row_bottom)
 	translate([-D/2+.3,y,0])
 	rotate([0,0,90])
 	pin(.5, 1.2, .8);
 
-	for (y=[-.95,.95])
+	for (y=row_top)
 	translate([D/2-.3,y,0])
 	rotate([0,0,-90])
 	pin(.5, 1.2, .8);
@@ -144,6 +214,26 @@ module sot235()
 	chip_notch()
 	translate([-D/2+.5,E/2-.5,A-.001])
 	cylinder(.021, r=.2, $fn=12);
+}
+
+module sot23()
+{
+	sot23x([0], [-.95,.95]);
+}
+
+module sot233()
+{
+	sot23();
+}
+
+module sot235()
+{
+	sot23x([-.95,.95], [-.95,0,.95]);
+}
+
+module sot236()
+{
+	sot23x([-.95, 0,.95], [-.95,0,.95]);
 }
 
 module sot666()
@@ -257,7 +347,7 @@ module l0603()
 	block([E,E,A], [0,0,-1]);
 }
 
-module display(pitch=10)
+module display(pitch=15)
 {
 	color("green")
 	block([($children+1)*pitch, 2*pitch,1],[-1,0,1]);
@@ -271,8 +361,17 @@ preview()
 	display()
 	{
 		ufqfpn28();
+		ufqfpn32();
+		ufqfpn48();
+		lqfp32();
+		lqfp48();
+		lqfp64();
+		lqfp100();
 		so5();
+		sot23();
+		sot233();
 		sot235();
+		sot236();
 		sot666();
 		kmr2();
 		r0402();

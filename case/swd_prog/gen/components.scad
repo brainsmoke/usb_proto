@@ -92,7 +92,7 @@ kmr2();
 
 translate([-17.000000,0.000000,0])
 rotate([0,0,180.000000])
-color("red")cylinder(h=5,r=2);;
+lqfp48();
 
 translate([-23.800000,10.000000,0])
 rotate([0,0,-90.000000])

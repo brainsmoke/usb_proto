@@ -196,7 +196,7 @@ kmr2();
 
 translate([3.800000,7.300000,0])
 rotate([0,0,-90.000000])
-color("red")cylinder(h=5,r=2);;
+lqfp48();
 
 translate([-4.362500,8.377500,0])
 rotate([0,0,0.000000])
@@ -212,7 +212,7 @@ color("red")cylinder(h=5,r=2);;
 
 translate([-4.062501,-11.250001,0])
 rotate([0,0,180.000000])
-color("red")cylinder(h=5,r=2);;
+sot236();
 
 translate([4.550000,15.600000,0])
 rotate([0,0,180.000000])
