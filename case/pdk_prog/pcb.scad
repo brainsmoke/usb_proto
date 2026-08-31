@@ -22,7 +22,7 @@ usb_c_board_offset=2.5 ;
 
 function pcb_thickness()      = .8;
 function pcb_center()         = [ hole_dist_x/2, hole_dist_y/2 ];
-function dfu_button_pos()     = [ 7, 0 ];
+function dfu_button_pos()     = [ 7, hole_dist_y ];
 function dfu_button_angle()   = -90;
 
 function holes_pos()          = [ for (x = [0, hole_dist_x], y = [0, hole_dist_y]) [x,y] ];
