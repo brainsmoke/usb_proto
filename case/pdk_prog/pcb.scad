@@ -14,6 +14,10 @@ hole_dist_y = 30;
 pcb_radius = 3.5;
 pcb_screw_hole_diameter = 3.2;
 
+pad_hole_diameter = 1;
+pad_diameter = 1.7;
+pad_height = .001;
+
 usb_c_board_offset=2.5 ;
 
 function pcb_thickness()      = .8;
@@ -119,11 +123,32 @@ module pcb_shape()
 	cylinder(pcb_thickness(), r=pcb_radius);
 }
 
+module at_pcb_pads()
+{
+	translate([35, 15, 0])
+	{
+		at_grid(1,8,2.54)
+		children();
+
+		translate([-2.54*2,0,0])
+		at_grid(1,8,2.54)
+		children();
+
+		translate([-2.54*5,0,0])
+		at_grid(1,8,2.54)
+		children();
+	}
+}
+
 module pcb_holes_and_pads()
 {
 	at_pcb_holes()
 	translate([0,0,-pcb_thickness()-b])
 	cylinder(pcb_thickness()+2*b, r=pcb_screw_hole_diameter/2);
+
+	at_pcb_pads()
+	translate([0,0,-pcb_thickness()-b])
+	cylinder(pcb_thickness()+2*b, r=pad_hole_diameter/2);
 }
 
 module pcb()
@@ -138,6 +163,17 @@ module pcb()
 	}
 
 	pcb_components();
+
+	at_pcb_pads()
+	color("#c0c0c0")
+	difference()
+	{
+	translate([0,0,-pcb_thickness()-pad_height])
+	cylinder(pcb_thickness()+2*pad_height, r=pad_diameter/2);
+
+	translate([0,0,-pcb_thickness()-b])
+	cylinder(pcb_thickness()+2*b, r=pad_hole_diameter/2-pad_height);
+	}
 }
 
 module pcb_keepout()

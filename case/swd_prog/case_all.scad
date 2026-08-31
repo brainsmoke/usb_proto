@@ -42,6 +42,6 @@ next() flip() top()
 	swd_header();
 	jtag_header();
 	serial_header();
-	uart_header();
+	vusb_header();
 };
 

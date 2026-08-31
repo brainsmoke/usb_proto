@@ -68,6 +68,17 @@ module chamfer_block(dim, anchor=[0,0,0], r=0)
 	}
 }
 
+module at_grid(c,r,pitch,anchor=[0,0,0])
+{
+	dim=[(c-1)*pitch,(r-1)*pitch,1];
+	a=[anchor[0],anchor[1],-1];
+	anchor(dim,a)
+	for(x=[0:c-1])
+	for(y=[0:r-1])
+	translate([x*pitch,y*pitch,0])
+	children();
+}
+
 module ngon_outer(n,h,r)
 {
 	cylinder(h,r=r, $fn=n);

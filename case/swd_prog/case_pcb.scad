@@ -35,38 +35,35 @@ chamfer=0;
 module swd_header()
 {
 	at_top_above_pcb()
-	translate([30, 10, 0])
+	at_swd_header()
 	pinheader_case_hole(total_height-top_component_z, 1, 5);
 }
 
 module swd_header_simple()
 {
 	at_top_above_pcb()
-	translate([30, 10, 0])
+	at_swd_header()
 	pinheader_case_hole(total_height-top_component_z, 1, 3);
 }
 
 module jtag_header()
 {
 	at_top_above_pcb()
-	translate([30, 10, 0])
-	translate([-2.54*2,0,0])
+	at_jtag_header()
 	pinheader_case_hole(total_height-top_component_z, 1, 7);
 }
 
 module serial_header()
 {
 	at_top_above_pcb()
-	translate([30, 10, 0])
-	translate([-2.54*4,2.54*3,0])
+	at_serial_header()
 	pinheader_case_hole(total_height-top_component_z, 1, 3);
 }
 
-module uart_header()
+module vusb_header()
 {
 	at_top_above_pcb()
-	translate([30, 10, 0])
-	translate([-2.54*6.5,2.54*4,0])
+	at_vusb_header()
 	pinheader_case_hole(total_height-top_component_z, 2, 1);
 }
 
