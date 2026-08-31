@@ -19,12 +19,37 @@ module metallic()
 	children();
 }
 
+module gold()
+{
+	color("#c0c040")
+	children();
+}
+
 module button_body()
 {
 	color("#a0a0a0")
 	children();
 }
 
+module led_cathode()
+{
+	color("#2fff7f")
+	children();
+}
+
+module xtal_base()
+{
+	color("#777777")
+	children();
+}
+
+module coil_body()
+{
+	color("#777777")
+	children();
+}
+
+/* measurement symbols from stm32f0[47]2 datasheets */
 module qfn(A, D, D1, E, E1, L, L1, T, b, e)
 {
 	chip_package()
@@ -109,12 +134,76 @@ module bulge_block(dim, b, anchor)
 	}
 }
 
+module so_block(dim, chamfer, anchor)
+{
+	anchor(dim, anchor)
+	hull()
+	{
+		cube(dim+[0,-0, -chamfer]);
+
+		translate([chamfer,0,0])
+		cube(dim + [-2*chamfer,0, 0]);
+	}
+}
+
+module xtal_block(dim, chamfer, anchor)
+{
+	anchor(dim, anchor)
+	{
+		hull()
+		{
+			translate([chamfer,0,0])
+			cube(dim+[-2*chamfer, 0, -chamfer]);
+
+			translate([0, chamfer,0])
+			cube(dim+[0, -2*chamfer, -chamfer]);
+
+			translate([chamfer,chamfer,0])
+			cube(dim+[-2*chamfer, -2*chamfer, 0]);
+		}
+	}
+}
+
+module xtal(dim, chamfer, anchor)
+{
+	anchor(dim, anchor)
+	{
+		metallic()
+		render()
+		difference()
+		{
+			xtal_block(dim, chamfer, [-1,-1,-1]);
+			translate([-1,-1,-1])
+			cube(dim+[2,2,1-.01]);
+		}
+
+		gold()
+		render()
+		intersection()
+		{
+			xtal_block(dim, chamfer, [-1,-1,-1]);
+			translate([-1,-1,dim[2]-chamfer])
+			cube([dim[0]+2,dim[1]+2,chamfer-.01]);
+		}
+
+		xtal_base()
+		render()
+		intersection()
+		{
+			xtal_block(dim, chamfer, [-1,-1,-1]);
+			translate([-1,-1,-1])
+			cube(dim+[2,2,1-chamfer]);
+		}
+	}
+}
+
 module lqfp_block(dim, anchor)
 {
 	b = dim[2]/10;
 	bulge_block(dim-[-b*2,-b/2, 0], b, anchor);
 }
 
+/* measurement symbols from stm32f0[47]2 datasheets */
 module lqfp(A1, A2, D, D1, D3, E, E1, E3, e, L, L1, T, b)
 {
 	chip_package()
@@ -262,6 +351,36 @@ module sot666()
 	cylinder(.021, r=e/4, $fn=12);
 }
 
+/* measurement symbols from attiny204/1614 datasheets */
+module sox(n,A1,A2,D,E,E1,L1,b,e,c=0)
+{
+	chip_package()
+	so_block([E1,D,A2], c, [0,0,-1]);
+
+	metallic()
+	{
+		for (x=[0:n/2-1])
+		for (r=[90,270])
+		rotate([0,0,r])
+		translate([e*(x-(n/2-1)/2),E1/2,0])
+		pin(b, L1, (A2+A1)/2);
+	}
+
+	chip_notch()
+	translate([-E1/2+e/2+c/2, e*((n/2-1)/2),, A2-.001])
+	cylinder(.021, r=e*.2, $fn=12);
+}
+
+module so8(width=3.9)
+{
+	sox(n=8,A1=.25,A2=1.25,D=4.9,E=6,E1=width,L1=1.04,b=.41,e=1.27,c=.375);
+}
+
+module so14(width=3.9)
+{
+	sox(n=14,A1=.25,A2=1.25,D=8.65,E=6,E1=width,L1=1.04,b=.41,e=1.27,c=.375);
+}
+
 module kmr2()
 {
 
@@ -333,7 +452,7 @@ module c0603()
 	rDEA(D,E,A,"#807030");
 }
 
-module l0603()
+module led0603()
 {
 	inch = 25.4;
 	D=.06*inch;
@@ -345,15 +464,101 @@ module l0603()
 
 	color("white")
 	block([E,E,A], [0,0,-1]);
+
+	translate([-E/2,0,A/3])
+	led_cathode()
+	block([(D-E)/5,E,.01],[1,0,-1]);
+}
+
+// DI ap02002
+module diode(A,B,C,D,E,G,H,J)
+{
+	body_dim = [B,A,J];
+
+	chip_package()
+	bulge_block(body_dim, J/10, [0,0,-1]);
+
+	metallic()
+	render()
+	for (r=[0,180])
+	rotate([0,0,r])
+	translate([E/2-H,0,0])
+	difference()
+	{
+	block([H,C,J/2],[-1,0,-1]);
+	translate([-1,-1,D])
+	block([H+1-D,C+2,J/2-2*D],[-1,0,-1]);
+	}
+
+	chip_notch()
+	translate([-B/2+J/10+A/10,0,J])
+	block([A/10,A-J/5,.01],[-1,0,-1]);
+}
+
+module d_sma()
+{
+	diode(
+	A=(2.29+2.92)/2,
+	B=(4+4.6)/2,
+	C=(1.27+1.63)/2,
+	D=(.15+.31)/2,
+	E=(4.8+5.59)/2,
+	G=(.05+.2)/2,
+	H=(.76+1.52)/2,
+	J=(2.01+2.3)/2
+	);
+}
+
+module coil(w,h)
+{
+	coil_body()
+	{
+		ngon_inner(h=.3,r=w/2, n=8);
+		block([w,w*7/9,.3],anchor=[0,0,-1]);
+
+		translate([0,0,h])
+		{
+		block([w,w*7/9,.3],anchor=[0,0,1]);
+		translate([0,0,-.3])
+		ngon_inner(h=.3,r=w/2, n=8);
+		}
+	}
+
+	chip_package()
+	translate([0,0,.3])
+	union()
+	{
+		cylinder(h=h-2*.3,r1=w/2,r2=w/3,$fn=20);
+		cylinder(h=h-2*.3,r1=w/3,r2=w/2,$fn=20);
+		cylinder(h=h-2*.3,r=w/2.2,$fn=20);
+	}
+}
+
+module inductor_3015()
+{
+	coil(3.,1.5);
 }
 
 module display(pitch=15)
 {
+	w = 8;
+	h = floor(($children+w-1)/w);
+
 	color("green")
-	block([($children+1)*pitch, 2*pitch,1],[-1,0,1]);
-	for (i = [0:$children-1])
-	translate([pitch*(i+1),0,0])
-	children(i);
+	block([(w+1)*pitch, (h+1)*pitch,1],[-1,1,1]);
+	for (x=[0:w-1])
+	for (y=[0:h-1])
+	{
+		i=x+y*w;
+		if (i < $children)
+		translate([pitch*(x+1),-pitch*(y+1),0])
+		children(i);
+	}
+}
+
+module xtal3225()
+{
+	xtal([3.2,2.5,.6],.2, [0,0,-1]);
 }
 
 preview()
@@ -373,11 +578,17 @@ preview()
 		sot235();
 		sot236();
 		sot666();
+		so8();
+		so14();
+		xtal3225();
+		d_sma();
+		inductor_3015();
 		kmr2();
 		r0402();
 		r0603();
 		c0402();
 		c0603();
+		l0603();
 	}
 }
 

@@ -18,8 +18,8 @@ package_map = {
 	'C_0402_1005Metric':'c0402()',
 	'C_0603_1608Metric':'c0603()',
 
-	'LED_0603_1608Metric_Pad1':'l0603()',
-	'LED_0603_1608Metric':'l0603()',
+	'LED_0603_1608Metric_Pad1':'led0603()',
+	'LED_0603_1608Metric':'led0603()',
 
 	'SW_Push_1P1T_NO_CK_KMR2': 'kmr2()',
 
@@ -33,6 +33,14 @@ package_map = {
 	'LQFP-48_7x7mm_P0.5mm': 'lqfp48()',
 
 	'SOT-666': 'sot666()',
+
+	'SOIC-8_3.9x4.9mm_P1.27mm': 'so8()',
+
+	'L_Wuerth_MAPI-3015': 'inductor_3015()',
+
+	'Crystal_SMD_3225-4Pin_3.2x2.5mm': 'xtal3225()',
+
+	'D_SMA': 'd_sma()',
 
 	'USB_C_Receptacle_HRO_TYPE-C-31-M-12': 'usb_c_type_c31_m12()',
 }

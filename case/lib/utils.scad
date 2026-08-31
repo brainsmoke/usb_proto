@@ -68,6 +68,19 @@ module chamfer_block(dim, anchor=[0,0,0], r=0)
 	}
 }
 
+module ngon_outer(n,h,r)
+{
+	cylinder(h,r=r, $fn=n);
+}
+
+module ngon_inner(n,h,r)
+{
+	a=360/n/2;
+	r_cyl = r/cos(a);
+	rotate([0,0,a])
+	cylinder(h,r=r_cyl, $fn=n);
+}
+
 module preview()
 {
 	if ($preview)
