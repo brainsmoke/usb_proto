@@ -26,5 +26,5 @@ module socketheader_case_hole(depth, cols, rows=1, pitch=2.54, border=.8, margin
 
 pinheader_case_hole(10, 8, 1);
 translate([30,0,0])
-pinheader_case_hole(10, 1, 1, margin=0);
+socketheader_case_hole(10, 2, 1);
 

@@ -33,11 +33,14 @@ next() flip() top()
 
 		translate([35, 15, 0])
 		{
-			socketheader_case_hole(total_height-top_component_z-1, 1, 8);
+			rotate([0,0,90])
+			socketheader_case_hole(total_height-top_component_z-1, 8, 1);
 			translate([-2.54*2,0,0])
-			socketheader_case_hole(total_height-top_component_z-1, 1, 8);
+			rotate([0,0,90])
+			socketheader_case_hole(total_height-top_component_z-1, 8, 1);
 			translate([-2.54*5,0,0])
-			socketheader_case_hole(total_height-top_component_z-1, 1, 8);
+			rotate([0,0,90])
+			socketheader_case_hole(total_height-top_component_z-1, 8, 1);
 		}
 	}
 }
