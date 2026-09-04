@@ -21,7 +21,7 @@ LAYERS4=$(LAYERS2) In1.Cu In2.Cu
 LAYERS :=$(LAYERS4)
 
 SCAD_DIR=case
-SCAD_DEPS=case/usb_mini_io/gen/components.scad case/usb_proto/gen/components.scad case/usb_null/gen/components.scad
+SCAD_DEPS=case/usb_mini_io/gen/components.scad case/usb_proto/gen/components.scad case/usb_null/gen/components.scad case/pdk_prog/gen/components.scad case/swd_prog/gen/components.scad
 SCAD_PARTS=usb_null/case \
 usb_mini_io/case \
 usb_mini_io/game_controller \
