@@ -66,6 +66,23 @@ Cases: [keypad (keycaps flush)](build/usb_mini_io/keypad.stl) [keypad (keyswitch
 
 <img src="img/usb_null_closeup.jpg" width="640">
 
+# JTAG/SWD programmer with USB-C connector
+ 
+Production files (JLCPCB): [gerbers](build/swd_prog/gerbers_jlc.zip) [BOM](build/swd_prog/bomfile_jlc.csv) [POS](build/swd_prog/posfile_jlc.csv)
+ 
+Cases: [basic](build/swd_prog/case.stl) [all headers](build/swd_prog/case_add.stl)
+
+![Image for the pcb, as well as two inside a 3d-printed case](img/swd_prog.jpg)
+
+# Padauk programmer with USB-C connector
+ 
+![Image for the pcb, as well as one with a case and a soic8 zif socket on top](img/pdk_prog.jpg)
+ 
+Production files (JLCPCB): [gerbers](build/pdk_prog/gerbers_jlc.zip) [BOM](build/pdk_prog/bomfile_jlc.csv) [POS](build/pdk_prog/posfile_jlc.csv)
+ 
+Case: [case](build/pdk_prog/case.stl)
+
+
 ## (old) USB-C Fed Protoboard
 
 The first version of the protoboard did not have a microcontroller:
