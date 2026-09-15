@@ -32,6 +32,8 @@ usb_mini_io/old_keypad \
 usb_mini_io/old_keypad_bottom \
 usb_mini_io/old_keypad_top \
 usb_mini_io/single_key \
+usb_mini_io/ring_top \
+usb_mini_io/ring_bottom \
 usb_proto/case \
 usb_proto/case_almost_regular_hexagon \
 usb_proto/case_bottom \
