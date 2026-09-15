@@ -25,7 +25,7 @@ grid_height_top=0;
 
 pcb_pos = [ -r_keys - key_pitch/2, -10, top_component_z ];
 
-r_outer = (r_keys+key_pitch/2)/cos(360/n_keys/2)-1.;
+r_outer = sqrt(pow(r_keys+key_pitch/2,2)+pow(10,2));
 r_inner = (r_keys-key_pitch/2); /* /cos(360/n_keys/2)+1.; */
 
 module case_shape(height, radius)
