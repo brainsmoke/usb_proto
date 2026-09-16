@@ -71,7 +71,7 @@ static void keymatrix_read_column(void)
 	uint16_t port = gpio_get(KEYMATRIX_COLUMNS_PORT, columns_mask);
 	for (col=0; col<KEYMATRIX_N_COLUMNS; col++)
 	{
-		int key = col+row*KEYMATRIX_N_ROWS;
+		int key = col+row*KEYMATRIX_N_COLUMNS;
 
 		if (debounce[key])
 			continue;
