@@ -42,7 +42,7 @@
 #define KEY_BACKSPACE           (HID_KEY(HID_KEYBOARD_PAGE, 0x2A))
 #define KEY_TAB                 (HID_KEY(HID_KEYBOARD_PAGE, 0x2B))
 #define KEY_SPACEBAR            (HID_KEY(HID_KEYBOARD_PAGE, 0x2C))
-#define KEY_NUMBER(n)           (HID_KEY(HID_KEYBOARD_PAGE, 0x1E + (n + 1) % 10))
+#define KEY_NUMBER(n)           (HID_KEY(HID_KEYBOARD_PAGE, 0x1E + (n + 9) % 10))
 #define KEY_ALPHA(n)            (HID_KEY(HID_KEYBOARD_PAGE, 0x4 + (n)))
 
 #define KEY_LEFT_CONTROL        (HID_KEY(HID_KEYBOARD_PAGE, 0xE0))
