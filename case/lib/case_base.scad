@@ -192,6 +192,11 @@ module keepout() { }
 module bottom_custom() { }
 module top_custom() { }
 
+module screw_guide_bottom()
+{
+	screw_guide(bottom_thickness, case_split-e);
+}
+
 module _bottom()
 {
 	graft()
@@ -223,7 +228,7 @@ module _bottom()
 			case_shape_chamfer(chamfer_bottom_h, outer_radius-chamfer_bottom_w, outer_radius);
 		}
 
-		at_holes() screw_guide(bottom_thickness, case_split-e);
+		at_holes() screw_guide_bottom();
 
 		graft_remove()
 		keepout();
@@ -232,6 +237,11 @@ module _bottom()
 
 		children();
 	}
+}
+
+module screw_guide_top()
+{
+	screw_guide(case_split, total_height-e);
 }
 
 module _top()
@@ -278,7 +288,7 @@ module _top()
 			case_shape_chamfer(chamfer_top_h, outer_radius, outer_radius-chamfer_top_w);
 		}
 
-		at_holes() screw_guide(case_split, total_height-e);
+		at_holes() screw_guide_top();
 
 		graft_remove()
 		keepout();
