@@ -92,6 +92,21 @@ module ngon_inner(n,h,r)
 	cylinder(h,r=r_cyl, $fn=n);
 }
 
+
+module ngon_cone_outer(n,h,r1,r2)
+{
+	cylinder(h,r1=r1,r2=r2, $fn=n);
+}
+
+module ngon_cone_inner(n,h,r1,r2)
+{
+	a=360/n/2;
+	r1_cyl = r1/cos(a);
+	r2_cyl = r2/cos(a);
+	rotate([0,0,a])
+	cylinder(h,r1=r1_cyl,r2=r2_cyl, $fn=n);
+}
+
 module preview()
 {
 	if ($preview)
