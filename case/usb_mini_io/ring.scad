@@ -7,6 +7,9 @@ use <../lib/keyswitch.scad>
 
 total_height=19;
 
+leg_thickness = 1.6;
+funnel_top_radius = 4.8;
+screw_grab_radius = (thread*0.95)/2;
 
 chamfer_top=4;
 chamfer_bottom=1.8;
