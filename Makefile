@@ -41,6 +41,7 @@ usb_proto/case_keyswitches \
 usb_proto/case_keyswitches_8 \
 usb_proto/case_led_strip_connector \
 usb_proto/case_ledrelay_tester \
+usb_proto/case_ledrelay2_tester \
 usb_proto/case_top \
 usb_proto/case_top_plain \
 pdk_prog/case \
