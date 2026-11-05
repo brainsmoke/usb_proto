@@ -38,18 +38,19 @@ module mockup()
  
 bottom();
 mockup();
- 
+
 next() flip() top()
 {
 	top_features();
 
 	for (y=[7,10])
-	translate(breadboard_pos(5.5,y))
+	translate(breadboard_pos(18.5,y))
 	at_top_above_pcb()
 	socketheader_case_hole(total_height-top_component_z-1, 4, 1);
 
-	for (x=[14,19])
-	translate(breadboard_pos(x,8.5))
+	for (x=[3,8])
+	for (y=[5,12])
+	translate(breadboard_pos(x,y))
 	led_hole(hole_height, hole_d, hole_width_top, hole_width_base);
 
 };
