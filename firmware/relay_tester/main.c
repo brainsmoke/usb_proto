@@ -42,6 +42,7 @@
 #define MASK(c) (3<<(2*(c)))
 
 #define INPUT_CAPTURE_PIN (6)
+#define OUTPUT_PIN (0)
 
 //#define F_CPU_MEASURED (47838000)
 #define F_CPU_MEASURED (F_CPU)
@@ -49,9 +50,6 @@
 static void tim3_pa6_input_capture_enable(void)
 {
     RCC_APB1ENR |= RCC_APB1ENR_TIM3EN;
-
-    gpio_set_af(GPIOA, GPIO_AF1, GPIO6);
-    gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO6);
 
 	TIM3_CR1 = TIM_CR1_CKD_CK_INT | /* no clock division */
 	           TIM_CR1_CMS_EDGE   |
@@ -161,15 +159,20 @@ static void frame_set_value(int index, int v)
 	frame[index] = (v&0xff) | VALUE;
 }
 
-static void frame_set_route(int index, int route, int timeout)
+static void frame_set_route4(int index, int route, int timeout)
 {
-	frame[index] = (timeout<<3)| ((1<<(route-1))&7) | ROUTING;
+	frame[index] = (timeout<<3)| ((1<<route)&7) | ROUTING4;
+}
+
+static void frame_set_route5(int index, int route, int timeout)
+{
+	frame[index] = (timeout<<4)| ((1<<route)&15) | ROUTING5;
 }
 
 static void frame_set_rgb(int index, int r, int g, int b)
 {
-	frame_set_value(index+0, r);
-	frame_set_value(index+1, g);
+	frame_set_value(index+0, g);
+	frame_set_value(index+1, r);
 	frame_set_value(index+2, b);
 }
 
@@ -192,7 +195,7 @@ for i in range(0, 256, 16):
 	0x31, 0x30, 0x30, 0x30, 0x2f, 0x2f, 0x2e, 0x2d, 0x2c, 0x2b, 0x2a, 0x29, 0x28, 0x26, 0x25, 0x24,
 	0x22, 0x21, 0x1f, 0x1e, 0x1c, 0x1b, 0x19, 0x17, 0x16, 0x14, 0x13, 0x11, 0x10, 0x0f, 0x0d, 0x0c,
 	0x0b, 0x0a, 0x09, 0x08, 0x07, 0x06, 0x05, 0x05, 0x04, 0x03, 0x03, 0x03, 0x02, 0x02, 0x02, 0x01,
-	0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+	0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00,
 };
 
 static void init_frame(void)
@@ -205,92 +208,91 @@ static void init_frame(void)
 
 static void set_frame_info(int pin, int phase)
 {
+	frame_set_route5(ROUTE5_PACKET, pin, 15);
+	frame_set_rgb(LED_HIDDEN, fade[phase], 0, fade[phase]);
+	frame_set_rgb(LED0, fade[phase], fade[phase], fade[phase]);
+
 	switch (pin)
 	{
-		case 4:
-			frame_set_rgb(LED0, fade[phase], fade[phase], fade[phase]);
-
-			frame_set_route(PACKET1, 1, 0);
+		case 0:
+			frame_set_route4(PACKET1, 0, 0);
 			frame_set_rgb(LED1, fade[phase], 0, 0);
 
-			frame_set_route(PACKET3, 2, 15);         /* sense pin last */
+			frame_set_route4(PACKET2, 1, 0);
+			frame_set_rgb(LED2, 0, fade[phase], 0);
+
+			frame_set_route4(PACKET3, 2, 15);         /* sense pin last */
+			frame_set_rgb(LED3, 0, 0, fade[phase]);
+			break;
+		case 1:
+			frame_set_route4(PACKET1, 0, 0);
+			frame_set_rgb(LED1, fade[phase], 0, 0);
+
+			frame_set_route4(PACKET3, 1, 15);         /* sense pin last */
 			frame_set_rgb(LED3, 0, fade[phase], 0);
 
-			frame_set_route(PACKET2, 3, 0);
+			frame_set_route4(PACKET2, 2, 0);
 			frame_set_rgb(LED2, 0, 0, fade[phase]);
 			break;
-		case 5:
-			frame_set_rgb(LED0, fade[phase], fade[phase], fade[phase]);
-
-			frame_set_route(PACKET3, 1, 15);         /* sense pin last */
+		case 2:
+			frame_set_route4(PACKET3, 0, 15);         /* sense pin last */
 			frame_set_rgb(LED3, fade[phase], 0, 0);
 
-			frame_set_route(PACKET1, 2, 0);
+			frame_set_route4(PACKET1, 1, 0);
 			frame_set_rgb(LED1, 0, fade[phase], 0);
 
-			frame_set_route(PACKET2, 3, 0);
+			frame_set_route4(PACKET2, 2, 0);
 			frame_set_rgb(LED2, 0, 0, fade[phase]);
 			break;
-		case 6:
-			frame_set_rgb(LED0, fade[phase], fade[phase], fade[phase]); /* no sense pin */
+		case 3:
+			/* sense pin is on incoming stream */
 
-			frame_set_route(PACKET1, 1, 0);
+			frame_set_route4(PACKET1, 0, 0);
 			frame_set_rgb(LED1, fade[phase], 0, 0);
 
-			frame_set_route(PACKET2, 2, 0);
+			frame_set_route4(PACKET2, 1, 0);
 			frame_set_rgb(LED2, 0, fade[phase], 0);
 
-			frame_set_route(PACKET3, 3, 15);
+			frame_set_route4(PACKET3, 2, 15);
 			frame_set_rgb(LED3, 0, 0, fade[phase]);
 			break;
-		case 7:
-			frame_set_rgb(LED0, fade[phase], fade[phase], fade[phase]);
-
-			frame_set_route(PACKET1, 1, 0);
-			frame_set_rgb(LED1, fade[phase], 0, 0);
-
-			frame_set_route(PACKET2, 2, 0);
-			frame_set_rgb(LED2, 0, fade[phase], 0);
-
-			frame_set_route(PACKET3, 3, 15);         /* sense pin last */
-			frame_set_rgb(LED3, 0, 0, fade[phase]);
+		default:
 			break;
 	}
+}
+
+
+volatile uint32_t tick=0,last_tick=0;
+void SysTick_Handler(void)
+{
+	tick+=1;
+}
+ 
+static void wait(void)
+{
+	while (tick == last_tick)
+		usb_serial_poll();
+	last_tick = tick;
 }
 
 static void init(void)
 {
 	rcc_clock_setup_in_hsi_out_48mhz();
 	rcc_periph_clock_enable(RCC_GPIOA);
-	rcc_periph_clock_enable(RCC_GPIOB);
 	remap_usb_pins();
+
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO0);
+	gpio_set_output_options(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, GPIO0);
+   	gpio_set_af(GPIOA, GPIO_AF1, GPIO6);
+   	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO6);
 
 	tim3_pa6_input_capture_enable();
 	usb_serial_init();
-}
-
-
-static void set_out_pin(int n)
-{
-    gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, ( (1<<4)|(1<<5)|(1<<7) ) & ~(1<<n));
-    gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, (1<<n));
-
-	if (n != INPUT_CAPTURE_PIN)
-	{
-    	gpio_set_af(GPIOA, GPIO_AF1, GPIO6);
-    	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO6);
-	}
-}
-
-static void set_out_all_pins(void)
-{
-    gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, ( (1<<4)|(1<<5)|(1<<6)|(1<<7) ));
+    enable_sys_tick(F_SYS_TICK_CLK/60);
 }
 
 int main(void)
 {
-	int pin, phase;
-
 	init();
 	init_frame();
 	TIM3_CR1 |= TIM_CR1_CEN;
@@ -298,42 +300,36 @@ int main(void)
 	while(!usb_serial_can_write())
 		usb_serial_poll();
 
-
 	for(;;)
 	{
-		for (pin=4; pin<8; pin++)
+		int pin, phase;
+		for (pin=0; pin<4; pin++)
 		{
-
-			set_out_all_pins();
-			bitbang_clear(GPIOA, 0x00f0);
-			set_out_pin(pin);
 			uint32_t max_freq = 0, min_freq = UINT32_MAX;
 			for (phase=0; phase<128; phase++)
 			{
-				usb_serial_poll();
 				set_frame_info(pin, phase);
 				clear_histogram();
-				bitbang(frame, pin, GPIOA, TIM3);
+				bitbang(frame, 0, GPIOA, TIM3);
+				wait();
 
-				if (pin != INPUT_CAPTURE_PIN)
+				uint32_t cycles11 = histogram[65]+histogram[66]+histogram[67];
+				cycles11 += histogram[64]+histogram[68]; /* probably not needed */
+				uint32_t cycles12 = histogram[71]+histogram[72]+histogram[73];
+				cycles12 += histogram[70]+histogram[74]; /* probably not needed */
+				if (cycles11 + cycles12 == MEASURE_PERIODS)
 				{
-					uint32_t cycles11 = histogram[65]+histogram[66]+histogram[67];
-					cycles11 += histogram[64]+histogram[68]; /* probably not needed */
-					uint32_t cycles12 = histogram[71]+histogram[72]+histogram[73];
-					cycles12 += histogram[70]+histogram[74]; /* probably not needed */
-					if (cycles11 + cycles12 == MEASURE_PERIODS)
-					{
-						uint32_t freq = F_CPU_MEASURED/2000;
-						freq *= 11*cycles11+12*cycles12;
-						freq /= MEASURE_NATIVE_CYCLES;
-						freq *= 2000;
-						if (min_freq > freq)
-							min_freq = freq;
-						if (max_freq < freq)
-							max_freq = freq;
-					}
+					uint32_t freq = F_CPU_MEASURED/2000;
+					freq *= 11*cycles11+12*cycles12;
+					freq /= MEASURE_NATIVE_CYCLES;
+					freq *= 2000;
+					if (min_freq > freq)
+						min_freq = freq;
+					if (max_freq < freq)
+						max_freq = freq;
 				}
 			}
+
 			print("pin = ");
 			print_32(pin);
 			if (max_freq == 0)

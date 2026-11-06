@@ -109,8 +109,9 @@ b bitbang_load
 /* 16 +  2 */  strh rOUTTMP, [rGPIO, #GPIO_ODR]
 
 /* 18 +  3 */  capture_check_end_3_cycles
-/* 21 +  1 */  nop
-/* 24 + 15 */  capture_check_17_cycles
+/* 21 + 18 */  delay rOUTTMP, 18
+///* 21 +  1 */  nop
+///* 22 + 17 */  capture_check_17_cycles
 
 /* 39 +  1 */  movs rOUTTMP, #0
 /* 40 +  2 */  strh rOUTTMP, [rGPIO, #GPIO_ODR]
@@ -129,27 +130,31 @@ b bitbang_load
 .endm
 
 
-bitbang_epilogue:
-capture_check_17_cycles
-capture_check_17_cycles
-b bitbang_end
-
+bitbang_gap_cycle1:
+/*  1 + 15 */  capture_check_17_cycles
+/* 16 + 28 */  delay rOUTTMP, 28
+/* 44 + 15 */  capture_check_17_cycles
+/* 59 +  1 */  lsls rOUTTMP, rOUTDATA, #23
+/* 60 + 1|6*/  bcs bitbang_0_cycle_66
+/* 61 +  1 */  mov rOUTTMP, rPIN
+/* 62 +  1 */  lsls rOUTDATA, rOUTTMP
+/* 63 +  1 */  nop
+/* 64 +  6 */  b bitbang_6
 bitbang_0:
 /*  0 + 61 */  bitbang_pulse_61_cycles 0
-/* 61 +  1 */  cmp rBUFFER, rBUFEND
-/* 62 + 1|6*/  beq bitbang_epilogue
 bitbang_load:
-bitbang_0_cycle_63:
-/* 63 +  1 */  mov rOUTTMP, rBUFFER
-/* 64 +  2 */  ldrh rOUTDATA, [rOUTTMP]
+bitbang_0_cycle_61:
+/* 61 +  1 */  mov rOUTTMP, rBUFFER
+/* 62 +  2 */  ldrh rOUTDATA, [rOUTTMP]
+/* 64 +  1 */  lsls rOUTTMP, rOUTDATA, #24
+/* 65 + 1|6*/  bcs bitbang_gap_cycle1
+bitbang_0_cycle_66:
 /* 66 +  1 */  mov rOUTTMP, rPIN
 /* 67 +  1 */  lsls rOUTDATA, rOUTTMP
-/* 68 +  1 */  lsrs rOUTTMP, rOUTDATA, #8
-/* 69 +  1 */  ands rOUTTMP, rPINMASK
+/* 68 +  1 */  nop
+/* 69 +  1 */  nop
 bitbang_7:
-/*  0 +  2 */  strh rOUTTMP, [rGPIO, #GPIO_ODR]
-/*  2 + 59 */  bitbang_pulse_end_59_cycles 7
-/* 61 +  9 */  delay rOUTTMP, 9
+/*  0 + 70 */  bitbang_pulse_70_cycles 7
 bitbang_6:
 /*  0 + 70 */  bitbang_pulse_70_cycles 6
 bitbang_5:
@@ -162,15 +167,19 @@ bitbang_2:
 /*  0 + 70 */  bitbang_pulse_70_cycles 2
 bitbang_1:
 /*  0 + 59 */  bitbang_pulse_61_cycles 1
-/* 61 +  1 */  nop
-/* 62 +  1 */  nop
+/* 59 +  1 */  movs rOUTTMP, #2
+/* 60 +  1 */  add rBUFFER, rOUTTMP
+/* 61 +  1 */  cmp rBUFFER, rBUFEND
+/* 62 + 1|3*/  beq bitbang_epilogue
 /* 63 +  1 */  nop
-/* 64 +  1 */  movs rOUTTMP, #2
-/* 65 +  1 */  add rBUFFER, rOUTTMP
-/* 66 + 3+1*/  b bitbang_0
+/* 64 + 3+3*/  b bitbang_0
+bitbang_epilogue:
+/*  0 + 70 */  bitbang_pulse_70_cycles 0
+capture_check_17_cycles
+capture_check_17_cycles
 
 bitbang_end:
-delay_big rTMP, 14400
+//delay_big rTMP, 14400
 /* pop r4-r11 */
 pop {r4-r7}
 mov r8, r4
@@ -205,7 +214,7 @@ bitbang_clear_loop:
 /* 65 +  1 */ subs rTMP, #1
 /* 66 + 3+1*/ bne bitbang_clear_loop
 
-delay_big rTMP, 14400
+//delay_big rTMP, 14400
 
 pop {r4-r7}
 bx lr
