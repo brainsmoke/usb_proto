@@ -280,7 +280,7 @@ static volatile uint32_t usb_ready = 0;
 
 int usb_serial_can_write(void)
 {
-	return usb_double_buffer_can_write(UART_DEVICE_TO_HOST_ENDPOINT);
+	return usb_ready && usb_double_buffer_can_write(UART_DEVICE_TO_HOST_ENDPOINT);
 }
 
 void __attribute__((weak)) usb_serial_data_available_cb(void)
